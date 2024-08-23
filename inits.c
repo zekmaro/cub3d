@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/21 22:38:18 by andrejarama      ###   ########.fr       */
+/*   Updated: 2024/08/23 16:37:00 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,25 @@ void	initialise_map(t_vars *vars)
 	vars->map = map;
 }
 
+void	initialise_player(t_vars *vars)
+{
+	t_player	*player;
+
+	player = (t_player *)(malloc(sizeof(t_player)));
+	if (!player)
+	{
+		//cleanup_vars(vars);
+		exit (1);
+	}
+	ft_bzero(player, sizeof(t_player));
+	vars->player = player;
+}
+
 void	initialise_vars(t_vars *vars)
 {
 	initialise_image(vars);
 	initialise_map(vars);
 	initialise_mlx(vars);
 	initialise_line(vars);
+	initialise_player(vars);
 }

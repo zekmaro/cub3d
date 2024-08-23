@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/22 00:15:20 by andrejarama      ###   ########.fr       */
+/*   Updated: 2024/08/23 14:54:25 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,16 @@ typedef struct s_line
 	int	dh;
 }	t_line;
 
+typedef struct s_player
+{
+	int	x;
+	int	y;
+	int	dir_x;
+	int	dir_y;
+	int	move_speed;
+	int	rot_speed;
+}	t_player;
+
 typedef struct s_vars
 {
 	t_map		*map;
@@ -118,6 +128,7 @@ typedef struct s_vars
 	t_colors	*colors;
 	t_mlx		*mlx;
 	t_line		*line;
+	t_player	*player;
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
@@ -126,6 +137,7 @@ typedef struct s_vars
 int		read_map(int fd, t_map *map, char *file_name);
 void	initialise_vars(t_vars *vars);
 void	print_map(t_map *map);
+void	draw_map(t_vars *vars);
 
 int		key_hook(int keycode, t_vars *vars);
 void	clean_screen(t_vars *vars);
