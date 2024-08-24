@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/23 16:44:33 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/24 14:09:36 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_map(t_vars *vars)
 
 	i = 0;
 	unit_size = 64;
-	player_size = 10;
+	player_size = 8;
 	while (i < vars->map->height)
 	{
 		j = 0;
@@ -59,5 +59,5 @@ void	draw_map(t_vars *vars)
 		}
 		i++;
 	}
-	draw_square(vars, vars->player->x, vars->player->y, RED, 10);
+	draw_square(vars, vars->player->x, vars->player->y, RED, player_size);
 }

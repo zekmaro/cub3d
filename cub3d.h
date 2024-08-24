@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/23 14:54:25 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/24 12:55:20 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@
 # include "minilibx_macos/mlx.h"
 
 // KEY DEFINITION LINUX
-// # define W 119
-// # define D 100
-// # define S 115
-// # define A 97
-// # define ESCAPE 65307
+# define W 119
+# define D 100
+# define S 115
+# define A 97
+# define ESCAPE 65307
 
 // KEY DEFINITION MAC
-# define W 13
-# define D 2
-# define S 1
-# define A 0
-# define ESCAPE 53
+// # define W 13
+// # define D 2
+// # define S 1
+// # define A 0
+// # define ESCAPE 53
 
 // COLORS
 # define WHITE 0xFFFFFF

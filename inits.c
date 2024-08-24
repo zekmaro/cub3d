@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/23 16:37:00 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/24 14:11:24 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	initialise_mlx(t_vars *vars)
 		exit (1);
 	}
 	ft_bzero(mlx, sizeof(t_mlx));
-	mlx->window_height = 1080 / 2;
-	mlx->window_width = 1920 / 2;
+	mlx->window_height = 1080;
+	mlx->window_width = 1920;
 	vars->mlx = mlx;
 }
 
