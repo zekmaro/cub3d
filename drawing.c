@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/24 14:09:36 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/25 15:30:07 by andrejarama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,41 @@ void	draw_square(t_vars *vars, int x, int y, unsigned int color, int unit_size)
 		}
 		i++;
 	}
+}
+
+int	is_wall(t_vars *vars, int y, int x)
+{
+	return (vars->map->grid[y / 64][x / 64] == '1');
+}
+
+void	get_ray_target_coors(t_vars *vars, int move_y, int move_x)
+{
+	int x;
+	int y;
+	int player_center_x;
+	int player_center_y;
+
+	player_center_x = vars->player->x + (8 / 2);
+	player_center_y = vars->player->y + (8 / 2);
+	x = (player_center_x + move_x);
+	y = (player_center_y + move_y);
+	vars->line->x0 = x;
+	vars->line->y0 = y;
+	vars->line->x1 = x;
+	vars->line->y1 = y;
+	while (!is_wall(vars, vars->line->y1, vars->line->x1))
+	{
+		vars->line->y1 += move_y;
+		vars->line->x1 += move_x;
+	}
+}
+
+void	draw_ray(t_vars *vars)
+{
+	get_ray_target_coors(vars, -8, -2);
+	draw_line(vars, GREEN);
+	get_ray_target_coors(vars, -8, 2);
+	draw_line(vars, GREEN);
 }
 
 void	draw_map(t_vars *vars)
@@ -60,4 +95,5 @@ void	draw_map(t_vars *vars)
 		i++;
 	}
 	draw_square(vars, vars->player->x, vars->player->y, RED, player_size);
+	draw_ray(vars);
 }

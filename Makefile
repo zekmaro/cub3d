@@ -9,7 +9,8 @@ SRC		:=	get_next_line/get_next_line.c \
 			utils.c \
 			handle_image.c \
 			handle_keys.c \
-			drawing.c 
+			drawing.c \
+			draw_line.c
 			
 CFLAGS	:= -Wall -Wextra -g
 LIBS	:= libft/libft.a minilibx_macos/libmlx.a
@@ -21,7 +22,7 @@ all		: $(NAME)
 
 $(NAME)	: $(OBJ) cub3d.h
 	make -C libft all
-	$(CC) $(OBJ) $(LIBS) -lmlx -lXext -lX11 -lm -o $(NAME)
+	$(CC) $(OBJ) $(LIBS) -framework OpenGL -framework AppKit -o $(NAME)
 
 clean	:
 	make -C libft clean

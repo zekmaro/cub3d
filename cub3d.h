@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/24 12:55:20 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/25 23:56:13 by andrejarama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@
 # include "minilibx_macos/mlx.h"
 
 // KEY DEFINITION LINUX
-# define W 119
-# define D 100
-# define S 115
-# define A 97
-# define ESCAPE 65307
+// # define W 119
+// # define D 100
+// # define S 115
+// # define A 97
+// # define ESCAPE 65307
 
 // KEY DEFINITION MAC
-// # define W 13
-// # define D 2
-// # define S 1
-// # define A 0
-// # define ESCAPE 53
+# define W 13
+# define D 2
+# define S 1
+# define A 0
+# define ESCAPE 53
 
 // COLORS
 # define WHITE 0xFFFFFF
@@ -42,12 +42,14 @@
 # define PURPLE 0x800080
 # define BLACK 0x000000
 # define BLUE 0x00008B
+# define GREEN 0x008000
 
 typedef struct s_map
 {
 	char	**grid;
 	int		height;
 	int		width;
+	int		angle;
 	int     player_x;
     int     player_y;
     char    player_dir;
@@ -143,5 +145,6 @@ int		key_hook(int keycode, t_vars *vars);
 void	clean_screen(t_vars *vars);
 void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 void	put_pixel_to_image(t_vars *vars, int x, int y, int color);
-
+void	draw_line(t_vars *vars, unsigned long color);
+int		mouse_move(int x, int y, t_vars *vars);
 #endif // CUB3D_H

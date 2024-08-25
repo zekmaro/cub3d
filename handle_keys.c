@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/24 14:07:18 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/25 20:45:19 by andrejarama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 		vars->player->x += move_x;	
 	}
 }
+
+int mouse_move(int x, int y, t_vars *vars)
+{
+    // Example: Print the mouse position to the console
+    printf("Mouse moved to: x = %d, y = %d\n", x, y);
+
+    // Here you can add code to update your game state based on mouse movement
+
+    return (0);
+}
+
 
 void	check_move_player(int keycode, t_vars *vars)
 {

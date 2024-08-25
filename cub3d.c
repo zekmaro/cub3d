@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/24 12:56:34 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/25 15:50:54 by andrejarama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	run_screen(t_vars *vars)
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 			vars->image->mlx_img, 0, 0);
+	mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_key_hook(vars->mlx->win, key_hook, vars);
 	//mlx_hook(vars->mlx->win, 17, 0, (int (*)(void))free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
