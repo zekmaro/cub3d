@@ -22,7 +22,7 @@ all		: $(NAME)
 
 $(NAME)	: $(OBJ) cub3d.h
 	make -C libft all
-	$(CC) $(OBJ) $(LIBS) -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJ) $(LIBS) -lmlx -lXext -lX11 -lm -o $(NAME)
 
 clean	:
 	make -C libft clean

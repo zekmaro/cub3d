@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/25 15:30:07 by andrejarama      ###   ########.fr       */
+/*   Updated: 2024/08/28 17:35:43 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 void	draw_square(t_vars *vars, int x, int y, unsigned int color, int unit_size)
 {
@@ -29,6 +30,45 @@ void	draw_square(t_vars *vars, int x, int y, unsigned int color, int unit_size)
 		i++;
 	}
 }
+
+void rotate_around_point(int *x, int *y, int cx, int cy, double angle)
+{
+    int temp_x = *x - cx;
+    int temp_y = *y - cy;
+
+    *x = temp_x * cos(angle) - temp_y * sin(angle) + cx;
+    *y = temp_x * sin(angle) + temp_y * cos(angle) + cy;
+}
+
+void draw_player(t_vars *vars, int x, int y, unsigned int color, int unit_size)
+{
+    // Calculate the center of the square
+    int cx = x + unit_size / 2;
+    int cy = y + unit_size / 2;
+	int i = 0;
+	int j;
+
+	i = 0;
+    while (i < unit_size)
+    {
+		j = 0;
+        while (j < unit_size)
+        {
+            // Calculate the original position of the pixel before rotation
+            int px = x + j;
+            int py = y + i;
+
+            // Rotate the pixel around the center
+            rotate_around_point(&px, &py, cx, cy, vars->map->angle);
+
+            // Draw the pixel at the rotated position
+            put_pixel_to_image(vars, px, py, color);
+			j++;
+        }
+		i++;
+    }
+}
+
 
 int	is_wall(t_vars *vars, int y, int x)
 {
@@ -74,7 +114,7 @@ void	draw_map(t_vars *vars)
 
 	i = 0;
 	unit_size = 64;
-	player_size = 8;
+	player_size = 16;
 	while (i < vars->map->height)
 	{
 		j = 0;
@@ -94,6 +134,6 @@ void	draw_map(t_vars *vars)
 		}
 		i++;
 	}
-	draw_square(vars, vars->player->x, vars->player->y, RED, player_size);
-	draw_ray(vars);
+	draw_player(vars, vars->player->x, vars->player->y, RED, player_size);
+	//draw_ray(vars);
 }

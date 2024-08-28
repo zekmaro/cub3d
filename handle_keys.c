@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/25 20:45:19 by andrejarama      ###   ########.fr       */
+/*   Updated: 2024/08/28 17:40:38 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <unistd.h>
 
 int	player_inside_map(t_vars *vars, int x, int y)
 {
@@ -51,14 +50,12 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 
 int mouse_move(int x, int y, t_vars *vars)
 {
-    // Example: Print the mouse position to the console
-    printf("Mouse moved to: x = %d, y = %d\n", x, y);
-
-    // Here you can add code to update your game state based on mouse movement
-
+	vars->map->angle = (x / 360);
+	draw_map(vars);
+	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
+			vars->image->mlx_img, 0, 0);
     return (0);
 }
-
 
 void	check_move_player(int keycode, t_vars *vars)
 {
@@ -103,7 +100,7 @@ int	key_hook(int keycode, t_vars *vars)
 		handle_key(keycode, vars);
 		draw_map(vars);
 		mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
-			vars->image->mlx_img, 0, 0);	
+			vars->image->mlx_img, 0, 0);
 	}
 	return (0);
 }
