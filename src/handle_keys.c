@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 22:28:23 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 23:06:33 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 	int x;
 	int y;
 
-	x = (vars->player->center_x + move_x) / vars->unit_size;
-	y = (vars->player->center_y + move_y) / vars->unit_size;
-	if (can_move(vars, y, x))
+	x = (vars->player->center_x + move_x);
+	y = (vars->player->center_y + move_y);
+	rotate_around_point(&x, &y, vars->player->center_x, vars->player->center_y, vars->player->angle);
+	if (can_move(vars, y / vars->unit_size, x / vars->unit_size))
 	{
-		vars->player->y += move_y;
-		vars->player->x += move_x;	
+		vars->player->y = y;
+		vars->player->x = x;	
 	}
 }
 
@@ -38,26 +39,21 @@ int mouse_move(int x, int y, t_vars *vars)
 
 void	check_move_player(int keycode, t_vars *vars)
 {
-	int move_x;
-	int move_y;
-
-	move_x = 8;
-	move_y = 8;
 	if (keycode == W)
 	{
-		move_player(vars, -move_y, 0);
+		move_player(vars, -vars->player->player_size, 0);
 	}
 	else if (keycode == S)
 	{
-		move_player(vars, move_y, 0);
+		move_player(vars, vars->player->player_size, 0);
 	}
 	else if (keycode == D)
 	{
-		move_player(vars, 0, move_x);
+		move_player(vars, 0, vars->player->player_size);
 	}
 	else if (keycode == A)
 	{
-		move_player(vars, 0, -move_x);
+		move_player(vars, 0, -vars->player->player_size);
 	}
 	else if (keycode == KEY_LEFT)
 		vars->player->angle -= M_PI / 6;
