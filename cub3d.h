@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 22:27:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:27:33 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define D 100
 # define S 115
 # define A 97
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_UP 65362
+# define KEY_DOWN 65364
 # define ESCAPE 65307
 
 // KEY DEFINITION MAC

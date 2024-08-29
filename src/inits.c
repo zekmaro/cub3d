@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 18:40:04 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 22:19:41 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	initialise_player(t_vars *vars)
 
 void	initialise_vars(t_vars *vars)
 {
-	vars->unit_size = 64;
+	vars->unit_size = 32;
 	initialise_image(vars);
 	initialise_map(vars);
 	initialise_mlx(vars);

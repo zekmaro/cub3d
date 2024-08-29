@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 18:40:00 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 22:28:23 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,9 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 {
 	int x;
 	int y;
-	int player_center_x;
-	int player_center_y;
 
-	player_center_x = vars->player->x + (8 / 2);
-	player_center_y = vars->player->y + (8 / 2);
-	x = (player_center_x + move_x) / 64;
-	y = (player_center_y + move_y) / 64;
+	x = (vars->player->center_x + move_x) / vars->unit_size;
+	y = (vars->player->center_y + move_y) / vars->unit_size;
 	if (can_move(vars, y, x))
 	{
 		vars->player->y += move_y;
@@ -63,6 +59,11 @@ void	check_move_player(int keycode, t_vars *vars)
 	{
 		move_player(vars, 0, -move_x);
 	}
+	else if (keycode == KEY_LEFT)
+		vars->player->angle -= M_PI / 6;
+	else if (keycode == KEY_RIGHT)
+		vars->player->angle += M_PI / 6;
+		
 }
 
 void	handle_key(int keycode, t_vars *vars)
