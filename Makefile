@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
+#    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/08/29 18:50:08 by anarama          ###   ########.fr        #
+#    Updated: 2024/08/29 19:26:27 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC		:=	src/cub3d.c \
 			src/handle_keys.c \
 			src/inits.c \
 			src/parsing.c \
-			src/utils.c
+			src/utils.c \
+			src/raycast.c \
 
 # LIBS 
 LIBS	:= libft/libft.a

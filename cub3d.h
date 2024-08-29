@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 18:40:46 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 19:22:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,9 @@ void	print_map(t_map *map);
 int		is_wall(t_vars *vars, int y, int x);
 int		player_inside_map(t_vars *vars, int x, int y);
 int		can_move(t_vars *vars, int y, int x);
+
+/* Raycast.c */
+void	cast_ray(t_vars *vars, double ray_angle, int ray_id);
+void	raycast(t_vars *vars);
 
 #endif // CUB3D_H
