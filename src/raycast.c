@@ -47,7 +47,7 @@ void	cast_ray(t_vars *vars, double ray_angle, int ray_id)
 	y = draw_start;
 	while (y < draw_end)
 	{
-		put_pixel_to_image(vars, ray_id, y, BLUE);
+		put_pixel_to_image(vars, ray_id, y, BEIGE);
 		y++;
 	}
 }

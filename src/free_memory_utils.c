@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/29 18:39:42 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 22:22:34 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void	free_map(t_map *map)
 	free(map->grid);
 }
 
-void	free_and_exit(t_vars *vars)
+int	free_and_exit(void *param)
 {
+	t_vars	*vars;
+
+	vars = (t_vars *)param;
 	cleanup_vars(vars);
 	exit(0);
 }
