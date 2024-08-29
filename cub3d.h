@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 19:22:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:27:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,19 @@
 # define BLACK 0x000000
 # define BLUE 0x00008B
 # define GREEN 0x008000
+# define YELLOW 0xFFFF00
+# define BEIGE 0xC8AE7E
+# define BROWN 0x4C2C17
+# define LIGHT_BLUE 0x7FDBFF
 
 typedef struct s_map
 {
 	char	**grid;
 	int		height;
 	int		width;
-	int     player_x;
-    int     player_y;
-    char    player_dir;
+	int		player_x;
+	int		player_y;
+	char	player_dir;
 }	t_map;
 
 typedef struct s_img
@@ -120,7 +124,7 @@ void	draw_map(t_vars *vars);
 /* Free_memory_utils.c */
 void	free_memory(char **arr);
 void	free_map(t_map *map);
-void	free_and_exit(t_vars *vars);
+int		free_and_exit(void *param);
 void	cleanup_vars(t_vars *vars);
 
 /* Free_vars.c */

@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/29 21:16:21 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 21:42:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	draw_floor(t_vars *vars)
 		j = 0;
 		while (j < vars->mlx->window_width)
 		{
-			put_pixel_to_image(vars, j, i, RED);
+			put_pixel_to_image(vars, j, i, BROWN);
 			j++;
 		}
 		i++;
@@ -120,7 +120,7 @@ void	draw_ceiling(t_vars *vars)
 		j = 0;
 		while (j < vars->mlx->window_width)
 		{
-			put_pixel_to_image(vars, j, i, WHITE);
+			put_pixel_to_image(vars, j, i, LIGHT_BLUE);
 			j++;
 		}
 		i--;
