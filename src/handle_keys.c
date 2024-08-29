@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 23:27:29 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:33:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,13 @@ void	check_move_player(int keycode, t_vars *vars)
 	move_x = 8;
 	move_y = 8;
 	if (keycode == W)
-	{
 		move_player(vars, -move_y, 0);
-	}
 	else if (keycode == S)
-	{
 		move_player(vars, move_y, 0);
-	}
 	else if (keycode == D)
-	{
 		move_player(vars, 0, move_x);
-	}
 	else if (keycode == A)
-	{
 		move_player(vars, 0, -move_x);
-	}
 	else if (keycode == KEY_LEFT)
 		vars->player->angle -= M_PI / 6;
 	else if (keycode == KEY_RIGHT)
@@ -73,9 +65,7 @@ void	handle_key(int keycode, t_vars *vars)
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == ESCAPE)
-	{
 		free_and_exit(vars);
-	}
 	else
 	{
 		clean_screen(vars);
