@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/29 20:09:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 21:16:21 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,50 @@ void	draw_ray(t_vars *vars)
 	draw_line(vars, GREEN);
 }
 
+void	draw_floor(t_vars *vars)
+{
+	int i;
+	int j;
+
+	i = vars->mlx->window_height / 2;
+	while (i < vars->mlx->window_height)
+	{
+		j = 0;
+		while (j < vars->mlx->window_width)
+		{
+			put_pixel_to_image(vars, j, i, RED);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_ceiling(t_vars *vars)
+{
+	int i;
+	int j;
+
+	i = vars->mlx->window_height / 2;
+	while (i > 0)
+	{
+		j = 0;
+		while (j < vars->mlx->window_width)
+		{
+			put_pixel_to_image(vars, j, i, WHITE);
+			j++;
+		}
+		i--;
+	}
+}
+
 void	draw_map(t_vars *vars)
 {
 	int i;
 	int j;
 
 	i = 0;
+	draw_floor(vars);
+	draw_ceiling(vars);
 	while (i < vars->map->height)
 	{
 		j = 0;
