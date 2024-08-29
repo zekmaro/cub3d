@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 22:21:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:53:23 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 	int		fd;
 
-	fd = 0;
 	if (argc != 2)
 	{
 		perror("Usage: ./cub3D [path]<filename>.cub\n");
