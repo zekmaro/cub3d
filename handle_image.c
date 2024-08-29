@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrejarama <andrejarama@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:54:25 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/22 00:07:08 by andrejarama      ###   ########.fr       */
+/*   Updated: 2024/08/29 15:52:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	clean_screen(t_vars *vars)
 
 void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx)
 {
+	(void)vars;
 	image->mlx_img = mlx_new_image(mlx->mlx, mlx->window_width,
 			mlx->window_height);
 	// if (!image->mlx_img)
