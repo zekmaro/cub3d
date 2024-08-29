@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/08/29 21:17:56 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 22:25:06 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	cast_ray(t_vars *vars, double ray_angle, int ray_id)
 	y = draw_start;
 	while (y < draw_end)
 	{
-		put_pixel_to_image(vars, ray_id, y, WHITE);
+		put_pixel_to_image(vars, ray_id, y, BLUE);
 		y++;
 	}
 }
