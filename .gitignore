@@ -1,0 +1,11 @@
+*.o
+*.swp
+cub3d
+*.swp
+*.tmp
+*.txt
+*.sh
+*.py
+a.out
+.vscode
+libft/libft.a
