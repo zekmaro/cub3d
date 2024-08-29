@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 15:16:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:39:28 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	run_screen(t_vars *vars)
 {
@@ -23,14 +23,14 @@ void	run_screen(t_vars *vars)
 			vars->image->mlx_img, 0, 0);
 	mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_key_hook(vars->mlx->win, key_hook, vars);
-	//mlx_hook(vars->mlx->win, 17, 0, (int (*)(void))free_and_exit, vars);
+	mlx_hook(vars->mlx->win, 17, 0, (int (*)(void))free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
 }
 
 void	setup_player(t_vars *vars)
 {
-	vars->player->x = (vars->map->player_x * 64) + 64 / 2;
-	vars->player->y = (vars->map->player_y * 64) + 64 / 2;
+	vars->player->x = (vars->map->player_x * vars->unit_size) + vars->unit_size / 2;
+	vars->player->y = (vars->map->player_y * vars->unit_size) + vars->unit_size / 2;
 }
 
 int	main(int argc, char **argv)
@@ -54,12 +54,10 @@ int	main(int argc, char **argv)
 	initialise_vars(&vars);
 	if (!read_map(fd, vars.map, argv[1]))
 	{
-		exit(EXIT_FAILURE);
-		//free_and_exit(&vars);
+		free_and_exit(&vars);
 	}
 	setup_player(&vars);
 	print_map(vars.map);
-	//initialise_map_vars(&vars);
 	run_screen(&vars);
 	return (0);
 }

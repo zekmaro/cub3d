@@ -6,21 +6,21 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/28 14:03:11 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 18:40:46 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "get_next_line/get_next_line.h"
+# include "gnl/get_next_line.h"
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
-# include "minilibx_macos/mlx.h"
+# include "mlx.h"
 
 // KEY DEFINITION LINUX
 # define W 119
@@ -49,18 +49,10 @@ typedef struct s_map
 	char	**grid;
 	int		height;
 	int		width;
-	int		angle;
 	int     player_x;
     int     player_y;
     char    player_dir;
 }	t_map;
-
-typedef struct s_angles
-{
-	double	angle_x;
-	double	angle_y;
-	double	angle_z;
-}	t_angles;
 
 typedef struct s_img
 {
@@ -70,20 +62,6 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
-
-typedef struct s_color
-{
-	unsigned long	color;
-	int				red;
-	int				green;
-	int				blue;
-}	t_color;
-
-typedef struct s_colors
-{
-	t_color	*low;
-	t_color	*top;
-}	t_colors;
 
 typedef struct s_mlx
 {
@@ -97,37 +75,34 @@ typedef struct s_line
 {
 	int	x0;
 	int	y0;
-	int	z0;
 	int	x1;
 	int	y1;
-	int	z1;
 	int	src_x;
 	int	src_y;
 	int	dx;
 	int	dy;
 	int	amount_pixels;
-	int	fraction;
 	int	step_x;
 	int	step_y;
-	int	dh;
 }	t_line;
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	dir_x;
-	int	dir_y;
-	int	move_speed;
-	int	rot_speed;
+	int		x;
+	int		y;
+	int		move_speed;
+	int		rot_speed;
+	int		player_size;
+	int		center_x;
+	int		center_y;
+	double	angle;
 }	t_player;
 
 typedef struct s_vars
 {
+	int			unit_size;
 	t_map		*map;
 	t_img		*image;
-	t_img		*color;
-	t_colors	*colors;
 	t_mlx		*mlx;
 	t_line		*line;
 	t_player	*player;
@@ -136,16 +111,44 @@ typedef struct s_vars
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
-int		read_map(int fd, t_map *map, char *file_name);
-void	initialise_vars(t_vars *vars);
-void	print_map(t_map *map);
+/* Draw_line.c */
+void	draw_line(t_vars *vars, unsigned long color);
+
+/* Drawing.c */
 void	draw_map(t_vars *vars);
 
-int		key_hook(int keycode, t_vars *vars);
+/* Free_memory_utils.c */
+void	free_memory(char **arr);
+void	free_map(t_map *map);
+void	free_and_exit(t_vars *vars);
+void	cleanup_vars(t_vars *vars);
+
+/* Free_vars.c */
+void	free_vars_map(t_vars *vars);
+void	free_vars_image(t_vars *vars);
+void	free_vars_player(t_vars *vars);
+void	free_vars_mlx(t_vars *vars);
+void	free_vars_line(t_vars *vars);
+
+/* Handle_iamge.c */
+void	put_pixel_to_image(t_vars *vars, int x, int y, int color);
 void	clean_screen(t_vars *vars);
 void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
-void	put_pixel_to_image(t_vars *vars, int x, int y, int color);
-void	draw_line(t_vars *vars, unsigned long color);
+
+/* Handle_keys.c */
 int		mouse_move(int x, int y, t_vars *vars);
-void	draw_ray(t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
+
+/* Inits.c */
+void	initialise_vars(t_vars *vars);
+
+/* Parsing.c */
+int		read_map(int fd, t_map *map, char *file_name);
+
+/* Utils.c */
+void	print_map(t_map *map);
+int		is_wall(t_vars *vars, int y, int x);
+int		player_inside_map(t_vars *vars, int x, int y);
+int		can_move(t_vars *vars, int y, int x);
+
 #endif // CUB3D_H

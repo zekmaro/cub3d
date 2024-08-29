@@ -6,11 +6,11 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/24 14:11:24 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 18:40:04 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	initialise_mlx(t_vars *vars)
 {
@@ -83,11 +83,13 @@ void	initialise_player(t_vars *vars)
 		exit (1);
 	}
 	ft_bzero(player, sizeof(t_player));
+	player->player_size = 8;
 	vars->player = player;
 }
 
 void	initialise_vars(t_vars *vars)
 {
+	vars->unit_size = 64;
 	initialise_image(vars);
 	initialise_map(vars);
 	initialise_mlx(vars);
