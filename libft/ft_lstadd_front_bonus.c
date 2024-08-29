@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 20:15:53 by anarama           #+#    #+#             */
-/*   Updated: 2024/04/15 11:46:10 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 21:01:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new_elem)
 {
-	if (new == NULL)
+	if (new_elem == NULL)
 		return ;
 	if (*lst == NULL)
 	{
-		*lst = new;
+		*lst = new_elem;
 		return ;
 	}
-	new->next = *lst;
-	*lst = new;
+	new_elem->next = *lst;
+	*lst = new_elem;
 }
