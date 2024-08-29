@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/29 20:09:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 21:40:26 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,42 @@ void	draw_ray(t_vars *vars)
 	draw_line(vars, GREEN);
 	get_ray_target_coors(vars, -1, 1);
 	draw_line(vars, GREEN);
+}
+
+void	draw_floor(t_vars *vars)
+{
+	int i;
+	int j;
+
+	i = vars->mlx->window_height / 2;
+	while (i < vars->mlx->window_height)
+	{
+		j = 0;
+		while (j < vars->mlx->window_width)
+		{
+			put_pixel_to_image(vars, j, i, BROWN);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_ceiling(t_vars *vars)
+{
+	int i;
+	int j;
+
+	i = vars->mlx->window_height / 2;
+	while (i > 0)
+	{
+		j = 0;
+		while (j < vars->mlx->window_width)
+		{
+			put_pixel_to_image(vars, j, i, LIGHT_BLUE);
+			j++;
+		}
+		i--;
+	}
 }
 
 void	draw_map(t_vars *vars)
