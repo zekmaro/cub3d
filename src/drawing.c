@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
 /*   Updated: 2024/08/29 21:42:11 by iberegsz         ###   ########.fr       */
@@ -133,6 +133,8 @@ void	draw_map(t_vars *vars)
 	int j;
 
 	i = 0;
+	draw_floor(vars);
+	draw_ceiling(vars);
 	while (i < vars->map->height)
 	{
 		j = 0;

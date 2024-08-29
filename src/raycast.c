@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
 /*   Updated: 2024/08/29 21:42:18 by iberegsz         ###   ########.fr       */
@@ -37,7 +37,7 @@ void	cast_ray(t_vars *vars, double ray_angle, int ray_id)
 	}
 	distance_to_wall = sqrt(pow(ray_x - vars->player->x, 2) \
 		+ pow(ray_y - vars->player->y, 2));
-	line_height = (int)(vars->mlx->window_height / distance_to_wall);
+	line_height = (int)(vars->mlx->window_height * 10 / distance_to_wall);
 	draw_start = -line_height / 2 + vars->mlx->window_height / 2;
 	if (draw_start < 0)
 		draw_start = 0;
