@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 18:40:12 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 21:16:32 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void print_map(t_map *map)
 
 int	is_wall(t_vars *vars, int y, int x)
 {
-	return (vars->map->grid[y / 64][x / 64] == '1');
+	return (vars->map->grid[y / vars->unit_size][x / vars->unit_size] == '1');
 }
 
 int	player_inside_map(t_vars *vars, int x, int y)
