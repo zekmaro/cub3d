@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 15:51:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:40:00 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int	player_inside_map(t_vars *vars, int x, int y)
-{
-	return (x < vars->map->width
-		&& y < vars->map->height);
-}
-
-int	can_move(t_vars *vars, int y, int x)
-{
-	if (player_inside_map(vars, x, y))
-	{
-		if (vars->map->grid[y][x] == '1')
-			return (0);
-		return (1);
-	}
-	else
-		return (0);
-}
+#include "../cub3d.h"
 
 void	move_player(t_vars *vars, int move_y, int move_x)
 {
@@ -51,7 +33,7 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 int mouse_move(int x, int y, t_vars *vars)
 {
 	(void)y;
-	vars->map->angle = (x / 360);
+	vars->player->angle = (x / 360);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 			vars->image->mlx_img, 0, 0);
@@ -92,8 +74,7 @@ int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == ESCAPE)
 	{
-		exit(1);
-		//free_and_exit(vars);
+		free_and_exit(vars);
 	}
 	else
 	{

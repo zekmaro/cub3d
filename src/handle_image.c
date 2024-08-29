@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:54:25 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 15:52:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:39:50 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	put_pixel_to_image(t_vars *vars, int x, int y, int color)
 {
@@ -50,10 +50,10 @@ void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx)
 	(void)vars;
 	image->mlx_img = mlx_new_image(mlx->mlx, mlx->window_width,
 			mlx->window_height);
-	// if (!image->mlx_img)
-	// 	free_and_exit(vars);
+	if (!image->mlx_img)
+		free_and_exit(vars);
 	image->addr = mlx_get_data_addr(image->mlx_img, &(image->bits_per_pixel),
 			&(image->line_len), &(image->endian));
-	// if (!image->addr)
-	// 	free_and_exit(vars);
+	if (!image->addr)
+		free_and_exit(vars);
 }
