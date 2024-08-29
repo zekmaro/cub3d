@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/08/29 22:25:06 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 22:53:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	cast_ray(t_vars *vars, double ray_angle, int ray_id)
 	ray_y = vars->player->y;
 	ray_dir_x = cos(ray_angle);
 	ray_dir_y = sin(ray_angle);
-	distance_to_wall = 0;
 	while (vars->map->grid[(int)(ray_y / vars->unit_size)] \
 		[(int)(ray_x / vars->unit_size)] != '1')
 	{
