@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/28 13:51:15 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 15:16:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	fd = 0;
 	if (argc != 2)
 	{
-		perror("Usage: ./fdf <filename>\n");
+		perror("Usage: ./cub3D [path]<filename>.cub\n");
 		exit(EXIT_FAILURE);
 	}
 	fd = open(argv[1], O_RDONLY);
