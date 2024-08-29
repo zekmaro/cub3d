@@ -1,4 +1,16 @@
-NAME	:= cub3d
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
+#    Updated: 2024/08/29 15:52:06 by iberegsz         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	:= cub3D
 CC		:= cc
 OBJDIR	:= obj
 SRC		:=	get_next_line/get_next_line.c \
@@ -12,7 +24,7 @@ SRC		:=	get_next_line/get_next_line.c \
 			drawing.c \
 			draw_line.c
 			
-CFLAGS	:= -Wall -Wextra -g
+CFLAGS	:= -Wall -Wextra -Werror -g
 LIBS	:= libft/libft.a minilibx_macos/libmlx.a
 OBJ		:= $(SRC:%.c=%.o)
 
@@ -21,15 +33,15 @@ OBJ		:= $(SRC:%.c=%.o)
 all		: $(NAME)
 
 $(NAME)	: $(OBJ) cub3d.h
-	make -C libft all
+	make -C libft all -j
 	$(CC) $(OBJ) $(LIBS) -lmlx -lXext -lX11 -lm -o $(NAME)
 
 clean	:
-	make -C libft clean
+	make -C libft clean -j
 	rm -f $(OBJ)
 
 fclean	:
-	make -C libft fclean
+	make -C libft fclean -j
 	rm -f $(OBJ) $(NAME)
 
 re		: fclean all

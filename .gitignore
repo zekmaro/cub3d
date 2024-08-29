@@ -1,6 +1,7 @@
 *.o
 *.swp
 cub3d
+cub3D
 *.swp
 *.tmp
 *.txt
@@ -9,3 +10,4 @@ cub3d
 a.out
 .vscode
 libft/libft.a
+cub3d-tester/

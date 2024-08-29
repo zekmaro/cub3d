@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/28 17:40:38 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/29 15:51:58 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 
 int mouse_move(int x, int y, t_vars *vars)
 {
+	(void)y;
 	vars->map->angle = (x / 360);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
