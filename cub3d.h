@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 22:27:33 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/31 01:08:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ typedef struct s_line
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	double	fov;
 	int		move_speed;
 	int		rot_speed;
