@@ -1,0 +1,22 @@
+/* XPM */
+static char * west_texture_xpm[] = {
+"16 16 2 1",
+" 	c #FFFFFF",
+"W	c #000000",
+"                ",
+"                ",
+"                ",
+"                ",
+"   WWW     WWW  ",
+"   WWW     WWW  ",
+"   WWW     WWW  ",
+"   WWW     WWW  ",
+"   WWW  W  WWW  ",
+"   WWW  W  WWW  ",
+"   WWW WWW WWW  ",
+"   WWW WWW WWW  ",
+"   WWWWWWWWWWW  ",
+"    WWWW WWWW   ",
+"                ",
+"                "
+};

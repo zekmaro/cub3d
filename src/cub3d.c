@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/30 12:09:02 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/30 17:59:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	run_screen(t_vars *vars)
 {
 	vars->mlx->mlx = mlx_init();
 	vars->mlx->win = mlx_new_window(vars->mlx->mlx, vars->mlx->window_width, \
-		vars->mlx->window_height, "Draw Grid");
+		vars->mlx->window_height, "Gestalt Cube3D");
 	get_data_image(vars, vars->image, vars->mlx);
+	initialise_textures(vars);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);

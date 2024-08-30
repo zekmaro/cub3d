@@ -1,0 +1,22 @@
+/* XPM */
+static char * north_texture_xpm[] = {
+"16 16 2 1",
+" 	c #FFFFFF",
+"N	c #000000",
+"                ",
+"                ",
+"                ",
+"                ",
+"   NNN     NNN  ",
+"   NNNN    NNN  ",
+"   NNNNNN  NNN  ",
+"   NNN NNN NNN  ",
+"   NNN NNN NNN  ",
+"   NNN  NNNNNN  ",
+"   NNN   NNNNN  ",
+"   NNN    NNNN  ",
+"   NNN     NNN  ",
+"   NNN     NNN  ",
+"                ",
+"                "
+};

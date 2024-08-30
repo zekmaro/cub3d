@@ -1,0 +1,22 @@
+/* XPM */
+static char * east_texture_xpm[] = {
+"16 16 2 1",
+" 	c #FFFFFF",
+"E	c #000000",
+"                ",
+"                ",
+"                ",
+"                ",
+"   EEEEEEEEEE   ",
+"   EEEEEEEEEE   ",
+"   EEE          ",
+"   EEE          ",
+"   EEEEEEEEEE   ",
+"   EEEEEEEEEE   ",
+"   EEE          ",
+"   EEE          ",
+"   EEEEEEEEEE   ",
+"   EEEEEEEEEE   ",
+"                ",
+"                "
+};
