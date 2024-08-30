@@ -66,31 +66,37 @@ void draw_player(t_vars *vars, unsigned int color)
     }
 }
 
-void	get_ray_target_coors(t_vars *vars, double move_y, double move_x)
+void get_ray_target_coors(t_vars *vars, double angle_offset)
 {
-	double x0;
-	double y0;
-	double x1;
-	double y1;
+    double x0, y0;
+    double x1, y1;
+    double ray_angle;
 
-	x0 = vars->player->center_x;
-	y0 = vars->player->center_y;
-	x1 = x0;
-	y1 = y0;
-	while (!is_wall(vars, y1, x1))
+    ray_angle = vars->player->angle + angle_offset;
+    x0 = vars->player->center_x;
+    y0 = vars->player->center_y;
+    x1 = x0;
+    y1 = y0;
+    while (!is_wall(vars, y1, x1))
+    {
+        x1 += cos(ray_angle);
+        y1 += sin(ray_angle);
+        put_pixel_to_image(vars, (int)x1, (int)y1, GREEN);
+    }
+}
+
+void draw_ray(t_vars *vars)
+{
+    double fov_half = vars->player->fov / 2;
+	double radian;
+
+	radian = 0;
+	while (radian < vars->player->fov)
 	{
-		y1 += move_y;
-		x1 += move_x;
-		put_pixel_to_image(vars, x1, y1, GREEN);
+		get_ray_target_coors(vars, -fov_half + radian);
+		radian += 0.05;
 	}
 }
-
-void	draw_ray(t_vars *vars)
-{
-	get_ray_target_coors(vars, -tan(vars->player->fov / 2), 1);
-	get_ray_target_coors(vars, tan(vars->player->fov / 2), 1);
-}
-
 void	draw_floor(t_vars *vars)
 {
 	int i;
