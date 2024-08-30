@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 22:27:33 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/30 11:48:16 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_vars
 void	draw_line(t_vars *vars, unsigned long color);
 
 /* Drawing.c */
+void	rotate_around_point(int *x, int *y, int cx, int cy, double angle);
 void	draw_map(t_vars *vars);
 
 /* Free_memory_utils.c */
