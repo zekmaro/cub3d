@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/30 19:36:34 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/30 23:39:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	free_vars_player(t_vars *vars)
 void	free_vars_mlx(t_vars *vars)
 {
 	if (vars->mlx->win)
-	{	
+	{
 		if (vars->mlx->win)
 		{
-			mlx_destroy_window(vars->mlx->mlx, vars->mlx->win);		
+			mlx_destroy_window(vars->mlx->mlx, vars->mlx->win);
 			vars->mlx->win = NULL;
 		}
 		if (vars->mlx->mlx)

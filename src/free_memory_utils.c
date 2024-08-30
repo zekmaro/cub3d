@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/30 19:07:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/30 23:40:52 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	free_and_exit(void *param)
 	exit(0);
 }
 
-void free_vars_textures(t_vars *vars)
+void	free_vars_textures(t_vars *vars)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 4)
@@ -69,5 +69,5 @@ void	cleanup_vars(t_vars *vars)
 	free_vars_textures(vars);
 	free_vars_mlx(vars);
 	free_vars_line(vars);
-	free_vars_player(vars);	
+	free_vars_player(vars);
 }

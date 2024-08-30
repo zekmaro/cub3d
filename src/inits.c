@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/30 19:30:48 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/30 23:53:50 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void	initialise_textures(t_vars *vars)
 	int	height;
 	int	i;
 
-    if (!vars->mlx || !vars->mlx->mlx)
-    {
-        perror("MLX not initialized");
-		free_and_exit(vars);        
-    }
+	if (!vars->mlx || !vars->mlx->mlx)
+	{
+		perror("MLX not initialized");
+		free_and_exit(vars);
+	}
 	vars->textures[0] = mlx_xpm_file_to_image(vars->mlx->mlx, \
 		"./assets/north_texture.xpm", &width, &height);
 	vars->textures[1] = mlx_xpm_file_to_image(vars->mlx->mlx, \
@@ -128,12 +128,12 @@ void	initialise_textures(t_vars *vars)
 
 void	initialise_vars(t_vars *vars)
 {
-	int i;
+	int	i;
 
 	vars->unit_size = 32;
 	i = -1;
 	while (++i < 4)
-		vars->textures[i] = NULL;		
+		vars->textures[i] = NULL;
 	initialise_image(vars);
 	initialise_map(vars);
 	initialise_mlx(vars);
