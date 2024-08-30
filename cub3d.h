@@ -96,8 +96,9 @@ typedef struct s_line
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
+	double	fov;
 	int		move_speed;
 	int		rot_speed;
 	int		player_size;
