@@ -52,6 +52,14 @@
 # define BROWN 0x4C2C17
 # define LIGHT_BLUE 0x7FDBFF
 
+typedef enum
+{
+	TEXTURE_NORTH,
+	TEXTURE_WEST,
+	TEXTURE_SOUTH,
+	TEXTURE_EAST
+} t_texture_type;
+
 typedef struct s_map
 {
 	char	**grid;
@@ -69,6 +77,7 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
+	t_texture_type *texture_type;
 }	t_img;
 
 typedef struct s_mlx
@@ -98,6 +107,8 @@ typedef struct s_ray
 {
 	double	ray_x;
 	double	ray_y;
+	double	last_ray_x;
+	double	last_ray_y;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	ray_angle;

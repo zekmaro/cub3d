@@ -20,6 +20,8 @@ void	get_ray_target_coors(t_vars *vars)
 	vars->ray->ray_dir_y = sin(vars->ray->ray_angle);
 	while (!is_wall(vars, vars->ray->ray_y, vars->ray->ray_x))
 	{
+		vars->ray->last_ray_x = vars->ray->ray_x;
+		vars->ray->last_ray_y = vars->ray->ray_y;
 		vars->ray->ray_x += vars->ray->ray_dir_x;
 		vars->ray->ray_y += vars->ray->ray_dir_y;
 	}
@@ -29,7 +31,7 @@ void	setup_ray(t_vars *vars)
 {
 	vars->ray->distance_to_wall = sqrt(pow(vars->ray->ray_x - vars->player->x, 2) \
 		+ pow(vars->ray->ray_y - vars->player->y, 2));
-	vars->ray->line_height = (int)(vars->mlx->window_height * 20 / vars->ray->distance_to_wall);
+	vars->ray->line_height = (int)(vars->mlx->window_height * vars->unit_size / 2 / vars->ray->distance_to_wall);
 	vars->ray->draw_start = -vars->ray->line_height / 2 + vars->mlx->window_height / 2;
 	if (vars->ray->draw_start < 0)
 		vars->ray->draw_start = 0;
@@ -38,42 +40,51 @@ void	setup_ray(t_vars *vars)
 		vars->ray->draw_end = vars->mlx->window_height - 1;
 }
 
+t_texture_type	define_texture_type(t_vars *vars)
+{
+	int dx;
+	int dy;
+	t_texture_type texture_type = 0;
+
+	dx = (int)vars->ray->last_ray_x / vars->unit_size - (int)vars->ray->ray_x / vars->unit_size;
+	dy = (int)vars->ray->last_ray_y / vars->unit_size - (int)vars->ray->ray_y / vars->unit_size;
+	if (dy == 1)
+		texture_type = TEXTURE_NORTH;
+	else if (dy == -1)
+		texture_type = TEXTURE_SOUTH;
+	else if (dx == 1)
+		texture_type = TEXTURE_WEST;
+	else if (dx == -1)
+		texture_type = TEXTURE_EAST;
+	return (texture_type);
+}
+
 void	cast_ray(t_vars *vars, int ray_id)
 {
 	int		y;
-	int		texture_index;
+	t_texture_type	texture_index;
 	int		tex_x;
 	int		tex_y;
 	int		color;
 
 	get_ray_target_coors(vars);
-	vars->ray->distance_to_wall = sqrt(pow(vars->ray->ray_x - vars->player->x, 2) \
-		+ pow(vars->ray->ray_y - vars->player->y, 2));
-	vars->ray->line_height = (int)(vars->mlx->window_height * 20 / vars->ray->distance_to_wall);
-	vars->ray->draw_start = -vars->ray->line_height / 2 + vars->mlx->window_height / 2;
-	if (vars->ray->draw_start < 0)
-		vars->ray->draw_start = 0;
-	vars->ray->draw_end = vars->ray->line_height / 2 + vars->mlx->window_height / 2;
-	if (vars->ray->draw_end >= vars->mlx->window_height)
-		vars->ray->draw_end = vars->mlx->window_height - 1;
-	if (fabs(vars->ray->ray_dir_x) > fabs(vars->ray->ray_dir_y))
-	{
-		if (vars->ray->ray_dir_x > 0)
-			texture_index = 2;
-		else
-			texture_index = 3;
-	}
-	else
-	{
-		if (vars->ray->ray_dir_y > 0)
-			texture_index = 1;
-		else
-			texture_index = 0;
-	}
+	setup_ray(vars);
+	texture_index = define_texture_type(vars);
 	y = vars->ray->draw_start;
 	while (y < vars->ray->draw_end)
 	{
-		tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
+		if (texture_index % 2 == 0)
+		{
+			tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
+			if (texture_index == TEXTURE_SOUTH)
+				tex_x *= -1;
+		}
+		else if (texture_index % 2 == 1)
+		{
+			tex_x = (int)(vars->ray->ray_y) % vars->unit_size;
+			if (texture_index == TEXTURE_WEST)
+				tex_x = vars->unit_size - tex_x;
+		}
 		tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size / vars->ray->line_height);
 		color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 		put_pixel_to_image(vars, ray_id, y, color);

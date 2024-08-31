@@ -112,13 +112,13 @@ void	initialise_textures(t_vars *vars)
 		perror("MLX not initialized");
 		free_and_exit(vars);
 	}
-	vars->textures[0] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+	vars->textures[TEXTURE_NORTH] = mlx_xpm_file_to_image(vars->mlx->mlx, \
 		"./assets/north_texture.xpm", &width, &height);
-	vars->textures[1] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+	vars->textures[TEXTURE_SOUTH] = mlx_xpm_file_to_image(vars->mlx->mlx, \
 		"./assets/south_texture.xpm", &width, &height);
-	vars->textures[2] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+	vars->textures[TEXTURE_WEST] = mlx_xpm_file_to_image(vars->mlx->mlx, \
 		"./assets/west_texture.xpm", &width, &height);
-	vars->textures[3] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+	vars->textures[TEXTURE_EAST] = mlx_xpm_file_to_image(vars->mlx->mlx, \
 		"./assets/east_texture.xpm", &width, &height);
 	if (!vars->textures[0] || !vars->textures[1] \
 		|| !vars->textures[2] || !vars->textures[3])
@@ -144,7 +144,7 @@ void	initialise_vars(t_vars *vars)
 {
 	int	i;
 
-	vars->unit_size = 64;
+	vars->unit_size = 16;
 	i = -1;
 	while (++i < 4)
 		vars->textures[i] = NULL;
