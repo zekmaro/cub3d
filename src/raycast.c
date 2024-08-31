@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/08/31 14:21:49 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/31 16:57:56 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	cast_ray(t_vars *vars, double ray_angle, int ray_id)
 	}
 	distance_to_wall = sqrt(pow(ray_x - vars->player->x, 2) \
 		+ pow(ray_y - vars->player->y, 2));
-	line_height = (int)(vars->mlx->window_height * 10 / distance_to_wall);
+	line_height = (int)(vars->mlx->window_height * 20 / distance_to_wall);
 	draw_start = -line_height / 2 + vars->mlx->window_height / 2;
 	if (draw_start < 0)
 		draw_start = 0;
