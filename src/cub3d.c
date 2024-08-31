@@ -64,7 +64,7 @@ int	main(int argc, char **argv)
 	if (!read_map(fd, vars.map, argv[1]))
 		free_and_exit(&vars);
 	setup_player(&vars);
-	print_map(vars.map);
+	//print_map(vars.map);
 	run_screen(&vars);
 	return (0);
 }

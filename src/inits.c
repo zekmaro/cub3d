@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/31 16:57:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/31 23:03:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,50 +101,48 @@ void	initialise_ray(t_vars *vars)
 	vars->ray = ray;
 }
 
-void	initialise_textures(t_vars *vars)
+void	load_texture(t_vars *vars, int texture_index, const char *file_path)
 {
 	int	width;
 	int	height;
-	int	i;
 
+	vars->textures[texture_index] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+		(char *)file_path, &width, &height);
+	if (!vars->textures[texture_index])
+	{
+		perror("Failed to load texture");
+		free_and_exit(vars);
+	}
+	vars->textures[texture_index]->addr = mlx_get_data_addr(\
+		vars->textures[texture_index], \
+		&vars->textures[texture_index]->bits_per_pixel, \
+		&vars->textures[texture_index]->line_len, \
+		&vars->textures[texture_index]->endian);
+	if (!vars->textures[texture_index]->addr)
+	{
+		perror("Failed to get texture data address");
+		free_and_exit(vars);
+	}
+}
+
+void	initialise_textures(t_vars *vars)
+{
 	if (!vars->mlx || !vars->mlx->mlx)
 	{
 		perror("MLX not initialized");
 		free_and_exit(vars);
 	}
-	vars->textures[0] = mlx_xpm_file_to_image(vars->mlx->mlx, \
-		"./assets/north_texture.xpm", &width, &height);
-	vars->textures[1] = mlx_xpm_file_to_image(vars->mlx->mlx, \
-		"./assets/south_texture.xpm", &width, &height);
-	vars->textures[2] = mlx_xpm_file_to_image(vars->mlx->mlx, \
-		"./assets/west_texture.xpm", &width, &height);
-	vars->textures[3] = mlx_xpm_file_to_image(vars->mlx->mlx, \
-		"./assets/east_texture.xpm", &width, &height);
-	if (!vars->textures[0] || !vars->textures[1] \
-		|| !vars->textures[2] || !vars->textures[3])
-	{
-		perror("Failed to load textures");
-		free_and_exit(vars);
-	}
-	i = -1;
-	while (++i < 4)
-	{
-		vars->textures[i]->addr = mlx_get_data_addr(vars->textures[i], \
-			&vars->textures[i]->bits_per_pixel, &vars->textures[i]->line_len, \
-			&vars->textures[i]->endian);
-		if (!vars->textures[i]->addr)
-		{
-			perror("Failed to get texture data address");
-			free_and_exit(vars);
-		}
-	}
+	load_texture(vars, TEXTURE_NORTH, "./assets/north_texture.xpm");
+	load_texture(vars, TEXTURE_SOUTH, "./assets/south_texture.xpm");
+	load_texture(vars, TEXTURE_WEST, "./assets/west_texture.xpm");
+	load_texture(vars, TEXTURE_EAST, "./assets/east_texture.xpm");
 }
 
 void	initialise_vars(t_vars *vars)
 {
 	int	i;
 
-	vars->unit_size = 64;
+	vars->unit_size = 16;
 	i = -1;
 	while (++i < 4)
 		vars->textures[i] = NULL;

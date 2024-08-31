@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/31 18:03:41 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/31 22:51:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@
 # define BROWN 0x4C2C17
 # define LIGHT_BLUE 0x7FDBFF
 
+typedef enum e_tex_typ
+{
+	TEXTURE_NORTH,
+	TEXTURE_WEST,
+	TEXTURE_SOUTH,
+	TEXTURE_EAST
+}	t_tex_typ;
+
 typedef struct s_map
 {
 	char	**grid;
@@ -64,11 +72,12 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	void	*mlx_img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_len;
-	int		endian;
+	void		*mlx_img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_len;
+	int			endian;
+	t_tex_typ	*texture_type;
 }	t_img;
 
 typedef struct s_mlx
@@ -98,6 +107,8 @@ typedef struct s_ray
 {
 	double	ray_x;
 	double	ray_y;
+	double	last_ray_x;
+	double	last_ray_y;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	ray_angle;

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <math.h>
 
 void	draw_square(t_vars *vars, int x, int y, int color)
 {
@@ -158,7 +157,7 @@ void	draw_minimap(t_vars *vars)
 			vars->line->x0 = j * vars->unit_size;
 			vars->line->y0 = i * vars->unit_size;
 			if (vars->map->grid[i][j] == '1')
-				draw_square(vars, vars->line->x0, vars->line->y0, PURPLE);
+				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
 			else
 				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
 			j++;
