@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   handle_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:54:25 by andrejarama       #+#    #+#             */
 /*   Updated: 2024/08/29 18:39:50 by anarama          ###   ########.fr       */

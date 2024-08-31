@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 14:59:58 by andrejarama       #+#    #+#             */
 /*   Updated: 2024/08/29 22:24:47 by iberegsz         ###   ########.fr       */
@@ -37,21 +37,13 @@ void	increment_step(int *x0, int *y0, t_line *line)
 
 	error = abs(*x0 - line->x0) * line->dy - abs(*y0 - line->y0) * line->dx;
 	if (line->step_x && !error)
-	{
 		*x0 += line->step_x;
-	}
 	else if (line->step_y && !error)
-	{
 		*y0 += line->step_y;
-	}
 	else if (error < 0)
-	{
 		*x0 += line->step_x;
-	}
 	else if (error > 0)
-	{
 		*y0 += line->step_y;
-	}
 }
 
 void	draw_line(t_vars *vars, unsigned long color)
