@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/31 01:05:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:04:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 {
 	int	x;
 	int	y;
-	int save_x;
-	int save_y;
+	int	save_x;
+	int	save_y;
 
 	x = vars->player->center_x + move_x;
 	y = vars->player->center_y + move_y;
 	save_x = x;
 	save_y = y;
-	rotate_around_point(&x, &y, vars->player->center_x, \
-			vars->player->center_y, vars->player->angle);
+	rotate_around_point(vars, &x, &y);
 	if (can_move(vars, save_y / vars->unit_size, save_x / vars->unit_size))
 	{
 		vars->player->y += move_y;

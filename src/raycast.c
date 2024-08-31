@@ -25,10 +25,18 @@ void	get_ray_target_coors(t_vars *vars)
 	}
 }
 
-// void	setup_ray_start_and_end(t_vars *vars)
-// {
-
-// }
+void	setup_ray(t_vars *vars)
+{
+	vars->ray->distance_to_wall = sqrt(pow(vars->ray->ray_x - vars->player->x, 2) \
+		+ pow(vars->ray->ray_y - vars->player->y, 2));
+	vars->ray->line_height = (int)(vars->mlx->window_height * 20 / vars->ray->distance_to_wall);
+	vars->ray->draw_start = -vars->ray->line_height / 2 + vars->mlx->window_height / 2;
+	if (vars->ray->draw_start < 0)
+		vars->ray->draw_start = 0;
+	vars->ray->draw_end = vars->ray->line_height / 2 + vars->mlx->window_height / 2;
+	if (vars->ray->draw_end >= vars->mlx->window_height)
+		vars->ray->draw_end = vars->mlx->window_height - 1;
+}
 
 void	cast_ray(t_vars *vars, int ray_id)
 {
