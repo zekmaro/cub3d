@@ -132,6 +132,7 @@ void	draw_map(t_vars *vars);
 void	free_memory(char **arr);
 void	free_map(t_map *map);
 int		free_and_exit(void *param);
+void	free_vars_textures(t_vars *vars);
 void	cleanup_vars(t_vars *vars);
 
 /* Free_vars.c */
@@ -141,7 +142,7 @@ void	free_vars_player(t_vars *vars);
 void	free_vars_mlx(t_vars *vars);
 void	free_vars_line(t_vars *vars);
 
-/* Handle_iamge.c */
+/* Handle_image.c */
 void	put_pixel_to_image(t_vars *vars, int x, int y, int color);
 void	clean_screen(t_vars *vars);
 void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);

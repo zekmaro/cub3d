@@ -56,8 +56,8 @@ void	free_vars_textures(t_vars *vars)
 	{
 		if (vars->textures[i])
 		{
-			mlx_destroy_image(vars->mlx->mlx, vars->textures[i]);
-			vars->textures[i] = NULL;
+			free(vars->textures[i]->mlx_img);
+			free(vars->textures[i]);
 		}
 	}
 }
@@ -66,7 +66,6 @@ void	cleanup_vars(t_vars *vars)
 {
 	free_vars_map(vars);
 	free_vars_image(vars);
-	free_vars_textures(vars);
 	free_vars_mlx(vars);
 	free_vars_line(vars);
 	free_vars_player(vars);
