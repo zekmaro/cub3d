@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/30 23:53:50 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/31 16:57:56 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	initialise_vars(t_vars *vars)
 {
 	int	i;
 
-	vars->unit_size = 32;
+	vars->unit_size = 64;
 	i = -1;
 	while (++i < 4)
 		vars->textures[i] = NULL;
