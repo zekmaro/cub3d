@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/08/30 23:45:53 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:21:49 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	cast_ray(t_vars *vars, double ray_angle, int ray_id)
 {
-	double			ray_x;
-	double			ray_y;
-	double			ray_dir_x;
-	double			ray_dir_y;
-	double			distance_to_wall;
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	int				y;
-	int				texture_index;
-	int				tex_x;
-	int				tex_y;
-	unsigned int	color;
+	double	ray_x;
+	double	ray_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	distance_to_wall;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		y;
+	int		texture_index;
+	int		tex_x;
+	int		tex_y;
+	int		color;
 
 	ray_x = vars->player->x;
 	ray_y = vars->player->y;

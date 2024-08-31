@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/31 01:08:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:23:25 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,11 @@ void	initialise_textures(t_vars *vars);
 int		read_map(int fd, t_map *map, char *file_name);
 
 /* Utils.c */
-void			print_map(t_map *map);
-int				is_wall(t_vars *vars, int y, int x);
-int				player_inside_map(t_vars *vars, int x, int y);
-int				can_move(t_vars *vars, int y, int x);
-unsigned int	get_texture_color(t_img *texture, int x, int y);
+void	print_map(t_map *map);
+int		is_wall(t_vars *vars, int y, int x);
+int		player_inside_map(t_vars *vars, int x, int y);
+int		can_move(t_vars *vars, int y, int x);
+int		get_texture_color(t_img *texture, int x, int y);
 
 /* Raycast.c */
 void	cast_ray(t_vars *vars, double ray_angle, int ray_id);
