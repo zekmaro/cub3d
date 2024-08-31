@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/30 11:48:16 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/31 14:23:25 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
+	double	fov;
 	int		move_speed;
 	int		rot_speed;
 	int		player_size;
@@ -114,6 +115,7 @@ typedef struct s_vars
 	t_mlx		*mlx;
 	t_line		*line;
 	t_player	*player;
+	t_img		*textures[4];
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
@@ -130,6 +132,7 @@ void	draw_map(t_vars *vars);
 void	free_memory(char **arr);
 void	free_map(t_map *map);
 int		free_and_exit(void *param);
+void	free_vars_textures(t_vars *vars);
 void	cleanup_vars(t_vars *vars);
 
 /* Free_vars.c */
@@ -139,7 +142,7 @@ void	free_vars_player(t_vars *vars);
 void	free_vars_mlx(t_vars *vars);
 void	free_vars_line(t_vars *vars);
 
-/* Handle_iamge.c */
+/* Handle_image.c */
 void	put_pixel_to_image(t_vars *vars, int x, int y, int color);
 void	clean_screen(t_vars *vars);
 void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
@@ -150,6 +153,7 @@ int		key_hook(int keycode, t_vars *vars);
 
 /* Inits.c */
 void	initialise_vars(t_vars *vars);
+void	initialise_textures(t_vars *vars);
 
 /* Parsing.c */
 int		read_map(int fd, t_map *map, char *file_name);
@@ -159,6 +163,7 @@ void	print_map(t_map *map);
 int		is_wall(t_vars *vars, int y, int x);
 int		player_inside_map(t_vars *vars, int x, int y);
 int		can_move(t_vars *vars, int y, int x);
+int		get_texture_color(t_img *texture, int x, int y);
 
 /* Raycast.c */
 void	cast_ray(t_vars *vars, double ray_angle, int ray_id);
