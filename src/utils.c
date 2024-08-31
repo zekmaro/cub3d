@@ -51,7 +51,7 @@ int	can_move(t_vars *vars, int y, int x)
 		return (0);
 }
 
-unsigned int	get_texture_color(t_img *texture, int x, int y)
+int	get_texture_color(t_img *texture, int x, int y)
 {
 	char	*pixel;
 	int		color;
