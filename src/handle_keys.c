@@ -16,12 +16,16 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 {
 	int	x;
 	int	y;
+	int save_x;
+	int save_y;
 
-	x = (vars->player->center_x + move_x);
-	y = (vars->player->center_y + move_y);
+	x = vars->player->center_x + move_x;
+	y = vars->player->center_y + move_y;
+	save_x = x;
+	save_y = y;
 	rotate_around_point(&x, &y, vars->player->center_x, \
-		vars->player->center_y, vars->player->angle);
-	if (can_move(vars, y / vars->unit_size, x / vars->unit_size))
+			vars->player->center_y, vars->player->angle);
+	if (can_move(vars, save_y / vars->unit_size, save_x / vars->unit_size))
 	{
 		vars->player->y += move_y;
 		vars->player->x += move_x;

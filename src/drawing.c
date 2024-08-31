@@ -140,14 +140,12 @@ void	draw_ceiling(t_vars *vars)
 	}
 }
 
-void	draw_map(t_vars *vars)
+void	draw_minimap(t_vars *vars)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	draw_floor(vars);
-	draw_ceiling(vars);
 	while (i < vars->map->height)
 	{
 		j = 0;
@@ -166,6 +164,13 @@ void	draw_map(t_vars *vars)
 		i++;
 	}
 	draw_player(vars, RED);
-	draw_ray(vars);
+}
+
+void	draw_map(t_vars *vars)
+{
+	draw_floor(vars);
+	draw_ceiling(vars);
 	raycast(vars);
+	draw_minimap(vars);
+	draw_ray(vars);
 }
