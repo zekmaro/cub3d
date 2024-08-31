@@ -34,7 +34,7 @@ void	setup_player(t_vars *vars)
 		+ vars->unit_size / 2;
 	vars->player->y = (vars->map->player_y * vars->unit_size) \
 		+ vars->unit_size / 2;
-	vars->player->fov = M_PI / 2;
+	vars->player->fov = M_PI / 3;
 	if (vars->map->player_dir == 'N')
 		vars->player->angle = -M_PI / 2;
 	else if (vars->map->player_dir == 'W')

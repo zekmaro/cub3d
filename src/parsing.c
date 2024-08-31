@@ -18,10 +18,12 @@ int	count_new_lines(int fd)
 	int		new_lines;
 
 	new_lines = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		new_lines++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (new_lines);
 }
@@ -65,11 +67,13 @@ int	read_map(int fd, t_map *map, char *file_name)
 	map->grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (!map->grid)
 		return (close(fd), 0);
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (!validate_line(line, i, map))
 			return (free(line), close(fd), 0);
 		map->grid[i] = line;
+		line = get_next_line(fd);
 		i++;
 	}
 	close(fd);

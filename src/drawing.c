@@ -73,28 +73,28 @@ void	draw_player(t_vars *vars, unsigned int color)
 	}
 }
 
-void	get_ray_target_coors(t_vars *vars, double angle_offset)
+void	draw_ray(t_vars *vars, double angle_offset)
 {
-	double	x0;
-	double	y0;
-	double	x1;
-	double	y1;
+	double	ray_x;
+	double	ray_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
 	double	ray_angle;
 
 	ray_angle = vars->player->angle + angle_offset;
-	x0 = vars->player->center_x;
-	y0 = vars->player->center_y;
-	x1 = x0;
-	y1 = y0;
-	while (!is_wall(vars, y1, x1))
+	ray_x = vars->player->center_x;
+	ray_y = vars->player->center_y;
+	ray_dir_x = ray_x;
+	ray_dir_y = ray_y;
+	while (!is_wall(vars, ray_dir_y, ray_dir_x))
 	{
-		x1 += cos(ray_angle);
-		y1 += sin(ray_angle);
-		put_pixel_to_image(vars, (int)x1, (int)y1, GREEN);
+		ray_dir_x += cos(ray_angle);
+		ray_dir_y += sin(ray_angle);
+		put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, GREEN);
 	}
 }
 
-void	draw_ray(t_vars *vars)
+void	draw_ray_segment(t_vars *vars)
 {
 	double	fov_half;
 	double	radian;
@@ -103,7 +103,7 @@ void	draw_ray(t_vars *vars)
 	radian = 0;
 	while (radian < vars->player->fov)
 	{
-		get_ray_target_coors(vars, -fov_half + radian);
+		draw_ray(vars, -fov_half + radian);
 		radian += 0.05;
 	}
 }
@@ -174,5 +174,5 @@ void	draw_map(t_vars *vars)
 	draw_ceiling(vars);
 	raycast(vars);
 	draw_minimap(vars);
-	draw_ray(vars);
+	draw_ray_segment(vars);
 }
