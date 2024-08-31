@@ -94,6 +94,19 @@ typedef struct s_line
 	int	step_y;
 }	t_line;
 
+typedef struct s_ray
+{
+	double	ray_x;
+	double	ray_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	ray_angle;
+	double	distance_to_wall;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
+
 typedef struct s_player
 {
 	int		x;
@@ -115,6 +128,7 @@ typedef struct s_vars
 	t_mlx		*mlx;
 	t_line		*line;
 	t_player	*player;
+	t_ray		*ray;
 	t_img		*textures[4];
 }	t_vars;
 
@@ -166,7 +180,7 @@ int		can_move(t_vars *vars, int y, int x);
 int		get_texture_color(t_img *texture, int x, int y);
 
 /* Raycast.c */
-void	cast_ray(t_vars *vars, double ray_angle, int ray_id);
+void	cast_ray(t_vars *vars, int ray_id);
 void	raycast(t_vars *vars);
 
 #endif // CUB3D_H

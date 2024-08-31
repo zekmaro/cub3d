@@ -87,6 +87,20 @@ void	initialise_player(t_vars *vars)
 	vars->player = player;
 }
 
+void	initialise_ray(t_vars *vars)
+{
+	t_ray	*ray;
+
+	ray = (t_ray *)(malloc(sizeof(t_ray)));
+	if (!ray)
+	{
+		//cleanup_vars(vars);
+		exit (1);
+	}
+	ft_bzero(ray, sizeof(t_ray));
+	vars->ray = ray;
+}
+
 void	initialise_textures(t_vars *vars)
 {
 	int	width;
@@ -138,5 +152,6 @@ void	initialise_vars(t_vars *vars)
 	initialise_map(vars);
 	initialise_mlx(vars);
 	initialise_line(vars);
+	initialise_ray(vars);
 	initialise_player(vars);
 }
