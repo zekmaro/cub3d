@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/31 01:11:45 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:03:52 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include <math.h>
 
-void	draw_square(t_vars *vars, int x, int y, unsigned int color, \
-	int unit_size)
+void	draw_square(t_vars *vars, int x, int y, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < unit_size)
+	while (i < vars->unit_size)
 	{
 		j = 0;
-		while (j < unit_size)
+		while (j < vars->unit_size)
 		{
 			put_pixel_to_image(vars, x + j, y + i, color);
 			j++;
@@ -32,11 +31,17 @@ void	draw_square(t_vars *vars, int x, int y, unsigned int color, \
 	}
 }
 
-void	rotate_around_point(int *x, int *y, int cx, int cy, double angle)
+void	rotate_around_point(t_vars *vars, int *x, int *y)
 {
-	int	temp_x;
-	int	temp_y;
+	int		temp_x;
+	int		temp_y;
+	double	angle;
+	int		cx;
+	int		cy;
 
+	angle = vars->player->angle;
+	cx = vars->player->center_x;
+	cy = vars->player->center_y;
 	temp_x = *x - cx;
 	temp_y = *y - cy;
 	*x = temp_x * cos(angle) - temp_y * sin(angle) + cx;
@@ -60,8 +65,7 @@ void	draw_player(t_vars *vars, unsigned int color)
 		{
 			pixel_x = vars->player->x + j;
 			pixel_y = vars->player->y + i;
-			rotate_around_point(&pixel_x, &pixel_y, vars->player->center_x, \
-				vars->player->center_y, vars->player->angle);
+			rotate_around_point(vars, &pixel_x, &pixel_y);
 			put_pixel_to_image(vars, pixel_x, pixel_y, color);
 			j++;
 		}
@@ -154,11 +158,9 @@ void	draw_minimap(t_vars *vars)
 			vars->line->x0 = j * vars->unit_size;
 			vars->line->y0 = i * vars->unit_size;
 			if (vars->map->grid[i][j] == '1')
-				draw_square(vars, vars->line->x0, vars->line->y0, \
-					PURPLE, vars->unit_size);
+				draw_square(vars, vars->line->x0, vars->line->y0, PURPLE);
 			else
-				draw_square(vars, vars->line->x0, vars->line->y0, \
-					WHITE, vars->unit_size);
+				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
 			j++;
 		}
 		i++;
