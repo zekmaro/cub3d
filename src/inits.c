@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 23:33:55 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/08/30 23:53:50 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,53 @@ void	initialise_player(t_vars *vars)
 	vars->player = player;
 }
 
+void	initialise_textures(t_vars *vars)
+{
+	int	width;
+	int	height;
+	int	i;
+
+	if (!vars->mlx || !vars->mlx->mlx)
+	{
+		perror("MLX not initialized");
+		free_and_exit(vars);
+	}
+	vars->textures[0] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+		"./assets/north_texture.xpm", &width, &height);
+	vars->textures[1] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+		"./assets/south_texture.xpm", &width, &height);
+	vars->textures[2] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+		"./assets/west_texture.xpm", &width, &height);
+	vars->textures[3] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+		"./assets/east_texture.xpm", &width, &height);
+	if (!vars->textures[0] || !vars->textures[1] \
+		|| !vars->textures[2] || !vars->textures[3])
+	{
+		perror("Failed to load textures");
+		free_and_exit(vars);
+	}
+	i = -1;
+	while (++i < 4)
+	{
+		vars->textures[i]->addr = mlx_get_data_addr(vars->textures[i], \
+			&vars->textures[i]->bits_per_pixel, &vars->textures[i]->line_len, \
+			&vars->textures[i]->endian);
+		if (!vars->textures[i]->addr)
+		{
+			perror("Failed to get texture data address");
+			free_and_exit(vars);
+		}
+	}
+}
+
 void	initialise_vars(t_vars *vars)
 {
+	int	i;
+
 	vars->unit_size = 32;
+	i = -1;
+	while (++i < 4)
+		vars->textures[i] = NULL;
 	initialise_image(vars);
 	initialise_map(vars);
 	initialise_mlx(vars);

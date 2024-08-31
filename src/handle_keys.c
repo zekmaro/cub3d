@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/30 12:19:48 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/31 01:05:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,17 @@ void	check_move_player(int keycode, t_vars *vars)
 	move_x = 8;
 	move_y = 8;
 	if (keycode == W)
-	{
-		move_player(vars, move_y * sin(vars->player->angle), move_x * cos(vars->player->angle));
-	}
+		move_player(vars, move_y * sin(vars->player->angle), \
+			move_x * cos(vars->player->angle));
 	else if (keycode == S)
-	{
-		move_player(vars, -move_y * sin(vars->player->angle), -move_x * cos(vars->player->angle));
-	}
+		move_player(vars, -move_y * sin(vars->player->angle), \
+			-move_x * cos(vars->player->angle));
 	else if (keycode == D)
-	{
-		move_player(vars, move_y * cos(vars->player->angle), -move_x * sin(vars->player->angle));
-	}
+		move_player(vars, move_y * cos(vars->player->angle), \
+			-move_x * sin(vars->player->angle));
 	else if (keycode == A)
-	{
-		move_player(vars, -move_y * cos(vars->player->angle), move_x * sin(vars->player->angle));
-	}
+		move_player(vars, -move_y * cos(vars->player->angle), \
+			move_x * sin(vars->player->angle));
 	else if (keycode == KEY_LEFT)
 		vars->player->angle -= M_PI / 6;
 	else if (keycode == KEY_RIGHT)

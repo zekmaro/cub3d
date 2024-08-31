@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 22:27:33 by anarama          ###   ########.fr       */
+/*   Updated: 2024/08/31 01:08:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ typedef struct s_line
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	double	fov;
 	int		move_speed;
 	int		rot_speed;
@@ -115,6 +115,7 @@ typedef struct s_vars
 	t_mlx		*mlx;
 	t_line		*line;
 	t_player	*player;
+	t_img		*textures[4];
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
@@ -151,15 +152,17 @@ int		key_hook(int keycode, t_vars *vars);
 
 /* Inits.c */
 void	initialise_vars(t_vars *vars);
+void	initialise_textures(t_vars *vars);
 
 /* Parsing.c */
 int		read_map(int fd, t_map *map, char *file_name);
 
 /* Utils.c */
-void	print_map(t_map *map);
-int		is_wall(t_vars *vars, int y, int x);
-int		player_inside_map(t_vars *vars, int x, int y);
-int		can_move(t_vars *vars, int y, int x);
+void			print_map(t_map *map);
+int				is_wall(t_vars *vars, int y, int x);
+int				player_inside_map(t_vars *vars, int x, int y);
+int				can_move(t_vars *vars, int y, int x);
+unsigned int	get_texture_color(t_img *texture, int x, int y);
 
 /* Raycast.c */
 void	cast_ray(t_vars *vars, double ray_angle, int ray_id);
