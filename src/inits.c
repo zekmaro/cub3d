@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/31 23:03:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 01:41:45 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	initialise_mlx(t_vars *vars)
 	mlx = (t_mlx *)(malloc(sizeof(t_mlx)));
 	if (!mlx)
 	{
-		//cleanup_vars(vars);
-		exit (1);
+		cleanup_vars(vars);
 	}
 	ft_bzero(mlx, sizeof(t_mlx));
 	mlx->window_height = 1080;
@@ -35,8 +34,7 @@ void	initialise_line(t_vars *vars)
 	line = (t_line *)(malloc(sizeof(t_line)));
 	if (!line)
 	{
-		//cleanup_vars(vars);
-		exit (1);
+		cleanup_vars(vars);
 	}
 	ft_bzero(line, sizeof(t_line));
 	line->src_x = 1000;
@@ -51,8 +49,7 @@ void	initialise_image(t_vars *vars)
 	image = (t_img *)(malloc(sizeof(t_img)));
 	if (!image)
 	{
-		//cleanup_vars(vars);
-		exit (1);
+		cleanup_vars(vars);
 	}
 	ft_bzero(image, sizeof(t_img));
 	vars->image = image;
@@ -65,8 +62,7 @@ void	initialise_map(t_vars *vars)
 	map = (t_map *)(malloc(sizeof(t_map)));
 	if (!map)
 	{
-		//cleanup_vars(vars);
-		exit (1);
+		cleanup_vars(vars);
 	}
 	ft_bzero(map, sizeof(t_map));
 	vars->map = map;
@@ -79,8 +75,7 @@ void	initialise_player(t_vars *vars)
 	player = (t_player *)(malloc(sizeof(t_player)));
 	if (!player)
 	{
-		//cleanup_vars(vars);
-		exit (1);
+		cleanup_vars(vars);
 	}
 	ft_bzero(player, sizeof(t_player));
 	player->player_size = 8;
@@ -94,8 +89,7 @@ void	initialise_ray(t_vars *vars)
 	ray = (t_ray *)(malloc(sizeof(t_ray)));
 	if (!ray)
 	{
-		//cleanup_vars(vars);
-		exit (1);
+		cleanup_vars(vars);
 	}
 	ft_bzero(ray, sizeof(t_ray));
 	vars->ray = ray;
@@ -136,6 +130,24 @@ void	initialise_textures(t_vars *vars)
 	load_texture(vars, TEXTURE_SOUTH, "./assets/south_texture.xpm");
 	load_texture(vars, TEXTURE_WEST, "./assets/west_texture.xpm");
 	load_texture(vars, TEXTURE_EAST, "./assets/east_texture.xpm");
+}
+
+void	initialise_sprites(t_vars *vars)
+{
+	const char *sprite_frames[] \
+	= {
+		"./assets/tile000.xpm",
+		"./assets/tile001.xpm",
+		"./assets/tile002.xpm",
+		"./assets/tile003.xpm"
+	};
+	vars->animated_sprite = malloc(sizeof(t_img));
+	if (!vars->animated_sprite)
+	{
+		perror("Failed to allocate memory for animated sprite");
+		free_and_exit(vars);
+	}
+	load_animated_sprite(vars, vars->animated_sprite, sprite_frames, 4);
 }
 
 void	initialise_vars(t_vars *vars)

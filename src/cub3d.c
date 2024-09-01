@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/30 17:59:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 01:52:18 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,23 @@ void	run_screen(t_vars *vars)
 		vars->mlx->window_height, "Gestalt Cube3D");
 	get_data_image(vars, vars->image, vars->mlx);
 	initialise_textures(vars);
+	initialise_sprites(vars);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
 	//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_key_hook(vars->mlx->win, key_hook, vars);
+	mlx_loop_hook(vars->mlx->mlx, draw_sprite, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
+}
+
+int	game_loop(t_vars *vars)
+{
+	draw_map(vars);
+	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
+		vars->image->mlx_img, 0, 0);
+	return (0);
 }
 
 void	setup_player(t_vars *vars)
@@ -64,6 +74,7 @@ int	main(int argc, char **argv)
 	if (!read_map(fd, vars.map, argv[1]))
 		free_and_exit(&vars);
 	setup_player(&vars);
+	get_current_time(&vars.program_start);
 	//print_map(vars.map);
 	run_screen(&vars);
 	return (0);

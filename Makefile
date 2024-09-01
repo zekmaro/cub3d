@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/08/29 19:26:27 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/01 01:35:30 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC		:=	src/cub3d.c \
 			src/parsing.c \
 			src/utils.c \
 			src/raycast.c \
+			src/sprites.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
