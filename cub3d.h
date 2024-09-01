@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 16:04:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:25:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 # define BROWN 0x4C2C17
 # define GRAY 0x808080
 # define MAGENTA 0xFF00FF
+# define ORANGE 0xFFA500
 # define LIGHT_BLUE 0x7FDBFF
 # define LIGHT_GREEN 0x90EE90
 
@@ -170,7 +171,6 @@ void	draw_map(t_vars *vars);
 void	free_memory(char **arr);
 void	free_map(t_map *map);
 int		free_and_exit(void *param);
-void	free_vars_textures(t_vars *vars);
 void	cleanup_vars(t_vars *vars);
 
 /* Free_vars.c */
@@ -179,6 +179,8 @@ void	free_vars_image(t_vars *vars);
 void	free_vars_player(t_vars *vars);
 void	free_vars_mlx(t_vars *vars);
 void	free_vars_line(t_vars *vars);
+void	free_vars_textures(t_vars *vars);
+void	free_vars_ray(t_vars *vars);
 void	free_vars_sprites(t_vars *vars);
 
 /* Handle_image.c */
