@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 14:07:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:27:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	get_texture_color(t_img *texture, int x, int y)
 	pixel = texture->addr + (y * texture->line_len \
 		+ x * (texture->bits_per_pixel / 8));
 	color = *(unsigned int *)pixel;
+	if ((color & 0x00FFFFFF) == MAGENTA)
+		return (-1);
 	return (color);
 }
 

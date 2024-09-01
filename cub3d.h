@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 14:03:34 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:26:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define BEIGE 0xC8AE7E
 # define BROWN 0x4C2C17
 # define GRAY 0x808080
+# define MAGENTA 0xFF00FF
 # define LIGHT_BLUE 0x7FDBFF
 # define LIGHT_GREEN 0x90EE90
 

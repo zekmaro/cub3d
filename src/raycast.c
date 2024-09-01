@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/08/31 22:53:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:26:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
 			/ vars->ray->line_height);
 		color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
-		put_pixel_to_image(vars, ray_id, y, color);
+		if (color != -1)
+			put_pixel_to_image(vars, ray_id, y, color);
 		y++;
 	}
 }
