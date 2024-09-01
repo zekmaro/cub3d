@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/01 01:35:57 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:02:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ void	free_vars_sprites(t_vars *vars)
 
 	if (vars->animated_sprite)
 	{
-		i = -1;
-		while (++i < vars->animated_sprite->frame_count)
-			if (vars->animated_sprite->frames[i])
-				mlx_destroy_image(vars->mlx->mlx, \
-					vars->animated_sprite->frames[i]);
-		free(vars->animated_sprite->frames);
+		if (vars->animated_sprite->frames)
+		{
+			i = -1;
+			while (++i < vars->animated_sprite->frame_count)
+				if (vars->animated_sprite->frames[i])
+					mlx_destroy_image(vars->mlx->mlx, \
+			vars->animated_sprite->frames[i]);
+			free(vars->animated_sprite->frames);
+		}
 		free(vars->animated_sprite);
 		vars->animated_sprite = NULL;
 	}

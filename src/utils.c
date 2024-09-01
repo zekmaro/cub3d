@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/30 23:51:55 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:07:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	get_texture_color(t_img *texture, int x, int y)
 	color = *(unsigned int *)pixel;
 	return (color);
 }
-
 
 long	get_elapsed_time(struct timeval *start, struct timeval *end)
 {

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/01 01:32:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:05:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	update_sprite_frame(t_img *sprite)
 
 void	put_enemy_on_screen(t_vars *vars)
 {
-	vars->animated_sprite->current_frame_ptr =
+	vars->animated_sprite->current_frame_ptr = \
 		vars->animated_sprite->frames[vars->animated_sprite->current_frame];
-		mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
-			vars->animated_sprite->current_frame_ptr, 700, 700);
+	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
+		vars->animated_sprite->current_frame_ptr, 700, 700);
 }
 
 int	draw_sprite(t_vars *vars)
