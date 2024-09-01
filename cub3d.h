@@ -72,6 +72,8 @@ typedef struct s_map
 	int		player_x;
 	int		player_y;
 	char	player_dir;
+	int		monster_x;
+	int		monster_y;
 }	t_map;
 
 typedef struct s_img
