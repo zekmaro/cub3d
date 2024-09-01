@@ -141,6 +141,16 @@ typedef struct s_player
 	double	angle;
 }	t_player;
 
+typedef struct s_sprite
+{
+	int		x;
+	int		y;
+	int		distance;
+	int		screen_x;
+	int		width;
+	int		height;
+}	t_sprite;
+
 typedef struct s_vars
 {
 	int				unit_size;
@@ -155,6 +165,11 @@ typedef struct s_vars
 	int				is_monster;
 	struct timeval	program_start;
 	struct timeval	current_time;
+	int				*zbuffer;
+	int				*sprite_order;
+	t_sprite		*sprites;
+	t_texture		*sprite_texture;
+	int				num_sprites;
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
@@ -181,6 +196,7 @@ void	free_vars_player(t_vars *vars);
 void	free_vars_mlx(t_vars *vars);
 void	free_vars_line(t_vars *vars);
 void	free_vars_sprites(t_vars *vars);
+void	free_vars_zbuffer(t_vars *vars);
 
 /* Handle_image.c */
 void	put_pixel_to_image(t_vars *vars, int x, int y, int color);
@@ -218,5 +234,6 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 void	update_sprite_frame(t_img *sprite);
 void	put_enemy_on_screen(t_vars *vars);
 int		draw_sprite(t_vars *vars);
+void	draw_sprites(t_vars *vars);
 
 #endif // CUB3D_H

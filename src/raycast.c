@@ -152,6 +152,7 @@ void	cast_ray(t_vars *vars, int ray_id)
 	setup_ray(vars);
 	texture_index = define_texture_type(vars);
 	draw_ray_column(vars, ray_id, texture_index);
+	vars->zbuffer[ray_id] = vars->ray->distance_to_wall;
 }
 
 void	raycast(t_vars *vars)

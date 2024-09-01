@@ -179,6 +179,7 @@ void	draw_map(t_vars *vars)
 	draw_floor(vars);
 	draw_ceiling(vars);
 	raycast(vars);
+	draw_sprites(vars);
 	update_player_position(vars);
 	// draw_minimap(vars);
 	// draw_ray_segment(vars);

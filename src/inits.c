@@ -134,6 +134,21 @@ void	initialise_textures(t_vars *vars)
 
 void	initialise_sprites(t_vars *vars)
 {
+
+    vars->num_sprites = 1;
+    vars->sprites = malloc(sizeof(t_sprite) * vars->num_sprites);
+    if (!vars->sprites)
+    {
+        perror("Failed to allocate memory for sprites");
+        free_and_exit(vars);
+    }
+    load_sprite_texture(vars, &vars->sprite_texture, "path/to/sprite_texture.xpm");
+    vars->sprites[0].x = 5; 
+    vars->sprites[0].y = 10;
+    vars->sprites[0].distance = 0;
+    vars->sprites[0].screen_x = 0;
+    vars->sprites[0].width = 0;
+    vars->sprites[0].height = 0;
 	const char *sprite_frames[] \
 	= {
 		"./assets/tile000.xpm",
@@ -150,14 +165,22 @@ void	initialise_sprites(t_vars *vars)
 	load_animated_sprite(vars, vars->animated_sprite, sprite_frames, 4);
 }
 
+void	initialise_zbuffer(t_vars *vars)
+{
+	vars->zbuffer = malloc(sizeof(int) * vars->mlx->window_width);
+	if (!vars->zbuffer)
+	{
+		perror("Failed to allocate memory for zbuffer");
+		free_and_exit(vars);
+	}
+}
+
 void	initialise_vars(t_vars *vars)
 {
 	int	i;
 
 	vars->unit_size = 64;
-	i = -1;
-	while (++i < 4)
-		vars->textures[i] = NULL;
+	ft_bzero(vars->textures, sizeof(vars->textures));
 	initialise_image(vars);
 	initialise_map(vars);
 	initialise_mlx(vars);
