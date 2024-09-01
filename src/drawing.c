@@ -47,6 +47,12 @@ void	rotate_around_point(t_vars *vars, int *x, int *y)
 	*y = temp_x * sin(angle) + temp_y * cos(angle) + cy;
 }
 
+void	update_player_position(t_vars *vars)
+{
+	vars->player->center_x = vars->player->x + vars->player->player_size / 2;
+	vars->player->center_y = vars->player->y + vars->player->player_size / 2;
+}
+
 void	draw_player(t_vars *vars, unsigned int color)
 {
 	int	i;
@@ -55,8 +61,7 @@ void	draw_player(t_vars *vars, unsigned int color)
 	int	pixel_y;
 
 	i = 0;
-	vars->player->center_x = vars->player->x + vars->player->player_size / 2;
-	vars->player->center_y = vars->player->y + vars->player->player_size / 2;
+	update_player_position(vars);
 	while (i < vars->player->player_size)
 	{
 		j = 0;
@@ -158,6 +163,8 @@ void	draw_minimap(t_vars *vars)
 			vars->line->y0 = i * vars->unit_size;
 			if (vars->map->grid[i][j] == '1')
 				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
+			else if (vars->map->grid[i][j] == 'M')
+				draw_square(vars, vars->line->x0, vars->line->y0, BLUE);
 			else
 				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
 			j++;
@@ -172,6 +179,7 @@ void	draw_map(t_vars *vars)
 	draw_floor(vars);
 	draw_ceiling(vars);
 	raycast(vars);
-	draw_minimap(vars);
-	draw_ray_segment(vars);
+	update_player_position(vars);
+	// draw_minimap(vars);
+	// draw_ray_segment(vars);
 }

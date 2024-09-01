@@ -18,6 +18,7 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 {
 	int	width;
 	int	height;
+	t_img *tmp;
 	int	i;
 
 	sprite->frame_count = frame_count;
@@ -33,6 +34,12 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 	{
 		sprite->frames[i] = mlx_xpm_file_to_image(vars->mlx->mlx, \
 			(char *)file_paths[i], &width, &height);
+		tmp = (t_img *)sprite->frames[i];
+		tmp->addr = mlx_get_data_addr(\
+		tmp, \
+		&tmp->bits_per_pixel, \
+		&tmp->line_len, \
+		&tmp->endian);
 		if (!sprite->frames[i])
 		{
 			perror("Failed to load sprite frame");
@@ -69,7 +76,10 @@ int	draw_sprite(t_vars *vars)
 	if (elapsed_time % 200 == 0)
 	{
 		update_sprite_frame(vars->animated_sprite);
-		put_enemy_on_screen(vars);
+		draw_map(vars);
+		mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
+			vars->image->mlx_img, 0, 0);
+		//put_enemy_on_screen(vars);
 	}
 	return (0);
 }

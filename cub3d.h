@@ -152,6 +152,7 @@ typedef struct s_vars
 	t_ray			*ray;
 	t_img			*textures[4];
 	t_img			*animated_sprite;
+	int				is_monster;
 	struct timeval	program_start;
 	struct timeval	current_time;
 }	t_vars;

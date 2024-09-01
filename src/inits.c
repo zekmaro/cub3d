@@ -154,7 +154,7 @@ void	initialise_vars(t_vars *vars)
 {
 	int	i;
 
-	vars->unit_size = 16;
+	vars->unit_size = 64;
 	i = -1;
 	while (++i < 4)
 		vars->textures[i] = NULL;
