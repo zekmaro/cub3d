@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/01 01:35:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:32:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,6 @@ int	free_and_exit(void *param)
 	vars = (t_vars *)param;
 	cleanup_vars(vars);
 	exit(0);
-}
-
-void	free_vars_textures(t_vars *vars)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		if (vars->textures[i])
-		{
-			free(vars->textures[i]->mlx_img);
-			free(vars->textures[i]);
-		}
-	}
-}
-
-void	free_vars_ray(t_vars *vars)
-{
-	if (vars->ray)
-	{
-		free(vars->ray);
-		vars->ray = NULL;
-	}
 }
 
 void	cleanup_vars(t_vars *vars)
