@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/01 17:32:37 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 18:43:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ void	cleanup_vars(t_vars *vars)
 	free_vars_player(vars);
 	free_vars_ray(vars);
 	free_vars_sprites(vars);
+	free_vars_doors(vars);
 }

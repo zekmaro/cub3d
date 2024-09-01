@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/01 16:03:19 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 19:21:10 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,15 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 			if (is_monster(vars, map_x, map_y))
 			{
 				put_pixel_to_image(vars, ray_id, y, color);
+			}
+			if (is_door(vars, map_x, map_y))
+			{
+				if (vars->map->doors[map_y][map_x] == DOOR_CLOSED)
+				{
+					color = get_texture_color(vars->textures[texture_index], \
+						tex_x, tex_y);
+					put_pixel_to_image(vars, ray_id, y, color);
+				}
 			}
 			else
 			{

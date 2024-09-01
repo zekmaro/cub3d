@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 14:27:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 18:56:23 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	can_move(t_vars *vars, int y, int x)
 	if (player_inside_map(vars, x, y))
 	{
 		if (vars->map->grid[y][x] == '1')
+			return (0);
+		if (vars->map->doors[y][x] == DOOR_CLOSED)
 			return (0);
 		return (1);
 	}

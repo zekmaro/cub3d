@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/01 17:32:08 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 18:43:43 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	free_vars_textures(t_vars *vars)
 	int	i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		if (vars->textures[i])
 		{
@@ -108,5 +108,18 @@ void	free_vars_sprites(t_vars *vars)
 		}
 		free(vars->animated_sprite);
 		vars->animated_sprite = NULL;
+	}
+}
+
+void	free_vars_doors(t_vars *vars)
+{
+	int	i;
+
+	if (vars->map->doors)
+	{
+		i = -1;
+		while (++i < vars->map->height)
+			free(vars->map->doors[i]);
+		free(vars->map->doors);
 	}
 }

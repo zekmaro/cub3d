@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 01:41:45 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 18:43:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	initialise_textures(t_vars *vars)
 	load_texture(vars, TEXTURE_SOUTH, "./assets/south_texture.xpm");
 	load_texture(vars, TEXTURE_WEST, "./assets/west_texture.xpm");
 	load_texture(vars, TEXTURE_EAST, "./assets/east_texture.xpm");
+	load_texture(vars, TEXTURE_DOOR, "./assets/door_texture.xpm");
 }
 
 void	initialise_sprites(t_vars *vars)
@@ -152,12 +153,8 @@ void	initialise_sprites(t_vars *vars)
 
 void	initialise_vars(t_vars *vars)
 {
-	int	i;
-
 	vars->unit_size = 16;
-	i = -1;
-	while (++i < 4)
-		vars->textures[i] = NULL;
+	ft_bzero(vars->textures, sizeof(vars->textures));
 	initialise_image(vars);
 	initialise_map(vars);
 	initialise_mlx(vars);
