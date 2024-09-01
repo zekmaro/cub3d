@@ -174,5 +174,4 @@ void	draw_map(t_vars *vars)
 	raycast(vars);
 	draw_minimap(vars);
 	draw_ray_segment(vars);
-	draw_sprite(vars, vars->animated_sprite, 120, 120);
 }

@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <sys/time.h>
 # include <unistd.h>
 # include <math.h>
 # include "mlx.h"
@@ -82,6 +83,7 @@ typedef struct s_img
 	t_tex_typ	*texture_type;
 	int			frame_count;
 	int			current_frame;
+	void		*current_frame_ptr;
 	void		**frames;
 }	t_img;
 
@@ -147,6 +149,8 @@ typedef struct s_vars
 	t_ray		*ray;
 	t_img		*textures[4];
 	t_img		*animated_sprite;
+	struct timeval	program_start;
+	struct timeval	current_time;
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
@@ -197,6 +201,8 @@ int		is_wall(t_vars *vars, int y, int x);
 int		player_inside_map(t_vars *vars, int x, int y);
 int		can_move(t_vars *vars, int y, int x);
 int		get_texture_color(t_img *texture, int x, int y);
+long	get_elapsed_time(struct timeval *start, struct timeval *end);
+void	get_current_time(struct timeval *time);
 
 /* Raycast.c */
 void	cast_ray(t_vars *vars, int ray_id);
@@ -206,6 +212,7 @@ void	raycast(t_vars *vars);
 void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 			const char **file_paths, int frame_count);
 void	update_sprite_frame(t_img *sprite);
-void	draw_sprite(t_vars *vars, t_img *sprite, int x, int y);
+void	put_enemy_on_screen(t_vars *vars);
+int	draw_sprite(t_vars *vars);
 
 #endif // CUB3D_H

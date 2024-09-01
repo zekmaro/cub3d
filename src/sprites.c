@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <unistd.h>
 
 void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 		const char **file_paths, int frame_count)
@@ -46,11 +47,24 @@ void	update_sprite_frame(t_img *sprite)
 	sprite->current_frame = (sprite->current_frame + 1) % sprite->frame_count;
 }
 
-void	draw_sprite(t_vars *vars, t_img *sprite, int x, int y)
+void	put_enemy_on_screen(t_vars *vars)
 {
-	void	*current_frame;
+	vars->animated_sprite->current_frame_ptr =
+		vars->animated_sprite->frames[vars->animated_sprite->current_frame];
+		mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
+			vars->animated_sprite->current_frame_ptr, 700, 700);
+}
 
-	current_frame = sprite->frames[sprite->current_frame];
-	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
-		current_frame, x, y);
+int	draw_sprite(t_vars *vars)
+{
+	long	elapsed_time;
+
+	get_current_time(&vars->current_time);
+	elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
+	if (elapsed_time % 200 == 0)
+	{
+		update_sprite_frame(vars->animated_sprite);
+		put_enemy_on_screen(vars);
+	}
+	return (0);
 }

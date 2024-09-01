@@ -61,3 +61,15 @@ int	get_texture_color(t_img *texture, int x, int y)
 	color = *(unsigned int *)pixel;
 	return (color);
 }
+
+
+long	get_elapsed_time(struct timeval *start, struct timeval *end)
+{
+	return ((end->tv_sec - start->tv_sec) * 1000
+		+ (end->tv_usec - start->tv_usec) / 1000);
+}
+
+void	get_current_time(struct timeval *time)
+{
+	gettimeofday(time, NULL);
+}

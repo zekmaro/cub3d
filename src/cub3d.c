@@ -20,12 +20,12 @@ void	run_screen(t_vars *vars)
 	get_data_image(vars, vars->image, vars->mlx);
 	initialise_textures(vars);
 	initialise_sprites(vars);
-	update_sprite_frame(vars->animated_sprite);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
 	//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_key_hook(vars->mlx->win, key_hook, vars);
+	mlx_loop_hook(vars->mlx->mlx, draw_sprite, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
 }
@@ -74,6 +74,7 @@ int	main(int argc, char **argv)
 	if (!read_map(fd, vars.map, argv[1]))
 		free_and_exit(&vars);
 	setup_player(&vars);
+	get_current_time(&vars.program_start);
 	//print_map(vars.map);
 	run_screen(&vars);
 	return (0);
