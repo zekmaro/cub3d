@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/31 22:51:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 01:53:26 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@
 # define YELLOW 0xFFFF00
 # define BEIGE 0xC8AE7E
 # define BROWN 0x4C2C17
+# define GRAY 0x808080
 # define LIGHT_BLUE 0x7FDBFF
+# define LIGHT_GREEN 0x90EE90
 
 typedef enum e_tex_typ
 {
@@ -78,6 +80,9 @@ typedef struct s_img
 	int			line_len;
 	int			endian;
 	t_tex_typ	*texture_type;
+	int			frame_count;
+	int			current_frame;
+	void		**frames;
 }	t_img;
 
 typedef struct s_mlx
@@ -141,6 +146,7 @@ typedef struct s_vars
 	t_player	*player;
 	t_ray		*ray;
 	t_img		*textures[4];
+	t_img		*animated_sprite;
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
@@ -166,6 +172,7 @@ void	free_vars_image(t_vars *vars);
 void	free_vars_player(t_vars *vars);
 void	free_vars_mlx(t_vars *vars);
 void	free_vars_line(t_vars *vars);
+void	free_vars_sprites(t_vars *vars);
 
 /* Handle_image.c */
 void	put_pixel_to_image(t_vars *vars, int x, int y, int color);
@@ -179,6 +186,7 @@ int		key_hook(int keycode, t_vars *vars);
 /* Inits.c */
 void	initialise_vars(t_vars *vars);
 void	initialise_textures(t_vars *vars);
+void	initialise_sprites(t_vars *vars);
 
 /* Parsing.c */
 int		read_map(int fd, t_map *map, char *file_name);
@@ -193,5 +201,11 @@ int		get_texture_color(t_img *texture, int x, int y);
 /* Raycast.c */
 void	cast_ray(t_vars *vars, int ray_id);
 void	raycast(t_vars *vars);
+
+/* Sprites.c */
+void	load_animated_sprite(t_vars *vars, t_img *sprite, \
+			const char **file_paths, int frame_count);
+void	update_sprite_frame(t_img *sprite);
+void	draw_sprite(t_vars *vars, t_img *sprite, int x, int y);
 
 #endif // CUB3D_H

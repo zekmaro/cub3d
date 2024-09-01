@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/08/31 18:03:52 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 02:01:00 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,4 +174,5 @@ void	draw_map(t_vars *vars)
 	raycast(vars);
 	draw_minimap(vars);
 	draw_ray_segment(vars);
+	draw_sprite(vars, vars->animated_sprite, 120, 120);
 }

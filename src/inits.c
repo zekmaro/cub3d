@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/31 23:03:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 01:41:45 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,24 @@ void	initialise_textures(t_vars *vars)
 	load_texture(vars, TEXTURE_SOUTH, "./assets/south_texture.xpm");
 	load_texture(vars, TEXTURE_WEST, "./assets/west_texture.xpm");
 	load_texture(vars, TEXTURE_EAST, "./assets/east_texture.xpm");
+}
+
+void	initialise_sprites(t_vars *vars)
+{
+	const char *sprite_frames[] \
+	= {
+		"./assets/tile000.xpm",
+		"./assets/tile001.xpm",
+		"./assets/tile002.xpm",
+		"./assets/tile003.xpm"
+	};
+	vars->animated_sprite = malloc(sizeof(t_img));
+	if (!vars->animated_sprite)
+	{
+		perror("Failed to allocate memory for animated sprite");
+		free_and_exit(vars);
+	}
+	load_animated_sprite(vars, vars->animated_sprite, sprite_frames, 4);
 }
 
 void	initialise_vars(t_vars *vars)
