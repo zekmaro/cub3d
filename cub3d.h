@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 19:19:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 19:28:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ typedef struct s_vars
 	t_line			*line;
 	t_player		*player;
 	t_ray			*ray;
-	t_img			*textures[4];
+	t_img			*textures[5];
 	t_img			*animated_sprite;
 	struct timeval	program_start;
 	struct timeval	current_time;
