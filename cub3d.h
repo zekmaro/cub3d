@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 14:26:13 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:04:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_map
 	int		player_x;
 	int		player_y;
 	char	player_dir;
+	int		monster_x;
+	int		monster_y;
 }	t_map;
 
 typedef struct s_img

@@ -6,11 +6,16 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/01 14:26:11 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:03:19 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	is_monster(t_vars *vars, int x, int y)
+{
+	return (x == vars->map->monster_x && y == vars->map->monster_y);
+}
 
 void	get_ray_target_coords(t_vars *vars)
 {
@@ -81,14 +86,28 @@ void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 	}
 }
 
+int	get_map_x(t_vars *vars)
+{
+	return ((int)(vars->ray->ray_x / vars->unit_size));
+}
+
+int	get_map_y(t_vars *vars)
+{
+	return ((int)(vars->ray->ray_y / vars->unit_size));
+}
+
 void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 {
 	int	y;
 	int	tex_x;
 	int	tex_y;
 	int	color;
+	int	map_x;
+	int	map_y;
 
 	y = vars->ray->draw_start;
+	map_x = get_map_x(vars);
+	map_y = get_map_y(vars);
 	while (y < vars->ray->draw_end)
 	{
 		get_texture_coords(vars, texture_index, &tex_x);
@@ -96,7 +115,16 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 			/ vars->ray->line_height);
 		color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 		if (color != -1)
-			put_pixel_to_image(vars, ray_id, y, color);
+		{
+			if (is_monster(vars, map_x, map_y))
+			{
+				put_pixel_to_image(vars, ray_id, y, color);
+			}
+			else
+			{
+				put_pixel_to_image(vars, ray_id, y, color);
+			}
+		}
 		y++;
 	}
 }

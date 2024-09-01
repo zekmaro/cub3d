@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/01 14:05:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/01 15:59:42 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,15 @@ void	update_sprite_frame(t_img *sprite)
 
 void	put_enemy_on_screen(t_vars *vars)
 {
+	int	screen_x;
+	int	screen_y;
+
+	screen_x = (vars->map->monster_x * vars->unit_size) + vars->unit_size / 2;
+	screen_y = (vars->map->monster_y * vars->unit_size) + vars->unit_size / 2;
 	vars->animated_sprite->current_frame_ptr = \
 		vars->animated_sprite->frames[vars->animated_sprite->current_frame];
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
-		vars->animated_sprite->current_frame_ptr, 700, 700);
+		vars->animated_sprite->current_frame_ptr, screen_x, screen_y);
 }
 
 int	draw_sprite(t_vars *vars)
