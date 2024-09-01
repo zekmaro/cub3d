@@ -140,15 +140,15 @@ typedef struct s_player
 
 typedef struct s_vars
 {
-	int				nit_size;
-	t_map			map;
-	t_img			image;
-	t_mlx			mlx;
-	t_line			line;
-	t_player		player;
-	t_ray			ray;
-	t_img			textures[4];
-	t_img			animated_sprite;
+	int				unit_size;
+	t_map			*map;
+	t_img			*image;
+	t_mlx			*mlx;
+	t_line			*line;
+	t_player		*player;
+	t_ray			*ray;
+	t_img			*textures[4];
+	t_img			*animated_sprite;
 	struct timeval	program_start;
 	struct timeval	current_time;
 }	t_vars;
