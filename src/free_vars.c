@@ -64,6 +64,7 @@ void	free_vars_line(t_vars *vars)
 void	free_vars_sprites(t_vars *vars)
 {
 	int	i;
+	t_img *temp;
 
 	if (vars->animated_sprite)
 	{
@@ -72,8 +73,11 @@ void	free_vars_sprites(t_vars *vars)
 			i = -1;
 			while (++i < vars->animated_sprite->frame_count)
 				if (vars->animated_sprite->frames[i])
-					mlx_destroy_image(vars->mlx->mlx, \
-			vars->animated_sprite->frames[i]);
+				{
+					temp = (t_img *)vars->animated_sprite->frames[i];
+					free(temp->mlx_img);
+					free(vars->animated_sprite->frames[i]);
+				}
 			free(vars->animated_sprite->frames);
 		}
 		free(vars->animated_sprite);
