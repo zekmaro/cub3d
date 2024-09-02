@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 12:14:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:22:22 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,15 +182,17 @@ void	free_map(t_map *map);
 int		free_and_exit(void *param);
 void	cleanup_vars(t_vars *vars);
 
-/* Free_vars.c */
+/* Free_environment.c */
 void	free_vars_map(t_vars *vars);
+void	free_vars_textures(t_vars *vars);
+void	free_vars_sprites(t_vars *vars);
+
+/* Free_components.c */
 void	free_vars_image(t_vars *vars);
 void	free_vars_player(t_vars *vars);
 void	free_vars_mlx(t_vars *vars);
 void	free_vars_line(t_vars *vars);
-void	free_vars_textures(t_vars *vars);
 void	free_vars_ray(t_vars *vars);
-void	free_vars_sprites(t_vars *vars);
 
 /* Handle_image.c */
 void	put_pixel_to_image(t_vars *vars, int x, int y, int color);

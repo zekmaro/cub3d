@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/02 12:13:41 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/02 12:22:55 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC		:=	src/cub3d.c \
 			src/draw_environment.c \
 			src/draw_entities.c \
 			src/free_memory_utils.c \
-			src/free_vars.c \
+			src/free_environment.c \
+			src/free_components.c \
 			src/handle_image.c \
 			src/handle_keys.c \
 			src/init_components.c \
