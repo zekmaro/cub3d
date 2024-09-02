@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/02 15:39:08 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:17:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,23 @@ int	get_map_y(t_vars *vars)
 
 void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 {
-	int			y;
-	int			tex_x;
-	int			tex_y;
-	int			color;
-	t_pix_inf	pix_inf;
+	int				y;
+	int				color;
+	t_pix_inf		pixel_info;
+	t_tex_coords	coords;
 
 	y = vars->ray->draw_start;
-	pix_inf.ray_id = ray_id;
-	pix_inf.map_x = get_map_x(vars);
-	pix_inf.map_y = get_map_y(vars);
+	pixel_info.ray_id = ray_id;
+	pixel_info.map_x = get_map_x(vars);
+	pixel_info.map_y = get_map_y(vars);
 	while (y < vars->ray->draw_end)
 	{
-		color = get_texture_color_at_y(vars, texture_index, y, &tex_x, &tex_y);
+		color = get_texture_color_at_y(vars, texture_index, y, &coords);
 		if (color != -1)
 		{
-			pix_inf.y = y;
-			pix_inf.color = color;
-			handle_pixel(vars, &pix_inf);
+			pixel_info.y = y;
+			pixel_info.color = color;
+			handle_pixel(vars, &pixel_info);
 		}
 		y++;
 	}

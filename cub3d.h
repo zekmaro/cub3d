@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 15:35:52 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:18:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ typedef struct s_pix_inf
 	int	map_x;
 	int	map_y;
 }	t_pix_inf;
+
+typedef struct s_tex_coords
+{
+	int		tex_x;
+	int		tex_y;
+}	t_tex_coords;
 
 typedef enum e_tex_typ
 {
@@ -287,6 +293,6 @@ void		handle_door(t_vars *vars, int ray_id, int y, int color);
 void		handle_wall(t_vars *vars, int ray_id, int y, int color);
 void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
-				int y, int *tex_x, int *tex_y);
+				int y, t_tex_coords *coords);
 
 #endif // CUB3D_H

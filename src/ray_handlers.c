@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:20:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/02 15:43:34 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:17:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void	handle_pixel(t_vars *vars, t_pix_inf *pix_inf)
 		handle_wall(vars, pix_inf->ray_id, pix_inf->y, pix_inf->color);
 }
 
-int	get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, int y, \
-		int *tex_x, int *tex_y)
+int	get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
+	int y, t_tex_coords *coords)
 {
-	get_texture_coords(vars, texture_index, tex_x);
-	*tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
+	get_texture_coords(vars, texture_index, &coords->tex_x);
+	coords->tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
 		/ vars->ray->line_height);
-	return (get_texture_color(vars->textures[texture_index], *tex_x, *tex_y));
+	return (get_texture_color(vars->textures[texture_index], coords->tex_x, \
+		coords->tex_y));
 }
