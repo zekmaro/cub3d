@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 11:42:09 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:59:29 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,10 +201,20 @@ void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 int		mouse_move(int x, int y, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 
-/* Inits.c */
-void	initialise_vars(t_vars *vars);
+/* Init_components.c */
+void	initialise_mlx(t_vars *vars);
+void	initialise_line(t_vars *vars);
+void	initialise_image(t_vars *vars);
+void	initialise_player(t_vars *vars);
+void	initialise_ray(t_vars *vars);
+
+/* Init_environment.c */
+void	load_texture(t_vars *vars, int texture_index, \
+			const char *file_path);
 void	initialise_textures(t_vars *vars);
 void	initialise_sprites(t_vars *vars);
+void	initialise_map(t_vars *vars);
+void	initialise_vars(t_vars *vars);
 
 /* Parsing.c */
 int		read_map(int fd, t_map *map, char *file_name);
