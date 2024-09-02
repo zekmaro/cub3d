@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing.c                                          :+:      :+:    :+:   */
+/*   draw_entities.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/01 02:01:00 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:43:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,73 +105,4 @@ void	draw_ray_segment(t_vars *vars)
 		draw_ray(vars, -fov_half + radian);
 		radian += 0.05;
 	}
-}
-
-void	draw_floor(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	i = vars->mlx->window_height / 2;
-	while (i < vars->mlx->window_height)
-	{
-		j = 0;
-		while (j < vars->mlx->window_width)
-		{
-			put_pixel_to_image(vars, j, i, BROWN);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_ceiling(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	i = vars->mlx->window_height / 2;
-	while (i > 0)
-	{
-		j = 0;
-		while (j < vars->mlx->window_width)
-		{
-			put_pixel_to_image(vars, j, i, LIGHT_BLUE);
-			j++;
-		}
-		i--;
-	}
-}
-
-void	draw_minimap(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < vars->map->height)
-	{
-		j = 0;
-		while (j < vars->map->width)
-		{
-			vars->line->x0 = j * vars->unit_size;
-			vars->line->y0 = i * vars->unit_size;
-			if (vars->map->grid[i][j] == '1')
-				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
-			else
-				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
-			j++;
-		}
-		i++;
-	}
-	draw_player(vars, RED);
-}
-
-void	draw_map(t_vars *vars)
-{
-	draw_floor(vars);
-	draw_ceiling(vars);
-	raycast(vars);
-	draw_minimap(vars);
-	draw_ray_segment(vars);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 18:56:23 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:13:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	can_move(t_vars *vars, int y, int x)
 	{
 		if (vars->map->grid[y][x] == '1')
 			return (0);
-		if (vars->map->doors[y][x] == DOOR_CLOSED)
-			return (0);
 		return (1);
 	}
 	else
@@ -64,15 +62,4 @@ int	get_texture_color(t_img *texture, int x, int y)
 	if ((color & 0x00FFFFFF) == MAGENTA)
 		return (-1);
 	return (color);
-}
-
-long	get_elapsed_time(struct timeval *start, struct timeval *end)
-{
-	return ((end->tv_sec - start->tv_sec) * 1000
-		+ (end->tv_usec - start->tv_usec) / 1000);
-}
-
-void	get_current_time(struct timeval *time)
-{
-	gettimeofday(time, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 19:28:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:12:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,70 +172,113 @@ typedef struct s_vars
 // for mac: -framework OpenGL -framework AppKit -o
 
 /* Draw_line.c */
-void	draw_line(t_vars *vars, unsigned long color);
+void		draw_line(t_vars *vars, unsigned long color);
 
-/* Drawing.c */
-void	rotate_around_point(t_vars *vars, int *x, int *y);
-void	draw_map(t_vars *vars);
+/* Draw_entities.c */
+void		draw_square(t_vars *vars, int x, int y, int color);
+void		rotate_around_point(t_vars *vars, int *x, int *y);
+void		draw_player(t_vars *vars, unsigned int color);
+void		draw_ray(t_vars *vars, double angle_offset);
+void		draw_ray_segment(t_vars *vars);
+
+/* Draw_environment.c */
+void		draw_floor(t_vars *vars);
+void		draw_ceiling(t_vars *vars);
+void		draw_map(t_vars *vars);
+void		draw_minimap(t_vars *vars);
 
 /* Free_memory_utils.c */
-void	free_memory(char **arr);
-void	free_map(t_map *map);
-int		free_and_exit(void *param);
-void	cleanup_vars(t_vars *vars);
+void		free_memory(char **arr);
+void		free_map(t_map *map);
+int			free_and_exit(void *param);
+void		free_vars_doors(t_vars *vars);
+void		cleanup_vars(t_vars *vars);
 
-/* Free_vars.c */
-void	free_vars_map(t_vars *vars);
-void	free_vars_image(t_vars *vars);
-void	free_vars_player(t_vars *vars);
-void	free_vars_mlx(t_vars *vars);
-void	free_vars_line(t_vars *vars);
-void	free_vars_textures(t_vars *vars);
-void	free_vars_ray(t_vars *vars);
-void	free_vars_sprites(t_vars *vars);
-void	free_vars_doors(t_vars *vars);
+/* Free_environment.c */
+void		free_vars_map(t_vars *vars);
+void		free_vars_textures(t_vars *vars);
+void		free_vars_sprites(t_vars *vars);
+
+/* Free_components.c */
+void		free_vars_image(t_vars *vars);
+void		free_vars_player(t_vars *vars);
+void		free_vars_mlx(t_vars *vars);
+void		free_vars_line(t_vars *vars);
+void		free_vars_ray(t_vars *vars);
 
 /* Handle_image.c */
-void	put_pixel_to_image(t_vars *vars, int x, int y, int color);
-void	clean_screen(t_vars *vars);
-void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
+void		put_pixel_to_image(t_vars *vars, int x, int y, int color);
+void		clean_screen(t_vars *vars);
+void		get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 
 /* Handle_keys.c */
-int		mouse_move(int x, int y, t_vars *vars);
-int		key_hook(int keycode, t_vars *vars);
+int			mouse_move(int x, int y, t_vars *vars);
+int			key_hook(int keycode, t_vars *vars);
 
-/* Inits.c */
-void	initialise_vars(t_vars *vars);
-void	initialise_textures(t_vars *vars);
-void	initialise_sprites(t_vars *vars);
+/* Init_components.c */
+void		initialise_mlx(t_vars *vars);
+void		initialise_line(t_vars *vars);
+void		initialise_image(t_vars *vars);
+void		initialise_player(t_vars *vars);
+void		initialise_ray(t_vars *vars);
+
+/* Init_environment.c */
+void		load_texture(t_vars *vars, int texture_index, \
+				const char *file_path);
+void		initialise_textures(t_vars *vars);
+void		initialise_sprites(t_vars *vars);
+void		initialise_map(t_vars *vars);
+void		initialise_vars(t_vars *vars);
 
 /* Parsing.c */
-int		read_map(int fd, t_map *map, char *file_name);
+int			read_map(int fd, t_map *map, char *file_name);
 
-/* Utils.c */
-void	print_map(t_map *map);
-int		is_wall(t_vars *vars, int y, int x);
-int		player_inside_map(t_vars *vars, int x, int y);
-int		can_move(t_vars *vars, int y, int x);
-int		get_texture_color(t_img *texture, int x, int y);
-long	get_elapsed_time(struct timeval *start, struct timeval *end);
-void	get_current_time(struct timeval *time);
+/* Map_utils.c */
+void		print_map(t_map *map);
+int			is_wall(t_vars *vars, int y, int x);
+int			player_inside_map(t_vars *vars, int x, int y);
+int			can_move(t_vars *vars, int y, int x);
+int			get_texture_color(t_img *texture, int x, int y);
 
-/* Raycast.c */
-void	cast_ray(t_vars *vars, int ray_id);
-void	raycast(t_vars *vars);
+/* Time_utils.c */
+long		get_elapsed_time(struct timeval *start, struct timeval *end);
+void		get_current_time(struct timeval *time);
+
+/* Raycasting.c */
+void		get_ray_target_coords(t_vars *vars);
+void		setup_ray(t_vars *vars);
+t_tex_typ	define_texture_type(t_vars *vars);
+void		cast_ray(t_vars *vars, int ray_id);
+void		raycast(t_vars *vars);
+
+/* Ray_drawing.c */
+void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \
+				int *tex_x);
+int			is_monster(t_vars *vars, int x, int y);
+int			get_map_x(t_vars *vars);
+int			get_map_y(t_vars *vars);
+void		draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index);
 
 /* Sprites.c */
-void	load_animated_sprite(t_vars *vars, t_img *sprite, \
-			const char **file_paths, int frame_count);
-void	update_sprite_frame(t_img *sprite);
-void	put_enemy_on_screen(t_vars *vars);
-int		draw_sprite(t_vars *vars);
+void		load_animated_sprite(t_vars *vars, t_img *sprite, \
+				const char **file_paths, int frame_count);
+void		update_sprite_frame(t_img *sprite);
+void		put_enemy_on_screen(t_vars *vars);
+int			draw_sprite(t_vars *vars);
 
 /* Doors */
-int		is_door(t_vars *vars, int x, int y);
-void	open_door(t_vars *vars, int x, int y);
-void	close_door(t_vars *vars, int x, int y);
-void	toggle_door(t_vars *vars, int x, int y);
+int			is_door(t_vars *vars, int x, int y);
+void		open_door(t_vars *vars, int x, int y);
+void		close_door(t_vars *vars, int x, int y);
+void		toggle_door(t_vars *vars, int x, int y);
+
+/* Ray_handlers.c */
+void		handle_monster(t_vars *vars, int ray_id, int y, int color);
+void		handle_door(t_vars *vars, int ray_id, int y, int color);
+void		handle_wall(t_vars *vars, int ray_id, int y, int color);
+void		handle_pixel(t_vars *vars, int ray_id, int y, int color, \
+				int map_x, int map_y);
+int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
+				int y, int *tex_x, int *tex_y);
 
 #endif // CUB3D_H

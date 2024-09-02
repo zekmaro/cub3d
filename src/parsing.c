@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 18:43:29 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:08:46 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	validate_line(char *line, int row, t_map *map)
 
 void	initialize_doors(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	map->doors = malloc(sizeof(int *) * map->height);
 	i = -1;

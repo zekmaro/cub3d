@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 19:04:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:08:10 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	check_move_player(int keycode, t_vars *vars)
 
 void	handle_key(int keycode, t_vars *vars)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	if (keycode == KEY_OPEN_DOOR)
 	{
