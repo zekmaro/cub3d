@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/02 11:56:56 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/02 12:13:41 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC		:=	src/cub3d.c \
 			src/init_components.c \
 			src/init_environment.c \
 			src/parsing.c \
-			src/utils.c \
+			src/map_utils.c \
+			src/time_utils.c \
 			src/raycast.c \
 			src/sprites.c \
 
