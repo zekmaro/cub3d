@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:20:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/02 13:30:32 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:43:34 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,14 @@ void	handle_wall(t_vars *vars, int ray_id, int y, int color)
 	put_pixel_to_image(vars, ray_id, y, color);
 }
 
-void	handle_pixel(t_vars *vars, int ray_id, int y, int color, \
-			int map_x, int map_y)
+void	handle_pixel(t_vars *vars, t_pix_inf *pix_inf)
 {
-	if (is_monster(vars, map_x, map_y))
-		handle_monster(vars, ray_id, y, color);
-	else if (is_door(vars, map_x, map_y))
-		handle_door(vars, ray_id, y, color);
+	if (is_monster(vars, pix_inf->map_x, pix_inf->map_y))
+		handle_monster(vars, pix_inf->ray_id, pix_inf->y, pix_inf->color);
+	else if (is_door(vars, pix_inf->map_x, pix_inf->map_y))
+		handle_door(vars, pix_inf->ray_id, pix_inf->y, pix_inf->color);
 	else
-		handle_wall(vars, ray_id, y, color);
+		handle_wall(vars, pix_inf->ray_id, pix_inf->y, pix_inf->color);
 }
 
 int	get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, int y, \

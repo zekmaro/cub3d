@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/02 13:34:37 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:39:08 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,25 @@ int	get_map_y(t_vars *vars)
 
 void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 {
-	int	y;
-	int	tex_x;
-	int	tex_y;
-	int	color;
+	int			y;
+	int			tex_x;
+	int			tex_y;
+	int			color;
+	t_pix_inf	pix_inf;
 
 	y = vars->ray->draw_start;
+	pix_inf.ray_id = ray_id;
+	pix_inf.map_x = get_map_x(vars);
+	pix_inf.map_y = get_map_y(vars);
 	while (y < vars->ray->draw_end)
 	{
 		color = get_texture_color_at_y(vars, texture_index, y, &tex_x, &tex_y);
 		if (color != -1)
-			handle_pixel(vars, ray_id, y, color, \
-				get_map_x(vars), get_map_y(vars));
+		{
+			pix_inf.y = y;
+			pix_inf.color = color;
+			handle_pixel(vars, &pix_inf);
+		}
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 13:12:31 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:35:52 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,15 @@
 # define DOOR_OPENING 2
 # define DOOR_CLOSING 3
 # define DOOR_UNDEFINED -1
+
+typedef struct s_pix_inf
+{
+	int	ray_id;
+	int	y;
+	int	color;
+	int	map_x;
+	int	map_y;
+}	t_pix_inf;
 
 typedef enum e_tex_typ
 {
@@ -276,8 +285,7 @@ void		toggle_door(t_vars *vars, int x, int y);
 void		handle_monster(t_vars *vars, int ray_id, int y, int color);
 void		handle_door(t_vars *vars, int ray_id, int y, int color);
 void		handle_wall(t_vars *vars, int ray_id, int y, int color);
-void		handle_pixel(t_vars *vars, int ray_id, int y, int color, \
-				int map_x, int map_y);
+void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, int *tex_x, int *tex_y);
 
