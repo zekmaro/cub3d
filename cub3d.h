@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 11:59:29 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:14:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,12 +219,14 @@ void	initialise_vars(t_vars *vars);
 /* Parsing.c */
 int		read_map(int fd, t_map *map, char *file_name);
 
-/* Utils.c */
+/* Map_utils.c */
 void	print_map(t_map *map);
 int		is_wall(t_vars *vars, int y, int x);
 int		player_inside_map(t_vars *vars, int x, int y);
 int		can_move(t_vars *vars, int y, int x);
 int		get_texture_color(t_img *texture, int x, int y);
+
+/* Time_utils.c */
 long	get_elapsed_time(struct timeval *start, struct timeval *end);
 void	get_current_time(struct timeval *time);
 
