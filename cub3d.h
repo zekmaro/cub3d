@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 12:34:49 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:18:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define KEY_UP 65362
 # define KEY_DOWN 65364
 # define ESCAPE 65307
+# define SPACE 32
+# define KEY_OPEN_DOOR SPACE
 
 // KEY DEFINITION MAC
 // # define W 13
@@ -57,12 +59,35 @@
 # define LIGHT_BLUE 0x7FDBFF
 # define LIGHT_GREEN 0x90EE90
 
+// DOOR STATES
+# define DOOR_CLOSED 0
+# define DOOR_OPEN 1
+# define DOOR_OPENING 2
+# define DOOR_CLOSING 3
+# define DOOR_UNDEFINED -1
+
+typedef struct s_pix_inf
+{
+	int	ray_id;
+	int	y;
+	int	color;
+	int	map_x;
+	int	map_y;
+}	t_pix_inf;
+
+typedef struct s_tex_coords
+{
+	int		tex_x;
+	int		tex_y;
+}	t_tex_coords;
+
 typedef enum e_tex_typ
 {
 	TEXTURE_NORTH,
 	TEXTURE_WEST,
 	TEXTURE_SOUTH,
-	TEXTURE_EAST
+	TEXTURE_EAST,
+	TEXTURE_DOOR
 }	t_tex_typ;
 
 typedef struct s_map
@@ -75,6 +100,7 @@ typedef struct s_map
 	char	player_dir;
 	int		monster_x;
 	int		monster_y;
+	int		**doors;
 }	t_map;
 
 typedef struct s_img
@@ -151,7 +177,7 @@ typedef struct s_vars
 	t_line			*line;
 	t_player		*player;
 	t_ray			*ray;
-	t_img			*textures[4];
+	t_img			*textures[5];
 	t_img			*animated_sprite;
 	struct timeval	program_start;
 	struct timeval	current_time;
@@ -180,6 +206,7 @@ void		draw_minimap(t_vars *vars);
 void		free_memory(char **arr);
 void		free_map(t_map *map);
 int			free_and_exit(void *param);
+void		free_vars_doors(t_vars *vars);
 void		cleanup_vars(t_vars *vars);
 
 /* Free_environment.c */
@@ -253,5 +280,19 @@ void		load_animated_sprite(t_vars *vars, t_img *sprite, \
 void		update_sprite_frame(t_img *sprite);
 void		put_enemy_on_screen(t_vars *vars);
 int			draw_sprite(t_vars *vars);
+
+/* Doors */
+int			is_door(t_vars *vars, int x, int y);
+void		open_door(t_vars *vars, int x, int y);
+void		close_door(t_vars *vars, int x, int y);
+void		toggle_door(t_vars *vars, int x, int y);
+
+/* Ray_handlers.c */
+void		handle_monster(t_vars *vars, int ray_id, int y, int color);
+void		handle_door(t_vars *vars, int ray_id, int y, int color);
+void		handle_wall(t_vars *vars, int ray_id, int y, int color);
+void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
+int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
+				int y, t_tex_coords *coords);
 
 #endif // CUB3D_H

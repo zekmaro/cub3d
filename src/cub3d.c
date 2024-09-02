@@ -23,12 +23,13 @@ void	run_screen(t_vars *vars)
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
-	//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_key_hook(vars->mlx->win, key_hook, vars);
 	mlx_loop_hook(vars->mlx->mlx, draw_sprite, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
 }
+//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
+// mlx_key_hook(vars->mlx->win, key_hook, vars);
 
 int	game_loop(t_vars *vars)
 {
@@ -75,7 +76,10 @@ int	main(int argc, char **argv)
 		free_and_exit(&vars);
 	setup_player(&vars);
 	get_current_time(&vars.program_start);
-	//print_map(vars.map);
 	run_screen(&vars);
 	return (0);
 }
+
+// get_current_time(&vars.program_start);
+//print_map(vars.map);
+// run_screen(&vars);

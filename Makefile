@@ -40,7 +40,9 @@ SRC		:=	src/cub3d.c \
 			src/time_utils.c \
 			src/raycasting.c \
 			src/ray_drawing.c \
+			src/ray_handlers.c \
 			src/sprites.c \
+			src/doors.c \
 
 # LIBS 
 LIBS	:= libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 23:03:14 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:08:46 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,27 @@ int	validate_line(char *line, int row, t_map *map)
 	return (1);
 }
 
+void	initialize_doors(t_map *map)
+{
+	int	i;
+	int	j;
+
+	map->doors = malloc(sizeof(int *) * map->height);
+	i = -1;
+	while (++i < map->height)
+	{
+		map->doors[i] = malloc(sizeof(int) * map->width);
+		j = -1;
+		while (++j < map->width)
+		{
+			if (map->grid[i][j] == 'D')
+				map->doors[i][j] = DOOR_CLOSED;
+			else
+				map->doors[i][j] = DOOR_UNDEFINED;
+		}
+	}
+}
+
 int	read_map(int fd, t_map *map, char *file_name)
 {
 	char	*line;
@@ -77,5 +98,6 @@ int	read_map(int fd, t_map *map, char *file_name)
 		i++;
 	}
 	close(fd);
+	initialize_doors(map);
 	return (1);
 }
