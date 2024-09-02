@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/02 12:22:55 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/02 12:31:21 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC		:=	src/cub3d.c \
 			src/parsing.c \
 			src/map_utils.c \
 			src/time_utils.c \
-			src/raycast.c \
+			src/raycasting.c \
+			src/ray_drawing.c \
 			src/sprites.c \
 
 # LIBS 
