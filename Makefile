@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/01 01:35:30 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/02 11:41:16 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ GNL		:=	gnl/get_next_line.c \
 
 SRC		:=	src/cub3d.c \
 			src/draw_line.c \
-			src/drawing.c \
+			src/draw_environment.c \
+			src/draw_entities.c \
 			src/free_memory_utils.c \
 			src/free_vars.c \
 			src/handle_image.c \
