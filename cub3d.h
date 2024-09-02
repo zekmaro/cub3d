@@ -121,6 +121,8 @@ typedef struct s_ray
 	double	last_ray_y;
 	double	ray_dir_x;
 	double	ray_dir_y;
+	double	ray_monster_x;
+	double	ray_monster_y;
 	double	ray_angle;
 	double	distance_to_wall;
 	int		line_height;
