@@ -124,26 +124,33 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
 			/ vars->ray->line_height);
 		if (!vars->is_monster)
+		{
 			color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
+		}
 		else
 		{
 			tmp = (t_img *)vars->animated_sprite->frames[vars->animated_sprite->current_frame];
-			if (tex_y < 63 && tex_x < 44)
+			if (tex_y <= 63 && tex_x <= 44)
 			{
 				setup_ray(vars, vars->ray->ray_monster_x, vars->ray->ray_monster_y);
 				tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
 					/ vars->ray->line_height);
 				tex_x = (int)(vars->ray->ray_monster_x) % vars->unit_size;
 				color = get_texture_color(tmp, tex_x, tex_y);
+				if (color == -1)
+				{
+					setup_ray(vars, vars->ray->last_ray_x, vars->ray->last_ray_y);
+					get_texture_coords(vars, texture_index, &tex_x);
+					tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
+						/ vars->ray->line_height);
+					if (tex_y <= 63)
+					{
+						color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
+					}
+				}
 			}
-			// if (color == -1)
-			// {
-			// 	setup_ray(vars, vars->ray->last_ray_x, vars->ray->last_ray_y);
-			// 	get_texture_coords(vars, texture_index, &tex_x);
-			// 	tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
-			// 		/ vars->ray->line_height);
-			// 	//color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);;
-			// }
+			else
+				color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 		}
 		// if (color != -1)
 		// {
