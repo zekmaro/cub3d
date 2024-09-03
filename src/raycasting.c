@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/02 12:30:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/03 22:57:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	setup_ray(t_vars *vars)
 {
 	vars->ray->distance_to_wall = sqrt(pow(vars->ray->ray_x \
 		- vars->player->x, 2) + pow(vars->ray->ray_y - vars->player->y, 2));
+	vars->ray->distance_to_wall *= cos(vars->player->angle \
+		- vars->ray->ray_angle);
 	vars->ray->line_height = (int)(vars->mlx->window_height \
 		* vars->unit_size / 2 / vars->ray->distance_to_wall);
 	vars->ray->draw_start = -vars->ray->line_height / 2 \
