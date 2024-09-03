@@ -108,7 +108,7 @@ void	draw_ray_segment(t_vars *vars)
 	while (radian < vars->player->fov)
 	{
 		draw_ray(vars, -fov_half + radian);
-		radian += 0.05;
+		radian += 0.01;
 	}
 }
 
@@ -178,8 +178,8 @@ void	draw_map(t_vars *vars)
 {
 	draw_floor(vars);
 	draw_ceiling(vars);
-	raycast(vars);
-	update_player_position(vars);
 	// draw_minimap(vars);
 	// draw_ray_segment(vars);
+	raycast(vars);
+	update_player_position(vars);
 }

@@ -39,7 +39,9 @@ t_tex_typ	define_texture_type(t_vars *vars)
 
 void	get_monster_coors(t_vars *vars, int y, int x)
 {
-	if (!vars->is_monster /*&& !define_texture_type(vars)*/ && vars->map->grid[y / vars->unit_size][x / vars->unit_size] == 'M')
+	const int alpha = (vars->unit_size - 43) / 2;
+	if (!vars->is_monster /*&& !define_texture_type(vars)*/ && vars->map->grid[y / vars->unit_size][x / vars->unit_size] == 'M'
+	&& (x % vars->unit_size > alpha && x % vars->unit_size < alpha + 44))
 	{
 		vars->ray->ray_monster_x = vars->ray->last_ray_x;
 		vars->ray->ray_monster_y = vars->ray->last_ray_y;
@@ -115,6 +117,7 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	int	map_y;
 	t_img *tmp;
 
+	(void)ray_id;
 	y = vars->ray->draw_start;
 	map_x = get_map_x(vars);
 	map_y = get_map_y(vars);
@@ -129,16 +132,19 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		}
 		else
 		{
+			put_pixel_to_image(vars, vars->ray->ray_monster_x, vars->ray->ray_monster_y, RED);
 			tmp = (t_img *)vars->animated_sprite->frames[vars->animated_sprite->current_frame];
-			if (tex_y <= 63 && tex_x <= 44)
+			if (tex_y <= 63 && tex_x <= 63)
 			{
 				setup_ray(vars, vars->ray->ray_monster_x, vars->ray->ray_monster_y);
 				tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
 					/ vars->ray->line_height);
-				tex_x = (int)(vars->ray->ray_monster_x) % vars->unit_size;
+				tex_x = (int)(vars->ray->ray_monster_x) % 44;
 				color = get_texture_color(tmp, tex_x, tex_y);
+				put_pixel_to_image(vars, ray_id, y, GREEN);
 				if (color == -1)
 				{
+					put_pixel_to_image(vars, ray_id, y, YELLOW);
 					setup_ray(vars, vars->ray->last_ray_x, vars->ray->last_ray_y);
 					get_texture_coords(vars, texture_index, &tex_x);
 					tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
@@ -148,21 +154,10 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 						color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 					}
 				}
+				put_pixel_to_image(vars, vars->ray->ray_monster_x, vars->ray->ray_monster_y, YELLOW);
 			}
-			else
-				color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 		}
-		// if (color != -1)
-		// {
-		// 	if (is_monster(vars, map_x, map_y))
-		// 	{
-		// 		put_pixel_to_image(vars, ray_id, y, color);
-		// 	}
-		// 	else
-		// 	{
 		put_pixel_to_image(vars, ray_id, y, color);
-		// 	}
-		// }
 		y++;
 	}
 	vars->is_monster = 0;
