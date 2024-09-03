@@ -141,10 +141,8 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 					/ vars->ray->line_height);
 				tex_x = (int)(vars->ray->ray_monster_x) % 44;
 				color = get_texture_color(tmp, tex_x, tex_y);
-				put_pixel_to_image(vars, ray_id, y, GREEN);
 				if (color == -1)
 				{
-					put_pixel_to_image(vars, ray_id, y, YELLOW);
 					setup_ray(vars, vars->ray->last_ray_x, vars->ray->last_ray_y);
 					get_texture_coords(vars, texture_index, &tex_x);
 					tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
@@ -154,7 +152,6 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 						color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 					}
 				}
-				put_pixel_to_image(vars, vars->ray->ray_monster_x, vars->ray->ray_monster_y, YELLOW);
 			}
 		}
 		put_pixel_to_image(vars, ray_id, y, color);
