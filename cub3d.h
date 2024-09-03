@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/01 16:04:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/04 01:28:45 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ typedef struct s_img
 	int			current_frame;
 	void		*current_frame_ptr;
 	void		**frames;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_mlx
@@ -139,6 +141,10 @@ typedef struct s_player
 	int		center_x;
 	int		center_y;
 	double	angle;
+	double	plane_x;
+    double	plane_y;
+	double	dir_x;
+    double	dir_y;
 }	t_player;
 
 typedef struct s_sprite
@@ -168,7 +174,7 @@ typedef struct s_vars
 	int				*zbuffer;
 	int				*sprite_order;
 	t_sprite		*sprites;
-	t_texture		*sprite_texture;
+	t_img			*sprite_texture;
 	int				num_sprites;
 }	t_vars;
 
