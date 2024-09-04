@@ -174,10 +174,10 @@ void	draw_minimap(t_vars *vars)
 	draw_player(vars, RED);
 }
 
-void	handle_sprites(t_vars *vars)
-{
-	
-}
+// void	handle_sprites(t_vars *vars)
+// {
+
+// }
 
 void	draw_map(t_vars *vars)
 {
@@ -186,6 +186,6 @@ void	draw_map(t_vars *vars)
 	// draw_minimap(vars);
 	// draw_ray_segment(vars);
 	raycast(vars);
-	handle_sprites(vars);
+	//handle_sprites(vars);
 	update_player_position(vars);
 }
