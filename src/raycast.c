@@ -23,8 +23,6 @@ t_tex_typ	define_texture_type(t_vars *vars)
 		- (int)vars->ray->ray_x / vars->unit_size;
 	dy = (int)vars->ray->last_ray_y / vars->unit_size \
 		- (int)vars->ray->ray_y / vars->unit_size;
-	if (vars->is_monster)
-		return (0);
 	if (dy == 1)
 		texture_type = TEXTURE_NORTH;
 	else if (dy == -1)
@@ -36,19 +34,6 @@ t_tex_typ	define_texture_type(t_vars *vars)
 	return (texture_type);
 }
 
-
-void	get_monster_coors(t_vars *vars, int y, int x)
-{
-	const int alpha = (vars->unit_size - 43) / 2;
-	if (!vars->is_monster /*&& !define_texture_type(vars)*/ && vars->map->grid[y / vars->unit_size][x / vars->unit_size] == 'M'
-	&& (x % vars->unit_size > alpha && x % vars->unit_size < alpha + 44))
-	{
-		vars->ray->ray_monster_x = vars->ray->last_ray_x;
-		vars->ray->ray_monster_y = vars->ray->last_ray_y;
-		vars->is_monster = 1;
-	}
-}
-
 void	get_ray_target_coords(t_vars *vars)
 {
 	vars->ray->ray_x = vars->player->x;
@@ -57,33 +42,11 @@ void	get_ray_target_coords(t_vars *vars)
 	vars->ray->ray_dir_y = sin(vars->ray->ray_angle);
 	while (!is_wall(vars, vars->ray->ray_y, vars->ray->ray_x))
 	{
-		//get_monster_coors(vars, vars->ray->ray_y, vars->ray->ray_x);
 		vars->ray->last_ray_x = vars->ray->ray_x;
 		vars->ray->last_ray_y = vars->ray->ray_y;
 		vars->ray->ray_x += vars->ray->ray_dir_x;
 		vars->ray->ray_y += vars->ray->ray_dir_y;
 	}
-}
-
-void	custom_setup_ray(t_vars *vars, double ray_x, double ray_y)
-{
-	vars->ray->distance_to_wall = sqrt(pow(ray_x \
-		- vars->player->x, 2) + pow(ray_y - vars->player->y, 2));
-	vars->ray->distance_to_wall *= cos(vars->player->angle \
-		- vars->ray->ray_angle);
-	double dynamic_offset = (vars->mlx->window_height * 10 / vars->ray->distance_to_wall);
-	vars->ray->line_height = (int)(vars->mlx->window_height \
-		* vars->unit_size / vars->ray->distance_to_wall);
-	vars->ray->draw_start = -vars->ray->line_height / 2 \
-		+ vars->mlx->window_height / 2;
-	vars->ray->draw_start += (44 + dynamic_offset);
-	if (vars->ray->draw_start < 0)
-		vars->ray->draw_start = 0;
-	vars->ray->draw_end = vars->ray->line_height / 2 \
-		+ vars->mlx->window_height / 2;
-	vars->ray->draw_end += (44 + dynamic_offset);
-	if (vars->ray->draw_end >= vars->mlx->window_height)
-		vars->ray->draw_end = vars->mlx->window_height - 1;
 }
 
 void	setup_ray(t_vars *vars, double ray_x, double ray_y)
@@ -136,13 +99,9 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	int	tex_x;
 	int	tex_y;
 	int	color;
-	int	map_x;
-	int	map_y;
 
 	(void)ray_id;
 	y = vars->ray->draw_start;
-	map_x = get_map_x(vars);
-	map_y = get_map_y(vars);
 	while (y < vars->ray->draw_end)
 	{
 		get_texture_coords(vars, texture_index, &tex_x);
@@ -162,6 +121,7 @@ void	cast_ray(t_vars *vars, int ray_id)
 	setup_ray(vars, vars->ray->ray_x, vars->ray->ray_y);
 	texture_index = define_texture_type(vars);
 	draw_ray_column(vars, ray_id, texture_index);
+	vars->zbuffer[ray_id] = vars->ray->distance_to_wall;
 }
 
 void	raycast(t_vars *vars)

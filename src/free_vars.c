@@ -86,3 +86,12 @@ void	free_vars_sprites(t_vars *vars)
 		vars->animated_sprite = NULL;
 	}
 }
+
+void	free_vars_zbuffer(t_vars *vars)
+{
+	if (vars->zbuffer)
+	{
+		free(vars->zbuffer);
+		vars->zbuffer = NULL;
+	}
+}

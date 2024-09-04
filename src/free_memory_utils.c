@@ -80,4 +80,5 @@ void	cleanup_vars(t_vars *vars)
 	free_vars_player(vars);
 	free_vars_ray(vars);
 	free_vars_sprites(vars);
+	free_vars_zbuffer(vars);	
 }
