@@ -136,14 +136,14 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	int	tex_x;
 	int	tex_y;
 	int	color;
-	int	map_x;
-	int	map_y;
+	// int	map_x;
+	// int	map_y;
 	t_img *tmp;
 
 	(void)ray_id;
 	y = vars->ray->draw_start;
-	map_x = get_map_x(vars);
-	map_y = get_map_y(vars);
+	// map_x = get_map_x(vars);
+	// map_y = get_map_y(vars);
 	while (y < vars->ray->draw_end)
 	{
 		get_texture_coords(vars, texture_index, &tex_x);
