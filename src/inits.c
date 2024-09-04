@@ -176,7 +176,7 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/tile002.xpm",
 		"./assets/tile003.xpm"
 	};
-	vars->animated_sprite = malloc(sizeof(t_img));
+	vars->animated_sprite = ft_calloc(sizeof(t_img), 1);
 	if (!vars->animated_sprite)
 	{
 		perror("Failed to allocate memory for animated sprite");

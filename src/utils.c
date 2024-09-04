@@ -43,7 +43,7 @@ int	can_move(t_vars *vars, int y, int x)
 {
 	if (player_inside_map(vars, x, y))
 	{
-		if (vars->map->grid[y][x] == '1' || vars->map->grid[y][x] == 'M')
+		if (vars->map->grid[y][x] == '1')
 			return (0);
 		return (1);
 	}

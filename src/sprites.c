@@ -53,18 +53,18 @@ void	update_sprite_frame(t_img *sprite)
 	sprite->current_frame = (sprite->current_frame + 1) % sprite->frame_count;
 }
 
-void	put_enemy_on_screen(t_vars *vars)
-{
-	int	screen_x;
-	int	screen_y;
+// void	put_enemy_on_screen(t_vars *vars)
+// {
+// 	int	screen_x;
+// 	int	screen_y;
 
-	screen_x = (vars->map->monster_x * vars->unit_size) + vars->unit_size / 2;
-	screen_y = (vars->map->monster_y * vars->unit_size) + vars->unit_size / 2;
-	vars->animated_sprite->current_frame_ptr = \
-		vars->animated_sprite->frames[vars->animated_sprite->current_frame];
-	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
-		vars->animated_sprite->current_frame_ptr, screen_x, screen_y);
-}
+// 	screen_x = (vars->map->monster_x * vars->unit_size) + vars->unit_size / 2;
+// 	screen_y = (vars->map->monster_y * vars->unit_size) + vars->unit_size / 2;
+// 	vars->animated_sprite->current_frame_ptr = \
+// 		vars->animated_sprite->frames[vars->animated_sprite->current_frame];
+// 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
+// 		vars->animated_sprite->current_frame_ptr, screen_x, screen_y);
+// }
 
 int	draw_sprite(t_vars *vars)
 {
