@@ -238,9 +238,9 @@ void	draw_map(t_vars *vars)
 {
 	draw_floor(vars);
 	draw_ceiling(vars);
-	// draw_minimap(vars);
-	// draw_ray_segment(vars);
 	raycast(vars);
 	handle_sprites(vars);
+	//draw_minimap(vars);
+	//draw_ray_segment(vars);	
 	update_player_position(vars);
 }
