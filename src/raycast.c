@@ -57,7 +57,7 @@ void	get_ray_target_coords(t_vars *vars)
 	vars->ray->ray_dir_y = sin(vars->ray->ray_angle);
 	while (!is_wall(vars, vars->ray->ray_y, vars->ray->ray_x))
 	{
-		get_monster_coors(vars, vars->ray->ray_y, vars->ray->ray_x);
+		//get_monster_coors(vars, vars->ray->ray_y, vars->ray->ray_x);
 		vars->ray->last_ray_x = vars->ray->ray_x;
 		vars->ray->last_ray_y = vars->ray->ray_y;
 		vars->ray->ray_x += vars->ray->ray_dir_x;
@@ -134,7 +134,6 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	int	color;
 	int	map_x;
 	int	map_y;
-	t_img *tmp;
 
 	(void)ray_id;
 	y = vars->ray->draw_start;
@@ -145,40 +144,10 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		get_texture_coords(vars, texture_index, &tex_x);
 		tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
 			/ vars->ray->line_height);
-		if (!vars->is_monster)
-		{
-			color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
-		}
-		else
-		{
-			tmp = (t_img *)vars->animated_sprite->frames[vars->animated_sprite->current_frame];
-			if (tex_y <= vars->unit_size && tex_x <= vars->unit_size)
-			{
-				custom_setup_ray(vars, vars->ray->ray_monster_x, vars->ray->ray_monster_y);
-				tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
-					/ vars->ray->line_height);
-				tex_x = (int)(vars->ray->ray_monster_x) % 44;
-				//printf("%d %d %d\n", y, vars->ray->draw_start, y - vars->ray->draw_start);
-				if (tex_y < 0)
-					tex_y = 0;
-				color = get_texture_color(tmp, tex_x, tex_y);
-				if (color == -1)
-				{
-					setup_ray(vars, vars->ray->last_ray_x, vars->ray->last_ray_y);
-					get_texture_coords(vars, texture_index, &tex_x);
-					tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
-						/ vars->ray->line_height);
-					if (tex_y <= vars->unit_size)
-					{
-						color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
-					}
-				}
-			}
-		}
+		color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 		put_pixel_to_image(vars, ray_id, y, color);
 		y++;
 	}
-	vars->is_monster = 0;
 }
 
 void	cast_ray(t_vars *vars, int ray_id)

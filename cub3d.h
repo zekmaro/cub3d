@@ -143,6 +143,13 @@ typedef struct s_player
 	double	angle;
 }	t_player;
 
+typedef struct s_sprite
+{
+	int x;
+	int y;
+	t_img *texture;
+}	t_sprite;
+
 typedef struct s_vars
 {
 	int				unit_size;
@@ -157,6 +164,7 @@ typedef struct s_vars
 	int				is_monster;
 	struct timeval	program_start;
 	struct timeval	current_time;
+	t_sprite		**sprite_arr;
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
