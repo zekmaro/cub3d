@@ -112,7 +112,7 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 
 	if (button == MOUSE_CLICK_LEFT && !vars->player->shoot)
 	{
-		system("aplay ./assets/gunshot.wav &");
+		system("aplay ./assets/gunshot.wav -q &");
 		vars->player->shoot = 1;
 		vars->player->fire_done = 0;
 	}
