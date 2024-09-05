@@ -183,6 +183,11 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/gun3.xpm",
 		"./assets/gun4.xpm"
 	};
+	const char *fire_frames[] \
+	= {
+		"./assets/gunfire1.xpm",
+		"./assets/gunfire2.xpm",
+	};
 	vars->animated_sprite = ft_calloc(sizeof(t_img), 1);
 	if (!vars->animated_sprite)
 	{
@@ -195,8 +200,15 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for gun sprite");
 		free_and_exit(vars);
 	}
+	vars->player->fire = ft_calloc(sizeof(t_img), 1);
+	if (!vars->player->fire)
+	{
+		perror("Failed to allocate memory for gun sprite");
+		free_and_exit(vars);
+	}
 	load_animated_sprite(vars, vars->animated_sprite, sprite_frames, 4);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
+	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 }
 
 void	initialise_zbuffer(t_vars *vars)

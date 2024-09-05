@@ -148,7 +148,10 @@ typedef struct s_player
     double	plane_y;
 	double	dir_x;
     double	dir_y;
+	int		shoot;
 	t_img	*gun;
+	t_img	*fire;
+	int		fire_done;
 }	t_player;
 
 typedef struct s_sprite
@@ -193,6 +196,8 @@ void	rotate_around_point(t_vars *vars, int *x, int *y);
 void	draw_map(t_vars *vars);
 void	draw_floor(t_vars *vars);
 void	draw_ceiling(t_vars *vars);
+void	draw_fire(t_vars *vars, double scale);
+void	draw_gun(t_vars *vars, double scale);
 
 /* Free_memory_utils.c */
 void	free_memory(char **arr);
@@ -249,4 +254,5 @@ void	put_enemy_on_screen(t_vars *vars);
 int		draw_sprite(t_vars *vars);
 void	draw_sprites(t_vars *vars);
 
+int	animate_shooting(t_vars *vars);
 #endif // CUB3D_H

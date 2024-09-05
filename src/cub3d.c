@@ -13,9 +13,18 @@
 #include "../cub3d.h"
 #include <mlx.h>
 
-void	check_addr(t_vars *vars)
+int	main_loop_hook(t_vars *vars)
 {
-	printf("%p", vars->player);
+    // Handle gun shooting animation
+    if (vars->player->shoot)
+    {
+        animate_shooting(vars); // Call gun animation
+    }
+
+    // Handle enemy animation
+    draw_sprite(vars); // Call enemy animation
+
+    return (0);
 }
 
 void	run_screen(t_vars *vars)
@@ -30,10 +39,9 @@ void	run_screen(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
 	//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
-	check_addr(vars);
 	mlx_mouse_hook(vars->mlx->win, shoot_this_shit, vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_hook, vars);
-	mlx_loop_hook(vars->mlx->mlx, draw_sprite, vars);
+	mlx_loop_hook(vars->mlx->mlx, main_loop_hook, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
 }

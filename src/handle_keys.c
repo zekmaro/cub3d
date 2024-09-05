@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <mlx.h>
+#include <unistd.h>
 
 void	move_player(t_vars *vars, int move_y, int move_x)
 {
@@ -66,13 +68,54 @@ void	check_move_player(int keycode, t_vars *vars)
 		vars->player->angle += M_PI / 90;
 }
 
+
+int	animate_shooting(t_vars *vars)
+{
+	static int frame_count = 0; // Frame counter for animation
+
+    if (!vars->player->shoot) // Check if animation should continue
+        return (0);
+
+    long elapsed_time;
+    get_current_time(&vars->current_time);
+    elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
+
+    if (elapsed_time % 200 == 0)
+    {
+		if (frame_count == 2 && !vars->player->fire_done)
+		{
+			vars->player->fire_done = 1;
+			frame_count = 0;
+		}
+        if (frame_count == 4) // Stop after 3 frames
+        {
+            vars->player->shoot = 0; // Reset shooting flag
+            frame_count = 0;       // Reset frame counter
+            return (0);
+        }
+		if (vars->player->fire_done)
+        	update_sprite_frame(vars->player->gun);
+        draw_map(vars);
+		if (!vars->player->fire_done)
+		{
+			draw_fire(vars, 4.0);
+			update_sprite_frame(vars->player->fire);
+		}
+        mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, vars->image->mlx_img, 0, 0);
+        frame_count++;
+    }
+    return (0);
+}
+
 int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 {
 	(void)x;
 	(void)y;
-	if (button == MOUSE_CLICK_LEFT)
+
+	if (button == MOUSE_CLICK_LEFT && !vars->player->shoot)
 	{
-		update_sprite_frame(vars->player->gun);
+		vars->player->shoot = 1;
+		vars->player->fire_done = 0;
 	}
 	return (0);
 }
@@ -89,7 +132,8 @@ int	key_hook(int keycode, t_vars *vars)
 	else
 	{
 		handle_key(keycode, vars);
-		draw_map(vars);
+		// draw_map(vars);
+		animate_shooting(vars);
 		mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 			vars->image->mlx_img, 0, 0);
 	}

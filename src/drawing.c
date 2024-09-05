@@ -197,6 +197,48 @@ void	handle_sprites(t_vars *vars)
     }
 }
 
+void	draw_fire(t_vars *vars, double scale)
+{
+
+	int		screen_x, screen_y;
+	int		tex_x, tex_y;
+	int color;
+	t_img *temp = (t_img *)vars->player->fire->frames[vars->player->fire->current_frame];
+	int		gun_width = temp->width;   // Original texture width
+	int		gun_height = temp->height;  // Original texture height
+
+	// Calculate the scaled dimensions
+	int		scaled_width = gun_width * scale;
+	int		scaled_height = gun_height * scale;
+
+	// Calculate the starting point for the gun on the screen (centered horizontally, at the bottom)
+	int		screen_x_start = (vars->mlx->window_width / 2) - (scaled_width / 2) + 18;
+	int		screen_y_start = vars->mlx->window_height - scaled_height;
+
+	// Loop through each screen pixel for the scaled gun sprite
+	for (screen_y = 0; screen_y < scaled_height; screen_y++)
+	{
+		// Calculate which texture Y-coordinate corresponds to the screen Y-coordinate
+		tex_y = screen_y / scale;
+
+		for (screen_x = 0; screen_x < scaled_width; screen_x++)
+		{
+			// Calculate which texture X-coordinate corresponds to the screen X-coordinate
+			tex_x = screen_x / scale;
+
+			// Get the texture pixel color from the gun texture
+			color = get_texture_color(vars->player->fire->frames[vars->player->fire->current_frame], tex_x, tex_y);
+
+			// Ignore transparent pixels (assuming 0xFF00FF is transparent)
+			if (color != -1)
+			{
+				// Draw the scaled pixel to the main image buffer at the correct screen location
+				put_pixel_to_image(vars, screen_x_start + screen_x, screen_y_start + screen_y - 250, color);
+			}
+		}
+	}
+}
+
 void	draw_gun(t_vars *vars, double scale)
 {
 	int		screen_x, screen_y;
