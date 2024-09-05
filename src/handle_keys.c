@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <mlx.h>
-#include <unistd.h>
 
 void	move_player(t_vars *vars, int move_y, int move_x)
 {

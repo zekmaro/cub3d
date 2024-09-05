@@ -6,25 +6,18 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/04 01:29:11 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/05 13:55:53 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <mlx.h>
 
 int	main_loop_hook(t_vars *vars)
 {
-    // Handle gun shooting animation
-    if (vars->player->shoot)
-    {
-        animate_shooting(vars); // Call gun animation
-    }
-
-    // Handle enemy animation
-    draw_sprite(vars); // Call enemy animation
-
-    return (0);
+	if (vars->player->shoot)
+		animate_shooting(vars);
+	draw_sprite(vars);
+	return (0);
 }
 
 void	run_screen(t_vars *vars)
@@ -54,24 +47,28 @@ int	game_loop(t_vars *vars)
 	return (0);
 }
 
-void setup_player(t_vars *vars)
+void	setup_player(t_vars *vars)
 {
-    vars->player->x = (vars->map->player_x * vars->unit_size) + vars->unit_size / 2;
-    vars->player->y = (vars->map->player_y * vars->unit_size) + vars->unit_size / 2;
-    vars->player->fov = M_PI / 3;
-    if (vars->map->player_dir == 'N')
-        vars->player->angle = -M_PI / 2;
-    else if (vars->map->player_dir == 'W')
-        vars->player->angle = -M_PI;
-    else if (vars->map->player_dir == 'S')
-        vars->player->angle = -3 * M_PI / 2;
-    else if (vars->map->player_dir == 'E')
-        vars->player->angle = 0;
-    vars->player->dir_x = cos(vars->player->angle);
-    vars->player->dir_y = sin(vars->player->angle);
-    double plane_length = tan(vars->player->fov / 2);
-    vars->player->plane_x = -vars->player->dir_y * plane_length;
-    vars->player->plane_y = vars->player->dir_x * plane_length;
+	double	plane_length;
+
+	vars->player->x = (vars->map->player_x * vars->unit_size) \
+		+ vars->unit_size / 2;
+	vars->player->y = (vars->map->player_y * vars->unit_size) \
+		+ vars->unit_size / 2;
+	vars->player->fov = M_PI / 3;
+	if (vars->map->player_dir == 'N')
+		vars->player->angle = -M_PI / 2;
+	else if (vars->map->player_dir == 'W')
+		vars->player->angle = -M_PI;
+	else if (vars->map->player_dir == 'S')
+		vars->player->angle = -3 * M_PI / 2;
+	else if (vars->map->player_dir == 'E')
+		vars->player->angle = 0;
+	vars->player->dir_x = cos(vars->player->angle);
+	vars->player->dir_y = sin(vars->player->angle);
+	 plane_length = tan(vars->player->fov / 2);
+	vars->player->plane_x = -vars->player->dir_y * plane_length;
+	vars->player->plane_y = vars->player->dir_x * plane_length;
 }
 
 int	main(int argc, char **argv)

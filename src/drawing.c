@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdint.h>
 
 void	draw_square(t_vars *vars, int x, int y, int color)
 {
