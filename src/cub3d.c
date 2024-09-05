@@ -14,9 +14,17 @@
 
 int	main_loop_hook(t_vars *vars)
 {
-	if (vars->player->shoot)
-		animate_shooting(vars);
+	struct timeval t;
+	double abc;
+
+	get_current_time(&t);
+	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
+	printf("before render: %f", abc);
+	// if (vars->player->shoot)
+	// 	animate_shooting(vars);
 	draw_sprite(vars);
+	get_current_time(&t);
+	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
 	return (0);
 }
 

@@ -30,10 +30,15 @@ int mouse_move(int x, int y, t_vars *vars)
     // Calculate how much the mouse moved from the center
     int dx = x - center_x;
     //int dy = y - center_y;
+	// double magnitude;
 
+	// magnitude = sqrt(x * x + y * y);
+	// dx /= magnitude;
     // Update player angle based on mouse movement (dx affects rotation)
-    double rot_speed = 0.0002; // Adjust this for desired sensitivity
+    double rot_speed = 0.002; // Adjust this for desired sensitivity
+	
     vars->player->angle += dx * rot_speed;
+	// printf("mouse moved: %d %f\n", dx, vars->player->angle);
 
     // Reset the mouse back to the center after processing the movement
     reset_mouse_to_center(vars);
