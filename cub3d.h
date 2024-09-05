@@ -189,6 +189,8 @@ void	draw_line(t_vars *vars, unsigned long color);
 /* Drawing.c */
 void	rotate_around_point(t_vars *vars, int *x, int *y);
 void	draw_map(t_vars *vars);
+void	draw_floor(t_vars *vars);
+void	draw_ceiling(t_vars *vars);
 
 /* Free_memory_utils.c */
 void	free_memory(char **arr);

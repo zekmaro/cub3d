@@ -77,12 +77,10 @@ int	key_hook(int keycode, t_vars *vars)
 		free_and_exit(vars);
 	else
 	{
-		clean_screen(vars);
 		handle_key(keycode, vars);
 		draw_map(vars);
 		mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 			vars->image->mlx_img, 0, 0);
-		// put_enemy_on_screen(vars);
 	}
 	return (0);
 }

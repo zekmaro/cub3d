@@ -120,39 +120,50 @@ void	draw_ray_segment(t_vars *vars)
 
 void	draw_floor(t_vars *vars)
 {
-	int	i;
-	int	j;
+	int	x, y;
+	char	*dst;
+	int	color = BROWN;
 
-	i = vars->mlx->window_height / 2;
-	while (i < vars->mlx->window_height)
+	// Loop through the bottom half of the screen for the floor
+	y = vars->mlx->window_height / 2;
+	while (y < vars->mlx->window_height)
 	{
-		j = 0;
-		while (j < vars->mlx->window_width)
+		x = 0;
+		while (x < vars->mlx->window_width)
 		{
-			put_pixel_to_image(vars, j, i, BROWN);
-			j++;
+			// Get the address of the pixel in the image buffer
+			dst = vars->image->addr + (y * vars->image->line_len + x * (vars->image->bits_per_pixel / 8));
+			// Set the color (assuming RGB format)
+			*(unsigned int *)dst = color;
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 
 void	draw_ceiling(t_vars *vars)
 {
-	int	i;
-	int	j;
+	int	x, y;
+	char	*dst;
+	int	color = LIGHT_BLUE;
 
-	i = vars->mlx->window_height / 2;
-	while (i > 0)
+	// Loop through the top half of the screen for the ceiling
+	y = 0;
+	while (y < vars->mlx->window_height / 2)
 	{
-		j = 0;
-		while (j < vars->mlx->window_width)
+		x = 0;
+		while (x < vars->mlx->window_width)
 		{
-			put_pixel_to_image(vars, j, i, LIGHT_BLUE);
-			j++;
+			// Get the address of the pixel in the image buffer
+			dst = vars->image->addr + (y * vars->image->line_len + x * (vars->image->bits_per_pixel / 8));
+			// Set the color (assuming RGB format)
+			*(unsigned int *)dst = color;
+			x++;
 		}
-		i--;
+		y++;
 	}
 }
+
 
 void	draw_minimap(t_vars *vars)
 {
@@ -236,8 +247,8 @@ void	handle_sprites(t_vars *vars)
 
 void	draw_map(t_vars *vars)
 {
-	draw_floor(vars);
-	draw_ceiling(vars);
+	// draw_floor(vars);
+	// draw_ceiling(vars);
 	raycast(vars);
 	handle_sprites(vars);
 	//draw_minimap(vars);
