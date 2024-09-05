@@ -28,6 +28,7 @@
 # define D 100
 # define S 115
 # define A 97
+# define MOUSE_CLICK_LEFT 1
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_UP 65362
@@ -147,6 +148,7 @@ typedef struct s_player
     double	plane_y;
 	double	dir_x;
     double	dir_y;
+	t_img	*gun;
 }	t_player;
 
 typedef struct s_sprite
@@ -216,6 +218,7 @@ void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 /* Handle_keys.c */
 int		mouse_move(int x, int y, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
+int	shoot_this_shit(int button, int x, int y, t_vars *vars);
 
 /* Inits.c */
 void	initialise_vars(t_vars *vars);

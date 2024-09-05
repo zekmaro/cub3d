@@ -44,6 +44,8 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 			perror("Failed to load sprite frame");
 			free_and_exit(vars);
 		}
+		tmp->width = width;
+		tmp->height = height;
 		i++;
 	}
 }

@@ -176,13 +176,27 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/tile002.xpm",
 		"./assets/tile003.xpm"
 	};
+	const char *gun_frames[] \
+	= {
+		"./assets/gun1.xpm",
+		"./assets/gun2.xpm",
+		"./assets/gun3.xpm",
+		"./assets/gun4.xpm"
+	};
 	vars->animated_sprite = ft_calloc(sizeof(t_img), 1);
 	if (!vars->animated_sprite)
 	{
 		perror("Failed to allocate memory for animated sprite");
 		free_and_exit(vars);
 	}
+	vars->player->gun = ft_calloc(sizeof(t_img), 1);
+	if (!vars->player->gun)
+	{
+		perror("Failed to allocate memory for gun sprite");
+		free_and_exit(vars);
+	}
 	load_animated_sprite(vars, vars->animated_sprite, sprite_frames, 4);
+	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 }
 
 void	initialise_zbuffer(t_vars *vars)

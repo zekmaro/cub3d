@@ -66,6 +66,17 @@ void	check_move_player(int keycode, t_vars *vars)
 		vars->player->angle += M_PI / 90;
 }
 
+int	shoot_this_shit(int button, int x, int y, t_vars *vars)
+{
+	(void)x;
+	(void)y;
+	if (button == MOUSE_CLICK_LEFT)
+	{
+		update_sprite_frame(vars->player->gun);
+	}
+	return (0);
+}
+
 void	handle_key(int keycode, t_vars *vars)
 {
 	check_move_player(keycode, vars);
