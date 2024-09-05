@@ -102,30 +102,30 @@ int	animate_shooting(t_vars *vars)
     get_current_time(&vars->current_time);
     elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 
-    if (elapsed_time % 100 == 0)
-    {
-		if (frame_count == 2 && !vars->player->fire_done)
-		{
-			vars->player->fire_done = 1;
-			frame_count = 0;
-		}
-        if (frame_count == 4) // Stop after 3 frames
-        {
-            vars->player->shoot = 0; // Reset shooting flag
-            frame_count = 0;       // Reset frame counter
-            return (0);
-        }
-		if (vars->player->fire_done)
-        	update_sprite_frame(vars->player->gun);
-        draw_map(vars);
-		if (!vars->player->fire_done)
-		{
-			draw_fire(vars, 4.0);
-			update_sprite_frame(vars->player->fire);
-		}
-        mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, vars->image->mlx_img, 0, 0);
-        frame_count++;
-    }
+    // if (elapsed_time % 10 == 0)
+    // {
+	if (frame_count == 2 && !vars->player->fire_done)
+	{
+		vars->player->fire_done = 1;
+		frame_count = 0;
+	}
+	if (frame_count == 4) // Stop after 3 frames
+	{
+		vars->player->shoot = 0; // Reset shooting flag
+		frame_count = 0;       // Reset frame counter
+		return (0);
+	}
+	if (vars->player->fire_done)
+		update_sprite_frame(vars->player->gun);
+	draw_map(vars);
+	if (!vars->player->fire_done)
+	{
+		draw_fire(vars, 4.0);
+		update_sprite_frame(vars->player->fire);
+	}
+	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, vars->image->mlx_img, 0, 0);
+	frame_count++;
+    // }
     return (0);
 }
 
