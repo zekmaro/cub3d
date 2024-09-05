@@ -48,35 +48,3 @@ void	draw_ceiling(t_vars *vars)
 	}
 }
 
-void	draw_map(t_vars *vars)
-{
-	draw_floor(vars);
-	draw_ceiling(vars);
-	raycast(vars);
-	draw_minimap(vars);
-	draw_ray_segment(vars);
-}
-
-void	draw_minimap(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < vars->map->height)
-	{
-		j = 0;
-		while (j < vars->map->width)
-		{
-			vars->line->x0 = j * vars->unit_size;
-			vars->line->y0 = i * vars->unit_size;
-			if (vars->map->grid[i][j] == '1')
-				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
-			else
-				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
-			j++;
-		}
-		i++;
-	}
-	draw_player(vars, RED);
-}
