@@ -66,7 +66,7 @@ void	setup_player(t_vars *vars)
 		vars->player->angle = 0;
 	vars->player->dir_x = cos(vars->player->angle);
 	vars->player->dir_y = sin(vars->player->angle);
-	plane_length = tan(vars->player->fov / 2);
+	 plane_length = tan(vars->player->fov / 2);
 	vars->player->plane_x = -vars->player->dir_y * plane_length;
 	vars->player->plane_y = vars->player->dir_x * plane_length;
 }
