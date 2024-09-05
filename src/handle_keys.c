@@ -21,12 +21,12 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 	int	save_x;
 	int	save_y;
 
-	x = vars->player->center_x + move_x;
-	y = vars->player->center_y + move_y;
+	x = vars->player->center_x + move_x * 5;
+	y = vars->player->center_y + move_y * 5;
 	save_x = x;
 	save_y = y;
 	rotate_around_point(vars, &x, &y);
-	if (can_move(vars, save_y / vars->unit_size, save_x / vars->unit_size))
+	if (can_move(vars, save_y / vars->unit_size , save_x / vars->unit_size))
 	{
 		vars->player->y += move_y;
 		vars->player->x += move_x;
@@ -80,7 +80,7 @@ int	animate_shooting(t_vars *vars)
     get_current_time(&vars->current_time);
     elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 
-    if (elapsed_time % 200 == 0)
+    if (elapsed_time % 100 == 0)
     {
 		if (frame_count == 2 && !vars->player->fire_done)
 		{
@@ -115,9 +115,9 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 	if (button == MOUSE_CLICK_LEFT && !vars->player->shoot)
 	{
 		vars->player->shoot = 1;
-		vars->player->fire_done = 0;
+		vars->player->fire_done = 0;      
 	}
-	return (0);
+	return (0);             
 }
 
 void	handle_key(int keycode, t_vars *vars)
@@ -132,10 +132,7 @@ int	key_hook(int keycode, t_vars *vars)
 	else
 	{
 		handle_key(keycode, vars);
-		// draw_map(vars);
 		animate_shooting(vars);
-		mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
-			vars->image->mlx_img, 0, 0);
 	}
 	return (0);
 }

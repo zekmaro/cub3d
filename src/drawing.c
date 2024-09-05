@@ -285,7 +285,7 @@ void	draw_map(t_vars *vars)
 	raycast(vars);
 	handle_sprites(vars);
 	draw_gun(vars, 4.0);
-	//draw_minimap(vars);
-	//draw_ray_segment(vars);	
+	// draw_minimap(vars);
+	// draw_ray_segment(vars);	
 	update_player_position(vars);
 }

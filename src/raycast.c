@@ -73,13 +73,19 @@ void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 	{
 		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
 		if (texture_index == TEXTURE_SOUTH)
-			*tex_x *= -1;
+		{
+			*tex_x *= -1; 
+			*tex_x -= 1;
+		}
 	}
 	else if (texture_index % 2 == 1)
 	{
 		*tex_x = (int)(vars->ray->ray_y) % vars->unit_size;
 		if (texture_index == TEXTURE_WEST)
+		{
 			*tex_x = vars->unit_size - *tex_x;
+			*tex_x -= 1;
+		}
 	}
 }
 
@@ -110,6 +116,8 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		get_texture_coords(vars, texture_index, &tex_x);
 		tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
 			/ vars->ray->line_height);
+		if (texture_index == TEXTURE_SOUTH)
+			tex_y += 1;
 		color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 		put_pixel_to_image(vars, ray_id, y, color);
 		y++;
