@@ -70,18 +70,10 @@ void	update_sprite_frame(t_img *sprite)
 
 int	draw_sprite(t_vars *vars)
 {
-	long	elapsed_time;
-
-	get_current_time(&vars->current_time);
-	elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
-	if (elapsed_time % 200 == 0)
-	{
-		update_sprite_frame(vars->animated_sprite);
-		draw_map(vars);
-		mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
-			vars->image->mlx_img, 0, 0);
-		//put_enemy_on_screen(vars);
-	}
+	update_sprite_frame(vars->animated_sprite);
+	draw_map(vars);
+	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
+		vars->image->mlx_img, 0, 0);
 	return (0);
 }
 
