@@ -118,53 +118,6 @@ void	draw_ray_segment(t_vars *vars)
 	}
 }
 
-void	draw_floor(t_vars *vars)
-{
-	int	x, y;
-	char	*dst;
-	int	color = BROWN;
-
-	// Loop through the bottom half of the screen for the floor
-	y = vars->mlx->window_height / 2;
-	while (y < vars->mlx->window_height)
-	{
-		x = 0;
-		while (x < vars->mlx->window_width)
-		{
-			// Get the address of the pixel in the image buffer
-			dst = vars->image->addr + (y * vars->image->line_len + x * (vars->image->bits_per_pixel / 8));
-			// Set the color (assuming RGB format)
-			*(unsigned int *)dst = color;
-			x++;
-		}
-		y++;
-	}
-}
-
-void	draw_ceiling(t_vars *vars)
-{
-	int	x, y;
-	char	*dst;
-	int	color = LIGHT_BLUE;
-
-	// Loop through the top half of the screen for the ceiling
-	y = 0;
-	while (y < vars->mlx->window_height / 2)
-	{
-		x = 0;
-		while (x < vars->mlx->window_width)
-		{
-			// Get the address of the pixel in the image buffer
-			dst = vars->image->addr + (y * vars->image->line_len + x * (vars->image->bits_per_pixel / 8));
-			// Set the color (assuming RGB format)
-			*(unsigned int *)dst = color;
-			x++;
-		}
-		y++;
-	}
-}
-
-
 void	draw_minimap(t_vars *vars)
 {
 	int	i;
@@ -247,8 +200,6 @@ void	handle_sprites(t_vars *vars)
 
 void	draw_map(t_vars *vars)
 {
-	// draw_floor(vars);
-	// draw_ceiling(vars);
 	raycast(vars);
 	handle_sprites(vars);
 	//draw_minimap(vars);

@@ -99,9 +99,12 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	int	tex_x;
 	int	tex_y;
 	int	color;
+	int temp = 0;
 
 	(void)ray_id;
 	y = vars->ray->draw_start;
+	while (temp++ < y)
+		put_pixel_to_image(vars, ray_id, temp, LIGHT_BLUE);
 	while (y < vars->ray->draw_end)
 	{
 		get_texture_coords(vars, texture_index, &tex_x);
@@ -111,6 +114,8 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		put_pixel_to_image(vars, ray_id, y, color);
 		y++;
 	}
+	while (y++ < vars->mlx->window_height)
+		put_pixel_to_image(vars, ray_id, y, BROWN);
 }
 
 void	cast_ray(t_vars *vars, int ray_id)
