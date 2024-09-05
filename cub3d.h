@@ -221,6 +221,7 @@ void	clean_screen(t_vars *vars);
 void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 
 /* Handle_keys.c */
+void reset_mouse_to_center(t_vars *vars);
 int		mouse_move(int x, int y, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 int	shoot_this_shit(int button, int x, int y, t_vars *vars);

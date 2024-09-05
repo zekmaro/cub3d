@@ -126,10 +126,10 @@ void	initialise_textures(t_vars *vars)
 		perror("MLX not initialized");
 		free_and_exit(vars);
 	}
-	load_texture(vars, TEXTURE_NORTH, "./assets/north_texture.xpm");
-	load_texture(vars, TEXTURE_SOUTH, "./assets/south_texture.xpm");
-	load_texture(vars, TEXTURE_WEST, "./assets/west_texture.xpm");
-	load_texture(vars, TEXTURE_EAST, "./assets/east_texture.xpm");
+	load_texture(vars, TEXTURE_NORTH, "./assets/wall1.xpm");
+	load_texture(vars, TEXTURE_SOUTH, "./assets/wall2.xpm");
+	load_texture(vars, TEXTURE_WEST, "./assets/wall3.xpm");
+	load_texture(vars, TEXTURE_EAST, "./assets/wall4.xpm");
 }
 
 void load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_path)

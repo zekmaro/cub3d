@@ -12,6 +12,35 @@
 
 #include "../cub3d.h"
 
+void reset_mouse_to_center(t_vars *vars)
+{
+    // Move the mouse to the center of the screen
+    int center_x = vars->mlx->window_width / 2;
+    int center_y = vars->mlx->window_height / 2;
+
+    mlx_mouse_move(vars->mlx->mlx, vars->mlx->win, center_x, center_y);
+}
+
+int mouse_move(int x, int y, t_vars *vars)
+{
+    int center_x = vars->mlx->window_width / 2;
+	(void)y;
+   // int center_y = vars->mlx->window_height / 2;
+
+    // Calculate how much the mouse moved from the center
+    int dx = x - center_x;
+    //int dy = y - center_y;
+
+    // Update player angle based on mouse movement (dx affects rotation)
+    double rot_speed = 0.0002; // Adjust this for desired sensitivity
+    vars->player->angle += dx * rot_speed;
+
+    // Reset the mouse back to the center after processing the movement
+    reset_mouse_to_center(vars);
+
+    return (0);
+}
+
 void	move_player(t_vars *vars, int move_y, int move_x)
 {
 	int	x;
@@ -29,16 +58,6 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 		vars->player->y += move_y;
 		vars->player->x += move_x;
 	}
-}
-
-int	mouse_move(int x, int y, t_vars *vars)
-{
-	(void)y;
-	vars->player->angle = (x / 360);
-	draw_map(vars);
-	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
-		vars->image->mlx_img, 0, 0);
-	return (0);
 }
 
 void	check_move_player(int keycode, t_vars *vars)

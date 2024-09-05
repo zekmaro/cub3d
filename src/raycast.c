@@ -110,7 +110,7 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	(void)ray_id;
 	y = vars->ray->draw_start;
 	while (temp++ < y)
-		put_pixel_to_image(vars, ray_id, temp, LIGHT_BLUE);
+		put_pixel_to_image(vars, ray_id, temp, RED);
 	while (y < vars->ray->draw_end)
 	{
 		get_texture_coords(vars, texture_index, &tex_x);
