@@ -61,9 +61,9 @@ void	check_move_player(int keycode, t_vars *vars)
 		move_player(vars, -move_y * cos(vars->player->angle), \
 			move_x * sin(vars->player->angle));
 	else if (keycode == KEY_LEFT)
-		vars->player->angle -= M_PI / 12;
+		vars->player->angle -= M_PI / 90;
 	else if (keycode == KEY_RIGHT)
-		vars->player->angle += M_PI / 12;
+		vars->player->angle += M_PI / 90;
 }
 
 void	handle_key(int keycode, t_vars *vars)

@@ -153,7 +153,6 @@ void	handle_sprites(t_vars *vars)
 	int spriteX = vars->map->monster_x * vars->unit_size + vars->unit_size / 2 - vars->player->center_x;
 	int spriteY = vars->map->monster_y * vars->unit_size + vars->unit_size / 2 - vars->player->center_y;
 
-	printf("planeY %f * dirY %f - dirX %f * planeX %f\n", planeY, dirY, dirX, planeX);
 	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
 	
 	double transformX = invDet * (dirY * spriteX - dirX * spriteY);
@@ -175,7 +174,7 @@ void	handle_sprites(t_vars *vars)
 	int drawEndX = spriteWidth / 2 + spriteScreenX;
 	if (drawEndX >= vars->mlx->window_width) drawEndX = vars->mlx->window_width - 1;
 
-	printf("transformY %f transformX %f drawEndY %d drawEndX %d drawStartY %d drawStartX %d \n", transformY, transformX, drawEndY, drawEndX, drawStartY, drawStartX);
+	//printf("transformY %f transformX %f drawEndY %d drawEndX %d drawStartY %d drawStartX %d \n", transformY, transformX, drawEndY, drawEndX, drawStartY, drawStartX);
 	for (int stripe = drawStartX; stripe < drawEndX; stripe++) {
 	// Calculate the X-coordinate in the sprite's texture
 		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * 44 / spriteWidth) / 256;
