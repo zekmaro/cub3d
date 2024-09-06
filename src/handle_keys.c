@@ -65,28 +65,28 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 	}
 }
 
-void	check_move_player(int keycode, t_vars *vars)
+void	update_position(t_vars *vars)
 {
 	int	move_x;
 	int	move_y;
 
 	move_x = 8;
 	move_y = 8;
-	if (keycode == W)
+	if (vars->keys.w == 1)
 		move_player(vars, move_y * sin(vars->player->angle), \
 			move_x * cos(vars->player->angle));
-	else if (keycode == S)
+	else if (vars->keys.s == 1)
 		move_player(vars, -move_y * sin(vars->player->angle), \
 			-move_x * cos(vars->player->angle));
-	else if (keycode == D)
+	else if (vars->keys.d == 1)
 		move_player(vars, move_y * cos(vars->player->angle), \
 			-move_x * sin(vars->player->angle));
-	else if (keycode == A)
+	else if (vars->keys.a == 1)
 		move_player(vars, -move_y * cos(vars->player->angle), \
 			move_x * sin(vars->player->angle));
-	else if (keycode == KEY_LEFT)
+	else if (vars->keys.left == 1)
 		vars->player->angle -= M_PI / 90;
-	else if (keycode == KEY_RIGHT)
+	else if (vars->keys.right == 1)
 		vars->player->angle += M_PI / 90;
 }
 
@@ -102,30 +102,30 @@ int	animate_shooting(t_vars *vars)
     get_current_time(&vars->current_time);
     elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 
-    if (elapsed_time % 100 == 0)
-    {
-		if (frame_count == 2 && !vars->player->fire_done)
-		{
-			vars->player->fire_done = 1;
-			frame_count = 0;
-		}
-        if (frame_count == 4) // Stop after 3 frames
-        {
-            vars->player->shoot = 0; // Reset shooting flag
-            frame_count = 0;       // Reset frame counter
-            return (0);
-        }
-		if (vars->player->fire_done)
-        	update_sprite_frame(vars->player->gun);
-        draw_map(vars);
-		if (!vars->player->fire_done)
-		{
-			draw_fire(vars, 4.0);
-			update_sprite_frame(vars->player->fire);
-		}
-        mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, vars->image->mlx_img, 0, 0);
-        frame_count++;
-    }
+    // if (elapsed_time % 10 == 0)
+    // {
+	if (frame_count == 2 && !vars->player->fire_done)
+	{
+		vars->player->fire_done = 1;
+		frame_count = 0;
+	}
+	if (frame_count == 4) // Stop after 3 frames
+	{
+		vars->player->shoot = 0; // Reset shooting flag
+		frame_count = 0;       // Reset frame counter
+		return (0);
+	}
+	if (vars->player->fire_done)
+		update_sprite_frame(vars->player->gun);
+	draw_map(vars);
+	if (!vars->player->fire_done)
+	{
+		draw_fire(vars, 4.0);
+		update_sprite_frame(vars->player->fire);
+	}
+	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, vars->image->mlx_img, 0, 0);
+	frame_count++;
+    // }
     return (0);
 }
 
@@ -154,17 +154,17 @@ void	handle_key(int keycode, t_vars *vars)
 		y = vars->player->y / vars->unit_size;
 		toggle_door(vars, x, y);
 	}
-	check_move_player(keycode, vars);
+	update_position(vars);
 }
 
-int	key_hook(int keycode, t_vars *vars)
-{
-	if (keycode == ESCAPE)
-		free_and_exit(vars);
-	else
-	{
-		handle_key(keycode, vars);
-		animate_shooting(vars);
-	}
-	return (0);
-}
+// int	key_hook(int keycode, t_vars *vars)
+// {
+// 	if (keycode == ESCAPE)
+// 		free_and_exit(vars);
+// 	else
+// 	{
+// 		handle_key(keycode, vars);
+// 		animate_shooting(vars);
+// 	}
+// 	return (0);
+// }

@@ -12,6 +12,44 @@
 
 #include "../cub3d.h"
 
+int	key_press(int keycode, t_vars *vars)
+{
+	if (keycode == ESCAPE)
+		free_and_exit(vars);
+	if (keycode == W)
+		vars->keys.w = 1;
+	if (keycode == S)
+		vars->keys.s = 1;
+	if (keycode == A)
+		vars->keys.a = 1;
+	if (keycode == D)
+		vars->keys.d = 1;
+	if (keycode == KEY_LEFT)
+		vars->keys.left = 1;
+	if (keycode == KEY_RIGHT)
+		vars->keys.right = 1;
+	return (0);
+}
+
+int	key_up(int keycode, t_vars *vars)
+{
+	if (keycode == ESCAPE)
+		free_and_exit(vars);
+	if (vars->keys.w == 1)
+		vars->keys.w = 0;
+	if (keycode == S)
+		vars->keys.s = 0;
+	if (keycode == A)
+		vars->keys.a = 0;
+	if (keycode == D)
+		vars->keys.d = 0;
+	if (keycode == KEY_LEFT)
+		vars->keys.left = 0;
+	if (keycode == KEY_RIGHT)
+		vars->keys.right = 0;
+	return (0);
+}
+
 int	main_loop_hook(t_vars *vars)
 {
 	struct timeval t;
@@ -19,12 +57,13 @@ int	main_loop_hook(t_vars *vars)
 
 	get_current_time(&t);
 	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
-	printf("before render: %f", abc);
-	// if (vars->player->shoot)
-	// 	animate_shooting(vars);
+	// printf("before render: %f", abc);
+	update_position(vars);
 	draw_sprite(vars);
+	if (vars->player->shoot)
+		animate_shooting(vars);
 	get_current_time(&t);
-	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
+	//printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
 	return (0);
 }
 
@@ -40,8 +79,10 @@ void	run_screen(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
 	//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
+	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
+	mlx_hook(vars->mlx->win, 3, 1L << 1, key_up, vars);
 	mlx_mouse_hook(vars->mlx->win, shoot_this_shit, vars);
-	mlx_hook(vars->mlx->win, 2, 1L << 0, key_hook, vars);
+	//mlx_hook(vars->mlx->win, 2, 1L << 0, key_hook, vars);
 	mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_loop_hook(vars->mlx->mlx, main_loop_hook, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
