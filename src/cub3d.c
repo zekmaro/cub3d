@@ -101,6 +101,7 @@ void	run_screen(t_vars *vars)
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
+	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
 	mlx_hook(vars->mlx->win, 3, 1L << 1, key_up, vars);
 	mlx_mouse_hook(vars->mlx->win, shoot_this_shit, vars);
