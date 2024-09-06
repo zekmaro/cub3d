@@ -70,7 +70,7 @@ void	update_sprite_frame(t_img *sprite)
 
 int	draw_sprite(t_vars *vars)
 {
-	//update_sprite_frame(vars->imp->move_animation);
+	//update_sprite_frame(vars->animated_sprite);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
