@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <mlx.h>
 
 long	update_imp_time(t_vars *vars)
 {
@@ -73,7 +72,7 @@ int	main_loop_hook(t_vars *vars)
 	long imp_elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
 	if (imp_elapsed_time > 200)
 	{
-		if (vars->imp->current_animation == vars->imp->death_animation && vars->imp->current_animation->current_frame == 3)
+		if (vars->imp->current_animation == vars->imp->death_animation && vars->imp->current_animation->current_frame == 4)
 		{
 			//printf("%d \n",vars->imp->current_animation->frame_count);
 			vars->imp->is_dead = 1;

@@ -182,7 +182,7 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/imp_dies2.xpm",
 		"./assets/imp_dies3.xpm",
 		"./assets/imp_dies4.xpm",
-		//"./assets/imp_dies5.xpm",
+		"./assets/imp_dies5.xpm",
 	};
 	const char *gun_frames[] \
 	= {
@@ -221,7 +221,7 @@ void	initialise_sprites(t_vars *vars)
 		free_and_exit(vars);
 	}
 	load_animated_sprite(vars, vars->imp->move_animation, imp_movement_frames, 4);
-	load_animated_sprite(vars, vars->imp->death_animation, imp_death_frames, 4);
+	load_animated_sprite(vars, vars->imp->death_animation, imp_death_frames, 5);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	vars->imp->current_animation = vars->imp->move_animation;
