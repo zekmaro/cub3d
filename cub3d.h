@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 16:18:40 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/04 01:28:45 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define D 100
 # define S 115
 # define A 97
+# define MOUSE_CLICK_LEFT 1
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_UP 65362
@@ -115,6 +116,8 @@ typedef struct s_img
 	int			current_frame;
 	void		*current_frame_ptr;
 	void		**frames;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_mlx
@@ -148,6 +151,8 @@ typedef struct s_ray
 	double	last_ray_y;
 	double	ray_dir_x;
 	double	ray_dir_y;
+	double	ray_monster_x;
+	double	ray_monster_y;
 	double	ray_angle;
 	double	distance_to_wall;
 	int		line_height;
@@ -166,7 +171,35 @@ typedef struct s_player
 	int		center_x;
 	int		center_y;
 	double	angle;
+	double	plane_x;
+    double	plane_y;
+	double	dir_x;
+    double	dir_y;
+	int		shoot;
+	t_img	*gun;
+	t_img	*fire;
+	int		fire_done;
 }	t_player;
+
+typedef struct s_sprite
+{
+	int		x;
+	int		y;
+	int		distance;
+	int		screen_x;
+	int		width;
+	int		height;
+}	t_sprite;
+
+typedef struct s_keys
+{
+	int w;
+	int a;
+	int s;
+	int d;
+	int left;
+	int right;
+}	t_keys;
 
 typedef struct s_vars
 {
@@ -179,8 +212,15 @@ typedef struct s_vars
 	t_ray			*ray;
 	t_img			*textures[5];
 	t_img			*animated_sprite;
+	int				is_monster;
 	struct timeval	program_start;
 	struct timeval	current_time;
+	int				*zbuffer;
+	int				*sprite_order;
+	t_sprite		*sprites;
+	t_img			*sprite_texture;
+	int				num_sprites;
+	t_keys			keys;
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
@@ -202,6 +242,14 @@ void		draw_ceiling(t_vars *vars);
 void		draw_map(t_vars *vars);
 void		draw_minimap(t_vars *vars);
 
+/* Drawing.c */
+void	rotate_around_point(t_vars *vars, int *x, int *y);
+void	draw_map(t_vars *vars);
+void	draw_floor(t_vars *vars);
+void	draw_ceiling(t_vars *vars);
+void	draw_fire(t_vars *vars, double scale);
+void	draw_gun(t_vars *vars, double scale);
+
 /* Free_memory_utils.c */
 void		free_memory(char **arr);
 void		free_map(t_map *map);
@@ -221,14 +269,27 @@ void		free_vars_mlx(t_vars *vars);
 void		free_vars_line(t_vars *vars);
 void		free_vars_ray(t_vars *vars);
 
+/* Free_vars.c */
+void	free_vars_map(t_vars *vars);
+void	free_vars_image(t_vars *vars);
+void	free_vars_player(t_vars *vars);
+void	free_vars_mlx(t_vars *vars);
+void	free_vars_line(t_vars *vars);
+void	free_vars_sprites(t_vars *vars);
+void	free_vars_zbuffer(t_vars *vars);
+
 /* Handle_image.c */
 void		put_pixel_to_image(t_vars *vars, int x, int y, int color);
 void		clean_screen(t_vars *vars);
 void		get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 
 /* Handle_keys.c */
-int			mouse_move(int x, int y, t_vars *vars);
-int			key_hook(int keycode, t_vars *vars);
+void reset_mouse_to_center(t_vars *vars);
+int		mouse_move(int x, int y, t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
+int	animate_shooting(t_vars *vars);
+void	update_position(t_vars *vars);
+int	shoot_this_shit(int button, int x, int y, t_vars *vars);
 
 /* Init_components.c */
 void		initialise_mlx(t_vars *vars);
@@ -261,7 +322,7 @@ void		get_current_time(struct timeval *time);
 
 /* Raycasting.c */
 void		get_ray_target_coords(t_vars *vars);
-void		setup_ray(t_vars *vars);
+void	setup_ray(t_vars *vars, double ray_x, double ray_y);
 t_tex_typ	define_texture_type(t_vars *vars);
 void		cast_ray(t_vars *vars, int ray_id);
 void		raycast(t_vars *vars);
@@ -275,11 +336,11 @@ int			get_map_y(t_vars *vars);
 void		draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index);
 
 /* Sprites.c */
-void		load_animated_sprite(t_vars *vars, t_img *sprite, \
-				const char **file_paths, int frame_count);
-void		update_sprite_frame(t_img *sprite);
-void		put_enemy_on_screen(t_vars *vars);
-int			draw_sprite(t_vars *vars);
+void	load_animated_sprite(t_vars *vars, t_img *sprite, \
+			const char **file_paths, int frame_count);
+void	update_sprite_frame(t_img *sprite);
+void	put_enemy_on_screen(t_vars *vars);
+int		draw_sprite(t_vars *vars);
 
 /* Doors */
 int			is_door(t_vars *vars, int x, int y);
@@ -294,5 +355,4 @@ void		handle_wall(t_vars *vars, int ray_id, int y, int color);
 void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
-
 #endif // CUB3D_H

@@ -44,6 +44,11 @@ int	validate_line(char *line, int row, t_map *map)
 			map->player_y = row;
 			map->player_dir = line[i];
 		}
+		else if (line[i] == 'M')
+		{
+			map->monster_x = i;
+			map->monster_y = row;
+		}
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
 			return (printf("world\n"), 0);
 		i++;
