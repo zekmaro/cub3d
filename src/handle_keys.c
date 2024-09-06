@@ -109,6 +109,7 @@ void	check_imp_collision(t_vars *vars)
 	}
 	if (imp_flag)
 	{
+		system("aplay ./assets/imp_pain.wav -q &");
 		vars->imp->health -= 50;
 	}
 	if (vars->imp->health == 0)
