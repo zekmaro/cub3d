@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/04 01:29:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:06:41 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,26 @@ void	initialise_textures(t_vars *vars)
 
 void load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_path)
 {
-    int width;
-    int height;
+	int	width;
+	int	height;
 
-    sprite_texture->mlx_img = mlx_xpm_file_to_image(vars->mlx->mlx, (char *)file_path, &width, &height);
-    if (!sprite_texture->mlx_img)
-    {
-        perror("Failed to load sprite texture");
-        free_and_exit(vars);
-    }
-    sprite_texture->addr = mlx_get_data_addr(sprite_texture->mlx_img, &sprite_texture->bits_per_pixel, &sprite_texture->line_len, &sprite_texture->endian);
-    if (!sprite_texture->addr)
-    {
-        perror("Failed to get sprite texture data address");
-        free_and_exit(vars);
-    }
-    sprite_texture->width = width;
-    sprite_texture->height = height;
+	sprite_texture->mlx_img = mlx_xpm_file_to_image(vars->mlx->mlx, \
+		(char *)file_path, &width, &height);
+	if (!sprite_texture->mlx_img)
+	{
+		perror("Failed to load sprite texture");
+		free_and_exit(vars);
+	}
+	sprite_texture->addr = mlx_get_data_addr(sprite_texture->mlx_img, \
+		&sprite_texture->bits_per_pixel, &sprite_texture->line_len, \
+		&sprite_texture->endian);
+	if (!sprite_texture->addr)
+	{
+		perror("Failed to get sprite texture data address");
+		free_and_exit(vars);
+	}
+	sprite_texture->width = width;
+	sprite_texture->height = height;
 }
 
 void	initialise_sprites(t_vars *vars)
