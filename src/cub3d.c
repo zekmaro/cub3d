@@ -73,6 +73,11 @@ int	main_loop_hook(t_vars *vars)
 	long imp_elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
 	if (imp_elapsed_time > 200)
 	{
+		if (vars->imp->current_animation == vars->imp->death_animation && vars->imp->current_animation->current_frame == 3)
+		{
+			//printf("%d \n",vars->imp->current_animation->frame_count);
+			vars->imp->is_dead = 1;
+		}
 		update_sprite_frame(vars->imp->current_animation);
 		vars->imp->time0 = vars->imp->time1;
 	}
@@ -80,11 +85,6 @@ int	main_loop_hook(t_vars *vars)
 	draw_sprite(vars);
 	if (vars->player->shoot)
 		animate_shooting(vars);
-	if (vars->imp->current_animation == vars->imp->death_animation && vars->imp->current_animation->current_frame == 3)
-	{
-		//printf("%d \n",vars->imp->current_animation->frame_count);
-		vars->imp->is_dead = 1;
-	}
 	get_current_time(&t);
 	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
 	return (0);
