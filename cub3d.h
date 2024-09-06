@@ -201,6 +201,17 @@ typedef struct s_keys
 	int		right;
 }	t_keys;
 
+typedef struct s_imp
+{
+	int health;
+	int damage;
+	t_img	*move_animation;
+	t_img	*death_animation;
+	t_img	*attack_animation;
+	struct timeval time0;
+	struct timeval time1;
+}	t_imp;
+
 typedef struct s_vars
 {
 	int				unit_size;
@@ -209,6 +220,7 @@ typedef struct s_vars
 	t_mlx			*mlx;
 	t_line			*line;
 	t_player		*player;
+	t_imp			*imp;
 	t_ray			*ray;
 	t_img			*textures[5];
 	t_img			*animated_sprite;
@@ -274,7 +286,6 @@ void		free_vars_map(t_vars *vars);
 void		free_vars_image(t_vars *vars);
 void		free_vars_player(t_vars *vars);
 void		free_vars_mlx(t_vars *vars);
-void		free_vars_line(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 void		free_vars_zbuffer(t_vars *vars);
 

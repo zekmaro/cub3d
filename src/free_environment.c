@@ -34,31 +34,37 @@ void	free_vars_textures(t_vars *vars)
 	}
 }
 
-void	free_vars_sprites(t_vars *vars)
+void	free_vars_line(t_vars *vars)
 {
-	int		i;
-	t_img	*temp;
-
-	if (vars->animated_sprite)
-	{
-		if (vars->animated_sprite->frames)
-		{
-			i = -1;
-			while (++i < vars->animated_sprite->frame_count)
-			{
-				if (vars->animated_sprite->frames[i])
-				{
-					temp = (t_img *)vars->animated_sprite->frames[i];
-					free(temp->mlx_img);
-					free(vars->animated_sprite->frames[i]);
-				}
-			}
-			free(vars->animated_sprite->frames);
-		}
-		free(vars->animated_sprite);
-		vars->animated_sprite = NULL;
-	}
+	if (vars->line)
+		free(vars->line);
 }
+
+// void	free_vars_sprites(t_vars *vars)
+// {
+// 	int		i;
+// 	t_img	*temp;
+
+// 	if (vars->animated_sprite)
+// 	{
+// 		if (vars->animated_sprite->frames)
+// 		{
+// 			i = -1;
+// 			while (++i < vars->animated_sprite->frame_count)
+// 			{
+// 				if (vars->animated_sprite->frames[i])
+// 				{
+// 					temp = (t_img *)vars->animated_sprite->frames[i];
+// 					free(temp->mlx_img);
+// 					free(vars->animated_sprite->frames[i]);
+// 				}
+// 			}
+// 			free(vars->animated_sprite->frames);
+// 		}
+// 		free(vars->animated_sprite);
+// 		vars->animated_sprite = NULL;
+// 	}
+// }
 
 void	free_vars_zbuffer(t_vars *vars)
 {

@@ -108,8 +108,8 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/gunfire1.xpm",
 		"./assets/gunfire2.xpm",
 	};
-	vars->animated_sprite = ft_calloc(sizeof(t_img), 1);
-	if (!vars->animated_sprite)
+	vars->imp->move_animation = ft_calloc(sizeof(t_img), 1);
+	if (!vars->imp->move_animation)
 	{
 		perror("Failed to allocate memory for animated sprite");
 		free_and_exit(vars);
@@ -126,7 +126,7 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for gun sprite");
 		free_and_exit(vars);
 	}
-	load_animated_sprite(vars, vars->animated_sprite, sprite_frames, 4);
+	load_animated_sprite(vars, vars->imp->move_animation, sprite_frames, 4);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 }
@@ -154,6 +154,11 @@ void	initialise_zbuffer(t_vars *vars)
 	}
 }
 
+void	init_imp(t_vars *vars)
+{
+	vars->imp = ft_calloc(sizeof(t_imp), 1);
+}
+
 void	initialise_vars(t_vars *vars)
 {
 	vars->unit_size = 64;
@@ -165,4 +170,5 @@ void	initialise_vars(t_vars *vars)
 	initialise_ray(vars);
 	initialise_player(vars);	
 	initialise_zbuffer(vars);
+	init_imp(vars);
 }

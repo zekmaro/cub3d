@@ -48,12 +48,6 @@ void	free_vars_mlx(t_vars *vars)
 	}
 }
 
-void	free_vars_line(t_vars *vars)
-{
-	if (vars->line)
-		free(vars->line);
-}
-
 void	free_vars_ray(t_vars *vars)
 {
 	if (vars->ray)
