@@ -65,28 +65,28 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 	}
 }
 
-void	check_move_player(int keycode, t_vars *vars)
+void	update_position(t_vars *vars)
 {
 	int	move_x;
 	int	move_y;
 
 	move_x = 8;
 	move_y = 8;
-	if (keycode == W)
+	if (vars->keys.w == 1)
 		move_player(vars, move_y * sin(vars->player->angle), \
 			move_x * cos(vars->player->angle));
-	else if (keycode == S)
+	else if (vars->keys.s == 1)
 		move_player(vars, -move_y * sin(vars->player->angle), \
 			-move_x * cos(vars->player->angle));
-	else if (keycode == D)
+	else if (vars->keys.d == 1)
 		move_player(vars, move_y * cos(vars->player->angle), \
 			-move_x * sin(vars->player->angle));
-	else if (keycode == A)
+	else if (vars->keys.a == 1)
 		move_player(vars, -move_y * cos(vars->player->angle), \
 			move_x * sin(vars->player->angle));
-	else if (keycode == KEY_LEFT)
+	else if (vars->keys.left == 1)
 		vars->player->angle -= M_PI / 90;
-	else if (keycode == KEY_RIGHT)
+	else if (vars->keys.right == 1)
 		vars->player->angle += M_PI / 90;
 }
 
@@ -143,19 +143,19 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 	return (0);             
 }
 
-void	handle_key(int keycode, t_vars *vars)
-{
-	check_move_player(keycode, vars);
-}
+// void	handle_key(int keycode, t_vars *vars)
+// {
+// 	check_move_player(keycode, vars);
+// }
 
-int	key_hook(int keycode, t_vars *vars)
-{
-	if (keycode == ESCAPE)
-		free_and_exit(vars);
-	else
-	{
-		handle_key(keycode, vars);
-		animate_shooting(vars);
-	}
-	return (0);
-}
+// int	key_hook(int keycode, t_vars *vars)
+// {
+// 	if (keycode == ESCAPE)
+// 		free_and_exit(vars);
+// 	else
+// 	{
+// 		handle_key(keycode, vars);
+// 		animate_shooting(vars);
+// 	}
+// 	return (0);
+// }

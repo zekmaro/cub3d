@@ -164,6 +164,16 @@ typedef struct s_sprite
 	int		height;
 }	t_sprite;
 
+typedef struct s_keys
+{
+	int w;
+	int a;
+	int s;
+	int d;
+	int left;
+	int right;
+}	t_keys;
+
 typedef struct s_vars
 {
 	int				unit_size;
@@ -183,6 +193,7 @@ typedef struct s_vars
 	t_sprite		*sprites;
 	t_img			*sprite_texture;
 	int				num_sprites;
+	t_keys			keys;
 }	t_vars;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
@@ -224,6 +235,7 @@ void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 void reset_mouse_to_center(t_vars *vars);
 int		mouse_move(int x, int y, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
+void	update_position(t_vars *vars);
 int	shoot_this_shit(int button, int x, int y, t_vars *vars);
 
 /* Inits.c */
