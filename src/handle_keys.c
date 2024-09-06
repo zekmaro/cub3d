@@ -90,6 +90,35 @@ void	update_position(t_vars *vars)
 		vars->player->angle += M_PI / 90;
 }
 
+void	check_imp_collision(t_vars *vars)
+{
+	double	ray_x;
+	double	ray_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	ray_angle;
+	int imp_flag = 0;
+
+	ray_angle = vars->player->angle;
+	ray_x = vars->player->center_x;
+	ray_y = vars->player->center_y;
+	ray_dir_x = ray_x;
+	ray_dir_y = ray_y;
+	while (!is_wall(vars, ray_dir_y, ray_dir_x) && !imp_flag)
+	{
+		ray_dir_x += cos(ray_angle);
+		ray_dir_y += sin(ray_angle);
+		imp_flag = is_imp(vars, ray_dir_y, ray_dir_x);
+	}
+	if (imp_flag)
+	{
+		vars->imp->health -= 50;
+	}
+	if (vars->imp->health == 0)
+	{
+		vars->imp->current_animation = vars->imp->death_animation;
+	}
+}
 
 int	animate_shooting(t_vars *vars)
 {
@@ -102,8 +131,6 @@ int	animate_shooting(t_vars *vars)
     get_current_time(&vars->current_time);
     elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 
-    // if (elapsed_time % 10 == 0)
-    // {
 	if (frame_count == 2 && !vars->player->fire_done)
 	{
 		vars->player->fire_done = 1;
@@ -125,7 +152,6 @@ int	animate_shooting(t_vars *vars)
 	}
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, vars->image->mlx_img, 0, 0);
 	frame_count++;
-    // }
     return (0);
 }
 
@@ -139,6 +165,7 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 		system("aplay ./assets/gunshot.wav -q &");
 		vars->player->shoot = 1;
 		vars->player->fire_done = 0;
+		check_imp_collision(vars);
 	}
 	return (0);             
 }

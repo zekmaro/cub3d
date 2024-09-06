@@ -178,9 +178,11 @@ typedef struct s_imp
 {
 	int health;
 	int damage;
+	int	is_dead;
 	t_img	*move_animation;
 	t_img	*death_animation;
 	t_img	*attack_animation;
+	t_img	*current_animation;
 	struct timeval time0;
 	struct timeval time1;
 }	t_imp;
@@ -259,6 +261,7 @@ int		read_map(int fd, t_map *map, char *file_name);
 
 /* Utils.c */
 void	print_map(t_map *map);
+int		is_imp(t_vars *vars, int y, int x);
 int		is_wall(t_vars *vars, int y, int x);
 int		player_inside_map(t_vars *vars, int x, int y);
 int		can_move(t_vars *vars, int y, int x);

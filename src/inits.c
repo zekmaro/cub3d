@@ -169,12 +169,20 @@ void	initialise_sprites(t_vars *vars)
         free_and_exit(vars);
     }
     load_sprite_texture(vars, vars->sprite_texture, "./assets/lamp.xpm");
-	const char *sprite_frames[] \
+	const char *imp_movement_frames[] \
 	= {
 		"./assets/tile000.xpm",
 		"./assets/tile001.xpm",
 		"./assets/tile002.xpm",
 		"./assets/tile003.xpm"
+	};
+	const char *imp_death_frames[] \
+	= {
+		"./assets/imp_dies1.xpm",
+		"./assets/imp_dies2.xpm",
+		"./assets/imp_dies3.xpm",
+		"./assets/imp_dies4.xpm",
+		//"./assets/imp_dies5.xpm",
 	};
 	const char *gun_frames[] \
 	= {
@@ -194,6 +202,12 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for animated sprite");
 		free_and_exit(vars);
 	}
+	vars->imp->death_animation = ft_calloc(sizeof(t_img), 1);
+	if (!vars->imp->death_animation)
+	{
+		perror("Failed to allocate memory for animated sprite");
+		free_and_exit(vars);
+	}
 	vars->player->gun = ft_calloc(sizeof(t_img), 1);
 	if (!vars->player->gun)
 	{
@@ -206,9 +220,11 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for gun sprite");
 		free_and_exit(vars);
 	}
-	load_animated_sprite(vars, vars->imp->move_animation, sprite_frames, 4);
+	load_animated_sprite(vars, vars->imp->move_animation, imp_movement_frames, 4);
+	load_animated_sprite(vars, vars->imp->death_animation, imp_death_frames, 4);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
+	vars->imp->current_animation = vars->imp->move_animation;
 }
 
 void	initialise_zbuffer(t_vars *vars)
@@ -224,6 +240,12 @@ void	initialise_zbuffer(t_vars *vars)
 void	init_imp(t_vars *vars)
 {
 	vars->imp = ft_calloc(sizeof(t_imp), 1);
+	if (!vars->imp)
+	{
+		perror("Failed to allocate memory for Imp");
+		free_and_exit(vars);
+	}
+	vars->imp->health = 100;
 }
 
 void	initialise_vars(t_vars *vars)
