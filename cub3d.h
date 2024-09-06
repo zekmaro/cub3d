@@ -205,9 +205,11 @@ typedef struct s_imp
 {
 	int health;
 	int damage;
+	int	is_dead;
 	t_img	*move_animation;
 	t_img	*death_animation;
 	t_img	*attack_animation;
+	t_img	*current_animation;
 	struct timeval time0;
 	struct timeval time1;
 }	t_imp;
@@ -320,31 +322,21 @@ void		initialise_vars(t_vars *vars);
 /* Parsing.c */
 int			read_map(int fd, t_map *map, char *file_name);
 
-/* Map_utils.c */
-void		print_map(t_map *map);
-int			is_wall(t_vars *vars, int y, int x);
-int			player_inside_map(t_vars *vars, int x, int y);
-int			can_move(t_vars *vars, int y, int x);
-int			get_texture_color(t_img *texture, int x, int y);
+/* Utils.c */
+void	print_map(t_map *map);
+int		is_imp(t_vars *vars, int y, int x);
+int		is_wall(t_vars *vars, int y, int x);
+int		player_inside_map(t_vars *vars, int x, int y);
+int		can_move(t_vars *vars, int y, int x);
+int		get_texture_color(t_img *texture, int x, int y);
+long	get_elapsed_time(struct timeval *start, struct timeval *end);
+void	get_current_time(struct timeval *time);
 
-/* Time_utils.c */
-long		get_elapsed_time(struct timeval *start, struct timeval *end);
-void		get_current_time(struct timeval *time);
-
-/* Raycasting.c */
-void		get_ray_target_coords(t_vars *vars);
-void		setup_ray(t_vars *vars, double ray_x, double ray_y);
-t_tex_typ	define_texture_type(t_vars *vars);
-void		cast_ray(t_vars *vars, int ray_id);
-void		raycast(t_vars *vars);
-
-/* Ray_drawing.c */
-void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \
-				int *tex_x);
-int			is_monster(t_vars *vars, int x, int y);
-int			get_map_x(t_vars *vars);
-int			get_map_y(t_vars *vars);
-void		draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index);
+/* Raycast.c */
+void	cast_ray(t_vars *vars, int ray_id);
+void	raycast(t_vars *vars);
+void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x);
+int		is_monster(t_vars *vars, int x, int y);
 
 /* Sprites.c */
 void		load_animated_sprite(t_vars *vars, t_img *sprite, \
