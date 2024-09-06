@@ -75,18 +75,18 @@ void	update_position(t_vars *vars)
 	if (vars->keys.w == 1)
 		move_player(vars, move_y * sin(vars->player->angle), \
 			move_x * cos(vars->player->angle));
-	else if (vars->keys.s == 1)
+	if (vars->keys.s == 1)
 		move_player(vars, -move_y * sin(vars->player->angle), \
 			-move_x * cos(vars->player->angle));
-	else if (vars->keys.d == 1)
+	if (vars->keys.d == 1)
 		move_player(vars, move_y * cos(vars->player->angle), \
 			-move_x * sin(vars->player->angle));
-	else if (vars->keys.a == 1)
+	if (vars->keys.a == 1)
 		move_player(vars, -move_y * cos(vars->player->angle), \
 			move_x * sin(vars->player->angle));
-	else if (vars->keys.left == 1)
+	if (vars->keys.left == 1)
 		vars->player->angle -= M_PI / 90;
-	else if (vars->keys.right == 1)
+	if (vars->keys.right == 1)
 		vars->player->angle += M_PI / 90;
 }
 

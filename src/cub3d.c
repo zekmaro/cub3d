@@ -13,6 +13,16 @@
 #include "../cub3d.h"
 #include <mlx.h>
 
+long	update_imp_time(t_vars *vars)
+{
+	long	elapsed_time;
+
+	get_current_time(&vars->imp->time1);
+	elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
+	return (elapsed_time);
+}
+
+
 int	key_press(int keycode, t_vars *vars)
 {
 	if (keycode == ESCAPE)
@@ -57,14 +67,21 @@ int	main_loop_hook(t_vars *vars)
 	double abc;
 
 	get_current_time(&t);
+	get_current_time(&vars->imp->time1);
 	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
 	// printf("before render: %f", abc);
+	long imp_elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
+	if (imp_elapsed_time > 200)
+	{
+		update_sprite_frame(vars->imp->move_animation);
+		vars->imp->time0 = vars->imp->time1;
+	}
 	update_position(vars);
 	draw_sprite(vars);
 	if (vars->player->shoot)
 		animate_shooting(vars);
 	get_current_time(&t);
-	//printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
+	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
 	return (0);
 }
 
@@ -79,11 +96,9 @@ void	run_screen(t_vars *vars)
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
-	//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
 	mlx_hook(vars->mlx->win, 3, 1L << 1, key_up, vars);
 	mlx_mouse_hook(vars->mlx->win, shoot_this_shit, vars);
-	//mlx_hook(vars->mlx->win, 2, 1L << 0, key_hook, vars);
 	mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_loop_hook(vars->mlx->mlx, main_loop_hook, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
@@ -144,6 +159,7 @@ int	main(int argc, char **argv)
 		free_and_exit(&vars);
 	setup_player(&vars);
 	get_current_time(&vars.program_start);
+	get_current_time(&vars.imp->time0);
 	//print_map(vars.map);
 	run_screen(&vars);
 	return (0);

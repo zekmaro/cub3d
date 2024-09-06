@@ -185,7 +185,7 @@ void	handle_sprites(t_vars *vars)
 				int texY = ((d * 63) / spriteHeight) / 256;
 
 				// Get the pixel color from the sprite's texture
-				int color = get_texture_color(vars->animated_sprite->frames[vars->animated_sprite->current_frame], texX, texY);
+				int color = get_texture_color(vars->imp->move_animation->frames[vars->imp->move_animation->current_frame], texX, texY);
 				if (color != -1) {
 					put_pixel_to_image(vars, stripe, y + 50, color);
 
