@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/04 01:28:45 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:04:08 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ typedef struct s_img
 	int			current_frame;
 	void		*current_frame_ptr;
 	void		**frames;
-	int		width;
-	int		height;
+	int			width;
+	int			height;
 }	t_img;
 
 typedef struct s_mlx
@@ -130,17 +130,17 @@ typedef struct s_mlx
 
 typedef struct s_line
 {
-	int	x0;
-	int	y0;
-	int	x1;
-	int	y1;
-	int	src_x;
-	int	src_y;
-	int	dx;
-	int	dy;
-	int	amount_pixels;
-	int	step_x;
-	int	step_y;
+	int		x0;
+	int		y0;
+	int		x1;
+	int		y1;
+	int		src_x;
+	int		src_y;
+	int		dx;
+	int		dy;
+	int		amount_pixels;
+	int		step_x;
+	int		step_y;
 }	t_line;
 
 typedef struct s_ray
@@ -172,9 +172,9 @@ typedef struct s_player
 	int		center_y;
 	double	angle;
 	double	plane_x;
-    double	plane_y;
+	double	plane_y;
 	double	dir_x;
-    double	dir_y;
+	double	dir_y;
 	int		shoot;
 	t_img	*gun;
 	t_img	*fire;
@@ -193,12 +193,12 @@ typedef struct s_sprite
 
 typedef struct s_keys
 {
-	int w;
-	int a;
-	int s;
-	int d;
-	int left;
-	int right;
+	int		w;
+	int		a;
+	int		s;
+	int		d;
+	int		left;
+	int		right;
 }	t_keys;
 
 typedef struct s_vars
@@ -243,12 +243,12 @@ void		draw_map(t_vars *vars);
 void		draw_minimap(t_vars *vars);
 
 /* Drawing.c */
-void	rotate_around_point(t_vars *vars, int *x, int *y);
-void	draw_map(t_vars *vars);
-void	draw_floor(t_vars *vars);
-void	draw_ceiling(t_vars *vars);
-void	draw_fire(t_vars *vars, double scale);
-void	draw_gun(t_vars *vars, double scale);
+void		rotate_around_point(t_vars *vars, int *x, int *y);
+void		draw_map(t_vars *vars);
+void		draw_floor(t_vars *vars);
+void		draw_ceiling(t_vars *vars);
+void		draw_fire(t_vars *vars, double scale);
+void		draw_gun(t_vars *vars, double scale);
 
 /* Free_memory_utils.c */
 void		free_memory(char **arr);
@@ -270,13 +270,13 @@ void		free_vars_line(t_vars *vars);
 void		free_vars_ray(t_vars *vars);
 
 /* Free_vars.c */
-void	free_vars_map(t_vars *vars);
-void	free_vars_image(t_vars *vars);
-void	free_vars_player(t_vars *vars);
-void	free_vars_mlx(t_vars *vars);
-void	free_vars_line(t_vars *vars);
-void	free_vars_sprites(t_vars *vars);
-void	free_vars_zbuffer(t_vars *vars);
+void		free_vars_map(t_vars *vars);
+void		free_vars_image(t_vars *vars);
+void		free_vars_player(t_vars *vars);
+void		free_vars_mlx(t_vars *vars);
+void		free_vars_line(t_vars *vars);
+void		free_vars_sprites(t_vars *vars);
+void		free_vars_zbuffer(t_vars *vars);
 
 /* Handle_image.c */
 void		put_pixel_to_image(t_vars *vars, int x, int y, int color);
@@ -284,12 +284,12 @@ void		clean_screen(t_vars *vars);
 void		get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 
 /* Handle_keys.c */
-void reset_mouse_to_center(t_vars *vars);
-int		mouse_move(int x, int y, t_vars *vars);
-int		key_hook(int keycode, t_vars *vars);
-int	animate_shooting(t_vars *vars);
-void	update_position(t_vars *vars);
-int	shoot_this_shit(int button, int x, int y, t_vars *vars);
+void		reset_mouse_to_center(t_vars *vars);
+int			mouse_move(int x, int y, t_vars *vars);
+int			key_hook(int keycode, t_vars *vars);
+int			animate_shooting(t_vars *vars);
+void		update_position(t_vars *vars);
+int			shoot_this_shit(int button, int x, int y, t_vars *vars);
 
 /* Init_components.c */
 void		initialise_mlx(t_vars *vars);
@@ -322,7 +322,7 @@ void		get_current_time(struct timeval *time);
 
 /* Raycasting.c */
 void		get_ray_target_coords(t_vars *vars);
-void	setup_ray(t_vars *vars, double ray_x, double ray_y);
+void		setup_ray(t_vars *vars, double ray_x, double ray_y);
 t_tex_typ	define_texture_type(t_vars *vars);
 void		cast_ray(t_vars *vars, int ray_id);
 void		raycast(t_vars *vars);
@@ -336,11 +336,11 @@ int			get_map_y(t_vars *vars);
 void		draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index);
 
 /* Sprites.c */
-void	load_animated_sprite(t_vars *vars, t_img *sprite, \
-			const char **file_paths, int frame_count);
-void	update_sprite_frame(t_img *sprite);
-void	put_enemy_on_screen(t_vars *vars);
-int		draw_sprite(t_vars *vars);
+void		load_animated_sprite(t_vars *vars, t_img *sprite, \
+				const char **file_paths, int frame_count);
+void		update_sprite_frame(t_img *sprite);
+void		put_enemy_on_screen(t_vars *vars);
+int			draw_sprite(t_vars *vars);
 
 /* Doors */
 int			is_door(t_vars *vars, int x, int y);
