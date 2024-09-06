@@ -91,10 +91,10 @@ void	initialise_sprites(t_vars *vars)
 	load_sprite_texture(vars, vars->sprite_texture, "./assets/lamp.xpm");
 	const char *imp_movement_frames[] \
 	= {
-		"./assets/tile000.xpm",
-		"./assets/tile001.xpm",
-		"./assets/tile002.xpm",
-		"./assets/tile003.xpm"
+		"./assets/imp_walk1.xpm",
+		"./assets/imp_walk2.xpm",
+		"./assets/imp_walk3.xpm",
+		"./assets/imp_walk4.xpm"
 	};
 	const char *imp_death_frames[] \
 	= {

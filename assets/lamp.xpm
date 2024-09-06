@@ -1,5 +1,5 @@
 /* XPM */
-static char *d69b4d482fda4b28ab988fe09fd4f1542UP6K7tBOpcNqkXP[] = {
+static char *lamp[] = {
 /* columns rows colors chars-per-pixel */
 "27 51 38 1 ",
 "  c magenta",
