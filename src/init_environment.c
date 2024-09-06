@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/06 13:06:41 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/06 18:34:45 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	initialise_textures(t_vars *vars)
 	load_texture(vars, TEXTURE_EAST, "./assets/wall4.xpm");
 }
 
-void load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_path)
+void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_path)
 {
 	int	width;
 	int	height;
@@ -75,20 +75,20 @@ void load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_p
 
 void	initialise_sprites(t_vars *vars)
 {
-    vars->num_sprites = 1;
-    vars->sprites = ft_calloc(sizeof(t_sprite), vars->num_sprites);
-    if (!vars->sprites)
-    {
-        perror("Failed to allocate memory for sprites");
-        free_and_exit(vars);
-    }
-    vars->sprite_texture = ft_calloc(sizeof(t_img), 1);
-    if (!vars->sprite_texture)
-    {
-        perror("Failed to allocate memory for sprite texture");
-        free_and_exit(vars);
-    }
-    load_sprite_texture(vars, vars->sprite_texture, "./assets/lamp.xpm");
+	vars->num_sprites = 1;
+	vars->sprites = ft_calloc(sizeof(t_sprite), vars->num_sprites);
+	if (!vars->sprites)
+	{
+		perror("Failed to allocate memory for sprites");
+		free_and_exit(vars);
+	}
+	vars->sprite_texture = ft_calloc(sizeof(t_img), 1);
+	if (!vars->sprite_texture)
+	{
+		perror("Failed to allocate memory for sprite texture");
+		free_and_exit(vars);
+	}
+	load_sprite_texture(vars, vars->sprite_texture, "./assets/lamp.xpm");
 	const char *imp_movement_frames[] \
 	= {
 		"./assets/tile000.xpm",
@@ -190,7 +190,7 @@ void	initialise_vars(t_vars *vars)
 	initialise_mlx(vars);
 	initialise_line(vars);
 	initialise_ray(vars);
-	initialise_player(vars);	
+	initialise_player(vars);
 	initialise_zbuffer(vars);
 	init_imp(vars);
 }

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/06 13:04:08 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/06 18:30:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,15 +203,15 @@ typedef struct s_keys
 
 typedef struct s_imp
 {
-	int health;
-	int damage;
-	int	is_dead;
-	t_img	*move_animation;
-	t_img	*death_animation;
-	t_img	*attack_animation;
-	t_img	*current_animation;
-	struct timeval time0;
-	struct timeval time1;
+	int				health;
+	int				damage;
+	int				is_dead;
+	t_img			*move_animation;
+	t_img			*death_animation;
+	t_img			*attack_animation;
+	t_img			*current_animation;
+	struct timeval	time0;
+	struct timeval	time1;
 }	t_imp;
 
 typedef struct s_vars
@@ -323,20 +323,21 @@ void		initialise_vars(t_vars *vars);
 int			read_map(int fd, t_map *map, char *file_name);
 
 /* Utils.c */
-void	print_map(t_map *map);
-int		is_imp(t_vars *vars, int y, int x);
-int		is_wall(t_vars *vars, int y, int x);
-int		player_inside_map(t_vars *vars, int x, int y);
-int		can_move(t_vars *vars, int y, int x);
-int		get_texture_color(t_img *texture, int x, int y);
-long	get_elapsed_time(struct timeval *start, struct timeval *end);
-void	get_current_time(struct timeval *time);
+void		print_map(t_map *map);
+int			is_imp(t_vars *vars, int y, int x);
+int			is_wall(t_vars *vars, int y, int x);
+int			player_inside_map(t_vars *vars, int x, int y);
+int			can_move(t_vars *vars, int y, int x);
+int			get_texture_color(t_img *texture, int x, int y);
+long		get_elapsed_time(struct timeval *start, struct timeval *end);
+void		get_current_time(struct timeval *time);
 
 /* Raycast.c */
-void	cast_ray(t_vars *vars, int ray_id);
-void	raycast(t_vars *vars);
-void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x);
-int		is_monster(t_vars *vars, int x, int y);
+void		cast_ray(t_vars *vars, int ray_id);
+void		raycast(t_vars *vars);
+void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \
+				int *tex_x);
+int			is_monster(t_vars *vars, int x, int y);
 
 /* Sprites.c */
 void		load_animated_sprite(t_vars *vars, t_img *sprite, \
@@ -358,4 +359,5 @@ void		handle_wall(t_vars *vars, int ray_id, int y, int color);
 void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
+
 #endif // CUB3D_H
