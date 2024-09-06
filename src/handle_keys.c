@@ -6,44 +6,41 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 13:08:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:50:00 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void reset_mouse_to_center(t_vars *vars)
+void	reset_mouse_to_center(t_vars *vars)
 {
-    // Move the mouse to the center of the screen
-    int center_x = vars->mlx->window_width / 2;
-    int center_y = vars->mlx->window_height / 2;
+	int center_x;
+	int center_y;
 
+	center_x = vars->mlx->window_width / 2;
+	center_y = vars->mlx->window_height / 2;
     mlx_mouse_move(vars->mlx->mlx, vars->mlx->win, center_x, center_y);
 }
 
-int mouse_move(int x, int y, t_vars *vars)
+int	mouse_move(int x, int y, t_vars *vars)
 {
-    int center_x = vars->mlx->window_width / 2;
+	int center_x = vars->mlx->window_width / 2;
 	(void)y;
    // int center_y = vars->mlx->window_height / 2;
-
-    // Calculate how much the mouse moved from the center
-    int dx = x - center_x;
+ 
+	int dx = x - center_x;
     //int dy = y - center_y;
 	// double magnitude;
 
 	// magnitude = sqrt(x * x + y * y);
 	// dx /= magnitude;
     // Update player angle based on mouse movement (dx affects rotation)
-    double rot_speed = 0.002; // Adjust this for desired sensitivity
+	double rot_speed = 0.002; // Adjust this for desired sensitivity
 	
-    vars->player->angle += dx * rot_speed;
+	vars->player->angle += dx * rot_speed;
 	// printf("mouse moved: %d %f\n", dx, vars->player->angle);
-
-    // Reset the mouse back to the center after processing the movement
-    reset_mouse_to_center(vars);
-
-    return (0);
+	reset_mouse_to_center(vars);
+	return (0);
 }
 
 void	move_player(t_vars *vars, int move_y, int move_x)
@@ -77,10 +74,10 @@ void	update_position(t_vars *vars)
 			move_x * cos(vars->player->angle));
 	else if (vars->keys.s == 1)
 		move_player(vars, -move_y * sin(vars->player->angle), \
-			-move_x * cos(vars->player->angle));
+			move_x * cos(vars->player->angle));
 	else if (vars->keys.d == 1)
 		move_player(vars, move_y * cos(vars->player->angle), \
-			-move_x * sin(vars->player->angle));
+			move_x * sin(vars->player->angle));
 	else if (vars->keys.a == 1)
 		move_player(vars, -move_y * cos(vars->player->angle), \
 			move_x * sin(vars->player->angle));
@@ -90,29 +87,26 @@ void	update_position(t_vars *vars)
 		vars->player->angle += M_PI / 90;
 }
 
-
 int	animate_shooting(t_vars *vars)
 {
-	static int frame_count = 0; // Frame counter for animation
+	static int frame_count = 0;
 
-    if (!vars->player->shoot) // Check if animation should continue
-        return (0);
-
-    long elapsed_time;
-    get_current_time(&vars->current_time);
-    elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
-
-    // if (elapsed_time % 10 == 0)
-    // {
+	if (!vars->player->shoot)
+		return (0);
+	long elapsed_time;
+	get_current_time(&vars->current_time);
+	elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
+	// if (elapsed_time % 10 == 0)
+	// {
 	if (frame_count == 2 && !vars->player->fire_done)
 	{
 		vars->player->fire_done = 1;
 		frame_count = 0;
 	}
-	if (frame_count == 4) // Stop after 3 frames
+	if (frame_count == 4)
 	{
-		vars->player->shoot = 0; // Reset shooting flag
-		frame_count = 0;       // Reset frame counter
+		vars->player->shoot = 0;
+		frame_count = 0;
 		return (0);
 	}
 	if (vars->player->fire_done)
@@ -125,8 +119,8 @@ int	animate_shooting(t_vars *vars)
 	}
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, vars->image->mlx_img, 0, 0);
 	frame_count++;
-    // }
-    return (0);
+	// }
+	return (0);
 }
 
 int	shoot_this_shit(int button, int x, int y, t_vars *vars)
@@ -140,7 +134,7 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 		vars->player->shoot = 1;
 		vars->player->fire_done = 0;
 	}
-	return (0);             
+	return (0);
 }
 
 void	handle_key(int keycode, t_vars *vars)
