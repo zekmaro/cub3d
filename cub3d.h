@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 19:51:53 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 23:13:34 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,8 @@ typedef struct s_player
 	int		player_size;
 	int		center_x;
 	int		center_y;
+	int		health;
+	int		is_damaged;
 	double	angle;
 	double	plane_x;
 	double	plane_y;
@@ -191,6 +193,8 @@ typedef struct s_player
 	t_img	*gun;
 	t_img	*fire;
 	int		fire_done;
+	struct timeval time0;
+	struct timeval time1;
 }	t_player;
 
 typedef struct s_sprite
@@ -389,4 +393,5 @@ void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
 
+void	draw_player_damaged(t_vars *vars);
 #endif // CUB3D_H
