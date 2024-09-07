@@ -455,7 +455,7 @@ void	draw_imp_fire_ball(t_vars *vars)
 void	draw_map(t_vars *vars)
 {
 	raycast(vars);
-	draw_door(vars);
+	//draw_door(vars);
 	if (!vars->imp->is_dead)
 		draw_imp(vars);
 	draw_gun(vars, 4.0);
