@@ -69,14 +69,6 @@
 
 # define MAX_DOORS 10
 
-typedef struct s_door
-{
-	int		x;
-	int		y;
-	int		state;
-	double	animation_progress;
-}	t_door;
-
 typedef struct s_pix_inf
 {
 	int	ray_id;
@@ -102,19 +94,6 @@ typedef enum e_tex_typ
 	TEXTURE_NONE
 }	t_tex_typ;
 
-typedef struct s_map
-{
-	char	**grid;
-	int		height;
-	int		width;
-	int		player_x;
-	int		player_y;
-	char	player_dir;
-	int		monster_x;
-	int		monster_y;
-	t_door	*doors;
-	int		num_doors;
-}	t_map;
 
 typedef struct s_img
 {
@@ -131,6 +110,31 @@ typedef struct s_img
 	int			width;
 	int			height;
 }	t_img;
+
+typedef struct s_map
+{
+	char	**grid;
+	int		height;
+	int		width;
+	int		player_x;
+	int		player_y;
+	char	player_dir;
+	int		monster_x;
+	int		monster_y;
+	int		door_x;
+	int		door_y;
+	int		num_doors;
+}	t_map;
+
+typedef struct s_door
+{
+	int		center_x;
+	int		center_y;
+	int		state;
+	double	animation_progress;
+	t_img	*textures;
+}	t_door;
+
 
 typedef struct s_mlx
 {
@@ -197,6 +201,7 @@ typedef struct s_player
 	struct timeval time1;
 }	t_player;
 
+
 typedef struct s_sprite
 {
 	int		x;
@@ -253,6 +258,7 @@ typedef struct s_vars
 	t_player		*player;
 	t_imp			*imp;
 	t_ray			*ray;
+	t_door			*door;
 	t_img			*textures[5];
 	t_img			*animated_sprite;
 	int				is_monster;
@@ -394,4 +400,5 @@ int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
 
 void	draw_player_damaged(t_vars *vars);
+void	draw_door(t_vars *vars);
 #endif // CUB3D_H

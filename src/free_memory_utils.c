@@ -36,16 +36,16 @@ void	free_map(t_map *map)
 		i++;
 	}
 	free(map->grid);
-	if (map->doors)
-	{
-		// i = 0;
-		// while (i < map->num_doors)
-		// {
-		// 	free(map->doors[i]);
-		// 	i++;
-		// }
-		free(map->doors);
-	}
+	// if (map->doors)
+	// {
+	// 	// i = 0;
+	// 	// while (i < map->num_doors)
+	// 	// {
+	// 	// 	free(map->doors[i]);
+	// 	// 	i++;
+	// 	// }
+	// 	free(map->doors);
+	// }
 }
 
 int	free_and_exit(void *param)
@@ -59,7 +59,7 @@ int	free_and_exit(void *param)
 
 void	cleanup_vars(t_vars *vars)
 {
-	free_vars_doors(vars);
+	//free_vars_doors(vars);
 	free_vars_map(vars);
 	free_vars_image(vars);
 	free_vars_mlx(vars);

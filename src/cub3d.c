@@ -12,6 +12,7 @@
 
 #include "../cub3d.h"
 #include <math.h>
+#include <stdio.h>
 
 long	update_imp_time(t_vars *vars)
 {
@@ -172,6 +173,7 @@ void	run_screen(t_vars *vars)
 	get_data_image(vars, vars->image, vars->mlx);
 	initialise_textures(vars);
 	initialise_sprites(vars);
+	draw_door(vars);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
@@ -232,6 +234,14 @@ void	setup_imp(t_vars *vars)
 	vars->imp->fire_ball_y = vars->imp->center_y;
 }
 
+void	setup_door(t_vars *vars)
+{
+	vars->door->center_x = vars->map->door_x * vars->unit_size + vars->unit_size / 2;
+	vars->door->center_y = vars->map->door_y * vars->unit_size + vars->unit_size / 2;
+	printf("door center x: %d\n", vars->door->center_x);
+	printf("door center y: %d\n", vars->door->center_y);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -254,6 +264,7 @@ int	main(int argc, char **argv)
 		free_and_exit(&vars);
 	setup_player(&vars);
 	setup_imp(&vars);
+	setup_door(&vars);
 	get_current_time(&vars.program_start);
 	get_current_time(&vars.imp->time0);
 	//print_map(vars.map);

@@ -181,7 +181,7 @@ void	handle_key(int keycode, t_vars *vars)
 	{
 		x = vars->player->x / vars->unit_size;
 		y = vars->player->y / vars->unit_size;
-		toggle_door(vars, x, y);
+		//toggle_door(vars, x, y);
 	}
 	update_position(vars);
 }

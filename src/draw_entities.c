@@ -262,6 +262,60 @@ void	draw_imp(t_vars *vars)
     }
 }
 
+void	draw_door(t_vars *vars)
+{
+	double dirY = vars->player->dir_y;
+	double dirX = vars->player->dir_x;
+	double planeY = vars->player->plane_y;
+	double planeX = vars->player->plane_x;
+	int spriteX = vars->door->center_x - vars->player->center_x;
+	int spriteY = vars->door->center_y + 32 - vars->player->center_y;
+	t_img *tmp = vars->door->textures->frames[2];
+
+	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
+	
+	double transformX = invDet * (dirY * spriteX - dirX * spriteY);
+	double transformY = invDet * (-planeY * spriteX + planeX * spriteY);
+	
+	int spriteScreenX = (int)((vars->mlx->window_width / 2) * (1 + transformX / transformY));
+	int spriteHeight = abs((int)(vars->mlx->window_height * 64 / transformY));
+	int spriteWidth = abs((int)(vars->mlx->window_height * 128 / transformY));
+
+	int drawStartY = -spriteHeight / 2 + vars->mlx->window_height / 2;
+	if (drawStartY < 0) drawStartY = 0;
+
+	int drawEndY = spriteHeight / 2 + vars->mlx->window_height / 2;
+	if (drawEndY >= vars->mlx->window_height) drawEndY = vars->mlx->window_height - 1;
+
+	int drawStartX = -spriteWidth / 2 + spriteScreenX;
+	if (drawStartX < 0) drawStartX = 0;
+
+	int drawEndX = spriteWidth / 2 + spriteScreenX;
+	if (drawEndX >= vars->mlx->window_width) drawEndX = vars->mlx->window_width - 1;
+
+	//printf("transformY %f transformX %f drawEndY %d drawEndX %d drawStartY %d drawStartX %d \n", transformY, transformX, drawEndY, drawEndX, drawStartY, drawStartX);
+	for (int stripe = drawStartX; stripe < drawEndX; stripe++) {
+	// Calculate the X-coordinate in the sprite's texture
+		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tmp->width / spriteWidth) / 256;
+
+		if (transformY > 0 && stripe > 0 && stripe < vars->mlx->window_width && transformY < vars->zbuffer[stripe]) {
+			for (int y = drawStartY; y < drawEndY; y++) {
+				// Calculate the Y-coordinate in the sprite's texture
+				int d = (y - vars->mlx->window_height / 2 + spriteHeight / 2) * 256;
+				int texY = ((d * tmp->height) / spriteHeight) / 256;
+
+				// Get the pixel color from the sprite's texture
+				int color = get_texture_color(tmp, texX, texY);
+				if (color != -1) {
+					put_pixel_to_image(vars, stripe, y, color);
+
+					vars->zbuffer[stripe] = transformY;
+				}
+			}
+		}
+    }
+}
+
 void	draw_fire(t_vars *vars, double scale)
 {
 
@@ -401,6 +455,7 @@ void	draw_imp_fire_ball(t_vars *vars)
 void	draw_map(t_vars *vars)
 {
 	raycast(vars);
+	draw_door(vars);
 	if (!vars->imp->is_dead)
 		draw_imp(vars);
 	draw_gun(vars, 4.0);

@@ -164,8 +164,8 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for fire sprite");
 		free_and_exit(vars);
 	}
-	vars->door_textures = ft_calloc(sizeof(t_img), 4);
-	if (!vars->door_textures)
+	vars->door->textures = ft_calloc(sizeof(t_img), 1);
+	if (!vars->door->textures)
 	{
 		perror("Failed to allocate memory for door textures");
 		free_and_exit(vars);
@@ -182,7 +182,7 @@ void	initialise_sprites(t_vars *vars)
 	load_animated_sprite(vars, vars->imp->fire_ball, imp_fire_ball_frames, 2);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
-	load_animated_sprite(vars, vars->door_textures, door_frames, 4);
+	load_animated_sprite(vars, vars->door->textures, door_frames, 4);
 	vars->imp->current_animation = vars->imp->move_animation;
 }
 
@@ -222,23 +222,23 @@ void	initialise_imp(t_vars *vars)
 
 void	initialise_doors(t_vars *vars)
 {
-	int	i;
+	// int	i;
 
 	vars->map->num_doors = 0;
-	vars->map->doors = ft_calloc(MAX_DOORS, sizeof(t_door));
-	if (!vars->map->doors)
+	vars->door = ft_calloc(1, sizeof(t_door));
+	if (!vars->door)
 	{
 		perror("Failed to allocate memory for doors");
 		free_and_exit(vars);
 	}
-	i = -1;
-	while (++i < MAX_DOORS)
-	{
-		vars->map->doors[i].x = -1;
-		vars->map->doors[i].y = -1;
-		vars->map->doors[i].state = DOOR_CLOSED;
-		vars->map->doors[i].animation_progress = 0.0;
-	}
+	// i = -1;
+	// while (++i < MAX_DOORS)
+	// {
+	// 	vars->map->doors[i].x = -1;
+	// 	vars->map->doors[i].y = -1;
+	// 	vars->map->doors[i].state = DOOR_CLOSED;
+	// 	vars->map->doors[i].animation_progress = 0.0;
+	// }
 }
 
 void	initialise_vars(t_vars *vars)
