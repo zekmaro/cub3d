@@ -118,6 +118,8 @@ void	check_imp_collision(t_vars *vars)
 	}
 	if (vars->imp->health == 0)
 	{
+		if (!vars->imp->is_dead)
+			system("aplay ./assets/imp_death.wav -q &");
 		vars->imp->current_animation = vars->imp->death_animation;
 	}
 }
