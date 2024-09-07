@@ -60,8 +60,10 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 	rotate_around_point(vars, &x, &y);
 	if (can_move(vars, save_y / vars->unit_size , save_x / vars->unit_size))
 	{
+		vars->map->grid[vars->player->center_y / vars->unit_size ][vars->player->center_x / vars->unit_size] = '0';
 		vars->player->y += move_y;
 		vars->player->x += move_x;
+		vars->map->grid[vars->player->y / vars->unit_size ][vars->player->x / vars->unit_size] = 'P';
 	}
 }
 

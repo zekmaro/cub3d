@@ -27,6 +27,12 @@ void	print_map(t_map *map)
 	ft_putchar_fd('\n', 1);
 }
 
+int	is_player(t_vars *vars, int y, int x)
+{
+	return (vars->map->grid[y / vars->unit_size][x \
+		/ vars->unit_size] == 'P');
+}
+
 int	is_imp(t_vars *vars, int y, int x)
 {
 	return (vars->map->grid[y / vars->unit_size][x \

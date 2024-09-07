@@ -68,14 +68,12 @@ int	main_loop_hook(t_vars *vars)
 	get_current_time(&t);
 	get_current_time(&vars->imp->time1);
 	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
-	// printf("before render: %f", abc);
 	long imp_elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
 	if (imp_elapsed_time > 200)
 	{
 		if (vars->imp->current_animation == vars->imp->death_animation
 			&& vars->imp->current_animation->current_frame == vars->imp->current_animation->frame_count - 1)
 		{
-			//printf("%d \n",vars->imp->current_animation->frame_count);
 			vars->imp->is_dead = 1;
 		}
 		update_sprite_frame(vars->imp->current_animation);
@@ -85,6 +83,8 @@ int	main_loop_hook(t_vars *vars)
 	draw_sprite(vars);
 	if (vars->player->shoot)
 		animate_shooting(vars);
+	if (!vars->imp->detected_player)
+		vars->imp->angle += M_PI / 45;
 	get_current_time(&t);
 	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
 	return (0);
@@ -138,9 +138,18 @@ void	setup_player(t_vars *vars)
 		vars->player->angle = 0;
 	vars->player->dir_x = cos(vars->player->angle);
 	vars->player->dir_y = sin(vars->player->angle);
-	 plane_length = tan(vars->player->fov / 2);
+	plane_length = tan(vars->player->fov / 2);
 	vars->player->plane_x = -vars->player->dir_y * plane_length;
 	vars->player->plane_y = vars->player->dir_x * plane_length;
+}
+
+void	setup_imp(t_vars *vars)
+{
+	vars->imp->x = (vars->map->monster_x * vars->unit_size);
+	vars->imp->y = (vars->map->monster_y * vars->unit_size);
+	vars->imp->center_x = vars->imp->x + vars->unit_size / 2;
+	vars->imp->center_y = vars->imp->y + vars->unit_size / 2;
+	vars->imp->angle = -M_PI / 2;
 }
 
 int	main(int argc, char **argv)
@@ -164,6 +173,7 @@ int	main(int argc, char **argv)
 	if (!read_map(fd, vars.map, argv[1]))
 		free_and_exit(&vars);
 	setup_player(&vars);
+	setup_imp(&vars);
 	get_current_time(&vars.program_start);
 	get_current_time(&vars.imp->time0);
 	//print_map(vars.map);
