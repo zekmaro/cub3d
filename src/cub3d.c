@@ -45,7 +45,7 @@ int	key_up(int keycode, t_vars *vars)
 {
 	if (keycode == ESCAPE)
 		free_and_exit(vars);
-	if (vars->keys.w == 1)
+	if (keycode == W)
 		vars->keys.w = 0;
 	if (keycode == S)
 		vars->keys.s = 0;
@@ -75,6 +75,8 @@ int	main_loop_hook(t_vars *vars)
 			&& vars->imp->current_animation->current_frame == vars->imp->current_animation->frame_count - 1)
 		{
 			vars->imp->is_dead = 1;
+			vars->imp->center_x = 0;
+			vars->imp->center_y = 0;
 		}
 		update_sprite_frame(vars->imp->current_animation);
 		vars->imp->time0 = vars->imp->time1;
@@ -84,7 +86,7 @@ int	main_loop_hook(t_vars *vars)
 	if (vars->player->shoot)
 		animate_shooting(vars);
 	if (!vars->imp->detected_player)
-		vars->imp->angle += M_PI / 45 * vars->imp->rot_dir;
+		vars->imp->angle += M_PI / 10 * vars->imp->rot_dir;
 	if (vars->imp->detected_player)
 	{
 		int vector_x = vars->player->center_x - vars->imp->center_x;
