@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/06 18:34:45 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:17:17 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,17 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/gunfire1.xpm",
 		"./assets/gunfire2.xpm",
 	};
+	const char *door_frames[] \
+	= {
+		"./assets/door0.xpm",
+		"./assets/door1.xpm",
+		"./assets/door2.xpm",
+		"./assets/door3.xpm",
+	};
 	vars->imp->move_animation = ft_calloc(sizeof(t_img), 1);
 	if (!vars->imp->move_animation)
 	{
-		perror("Failed to allocate memory for animated sprite");
+		perror("Failed to allocate memory for move animated sprite");
 		free_and_exit(vars);
 	}
 	vars->imp->death_animation = ft_calloc(sizeof(t_img), 1);
@@ -137,13 +144,20 @@ void	initialise_sprites(t_vars *vars)
 	vars->player->fire = ft_calloc(sizeof(t_img), 1);
 	if (!vars->player->fire)
 	{
-		perror("Failed to allocate memory for gun sprite");
+		perror("Failed to allocate memory for fire sprite");
+		free_and_exit(vars);
+	}
+	vars->door_textures = ft_calloc(sizeof(t_img), 4);
+	if (!vars->door_textures)
+	{
+		perror("Failed to allocate memory for door textures");
 		free_and_exit(vars);
 	}
 	load_animated_sprite(vars, vars->imp->move_animation, imp_movement_frames, 4);
 	load_animated_sprite(vars, vars->imp->death_animation, imp_death_frames, 5);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
+	load_animated_sprite(vars, vars->door_textures, door_frames, 4);
 	vars->imp->current_animation = vars->imp->move_animation;
 }
 
