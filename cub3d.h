@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 18:06:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:51:53 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_map
 	char	player_dir;
 	int		monster_x;
 	int		monster_y;
-	t_door	**doors;
+	t_door	*doors;
 	int		num_doors;
 }	t_map;
 
@@ -343,15 +343,15 @@ void		initialise_doors(t_vars *vars);
 int			read_map(int fd, t_map *map, char *file_name);
 
 /* Utils.c */
-void	print_map(t_map *map);
-int		is_player(t_vars *vars, int y, int x);
-int		is_imp(t_vars *vars, int y, int x);
-int		is_wall(t_vars *vars, int y, int x);
-int		player_inside_map(t_vars *vars, int x, int y);
-int		can_move(t_vars *vars, int y, int x);
-int		get_texture_color(t_img *texture, int x, int y);
-long	get_elapsed_time(struct timeval *start, struct timeval *end);
-void	get_current_time(struct timeval *time);
+void		print_map(t_map *map);
+int			is_player(t_vars *vars, int y, int x);
+int			is_imp(t_vars *vars, int y, int x);
+int			is_wall(t_vars *vars, int y, int x);
+int			player_inside_map(t_vars *vars, int x, int y);
+int			can_move(t_vars *vars, int y, int x);
+int			get_texture_color(t_img *texture, int x, int y);
+long		get_elapsed_time(struct timeval *start, struct timeval *end);
+void		get_current_time(struct timeval *time);
 
 /* Raycast.c */
 void		cast_ray(t_vars *vars, int ray_id);

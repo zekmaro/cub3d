@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 18:17:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:51:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int	validate_line(char *line, int row, t_map *map)
 		{
 			if (map->num_doors >= MAX_DOORS)
 				return (printf("Too many doors in the map\n"), 0);
-			map->doors[map->num_doors]->x = i;
-			map->doors[map->num_doors]->y = row;
-			map->doors[map->num_doors]->state = DOOR_CLOSED;
-			map->doors[map->num_doors]->animation_progress = 0.0;
+			map->doors[map->num_doors].x = i;
+			map->doors[map->num_doors].y = row;
+			map->doors[map->num_doors].state = DOOR_CLOSED;
+			map->doors[map->num_doors].animation_progress = 0.0;
 			map->num_doors++;
 		}
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
