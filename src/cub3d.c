@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/05 13:55:53 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 23:29:24 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ int	key_up(int keycode, t_vars *vars)
 	return (0);
 }
 
+int	player_damaged(t_vars *vars)
+{
+	return (abs(vars->imp->fire_ball_x - vars->player->center_x) < 20
+		&& abs(vars->imp->fire_ball_y - vars->player->center_y) < 20
+		&& !vars->player->is_damaged);
+}
+
 int	main_loop_hook(t_vars *vars)
 {
 	struct timeval t;
@@ -68,6 +75,7 @@ int	main_loop_hook(t_vars *vars)
 
 	get_current_time(&t);
 	get_current_time(&vars->imp->time1);
+	get_current_time(&vars->player->time1);
 	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
 	long imp_elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
 	if (imp_elapsed_time > 200)
@@ -76,14 +84,19 @@ int	main_loop_hook(t_vars *vars)
 			&& vars->imp->current_animation->current_frame == vars->imp->current_animation->frame_count - 1)
 		{
 			vars->imp->is_dead = 1;
-			vars->imp->center_x = 0;
-			vars->imp->center_y = 0;
+			vars->imp->center_x = -100;
+			vars->imp->center_y = -100;
 		}
 		update_sprite_frame(vars->imp->current_animation);
 		if (vars->imp->current_animation == vars->imp->attack_animation
 		&& vars->imp->current_animation->current_frame == vars->imp->current_animation->frame_count - 1)
 			vars->imp->current_animation = vars->imp->move_animation;
 		vars->imp->time0 = vars->imp->time1;
+	long time_player_damaged = get_elapsed_time(&vars->player->time0, &vars->player->time1);
+	if (time_player_damaged > 500)
+	{
+		vars->player->is_damaged = 0;
+	}
 	}
 	update_position(vars);
 	draw_sprite(vars);
@@ -118,9 +131,33 @@ int	main_loop_hook(t_vars *vars)
 		}
 		else
 		{
-			vars->imp->fire_ball_y += vars->imp->fire_delta_y;
-			vars->imp->fire_ball_x += vars->imp->fire_delta_x;
+			if (player_damaged(vars))
+			{
+				printf("hello\n");
+				vars->player->is_damaged = 1;
+				vars->player->health -= 20;
+				get_current_time(&vars->player->time0);
+				system("aplay ./assets/player_pain.wav -q &");
+				if (vars->player->health == 0)
+				{
+					printf("GAME OVER!\n");
+					system("aplay ./assets/player_dead.wav -q &");
+					free_and_exit(vars);
+				}
+				vars->imp->fire_ball_y = 0;
+				vars->imp->fire_ball_x = 0;
+			}
+			else
+			{
+				vars->imp->fire_ball_y += vars->imp->fire_delta_y;
+				vars->imp->fire_ball_x += vars->imp->fire_delta_x;		
+			}
 		}
+		vars->imp->detected_player = 0;
+	}
+	if (vars->player->is_damaged)
+	{
+		draw_player_damaged(vars);
 	}
 	get_current_time(&t);
 	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
@@ -180,6 +217,7 @@ void	setup_player(t_vars *vars)
 	plane_length = tan(vars->player->fov / 2);
 	vars->player->plane_x = -vars->player->dir_y * plane_length;
 	vars->player->plane_y = vars->player->dir_x * plane_length;
+	vars->player->health = 100;
 }
 
 void	setup_imp(t_vars *vars)
