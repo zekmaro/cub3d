@@ -183,6 +183,7 @@ typedef struct s_imp
 	int	y;
 	int	center_x;
 	int	center_y;
+	int	rot_dir;
 	double	angle;
 	int	detected_player;
 	t_img	*move_animation;

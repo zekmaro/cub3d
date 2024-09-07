@@ -29,14 +29,12 @@ void	print_map(t_map *map)
 
 int	is_player(t_vars *vars, int y, int x)
 {
-	return (vars->map->grid[y / vars->unit_size][x \
-		/ vars->unit_size] == 'P');
+	return (abs(y - vars->player->center_y) < 10 && abs(x - vars->player->center_x) < 10);
 }
 
 int	is_imp(t_vars *vars, int y, int x)
 {
-	return (vars->map->grid[y / vars->unit_size][x \
-		/ vars->unit_size] == 'M');
+	return (abs(y - vars->imp->center_y) < 40 && abs(x - vars->imp->center_x) < 40);
 }
 
 int	is_wall(t_vars *vars, int y, int x)

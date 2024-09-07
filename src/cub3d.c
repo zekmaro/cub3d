@@ -84,7 +84,14 @@ int	main_loop_hook(t_vars *vars)
 	if (vars->player->shoot)
 		animate_shooting(vars);
 	if (!vars->imp->detected_player)
-		vars->imp->angle += M_PI / 45;
+		vars->imp->angle += M_PI / 45 * vars->imp->rot_dir;
+	if (vars->imp->detected_player)
+	{
+		int vector_x = vars->player->center_x - vars->imp->center_x;
+		int vector_y = vars->player->center_y - vars->imp->center_y;
+		vars->imp->center_x += vector_x / 20;
+		vars->imp->center_y += vector_y / 20;
+	}
 	get_current_time(&t);
 	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
 	return (0);
@@ -150,6 +157,7 @@ void	setup_imp(t_vars *vars)
 	vars->imp->center_x = vars->imp->x + vars->unit_size / 2;
 	vars->imp->center_y = vars->imp->y + vars->unit_size / 2;
 	vars->imp->angle = -M_PI / 2;
+	vars->imp->rot_dir = 1;
 }
 
 int	main(int argc, char **argv)
