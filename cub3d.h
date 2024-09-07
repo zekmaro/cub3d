@@ -98,7 +98,8 @@ typedef enum e_tex_typ
 	TEXTURE_WEST,
 	TEXTURE_SOUTH,
 	TEXTURE_EAST,
-	TEXTURE_DOOR
+	TEXTURE_DOOR,
+	TEXTURE_NONE
 }	t_tex_typ;
 
 typedef struct s_map
