@@ -144,7 +144,7 @@ void	draw_ray_monster(t_vars *vars, double angle_offset)
 	{
 		ray_dir_x += cos(ray_angle);
 		ray_dir_y += sin(ray_angle);
-		put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
+		//put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
 		if (!vars->imp->detected_player)
 		{
 			vars->imp->detected_player = is_player(vars, ray_dir_y, ray_dir_x);
@@ -405,11 +405,11 @@ void	draw_map(t_vars *vars)
 		draw_imp(vars);
 	draw_gun(vars, 4.0);
 	//draw_minimap(vars);
-	draw_player(vars, RED);
+	//draw_player(vars, RED);
 	//draw_ray_segment_player(vars);
 	if (!vars->imp->is_dead)
 	{
-		draw_monster(vars, BLUE);
+	//	draw_monster(vars, BLUE);
 		draw_ray_segment_monster(vars);
 	}
 	if (vars->imp->detected_player)
