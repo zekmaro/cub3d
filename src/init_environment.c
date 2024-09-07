@@ -123,6 +123,17 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/door2.xpm",
 		"./assets/door3.xpm",
 	};
+	const char *imp_fire_ball_frames[] \
+	= {
+		"./assets/imp_fire1.xpm",
+		"./assets/imp_fire2.xpm"
+	};
+	const char *imp_attack_frames[] \
+	= {
+		"./assets/imp_attack1.xpm",
+		"./assets/imp_attack2.xpm",
+		"./assets/imp_attack3.xpm"
+	};
 	vars->imp->move_animation = ft_calloc(sizeof(t_img), 1);
 	if (!vars->imp->move_animation)
 	{
@@ -131,6 +142,12 @@ void	initialise_sprites(t_vars *vars)
 	}
 	vars->imp->death_animation = ft_calloc(sizeof(t_img), 1);
 	if (!vars->imp->death_animation)
+	{
+		perror("Failed to allocate memory for animated sprite");
+		free_and_exit(vars);
+	}
+	vars->imp->attack_animation = ft_calloc(sizeof(t_img), 1);
+	if (!vars->imp->attack_animation)
 	{
 		perror("Failed to allocate memory for animated sprite");
 		free_and_exit(vars);
@@ -153,8 +170,16 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for door textures");
 		free_and_exit(vars);
 	}
+	vars->imp->fire_ball = ft_calloc(sizeof(t_img), 1);
+	if (!vars->imp->fire_ball)
+	{
+		perror("Failed to allocate memory for imp fire balls ");
+		free_and_exit(vars);
+	}
 	load_animated_sprite(vars, vars->imp->move_animation, imp_movement_frames, 4);
 	load_animated_sprite(vars, vars->imp->death_animation, imp_death_frames, 5);
+	load_animated_sprite(vars, vars->imp->attack_animation, imp_attack_frames, 3);
+	load_animated_sprite(vars, vars->imp->fire_ball, imp_fire_ball_frames, 2);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	load_animated_sprite(vars, vars->door_textures, door_frames, 4);

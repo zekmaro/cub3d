@@ -144,7 +144,7 @@ void	draw_ray_monster(t_vars *vars, double angle_offset)
 	{
 		ray_dir_x += cos(ray_angle);
 		ray_dir_y += sin(ray_angle);
-		put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
+		//put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
 		if (!vars->imp->detected_player)
 		{
 			vars->imp->detected_player = is_player(vars, ray_dir_y, ray_dir_x);
@@ -292,7 +292,7 @@ void	draw_fire(t_vars *vars, double scale)
 			tex_x = screen_x / scale;
 
 			// Get the texture pixel color from the gun texture
-			color = get_texture_color(vars->player->fire->frames[vars->player->fire->current_frame], tex_x, tex_y);
+			color = get_texture_color(temp, tex_x, tex_y);
 
 			// Ignore transparent pixels (assuming 0xFF00FF is transparent)
 			if (color != -1)
@@ -333,7 +333,7 @@ void	draw_gun(t_vars *vars, double scale)
 			tex_x = screen_x / scale;
 
 			// Get the texture pixel color from the gun texture
-			color = get_texture_color(vars->player->gun->frames[vars->player->gun->current_frame], tex_x, tex_y);
+			color = get_texture_color(temp, tex_x, tex_y);
 
 			// Ignore transparent pixels (assuming 0xFF00FF is transparent)
 			if (color != -1)
@@ -345,6 +345,59 @@ void	draw_gun(t_vars *vars, double scale)
 	}
 }
 
+void	draw_imp_fire_ball(t_vars *vars)
+{
+	double dirY = vars->player->dir_y;
+	double dirX = vars->player->dir_x;
+	double planeY = vars->player->plane_y;
+	double planeX = vars->player->plane_x;
+	int spriteX = vars->imp->fire_ball_x - vars->player->center_x;
+	int spriteY = vars->imp->fire_ball_y - vars->player->center_y;
+	t_img *tmp = vars->imp->fire_ball->frames[vars->imp->fire_ball->current_frame];
+
+	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
+	
+	double transformX = invDet * (dirY * spriteX - dirX * spriteY);
+	double transformY = invDet * (-planeY * spriteX + planeX * spriteY);
+	
+	int spriteScreenX = (int)((vars->mlx->window_width / 2) * (1 + transformX / transformY));
+	int spriteHeight = abs((int)(vars->mlx->window_height * 20 / transformY));
+	int spriteWidth = abs((int)(vars->mlx->window_height * 20 / transformY));
+
+	int drawStartY = -spriteHeight / 2 + vars->mlx->window_height / 2;
+	if (drawStartY < 0) drawStartY = 0;
+
+	int drawEndY = spriteHeight / 2 + vars->mlx->window_height / 2;
+	if (drawEndY >= vars->mlx->window_height) drawEndY = vars->mlx->window_height - 1;
+
+	int drawStartX = -spriteWidth / 2 + spriteScreenX;
+	if (drawStartX < 0) drawStartX = 0;
+
+	int drawEndX = spriteWidth / 2 + spriteScreenX;
+	if (drawEndX >= vars->mlx->window_width) drawEndX = vars->mlx->window_width - 1;
+
+	//printf("transformY %f transformX %f drawEndY %d drawEndX %d drawStartY %d drawStartX %d \n", transformY, transformX, drawEndY, drawEndX, drawStartY, drawStartX);
+	for (int stripe = drawStartX; stripe < drawEndX; stripe++) {
+	// Calculate the X-coordinate in the sprite's texture
+		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tmp->width / spriteWidth) / 256;
+		if (transformY > 0 && stripe > 0 && stripe < vars->mlx->window_width && transformY < vars->zbuffer[stripe]) {
+			for (int y = drawStartY; y < drawEndY; y++) {
+				// Calculate the Y-coordinate in the sprite's texture
+				int d = (y - vars->mlx->window_height / 2 + spriteHeight / 2) * 256;
+				int texY = ((d * tmp->height) / spriteHeight) / 256;
+
+				// Get the pixel color from the sprite's texture
+				int color = get_texture_color(tmp, texX, texY);
+				if (color != -1) {
+					put_pixel_to_image(vars, stripe, y, color);
+
+					vars->zbuffer[stripe] = transformY;
+				}
+			}
+		}
+    }
+}
+
 void	draw_map(t_vars *vars)
 {
 	raycast(vars);
@@ -352,12 +405,14 @@ void	draw_map(t_vars *vars)
 		draw_imp(vars);
 	draw_gun(vars, 4.0);
 	//draw_minimap(vars);
-	draw_player(vars, RED);
+	//draw_player(vars, RED);
 	//draw_ray_segment_player(vars);
 	if (!vars->imp->is_dead)
 	{
-		draw_monster(vars, BLUE);
+	//	draw_monster(vars, BLUE);
 		draw_ray_segment_monster(vars);
 	}
+	if (vars->imp->detected_player)
+		draw_imp_fire_ball(vars);
 	update_player_position(vars);
 }
