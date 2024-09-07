@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 18:17:17 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:56:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void	initialise_zbuffer(t_vars *vars)
 	}
 }
 
-void	init_imp(t_vars *vars)
+void	initialise_imp(t_vars *vars)
 {
 	vars->imp = ft_calloc(sizeof(t_imp), 1);
 	if (!vars->imp)
@@ -195,16 +195,38 @@ void	init_imp(t_vars *vars)
 	vars->imp->health = 100;
 }
 
+void	initialise_doors(t_vars *vars)
+{
+	int	i;
+
+	vars->map->num_doors = 0;
+	vars->map->doors = ft_calloc(MAX_DOORS, sizeof(t_door));
+	if (!vars->map->doors)
+	{
+		perror("Failed to allocate memory for doors");
+		free_and_exit(vars);
+	}
+	i = -1;
+	while (++i < MAX_DOORS)
+	{
+		vars->map->doors[i].x = -1;
+		vars->map->doors[i].y = -1;
+		vars->map->doors[i].state = DOOR_CLOSED;
+		vars->map->doors[i].animation_progress = 0.0;
+	}
+}
+
 void	initialise_vars(t_vars *vars)
 {
 	vars->unit_size = 64;
 	ft_bzero(vars->textures, sizeof(vars->textures));
 	initialise_image(vars);
 	initialise_map(vars);
+	initialise_doors(vars);
 	initialise_mlx(vars);
 	initialise_line(vars);
 	initialise_ray(vars);
 	initialise_player(vars);
 	initialise_zbuffer(vars);
-	init_imp(vars);
+	initialise_imp(vars);
 }

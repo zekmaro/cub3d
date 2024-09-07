@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/07 18:12:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:51:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	free_map(t_map *map)
 	free(map->grid);
 	if (map->doors)
 	{
-		i = 0;
-		while (i < map->num_doors)
-		{
-			free(map->doors[i]);
-			i++;
-		}
+		// i = 0;
+		// while (i < map->num_doors)
+		// {
+		// 	free(map->doors[i]);
+		// 	i++;
+		// }
 		free(map->doors);
 	}
 }
