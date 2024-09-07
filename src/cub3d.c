@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <math.h>
 
 long	update_imp_time(t_vars *vars)
 {
@@ -91,8 +92,31 @@ int	main_loop_hook(t_vars *vars)
 	{
 		int vector_x = vars->player->center_x - vars->imp->center_x;
 		int vector_y = vars->player->center_y - vars->imp->center_y;
-		vars->imp->center_x += vector_x / 20;
-		vars->imp->center_y += vector_y / 20;
+		int vector = sqrt(vector_x * vector_x + vector_y * vector_y);
+		if (!vars->imp->shoot_ball)
+		{
+			vars->imp->fire_delta_y = (vector_y * vector_y / vector) / 10;
+			if (vector_y < 0)
+				vars->imp->fire_delta_y *= -1;
+			vars->imp->fire_delta_x = (vector_x * vector_x / vector) / 10;
+			if (vector_x < 0)
+				vars->imp->fire_delta_x *= -1;
+			printf("delta x %d delta y %d", vars->imp->fire_delta_x, vars->imp->fire_delta_y);
+			vars->imp->shoot_ball = 1;
+		}
+		vars->imp->center_x += vector_x / 40;
+		vars->imp->center_y += vector_y / 40;
+		if (is_wall(vars, vars->imp->fire_ball_y, vars->imp->fire_ball_x))
+		{
+			vars->imp->fire_ball_y = vars->imp->center_y;
+			vars->imp->fire_ball_x = vars->imp->center_x;
+			vars->imp->shoot_ball = 0;
+		}
+		else
+		{
+			vars->imp->fire_ball_y += vars->imp->fire_delta_y;
+			vars->imp->fire_ball_x += vars->imp->fire_delta_x;
+		}
 	}
 	get_current_time(&t);
 	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
@@ -119,6 +143,8 @@ void	run_screen(t_vars *vars)
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
 }
+//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
+// mlx_key_hook(vars->mlx->win, key_hook, vars);
 
 int	game_loop(t_vars *vars)
 {
@@ -160,6 +186,8 @@ void	setup_imp(t_vars *vars)
 	vars->imp->center_y = vars->imp->y + vars->unit_size / 2;
 	vars->imp->angle = -M_PI / 2;
 	vars->imp->rot_dir = 1;
+	vars->imp->fire_ball_x = vars->imp->center_x;
+	vars->imp->fire_ball_y = vars->imp->center_y;
 }
 
 int	main(int argc, char **argv)
@@ -190,3 +218,7 @@ int	main(int argc, char **argv)
 	run_screen(&vars);
 	return (0);
 }
+
+// get_current_time(&vars.program_start);
+//print_map(vars.map);
+// run_screen(&vars);

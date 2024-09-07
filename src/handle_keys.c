@@ -6,38 +6,38 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/31 18:04:12 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:17:07 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void reset_mouse_to_center(t_vars *vars)
+void	reset_mouse_to_center(t_vars *vars)
 {
-    // Move the mouse to the center of the screen
-    int center_x = vars->mlx->window_width / 2;
-    int center_y = vars->mlx->window_height / 2;
+	int	center_x;
+	int	center_y;
 
-    mlx_mouse_move(vars->mlx->mlx, vars->mlx->win, center_x, center_y);
+	center_x = vars->mlx->window_width / 2;
+	center_y = vars->mlx->window_height / 2;
+	mlx_mouse_move(vars->mlx->mlx, vars->mlx->win, center_x, center_y);
 }
 
-int mouse_move(int x, int y, t_vars *vars)
+int	mouse_move(int x, int y, t_vars *vars)
 {
-    int center_x = vars->mlx->window_width / 2;
+	int center_x = vars->mlx->window_width / 2;
 	(void)y;
    // int center_y = vars->mlx->window_height / 2;
-
-    // Calculate how much the mouse moved from the center
-    int dx = x - center_x;
+ 
+	int dx = x - center_x;
     //int dy = y - center_y;
 	// double magnitude;
 
 	// magnitude = sqrt(x * x + y * y);
 	// dx /= magnitude;
     // Update player angle based on mouse movement (dx affects rotation)
-    double rot_speed = 0.001; // Adjust this for desired sensitivity
-	
-    vars->player->angle += dx * rot_speed;
+    double rot_speed = 0.0004; // Adjust this for desired sensitivity
+
+	vars->player->angle += dx * rot_speed;
 	// printf("mouse moved: %d %f\n", dx, vars->player->angle);
 
     // Reset the mouse back to the center after processing the movement
@@ -126,24 +126,22 @@ void	check_imp_collision(t_vars *vars)
 
 int	animate_shooting(t_vars *vars)
 {
-	static int frame_count = 0; // Frame counter for animation
+	static int frame_count = 0;
 
-    if (!vars->player->shoot) // Check if animation should continue
-        return (0);
-
-    long elapsed_time;
-    get_current_time(&vars->current_time);
-    elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
-
+	if (!vars->player->shoot)
+		return (0);
+	long elapsed_time;
+	get_current_time(&vars->current_time);
+	elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 	if (frame_count == 2 && !vars->player->fire_done)
 	{
 		vars->player->fire_done = 1;
 		frame_count = 0;
 	}
-	if (frame_count == 4) // Stop after 3 frames
+	if (frame_count == 4)
 	{
-		vars->player->shoot = 0; // Reset shooting flag
-		frame_count = 0;       // Reset frame counter
+		vars->player->shoot = 0;
+		frame_count = 0;
 		return (0);
 	}
 	if (vars->player->fire_done)
@@ -171,13 +169,22 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 		vars->player->fire_done = 0;
 		check_imp_collision(vars);
 	}
-	return (0);             
+	return (0);
 }
 
-// void	handle_key(int keycode, t_vars *vars)
-// {
-// 	check_move_player(keycode, vars);
-// }
+void	handle_key(int keycode, t_vars *vars)
+{
+	int	x;
+	int	y;
+
+	if (keycode == KEY_OPEN_DOOR)
+	{
+		x = vars->player->x / vars->unit_size;
+		y = vars->player->y / vars->unit_size;
+		toggle_door(vars, x, y);
+	}
+	update_position(vars);
+}
 
 // int	key_hook(int keycode, t_vars *vars)
 // {

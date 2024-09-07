@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing.c                                          :+:      :+:    :+:   */
+/*   draw_entities.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/01 02:01:00 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:43:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	draw_ray_monster(t_vars *vars, double angle_offset)
 	{
 		ray_dir_x += cos(ray_angle);
 		ray_dir_y += sin(ray_angle);
-		//put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
+		put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
 		if (!vars->imp->detected_player)
 		{
 			vars->imp->detected_player = is_player(vars, ray_dir_y, ray_dir_x);
@@ -351,8 +351,8 @@ void	draw_imp_fire_ball(t_vars *vars)
 	double dirX = vars->player->dir_x;
 	double planeY = vars->player->plane_y;
 	double planeX = vars->player->plane_x;
-	int spriteX = vars->imp->center_x - vars->player->center_x;
-	int spriteY = vars->imp->center_y - vars->player->center_y;
+	int spriteX = vars->imp->fire_ball_x - vars->player->center_x;
+	int spriteY = vars->imp->fire_ball_y - vars->player->center_y;
 	t_img *tmp = vars->imp->fire_ball->frames[vars->imp->fire_ball->current_frame];
 
 	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
@@ -405,13 +405,14 @@ void	draw_map(t_vars *vars)
 		draw_imp(vars);
 	draw_gun(vars, 4.0);
 	//draw_minimap(vars);
-	//draw_player(vars, RED);
+	draw_player(vars, RED);
 	//draw_ray_segment_player(vars);
-	// if (!vars->imp->is_dead)
-	// {
-	// 	//draw_monster(vars, BLUE);
-	// 	draw_ray_segment_monster(vars);
-	// }
-	draw_imp_fire_ball(vars);
+	if (!vars->imp->is_dead)
+	{
+		draw_monster(vars, BLUE);
+		draw_ray_segment_monster(vars);
+	}
+	if (vars->imp->detected_player)
+		draw_imp_fire_ball(vars);
 	update_player_position(vars);
 }

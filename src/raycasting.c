@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -65,38 +65,6 @@ void	setup_ray(t_vars *vars, double ray_x, double ray_y)
 		+ vars->mlx->window_height / 2;
 	if (vars->ray->draw_end >= vars->mlx->window_height)
 		vars->ray->draw_end = vars->mlx->window_height - 1;
-}
-
-void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
-{
-	if (texture_index % 2 == 0)
-	{
-		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
-		if (texture_index == TEXTURE_SOUTH)
-		{
-			*tex_x *= -1; 
-			*tex_x -= 1;
-		}
-	}
-	else if (texture_index % 2 == 1)
-	{
-		*tex_x = (int)(vars->ray->ray_y) % vars->unit_size;
-		if (texture_index == TEXTURE_WEST)
-		{
-			*tex_x = vars->unit_size - *tex_x;
-			*tex_x -= 1;
-		}
-	}
-}
-
-int	get_map_x(t_vars *vars)
-{
-	return ((int)(vars->ray->ray_x / vars->unit_size));
-}
-
-int	get_map_y(t_vars *vars)
-{
-	return ((int)(vars->ray->ray_y / vars->unit_size));
 }
 
 void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)

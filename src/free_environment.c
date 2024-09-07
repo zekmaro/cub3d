@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_vars.c                                        :+:      :+:    :+:   */
+/*   free_environment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/01 15:35:43 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:08:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,26 @@
 
 void	free_vars_map(t_vars *vars)
 {
-	if (vars->map->grid)
+	if (vars->map)
+	{
 		free_map(vars->map);
-	free(vars->map);
-}
-
-void	free_vars_image(t_vars *vars)
-{
-	if (vars->image->mlx_img)
-	{
-		free_vars_textures(vars);
-		mlx_destroy_image(vars->mlx->mlx, vars->image->mlx_img);
+		free(vars->map);
+		vars->map = NULL;
 	}
-	free(vars->image);
 }
 
-void	free_vars_player(t_vars *vars)
+void	free_vars_textures(t_vars *vars)
 {
-	if (vars->player)
-		free(vars->player);
-}
+	int	i;
 
-void	free_vars_mlx(t_vars *vars)
-{
-	if (vars->mlx->win)
+	i = -1;
+	while (++i < 4)
 	{
-		if (vars->mlx->win)
+		if (vars->textures[i])
 		{
-			mlx_destroy_window(vars->mlx->mlx, vars->mlx->win);
-			vars->mlx->win = NULL;
+			free(vars->textures[i]->mlx_img);
+			free(vars->textures[i]);
 		}
-		if (vars->mlx->mlx)
-		{
-			mlx_destroy_display(vars->mlx->mlx);
-			free(vars->mlx->mlx);
-			vars->mlx->mlx = NULL;
-		}
-		free(vars->mlx);
-		vars->mlx = NULL;
 	}
 }
 
@@ -59,6 +41,28 @@ void	free_vars_line(t_vars *vars)
 {
 	if (vars->line)
 		free(vars->line);
+}
+
+void	free_vars_doors(t_vars *vars)
+{
+	int	i;
+
+	if (vars->map->doors)
+	{
+		free(vars->map->doors);
+		vars->map->doors = NULL;
+	}
+	if (vars->door_textures)
+	{
+		i = -1;
+		while (++i < 4)
+		{
+			if (vars->door_textures[i].mlx_img)
+				mlx_destroy_image(vars->mlx, vars->door_textures[i].mlx_img);
+		}
+		free(vars->door_textures);
+		vars->door_textures = NULL;
+	}
 }
 
 // void	free_vars_sprites(t_vars *vars)
