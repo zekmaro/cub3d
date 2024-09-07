@@ -94,18 +94,23 @@ void	check_imp_collision(t_vars *vars)
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	ray_angle;
-	int imp_flag = 0;
+	int imp_flag;
 
 	ray_angle = vars->player->angle;
 	ray_x = vars->player->center_x;
 	ray_y = vars->player->center_y;
 	ray_dir_x = ray_x;
 	ray_dir_y = ray_y;
+	imp_flag = 0;
 	while (!is_wall(vars, ray_dir_y, ray_dir_x) && !imp_flag)
 	{
 		ray_dir_x += cos(ray_angle);
 		ray_dir_y += sin(ray_angle);
+		printf("ray_dir_x %d ray_dir_y %d\n", (int)ray_dir_x, (int)ray_dir_y);
+		printf("monster x %d monster y %d\n", (int)vars->imp->center_x, (int)vars->imp->center_y);
 		imp_flag = is_imp(vars, ray_dir_y, ray_dir_x);
+		printf("hit imp %d \n", imp_flag);
+		put_pixel_to_image(vars, ray_dir_x, ray_dir_y, GREEN);
 	}
 	if (imp_flag)
 	{

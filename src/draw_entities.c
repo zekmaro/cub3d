@@ -82,6 +82,30 @@ void	draw_player(t_vars *vars, unsigned int color)
 	}
 }
 
+void	draw_monster(t_vars *vars, unsigned int color)
+{
+	int	i;
+	int	j;
+	int	pixel_x;
+	int	pixel_y;
+
+	i = 0;
+	//update_player_position(vars);
+	while (i < 8)
+	{
+		j = 0;
+		while (j < 8)
+		{
+			pixel_x = vars->imp->center_x - 4 + j;
+			pixel_y = vars->imp->center_y - 4 + i;
+			//rotate_around_point(vars, &pixel_x, &pixel_y);
+			put_pixel_to_image(vars, pixel_x, pixel_y, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw_ray(t_vars *vars, double angle_offset)
 {
 	double	ray_x;
@@ -103,7 +127,36 @@ void	draw_ray(t_vars *vars, double angle_offset)
 	}
 }
 
-void	draw_ray_segment(t_vars *vars)
+void	draw_ray_monster(t_vars *vars, double angle_offset)
+{
+	double	ray_x;
+	double	ray_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	ray_angle;
+
+	ray_angle = vars->imp->angle + angle_offset;
+	ray_x = vars->imp->center_x;
+	ray_y = vars->imp->center_y;
+	ray_dir_x = ray_x;
+	ray_dir_y = ray_y;
+	while (!is_wall(vars, ray_dir_y, ray_dir_x))
+	{
+		ray_dir_x += cos(ray_angle);
+		ray_dir_y += sin(ray_angle);
+		put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
+		if (!vars->imp->detected_player)
+		{
+			vars->imp->detected_player = is_player(vars, ray_dir_y, ray_dir_x);
+			if (vars->imp->detected_player && angle_offset > 0.00)
+				vars->imp->rot_dir = 1;
+			else if (vars->imp->detected_player && angle_offset < 0.00)
+				vars->imp->rot_dir = -1;
+		}
+	}
+}
+
+void	draw_ray_segment_player(t_vars *vars)
 {
 	double	fov_half;
 	double	radian;
@@ -117,30 +170,44 @@ void	draw_ray_segment(t_vars *vars)
 	}
 }
 
+void	draw_ray_segment_monster(t_vars *vars)
+{
+	double	fov_half;
+	double	radian;
+
+	fov_half = vars->player->fov / 2;
+	radian = 0;
+	vars->imp->detected_player = 0;
+	while (radian < vars->player->fov)
+	{
+		draw_ray_monster(vars, -fov_half + radian);
+		radian += 0.01;
+	}
+}
+
 void	draw_minimap(t_vars *vars)
 {
-	int	i;
-	int	j;
+	// int	i;
+	// int	j;
 
-	i = 0;
-	while (i < vars->map->height)
-	{
-		j = 0;
-		while (j < vars->map->width)
-		{
-			vars->line->x0 = j * vars->unit_size;
-			vars->line->y0 = i * vars->unit_size;
-			if (vars->map->grid[i][j] == '1')
-				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
-			else if (vars->map->grid[i][j] == 'M')
-				draw_square(vars, vars->line->x0, vars->line->y0, BLUE);
-			else
-				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
-			j++;
-		}
-		i++;
-	}
+	// i = 0;
+	// while (i < vars->map->height)
+	// {
+	// 	j = 0;
+	// 	while (j < vars->map->width)
+	// 	{
+	// 		vars->line->x0 = j * vars->unit_size;
+	// 		vars->line->y0 = i * vars->unit_size;
+	// 		if (vars->map->grid[i][j] == '1')
+	// 			draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
+	// 		else
+	// 			draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
 	draw_player(vars, RED);
+	draw_monster(vars, BLUE);
 }
 
 void	draw_imp(t_vars *vars)
@@ -149,8 +216,8 @@ void	draw_imp(t_vars *vars)
 	double dirX = vars->player->dir_x;
 	double planeY = vars->player->plane_y;
 	double planeX = vars->player->plane_x;
-	int spriteX = vars->map->monster_x * vars->unit_size + vars->unit_size / 2 - vars->player->center_x;
-	int spriteY = vars->map->monster_y * vars->unit_size + vars->unit_size / 2 - vars->player->center_y;
+	int spriteX = vars->imp->center_x - vars->player->center_x;
+	int spriteY = vars->imp->center_y - vars->player->center_y;
 
 	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
 	
@@ -286,7 +353,8 @@ void	draw_map(t_vars *vars)
 	if (!vars->imp->is_dead)
 		draw_imp(vars);
 	draw_gun(vars, 4.0);
-	// draw_minimap(vars);
-	// draw_ray_segment(vars);	
+	draw_minimap(vars);
+	//draw_ray_segment_player(vars);	
+	draw_ray_segment_monster(vars);
 	update_player_position(vars);
 }

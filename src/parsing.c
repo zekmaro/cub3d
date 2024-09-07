@@ -43,6 +43,7 @@ int	validate_line(char *line, int row, t_map *map)
 			map->player_x = i;
 			map->player_y = row;
 			map->player_dir = line[i];
+			line[i] = 'P';
 		}
 		else if (line[i] == 'M')
 		{

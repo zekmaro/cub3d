@@ -214,15 +214,22 @@ typedef struct s_keys
 
 typedef struct s_imp
 {
-	int				health;
-	int				damage;
-	int				is_dead;
-	t_img			*move_animation;
-	t_img			*death_animation;
-	t_img			*attack_animation;
-	t_img			*current_animation;
-	struct timeval	time0;
-	struct timeval	time1;
+	int health;
+	int damage;
+	int	is_dead;
+	int	x;
+	int	y;
+	int	center_x;
+	int	center_y;
+	int	rot_dir;
+	double	angle;
+	int	detected_player;
+	t_img	*move_animation;
+	t_img	*death_animation;
+	t_img	*attack_animation;
+	t_img	*current_animation;
+	struct timeval time0;
+	struct timeval time1;
 }	t_imp;
 
 typedef struct s_vars
@@ -336,14 +343,15 @@ void		initialise_doors(t_vars *vars);
 int			read_map(int fd, t_map *map, char *file_name);
 
 /* Utils.c */
-void		print_map(t_map *map);
-int			is_imp(t_vars *vars, int y, int x);
-int			is_wall(t_vars *vars, int y, int x);
-int			player_inside_map(t_vars *vars, int x, int y);
-int			can_move(t_vars *vars, int y, int x);
-int			get_texture_color(t_img *texture, int x, int y);
-long		get_elapsed_time(struct timeval *start, struct timeval *end);
-void		get_current_time(struct timeval *time);
+void	print_map(t_map *map);
+int		is_player(t_vars *vars, int y, int x);
+int		is_imp(t_vars *vars, int y, int x);
+int		is_wall(t_vars *vars, int y, int x);
+int		player_inside_map(t_vars *vars, int x, int y);
+int		can_move(t_vars *vars, int y, int x);
+int		get_texture_color(t_img *texture, int x, int y);
+long	get_elapsed_time(struct timeval *start, struct timeval *end);
+void	get_current_time(struct timeval *time);
 
 /* Raycast.c */
 void		cast_ray(t_vars *vars, int ray_id);
