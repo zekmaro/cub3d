@@ -227,6 +227,12 @@ typedef struct s_imp
 	t_img	*move_animation;
 	t_img	*death_animation;
 	t_img	*attack_animation;
+	t_img	*fire_ball;
+	int		fire_ball_x;
+	int		fire_ball_y;
+	int		fire_delta_x;
+	int		fire_delta_y;
+	int		shoot_ball;
 	t_img	*current_animation;
 	struct timeval time0;
 	struct timeval time1;
@@ -276,12 +282,13 @@ void		draw_map(t_vars *vars);
 void		draw_minimap(t_vars *vars);
 
 /* Drawing.c */
-void		rotate_around_point(t_vars *vars, int *x, int *y);
-void		draw_map(t_vars *vars);
-void		draw_floor(t_vars *vars);
-void		draw_ceiling(t_vars *vars);
-void		draw_fire(t_vars *vars, double scale);
-void		draw_gun(t_vars *vars, double scale);
+void	rotate_around_point(t_vars *vars, int *x, int *y);
+void	draw_map(t_vars *vars);
+void	draw_floor(t_vars *vars);
+void	draw_ceiling(t_vars *vars);
+void	draw_fire(t_vars *vars, double scale);
+void	draw_gun(t_vars *vars, double scale);
+void	draw_imp_fire_ball(t_vars *vars);
 
 /* Free_memory_utils.c */
 void		free_memory(char **arr);

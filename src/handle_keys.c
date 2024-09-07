@@ -35,8 +35,8 @@ int	mouse_move(int x, int y, t_vars *vars)
 	// magnitude = sqrt(x * x + y * y);
 	// dx /= magnitude;
     // Update player angle based on mouse movement (dx affects rotation)
-    double rot_speed = 0.001; // Adjust this for desired sensitivity
-	
+    double rot_speed = 0.0004; // Adjust this for desired sensitivity
+
 	vars->player->angle += dx * rot_speed;
 	// printf("mouse moved: %d %f\n", dx, vars->player->angle);
 
@@ -118,6 +118,8 @@ void	check_imp_collision(t_vars *vars)
 	}
 	if (vars->imp->health == 0)
 	{
+		if (!vars->imp->is_dead)
+			system("aplay ./assets/imp_death.wav -q &");
 		vars->imp->current_animation = vars->imp->death_animation;
 	}
 }
