@@ -12,26 +12,31 @@
 
 #include "../cub3d.h"
 
-t_tex_typ	define_texture_type(t_vars *vars)
+t_tex_typ define_texture_type(t_vars *vars)
 {
-	int			dx;
-	int			dy;
-	t_tex_typ	texture_type;
+    int map_x = (int)vars->ray->ray_x / vars->unit_size;
+    int map_y = (int)vars->ray->ray_y / vars->unit_size;
 
-	texture_type = 0;
-	dx = (int)vars->ray->last_ray_x / vars->unit_size \
-		- (int)vars->ray->ray_x / vars->unit_size;
-	dy = (int)vars->ray->last_ray_y / vars->unit_size \
-		- (int)vars->ray->ray_y / vars->unit_size;
-	if (dy == 1)
-		texture_type = TEXTURE_NORTH;
-	else if (dy == -1)
-		texture_type = TEXTURE_SOUTH;
-	else if (dx == 1)
-		texture_type = TEXTURE_WEST;
-	else if (dx == -1)
-		texture_type = TEXTURE_EAST;
-	return (texture_type);
+    if (vars->map->grid[map_y][map_x] == '1')
+    {
+        int dx = (int)vars->ray->last_ray_x / vars->unit_size - map_x;
+        int dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
+
+        if (dy == 1)
+            return TEXTURE_NORTH;
+        else if (dy == -1)
+            return TEXTURE_SOUTH;
+        else if (dx == 1)
+            return TEXTURE_WEST;
+        else if (dx == -1)
+            return TEXTURE_EAST;
+    }
+    else if (vars->map->grid[map_y][map_x] == 'D')
+    {
+        return TEXTURE_DOOR;
+    }
+
+    return TEXTURE_NONE;
 }
 
 void	get_ray_target_coords(t_vars *vars)
