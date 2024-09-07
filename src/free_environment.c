@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/02 12:21:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:08:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	free_vars_map(t_vars *vars)
 {
-	if (vars->map->grid)
+	if (vars->map)
+	{
 		free_map(vars->map);
-	free(vars->map);
+		free(vars->map);
+		vars->map = NULL;
+	}
 }
 
 void	free_vars_textures(t_vars *vars)
@@ -38,6 +41,28 @@ void	free_vars_line(t_vars *vars)
 {
 	if (vars->line)
 		free(vars->line);
+}
+
+void	free_vars_doors(t_vars *vars)
+{
+	int	i;
+
+	if (vars->map->doors)
+	{
+		free(vars->map->doors);
+		vars->map->doors = NULL;
+	}
+	if (vars->door_textures)
+	{
+		i = -1;
+		while (++i < 4)
+		{
+			if (vars->door_textures[i].mlx_img)
+				mlx_destroy_image(vars->mlx, vars->door_textures[i].mlx_img);
+		}
+		free(vars->door_textures);
+		vars->door_textures = NULL;
+	}
 }
 
 // void	free_vars_sprites(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/06 12:50:00 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:17:07 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	reset_mouse_to_center(t_vars *vars)
 {
-	int center_x;
-	int center_y;
+	int	center_x;
+	int	center_y;
 
 	center_x = vars->mlx->window_width / 2;
 	center_y = vars->mlx->window_height / 2;
-    mlx_mouse_move(vars->mlx->mlx, vars->mlx->win, center_x, center_y);
+	mlx_mouse_move(vars->mlx->mlx, vars->mlx->win, center_x, center_y);
 }
 
 int	mouse_move(int x, int y, t_vars *vars)
@@ -94,18 +94,23 @@ void	check_imp_collision(t_vars *vars)
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	ray_angle;
-	int imp_flag = 0;
+	int imp_flag;
 
 	ray_angle = vars->player->angle;
 	ray_x = vars->player->center_x;
 	ray_y = vars->player->center_y;
 	ray_dir_x = ray_x;
 	ray_dir_y = ray_y;
+	imp_flag = 0;
 	while (!is_wall(vars, ray_dir_y, ray_dir_x) && !imp_flag)
 	{
 		ray_dir_x += cos(ray_angle);
 		ray_dir_y += sin(ray_angle);
+		printf("ray_dir_x %d ray_dir_y %d\n", (int)ray_dir_x, (int)ray_dir_y);
+		printf("monster x %d monster y %d\n", (int)vars->imp->center_x, (int)vars->imp->center_y);
 		imp_flag = is_imp(vars, ray_dir_y, ray_dir_x);
+		printf("hit imp %d \n", imp_flag);
+		put_pixel_to_image(vars, ray_dir_x, ray_dir_y, GREEN);
 	}
 	if (imp_flag)
 	{
@@ -122,13 +127,11 @@ int	animate_shooting(t_vars *vars)
 {
 	static int frame_count = 0;
 
-    if (!vars->player->shoot) // Check if animation should continue
-        return (0);
-
-    long elapsed_time;
-    get_current_time(&vars->current_time);
-    elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
-
+	if (!vars->player->shoot)
+		return (0);
+	long elapsed_time;
+	get_current_time(&vars->current_time);
+	elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 	if (frame_count == 2 && !vars->player->fire_done)
 	{
 		vars->player->fire_done = 1;

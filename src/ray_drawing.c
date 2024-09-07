@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/02 16:17:36 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:17:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
 		if (texture_index == TEXTURE_SOUTH)
 		{
-			*tex_x *= -1; 
+			*tex_x *= -1;
 			*tex_x -= 1;
 		}
 	}
@@ -48,4 +48,3 @@ int	get_map_y(t_vars *vars)
 {
 	return ((int)(vars->ray->ray_y / vars->unit_size));
 }
-

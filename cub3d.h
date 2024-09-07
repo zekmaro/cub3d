@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/06 18:30:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:06:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,17 @@
 # define DOOR_OPEN 1
 # define DOOR_OPENING 2
 # define DOOR_CLOSING 3
-# define DOOR_UNDEFINED -1
+# define DOOR_NONE -1
+
+# define MAX_DOORS 10
+
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	int		state;
+	double	animation_progress;
+}	t_door;
 
 typedef struct s_pix_inf
 {
@@ -101,7 +111,8 @@ typedef struct s_map
 	char	player_dir;
 	int		monster_x;
 	int		monster_y;
-	int		**doors;
+	t_door	**doors;
+	int		num_doors;
 }	t_map;
 
 typedef struct s_img
@@ -203,15 +214,22 @@ typedef struct s_keys
 
 typedef struct s_imp
 {
-	int				health;
-	int				damage;
-	int				is_dead;
-	t_img			*move_animation;
-	t_img			*death_animation;
-	t_img			*attack_animation;
-	t_img			*current_animation;
-	struct timeval	time0;
-	struct timeval	time1;
+	int health;
+	int damage;
+	int	is_dead;
+	int	x;
+	int	y;
+	int	center_x;
+	int	center_y;
+	int	rot_dir;
+	double	angle;
+	int	detected_player;
+	t_img	*move_animation;
+	t_img	*death_animation;
+	t_img	*attack_animation;
+	t_img	*current_animation;
+	struct timeval time0;
+	struct timeval time1;
 }	t_imp;
 
 typedef struct s_vars
@@ -234,6 +252,7 @@ typedef struct s_vars
 	t_sprite		*sprites;
 	t_img			*sprite_texture;
 	int				num_sprites;
+	t_img			*door_textures;
 	t_keys			keys;
 }	t_vars;
 
@@ -318,19 +337,21 @@ void		initialise_textures(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 void		initialise_map(t_vars *vars);
 void		initialise_vars(t_vars *vars);
+void		initialise_doors(t_vars *vars);
 
 /* Parsing.c */
 int			read_map(int fd, t_map *map, char *file_name);
 
 /* Utils.c */
-void		print_map(t_map *map);
-int			is_imp(t_vars *vars, int y, int x);
-int			is_wall(t_vars *vars, int y, int x);
-int			player_inside_map(t_vars *vars, int x, int y);
-int			can_move(t_vars *vars, int y, int x);
-int			get_texture_color(t_img *texture, int x, int y);
-long		get_elapsed_time(struct timeval *start, struct timeval *end);
-void		get_current_time(struct timeval *time);
+void	print_map(t_map *map);
+int		is_player(t_vars *vars, int y, int x);
+int		is_imp(t_vars *vars, int y, int x);
+int		is_wall(t_vars *vars, int y, int x);
+int		player_inside_map(t_vars *vars, int x, int y);
+int		can_move(t_vars *vars, int y, int x);
+int		get_texture_color(t_img *texture, int x, int y);
+long	get_elapsed_time(struct timeval *start, struct timeval *end);
+void	get_current_time(struct timeval *time);
 
 /* Raycast.c */
 void		cast_ray(t_vars *vars, int ray_id);

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 13:08:46 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:17:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,22 @@ int	validate_line(char *line, int row, t_map *map)
 			map->player_x = i;
 			map->player_y = row;
 			map->player_dir = line[i];
+			line[i] = 'P';
 		}
 		else if (line[i] == 'M')
 		{
 			map->monster_x = i;
 			map->monster_y = row;
+		}
+		else if (line[i] == 'D')
+		{
+			if (map->num_doors >= MAX_DOORS)
+				return (printf("Too many doors in the map\n"), 0);
+			map->doors[map->num_doors]->x = i;
+			map->doors[map->num_doors]->y = row;
+			map->doors[map->num_doors]->state = DOOR_CLOSED;
+			map->doors[map->num_doors]->animation_progress = 0.0;
+			map->num_doors++;
 		}
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
 			return (printf("world\n"), 0);
@@ -56,27 +67,6 @@ int	validate_line(char *line, int row, t_map *map)
 	if (i > map->width)
 		map->width = i;
 	return (1);
-}
-
-void	initialize_doors(t_map *map)
-{
-	int	i;
-	int	j;
-
-	map->doors = malloc(sizeof(int *) * map->height);
-	i = -1;
-	while (++i < map->height)
-	{
-		map->doors[i] = malloc(sizeof(int) * map->width);
-		j = -1;
-		while (++j < map->width)
-		{
-			if (map->grid[i][j] == 'D')
-				map->doors[i][j] = DOOR_CLOSED;
-			else
-				map->doors[i][j] = DOOR_UNDEFINED;
-		}
-	}
 }
 
 int	read_map(int fd, t_map *map, char *file_name)
@@ -103,6 +93,5 @@ int	read_map(int fd, t_map *map, char *file_name)
 		i++;
 	}
 	close(fd);
-	initialize_doors(map);
 	return (1);
 }
