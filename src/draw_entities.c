@@ -187,27 +187,25 @@ void	draw_ray_segment_monster(t_vars *vars)
 
 void	draw_minimap(t_vars *vars)
 {
-	// int	i;
-	// int	j;
+	int	i;
+	int	j;
 
-	// i = 0;
-	// while (i < vars->map->height)
-	// {
-	// 	j = 0;
-	// 	while (j < vars->map->width)
-	// 	{
-	// 		vars->line->x0 = j * vars->unit_size;
-	// 		vars->line->y0 = i * vars->unit_size;
-	// 		if (vars->map->grid[i][j] == '1')
-	// 			draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
-	// 		else
-	// 			draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-	draw_player(vars, RED);
-	draw_monster(vars, BLUE);
+	i = 0;
+	while (i < vars->map->height)
+	{
+		j = 0;
+		while (j < vars->map->width)
+		{
+			vars->line->x0 = j * vars->unit_size;
+			vars->line->y0 = i * vars->unit_size;
+			if (vars->map->grid[i][j] == '1')
+				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
+			else
+				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	draw_imp(t_vars *vars)
@@ -353,8 +351,13 @@ void	draw_map(t_vars *vars)
 	if (!vars->imp->is_dead)
 		draw_imp(vars);
 	draw_gun(vars, 4.0);
-	draw_minimap(vars);
-	//draw_ray_segment_player(vars);	
-	draw_ray_segment_monster(vars);
+	//draw_minimap(vars);
+	draw_player(vars, RED);
+	//draw_ray_segment_player(vars);
+	if (!vars->imp->is_dead)
+	{
+		draw_monster(vars, BLUE);
+		draw_ray_segment_monster(vars);
+	}
 	update_player_position(vars);
 }
