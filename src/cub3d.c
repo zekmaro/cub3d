@@ -62,22 +62,23 @@ int	key_up(int keycode, t_vars *vars)
 	return (0);
 }
 
-int	player_damaged(t_vars *vars)
+int	player_damaged_imp(t_vars *vars)
 {
 	return (abs(vars->imp->fire_ball_x - vars->player->center_x) < 20
 		&& abs(vars->imp->fire_ball_y - vars->player->center_y) < 20
 		&& !vars->player->is_damaged);
 }
 
-int	main_loop_hook(t_vars *vars)
+int	player_damaged_caco(t_vars *vars)
 {
-	struct timeval t;
-	double abc;
+	return (abs(vars->caco->fire_ball_x - vars->player->center_x) < 20
+		&& abs(vars->caco->fire_ball_y - vars->player->center_y) < 20
+		&& !vars->player->is_damaged);
+}
 
-	get_current_time(&t);
+void	update_imp(t_vars *vars)
+{
 	get_current_time(&vars->imp->time1);
-	get_current_time(&vars->player->time1);
-	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
 	long imp_elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
 	if (imp_elapsed_time > 200)
 	{
@@ -93,68 +94,162 @@ int	main_loop_hook(t_vars *vars)
 		&& vars->imp->current_animation->current_frame == vars->imp->current_animation->frame_count - 1)
 			vars->imp->current_animation = vars->imp->move_animation;
 		vars->imp->time0 = vars->imp->time1;
+	}
+}
+
+void	update_caco(t_vars *vars)
+{
+	get_current_time(&vars->caco->time1);
+	long imp_elapsed_time = get_elapsed_time(&vars->caco->time0, &vars->caco->time1);
+	if (imp_elapsed_time > 300)
+	{
+		if (vars->caco->current_animation == vars->caco->death_animation
+			&& vars->caco->current_animation->current_frame == vars->caco->current_animation->frame_count - 1)
+		{
+			vars->caco->is_dead = 1;
+			vars->caco->center_x = -100;
+			vars->caco->center_y = -100;
+		}
+		update_sprite_frame(vars->caco->current_animation);
+		if (vars->caco->current_animation == vars->caco->attack_animation
+		&& vars->caco->current_animation->current_frame == vars->caco->current_animation->frame_count - 1)
+			vars->caco->current_animation = vars->caco->move_animation;
+		vars->caco->time0 = vars->caco->time1;
+	}
+}
+
+void	imp_shoot(t_vars *vars)
+{
+	int vector_x = vars->player->center_x - vars->imp->center_x;
+	int vector_y = vars->player->center_y - vars->imp->center_y;
+	int vector = sqrt(vector_x * vector_x + vector_y * vector_y);
+	if (!vars->imp->shoot_ball)
+	{
+		if (vars->imp->health > 0)
+			vars->imp->current_animation = vars->imp->attack_animation;
+		vars->imp->fire_delta_y = (vector_y * vector_y / vector) / 10;
+		if (vector_y < 0)
+			vars->imp->fire_delta_y *= -1;
+		vars->imp->fire_delta_x = (vector_x * vector_x / vector) / 10;
+		if (vector_x < 0)
+			vars->imp->fire_delta_x *= -1;
+		vars->imp->shoot_ball = 1;
+	}
+	vars->imp->center_x += vector_x / 40;
+	vars->imp->center_y += vector_y / 40;
+	if (is_wall(vars, vars->imp->fire_ball_y, vars->imp->fire_ball_x))
+	{
+		vars->imp->fire_ball_y = vars->imp->center_y;
+		vars->imp->fire_ball_x = vars->imp->center_x;
+		vars->imp->shoot_ball = 0;
+	}
+	else
+	{
+		if (player_damaged_imp(vars))
+		{
+			vars->player->is_damaged = 1;
+			vars->player->health -= 20;
+			get_current_time(&vars->player->time0);
+			system("aplay ./assets/player_pain.wav -q &");
+			if (vars->player->health == 0)
+			{
+				printf("GAME OVER!\n");
+				system("aplay ./assets/player_dead.wav -q &");
+				free_and_exit(vars);
+			}
+			vars->imp->fire_ball_y = 0;
+			vars->imp->fire_ball_x = 0;
+		}
+		else
+		{
+			vars->imp->fire_ball_y += vars->imp->fire_delta_y;
+			vars->imp->fire_ball_x += vars->imp->fire_delta_x;		
+		}
+	}
+	vars->imp->detected_player = 0;
+}
+
+void	caco_shoot(t_vars *vars)
+{
+	int vector_x = vars->player->center_x - vars->caco->center_x;
+	int vector_y = vars->player->center_y - vars->caco->center_y;
+	int vector = sqrt(vector_x * vector_x + vector_y * vector_y);
+	if (!vars->caco->shoot_ball)
+	{
+		if (vars->caco->health > 0)
+			vars->caco->current_animation = vars->caco->attack_animation;
+		vars->caco->fire_delta_y = (vector_y * vector_y / vector) / 20;
+		if (vector_y < 0)
+			vars->caco->fire_delta_y *= -1;
+		vars->caco->fire_delta_x = (vector_x * vector_x / vector) / 20;
+		if (vector_x < 0)
+			vars->caco->fire_delta_x *= -1;
+		vars->caco->shoot_ball = 1;
+	}
+	vars->caco->center_x += vector_x / 40;
+	vars->caco->center_y += vector_y / 40;
+	if (is_wall(vars, vars->caco->fire_ball_y, vars->caco->fire_ball_x))
+	{
+		vars->caco->fire_ball_y = vars->caco->center_y;
+		vars->caco->fire_ball_x = vars->caco->center_x;
+		vars->caco->shoot_ball = 0;
+	}
+	else
+	{
+		if (player_damaged_caco(vars))
+		{
+			vars->player->is_damaged = 1;
+			vars->player->health -= 20;
+			get_current_time(&vars->player->time0);
+			system("aplay ./assets/player_pain.wav -q &");
+			if (vars->player->health == 0)
+			{
+				printf("GAME OVER!\n");
+				system("aplay ./assets/player_dead.wav -q &");
+				free_and_exit(vars);
+			}
+			vars->caco->fire_ball_y = 0;
+			vars->caco->fire_ball_x = 0;
+		}
+		else
+		{
+			vars->caco->fire_ball_y += vars->caco->fire_delta_y;
+			vars->caco->fire_ball_x += vars->caco->fire_delta_x;		
+		}
+	}
+	vars->caco->detected_player = 0;
+}
+
+int	main_loop_hook(t_vars *vars)
+{
+	struct timeval t;
+	double abc;
+
+	get_current_time(&t);
+	get_current_time(&vars->player->time1);
+	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
 	long time_player_damaged = get_elapsed_time(&vars->player->time0, &vars->player->time1);
 	if (time_player_damaged > 500)
 	{
 		vars->player->is_damaged = 0;
 	}
-	}
+	update_imp(vars);
+	update_caco(vars);
 	update_position(vars);
 	draw_sprite(vars);
 	if (vars->player->shoot)
 		animate_shooting(vars);
 	if (!vars->imp->detected_player)
 		vars->imp->angle += M_PI / 10 * vars->imp->rot_dir;
+	if (!vars->caco->detected_player)
+		vars->caco->angle += M_PI / 10 * vars->imp->rot_dir;
 	if (vars->imp->detected_player)
 	{
-		int vector_x = vars->player->center_x - vars->imp->center_x;
-		int vector_y = vars->player->center_y - vars->imp->center_y;
-		int vector = sqrt(vector_x * vector_x + vector_y * vector_y);
-		if (!vars->imp->shoot_ball)
-		{
-			if (vars->imp->health > 0)
-				vars->imp->current_animation = vars->imp->attack_animation;
-			vars->imp->fire_delta_y = (vector_y * vector_y / vector) / 10;
-			if (vector_y < 0)
-				vars->imp->fire_delta_y *= -1;
-			vars->imp->fire_delta_x = (vector_x * vector_x / vector) / 10;
-			if (vector_x < 0)
-				vars->imp->fire_delta_x *= -1;
-			vars->imp->shoot_ball = 1;
-		}
-		vars->imp->center_x += vector_x / 40;
-		vars->imp->center_y += vector_y / 40;
-		if (is_wall(vars, vars->imp->fire_ball_y, vars->imp->fire_ball_x))
-		{
-			vars->imp->fire_ball_y = vars->imp->center_y;
-			vars->imp->fire_ball_x = vars->imp->center_x;
-			vars->imp->shoot_ball = 0;
-		}
-		else
-		{
-			if (player_damaged(vars))
-			{
-				printf("hello\n");
-				vars->player->is_damaged = 1;
-				vars->player->health -= 20;
-				get_current_time(&vars->player->time0);
-				system("aplay ./assets/player_pain.wav -q &");
-				if (vars->player->health == 0)
-				{
-					printf("GAME OVER!\n");
-					system("aplay ./assets/player_dead.wav -q &");
-					free_and_exit(vars);
-				}
-				vars->imp->fire_ball_y = 0;
-				vars->imp->fire_ball_x = 0;
-			}
-			else
-			{
-				vars->imp->fire_ball_y += vars->imp->fire_delta_y;
-				vars->imp->fire_ball_x += vars->imp->fire_delta_x;		
-			}
-		}
-		vars->imp->detected_player = 0;
+		imp_shoot(vars);
+	}
+	if (vars->caco->detected_player)
+	{
+		caco_shoot(vars);
 	}
 	if (vars->player->is_damaged)
 	{
@@ -234,6 +329,18 @@ void	setup_imp(t_vars *vars)
 	vars->imp->fire_ball_y = vars->imp->center_y;
 }
 
+void	setup_caco(t_vars *vars)
+{
+	vars->caco->x = (vars->map->caco_x * vars->unit_size);
+	vars->caco->y = (vars->map->caco_y * vars->unit_size);
+	vars->caco->center_x = vars->caco->x + vars->unit_size / 2;
+	vars->caco->center_y = vars->caco->y + vars->unit_size / 2;
+	vars->caco->angle = -M_PI / 2;
+	vars->caco->rot_dir = 1;
+	vars->caco->fire_ball_x = vars->caco->center_x;
+	vars->caco->fire_ball_y = vars->caco->center_y;
+}
+
 void	setup_door(t_vars *vars)
 {
 	vars->door->center_x = vars->map->door_x * vars->unit_size + vars->unit_size / 2;
@@ -265,8 +372,10 @@ int	main(int argc, char **argv)
 	setup_player(&vars);
 	setup_imp(&vars);
 	setup_door(&vars);
+	setup_caco(&vars);
 	get_current_time(&vars.program_start);
 	get_current_time(&vars.imp->time0);
+	get_current_time(&vars.caco->time0);
 	//print_map(vars.map);
 	run_screen(&vars);
 	return (0);

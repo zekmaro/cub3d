@@ -51,6 +51,11 @@ int	validate_line(char *line, int row, t_map *map)
 			map->monster_x = i;
 			map->monster_y = row;
 		}
+		else if (line[i] == 'C')
+		{
+			map->caco_x = i;
+			map->caco_y = row;
+		}
 		else if (line[i] == 'D')
 		{
 			if (map->num_doors >= MAX_DOORS)
