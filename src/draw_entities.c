@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/07 23:28:42 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/08 15:21:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,8 @@ void	draw_minimap(t_vars *vars)
 			vars->line->y0 = i * vars->unit_size;
 			if (vars->map->grid[i][j] == '1')
 				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
+			else if (vars->map->grid[i][j] == 'D')
+				draw_square(vars, vars->line->x0, vars->line->y0, YELLOW);
 			else
 				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
 			j++;
