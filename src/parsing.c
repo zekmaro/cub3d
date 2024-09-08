@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <stdio.h>
 
 int	count_new_lines(int fd)
 {
@@ -50,14 +51,17 @@ int	validate_line(char *line, int row, t_map *map)
 			map->monster_x = i;
 			map->monster_y = row;
 		}
+		else if (line[i] == 'C')
+		{
+			map->caco_x = i;
+			map->caco_y = row;
+		}
 		else if (line[i] == 'D')
 		{
 			if (map->num_doors >= MAX_DOORS)
 				return (printf("Too many doors in the map\n"), 0);
-			map->doors[map->num_doors].x = i;
-			map->doors[map->num_doors].y = row;
-			map->doors[map->num_doors].state = DOOR_CLOSED;
-			map->doors[map->num_doors].animation_progress = 0.0;
+			map->door_x = i;
+			map->door_y = row;
 			map->num_doors++;
 		}
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')

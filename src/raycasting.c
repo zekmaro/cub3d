@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/03 22:52:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/07 23:29:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_tex_typ define_texture_type(t_vars *vars)
     }
     else if (vars->map->grid[map_y][map_x] == 'D')
     {
-        return TEXTURE_DOOR;
+        return TEXTURE_DOOR0;
     }
 
     return TEXTURE_NONE;
@@ -72,26 +72,30 @@ void	setup_ray(t_vars *vars, double ray_x, double ray_y)
 		vars->ray->draw_end = vars->mlx->window_height - 1;
 }
 
-void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
+void draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 {
-	int	y;
-	int	tex_x;
-	int	tex_y;
-	int	color;
-	int temp = 0;
+	int		y;
+	int		tex_x;
+	int		tex_y;
+	int		color;
+	int		temp = 0;
+	t_img	*texture;
 
-	(void)ray_id;
+    (void)ray_id;
 	y = vars->ray->draw_start;
 	while (temp++ < y)
 		put_pixel_to_image(vars, ray_id, temp, RED);
 	while (y < vars->ray->draw_end)
 	{
 		get_texture_coords(vars, texture_index, &tex_x);
-		tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
-			/ vars->ray->line_height);
+		tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size / vars->ray->line_height);
+		if (texture_index == TEXTURE_DOOR0)
+			texture = &vars->door_textures[0];
+		else
+			texture = vars->textures[texture_index];
 		if (texture_index == TEXTURE_SOUTH)
 			tex_y += 1;
-		color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
+		color = get_texture_color(texture, tex_x, tex_y);
 		put_pixel_to_image(vars, ray_id, y, color);
 		y++;
 	}

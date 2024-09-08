@@ -47,6 +47,10 @@ void	initialise_textures(t_vars *vars)
 	load_texture(vars, TEXTURE_SOUTH, "./assets/wall2.xpm");
 	load_texture(vars, TEXTURE_WEST, "./assets/wall3.xpm");
 	load_texture(vars, TEXTURE_EAST, "./assets/wall4.xpm");
+	load_texture(vars, TEXTURE_DOOR0, "./assets/door0.xpm");
+	load_texture(vars, TEXTURE_DOOR1, "./assets/door1.xpm");
+	load_texture(vars, TEXTURE_DOOR2, "./assets/door2.xpm");
+	load_texture(vars, TEXTURE_DOOR3, "./assets/door3.xpm");
 }
 
 void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_path)
@@ -104,6 +108,40 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/imp_dies4.xpm",
 		"./assets/imp_dies5.xpm",
 	};
+	const char *imp_attack_frames[] \
+	= {
+		"./assets/imp_attack1.xpm",
+		"./assets/imp_attack2.xpm",
+		"./assets/imp_attack3.xpm"
+	};
+	const char *caco_movement_frames[] \
+	= {
+		"./assets/cacodemon1.xpm",
+		"./assets/caco_walk1.xpm",
+		"./assets/caco_walk2.xpm",
+		"./assets/caco_walk3.xpm",
+		"./assets/caco_walk4.xpm",
+		"./assets/caco_walk5.xpm",
+		"./assets/caco_walk6.xpm",
+	};
+	const char *caco_death_frames[] \
+	= {
+		"./assets/caco_dies1.xpm",
+		"./assets/caco_dies2.xpm",
+		"./assets/caco_dies3.xpm",
+		"./assets/caco_dies4.xpm",
+		"./assets/caco_dies5.xpm"
+	};
+	const char *caco_attack_frames[] \
+	= {
+		"./assets/cacodemon2.xpm",
+		"./assets/cacodemon3.xpm",
+		"./assets/cacodemon4.xpm"
+	};
+	const char *caco_fire_ball_frames[] \
+	= {
+		"./assets/caco_fire1.xpm"
+	};
 	const char *gun_frames[] \
 	= {
 		"./assets/gun1.xpm",
@@ -128,12 +166,7 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/imp_fire1.xpm",
 		"./assets/imp_fire2.xpm"
 	};
-	const char *imp_attack_frames[] \
-	= {
-		"./assets/imp_attack1.xpm",
-		"./assets/imp_attack2.xpm",
-		"./assets/imp_attack3.xpm"
-	};
+
 	vars->imp->move_animation = ft_calloc(sizeof(t_img), 1);
 	if (!vars->imp->move_animation)
 	{
@@ -152,6 +185,38 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for animated sprite");
 		free_and_exit(vars);
 	}
+	vars->caco->move_animation = ft_calloc(sizeof(t_caco), 1);
+	if (!vars->caco->move_animation)
+	{
+		perror("Failed to allocate memory for move animated sprite");
+		free_and_exit(vars);
+	}
+	vars->imp->fire_ball = ft_calloc(sizeof(t_img), 1);
+	if (!vars->imp->fire_ball)
+	{
+		perror("Failed to allocate memory for imp fire balls ");
+		free_and_exit(vars);
+	}
+
+	vars->caco->death_animation = ft_calloc(sizeof(t_caco), 1);
+	if (!vars->caco->death_animation)
+	{
+		perror("Failed to allocate memory for animated sprite");
+		free_and_exit(vars);
+	}
+	vars->caco->attack_animation = ft_calloc(sizeof(t_caco), 1);
+	if (!vars->caco->attack_animation)
+	{
+		perror("Failed to allocate memory for animated sprite");
+		free_and_exit(vars);
+	}
+	vars->caco->fire_ball = ft_calloc(sizeof(t_img), 1);
+	if (!vars->caco->fire_ball)
+	{
+		perror("Failed to allocate memory for imp fire balls ");
+		free_and_exit(vars);
+	}
+
 	vars->player->gun = ft_calloc(sizeof(t_img), 1);
 	if (!vars->player->gun)
 	{
@@ -164,26 +229,25 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for fire sprite");
 		free_and_exit(vars);
 	}
-	vars->door_textures = ft_calloc(sizeof(t_img), 4);
-	if (!vars->door_textures)
+	vars->door->textures = ft_calloc(sizeof(t_img), 1);
+	if (!vars->door->textures)
 	{
 		perror("Failed to allocate memory for door textures");
-		free_and_exit(vars);
-	}
-	vars->imp->fire_ball = ft_calloc(sizeof(t_img), 1);
-	if (!vars->imp->fire_ball)
-	{
-		perror("Failed to allocate memory for imp fire balls ");
 		free_and_exit(vars);
 	}
 	load_animated_sprite(vars, vars->imp->move_animation, imp_movement_frames, 4);
 	load_animated_sprite(vars, vars->imp->death_animation, imp_death_frames, 5);
 	load_animated_sprite(vars, vars->imp->attack_animation, imp_attack_frames, 3);
 	load_animated_sprite(vars, vars->imp->fire_ball, imp_fire_ball_frames, 2);
+	load_animated_sprite(vars, vars->caco->move_animation, caco_movement_frames, 7);
+	load_animated_sprite(vars, vars->caco->death_animation, caco_death_frames, 5);
+	load_animated_sprite(vars, vars->caco->attack_animation, caco_attack_frames, 3);
+	load_animated_sprite(vars, vars->caco->fire_ball, caco_fire_ball_frames, 1);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
-	load_animated_sprite(vars, vars->door_textures, door_frames, 4);
+	load_animated_sprite(vars, vars->door->textures, door_frames, 4);
 	vars->imp->current_animation = vars->imp->move_animation;
+	vars->caco->current_animation = vars->caco->move_animation;
 }
 
 void	initialise_map(t_vars *vars)
@@ -220,25 +284,36 @@ void	initialise_imp(t_vars *vars)
 	vars->imp->health = 100;
 }
 
+void	initialise_caco(t_vars *vars)
+{
+	vars->caco = ft_calloc(sizeof(t_caco), 1);
+	if (!vars->caco)
+	{
+		perror("Failed to allocate memory for Imp");
+		free_and_exit(vars);
+	}
+	vars->caco->health = 100;
+}
+
 void	initialise_doors(t_vars *vars)
 {
-	int	i;
+	// int	i;
 
 	vars->map->num_doors = 0;
-	vars->map->doors = ft_calloc(MAX_DOORS, sizeof(t_door));
-	if (!vars->map->doors)
+	vars->door = ft_calloc(1, sizeof(t_door));
+	if (!vars->door)
 	{
 		perror("Failed to allocate memory for doors");
 		free_and_exit(vars);
 	}
-	i = -1;
-	while (++i < MAX_DOORS)
-	{
-		vars->map->doors[i].x = -1;
-		vars->map->doors[i].y = -1;
-		vars->map->doors[i].state = DOOR_CLOSED;
-		vars->map->doors[i].animation_progress = 0.0;
-	}
+	// i = -1;
+	// while (++i < MAX_DOORS)
+	// {
+	// 	vars->map->doors[i].x = -1;
+	// 	vars->map->doors[i].y = -1;
+	// 	vars->map->doors[i].state = DOOR_CLOSED;
+	// 	vars->map->doors[i].animation_progress = 0.0;
+	// }
 }
 
 void	initialise_vars(t_vars *vars)
@@ -254,4 +329,5 @@ void	initialise_vars(t_vars *vars)
 	initialise_player(vars);
 	initialise_zbuffer(vars);
 	initialise_imp(vars);
+	initialise_caco(vars);
 }

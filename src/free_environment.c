@@ -43,27 +43,27 @@ void	free_vars_line(t_vars *vars)
 		free(vars->line);
 }
 
-void	free_vars_doors(t_vars *vars)
-{
-	int	i;
+// void	free_vars_doors(t_vars *vars)
+// {
+// 	int	i;
 
-	if (vars->map->doors)
-	{
-		free(vars->map->doors);
-		vars->map->doors = NULL;
-	}
-	if (vars->door_textures)
-	{
-		i = -1;
-		while (++i < 4)
-		{
-			if (vars->door_textures[i].mlx_img)
-				mlx_destroy_image(vars->mlx, vars->door_textures[i].mlx_img);
-		}
-		free(vars->door_textures);
-		vars->door_textures = NULL;
-	}
-}
+// 	if (vars->map->doors)
+// 	{
+// 		free(vars->map->doors);
+// 		vars->map->doors = NULL;
+// 	}
+// 	if (vars->door_textures)
+// 	{
+// 		i = -1;
+// 		while (++i < 4)
+// 		{
+// 			if (vars->door_textures[i].mlx_img)
+// 				mlx_destroy_image(vars->mlx, vars->door_textures[i].mlx_img);
+// 		}
+// 		free(vars->door_textures);
+// 		vars->door_textures = NULL;
+// 	}
+// }
 
 // void	free_vars_sprites(t_vars *vars)
 // {
