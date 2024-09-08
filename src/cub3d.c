@@ -300,8 +300,8 @@ void	setup_door(t_vars *vars)
 {
 	vars->door->center_x = vars->map->door_x * vars->unit_size + vars->unit_size / 2;
 	vars->door->center_y = vars->map->door_y * vars->unit_size + vars->unit_size / 2;
-	printf("door center x: %d\n", vars->door->center_x);
-	printf("door center y: %d\n", vars->door->center_y);
+	// printf("door center x: %d\n", vars->door->center_x);
+	// printf("door center y: %d\n", vars->door->center_y);
 }
 
 int	main(int argc, char **argv)
