@@ -62,19 +62,13 @@ int	count_frames(const char **frames)
 	return (result);
 }
 
-void	initialise_enemy_textures(t_vars *vars, t_img **animation,
+void	initialise_enemy_textures(t_vars *vars, t_img *animation,
 							const char **frames)
 {
 	int	frame_count;
 
-	*animation = ft_calloc(sizeof(t_img), 1);
-	if (!*animation)
-	{
-		perror("Failed to allocate memory for move animated sprite");
-		free_and_exit(vars);
-	}
 	frame_count = count_frames(frames);
-	load_animated_sprite(vars, *animation, frames, frame_count);
+	load_animated_sprite(vars, animation, frames, frame_count);
 }
 
 void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_path)
@@ -101,7 +95,7 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_p
 	sprite_texture->height = height;
 }
 
-void	init_imp_sprites(t_vars *vars)
+void	init_imp_sprites(t_vars *vars, t_enemy *imp)
 {
 	const char *imp_movement_frames[] \
 	= {
@@ -133,15 +127,16 @@ void	init_imp_sprites(t_vars *vars)
 		"./assets/imp_fire2.xpm",
 		NULL
 	};
-	initialise_enemy_textures(vars, &vars->imp->move_animation, imp_movement_frames);
-	initialise_enemy_textures(vars, &vars->imp->death_animation, imp_death_frames);
-	initialise_enemy_textures(vars, &vars->imp->attack_animation, imp_attack_frames);
-	initialise_enemy_textures(vars, &vars->imp->fire_ball, imp_fire_ball_frames);
-	vars->imp->current_animation = vars->imp->move_animation;
+	initialise_enemy_textures(vars, imp->move_animation, imp_movement_frames);
+	initialise_enemy_textures(vars, imp->death_animation, imp_death_frames);
+	initialise_enemy_textures(vars, imp->attack_animation, imp_attack_frames);
+	initialise_enemy_textures(vars, imp->fire_ball, imp_fire_ball_frames);
+	imp->current_animation = imp->move_animation;
 }
 
-void	init_caco_sprites(t_vars *vars)
+void	init_caco_sprites(t_vars *vars, t_enemy *caco)
 {
+	(void)vars;
 	const char *caco_movement_frames[] \
 	= {
 		"./assets/cacodemon1.xpm",
@@ -174,11 +169,11 @@ void	init_caco_sprites(t_vars *vars)
 		"./assets/caco_fire1.xpm",
 		NULL
 	};
-	initialise_enemy_textures(vars, &vars->caco->move_animation, caco_movement_frames);
-	initialise_enemy_textures(vars, &vars->caco->death_animation, caco_death_frames);
-	initialise_enemy_textures(vars, &vars->caco->attack_animation, caco_attack_frames);
-	initialise_enemy_textures(vars, &vars->caco->fire_ball, caco_fire_ball_frames);
-	vars->caco->current_animation = vars->caco->move_animation;
+	initialise_enemy_textures(vars, caco->move_animation, caco_movement_frames);
+	initialise_enemy_textures(vars, caco->death_animation, caco_death_frames);
+	initialise_enemy_textures(vars, caco->attack_animation, caco_attack_frames);
+	initialise_enemy_textures(vars, caco->fire_ball, caco_fire_ball_frames);
+	caco->current_animation = caco->move_animation;
 }
 
 void	initialise_sprites(t_vars *vars)
@@ -236,12 +231,11 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for door textures");
 		free_and_exit(vars);
 	}
-	init_imp_sprites(vars);
-	init_caco_sprites(vars);
+	// init_imp_sprites(vars);
+	// init_caco_sprites(vars);
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	load_animated_sprite(vars, vars->door->textures, door_frames, 4);
-	vars->caco->current_animation = vars->caco->move_animation;
 }
 
 
@@ -266,28 +260,6 @@ void	initialise_zbuffer(t_vars *vars)
 		perror("Failed to allocate memory for zbuffer");
 		free_and_exit(vars);
 	}
-}
-
-void	initialise_imp(t_vars *vars)
-{
-	vars->imp = ft_calloc(sizeof(t_enemy), 1);
-	if (!vars->imp)
-	{
-		perror("Failed to allocate memory for Imp");
-		free_and_exit(vars);
-	}
-	vars->imp->health = 100;
-}
-
-void	initialise_caco(t_vars *vars)
-{
-	vars->caco = ft_calloc(sizeof(t_enemy), 1);
-	if (!vars->caco)
-	{
-		perror("Failed to allocate memory for Imp");
-		free_and_exit(vars);
-	}
-	vars->caco->health = 100;
 }
 
 void	initialise_doors(t_vars *vars)
@@ -323,6 +295,4 @@ void	initialise_vars(t_vars *vars)
 	initialise_ray(vars);
 	initialise_player(vars);
 	initialise_zbuffer(vars);
-	initialise_imp(vars);
-	initialise_caco(vars);
 }

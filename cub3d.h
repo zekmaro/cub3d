@@ -132,6 +132,8 @@ typedef struct s_map
 	int		caco_y;
 	int		door_x;
 	int		door_y;
+	int 	imp_list_size;
+	int		caco_list_size;
 	int		num_doors;
 }	t_map;
 
@@ -238,6 +240,8 @@ typedef struct s_enemy
 	int	is_dead;
 	int	x;
 	int	y;
+	int	grid_x;
+	int	grid_y;
 	int	center_x;
 	int	center_y;
 	int	rot_dir;
@@ -266,7 +270,9 @@ typedef struct s_vars
 	t_line			*line;
 	t_player		*player;
 	t_enemy			*imp;
+	t_enemy			*imp_list;
 	t_enemy			*caco;
+	t_enemy			*caco_list;
 	t_ray			*ray;
 	t_door			*door;
 	t_img			*textures[5];
@@ -412,4 +418,7 @@ int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 
 void	draw_player_damaged(t_vars *vars);
 void	draw_door(t_vars *vars);
+void	init_imp_sprites(t_vars *vars, t_enemy *imp);
+int	is_enemy(t_enemy *enemy, int y, int x);
+void	init_caco_sprites(t_vars *vars, t_enemy *caco);
 #endif // CUB3D_H

@@ -90,71 +90,37 @@ void	update_position(t_vars *vars)
 		vars->player->angle += M_PI / 90;
 }
 
-void	check_imp_collision(t_vars *vars)
+void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 {
 	double	ray_x;
 	double	ray_y;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	ray_angle;
-	int imp_flag;
+	int enemy_flag;
 
 	ray_angle = vars->player->angle;
 	ray_x = vars->player->center_x;
 	ray_y = vars->player->center_y;
 	ray_dir_x = ray_x;
 	ray_dir_y = ray_y;
-	imp_flag = 0;
-	while (!is_wall(vars, ray_dir_y, ray_dir_x) && !imp_flag)
+	enemy_flag = 0;
+	while (!is_wall(vars, ray_dir_y, ray_dir_x) && !enemy_flag)
 	{
 		ray_dir_x += cos(ray_angle);
 		ray_dir_y += sin(ray_angle);
-		imp_flag = is_imp(vars, ray_dir_y, ray_dir_x);
+		enemy_flag = is_enemy(enemy, ray_dir_y, ray_dir_x);
 	}
-	if (imp_flag)
+	if (enemy_flag)
 	{
-		system("aplay ./assets/imp_pain.wav -q &");
-		vars->imp->health -= 50;
+		//system("aplay ./assets/imp_pain.wav -q &");
+		enemy->health -= damage;
 	}
-	if (vars->imp->health == 0)
+	if (enemy->health == 0)
 	{
-		if (!vars->imp->is_dead)
-			system("aplay ./assets/imp_death.wav -q &");
-		vars->imp->current_animation = vars->imp->death_animation;
-	}
-}
-
-void	check_caco_collision(t_vars *vars)
-{
-	double	ray_x;
-	double	ray_y;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	ray_angle;
-	int caco_flag;
-
-	ray_angle = vars->player->angle;
-	ray_x = vars->player->center_x;
-	ray_y = vars->player->center_y;
-	ray_dir_x = ray_x;
-	ray_dir_y = ray_y;
-	caco_flag = 0;
-	while (!is_wall(vars, ray_dir_y, ray_dir_x) && !caco_flag)
-	{
-		ray_dir_x += cos(ray_angle);
-		ray_dir_y += sin(ray_angle);
-		caco_flag = is_caco(vars, ray_dir_y, ray_dir_x);
-	}
-	if (caco_flag)
-	{
-		system("aplay ./assets/caco_pain.wav -q &");
-		vars->caco->health -= 20;
-	}
-	if (vars->caco->health == 0)
-	{
-		if (!vars->caco->is_dead)
-			system("aplay ./assets/caco_death.wav -q &");
-		vars->caco->current_animation = vars->caco->death_animation;
+		// if (!vars->imp->is_dead)
+		// 	system("aplay ./assets/imp_death.wav -q &");
+		enemy->current_animation = enemy->death_animation;
 	}
 }
 
@@ -201,8 +167,18 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 		system("aplay ./assets/gunshot.wav -q &");
 		vars->player->shoot = 1;
 		vars->player->fire_done = 0;
-		check_imp_collision(vars);
-		check_caco_collision(vars);
+		int i = 0;
+		while (i < vars->map->imp_list_size)
+		{
+			check_enemy_collision(vars, &vars->imp_list[i], 50);
+			i++;
+		}
+		i = 0;
+		while (i < vars->map->caco_list_size)
+		{
+			check_enemy_collision(vars, &vars->caco_list[i], 20);
+			i++;
+		}
 	}
 	return (0);
 }
