@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 12:13:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:22:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ int	is_wall(t_vars *vars, int y, int x)
 		/ vars->unit_size] == '1');
 }
 
+int is_door(t_vars *vars, int y, int x)
+{
+	return (vars->map->grid[y / vars->unit_size][x \
+		/ vars->unit_size] == 'D');
+}
+
 int	player_inside_map(t_vars *vars, int x, int y)
 {
 	return (x < vars->map->width \
@@ -71,7 +77,7 @@ int	get_texture_color(t_img *texture, int x, int y)
 	char	*pixel;
 	int		color;
 
-	pixel = texture->addr + (y * texture->line_len \
+pixel = texture->addr + (y * texture->line_len \
 		+ x * (texture->bits_per_pixel / 8));
 	color = *(unsigned int *)pixel;
 	if ((color & 0x00FFFFFF) == MAGENTA)

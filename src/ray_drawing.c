@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/07 18:17:33 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:22:06 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 {
-	if (texture_index % 2 == 0)
+	if (texture_index == TEXTURE_DOOR0 || texture_index == TEXTURE_DOOR1 \
+		|| texture_index == TEXTURE_DOOR2 || texture_index == TEXTURE_DOOR3)
+	{
+		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
+	}
+	else if (texture_index % 2 == 0)
 	{
 		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
 		if (texture_index == TEXTURE_SOUTH)
