@@ -127,64 +127,6 @@ void	draw_ray(t_vars *vars, double angle_offset)
 	}
 }
 
-void	draw_ray_imp(t_vars *vars, double angle_offset)
-{
-	double	ray_x;
-	double	ray_y;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	ray_angle;
-
-	ray_angle = vars->imp->angle + angle_offset;
-	ray_x = vars->imp->center_x;
-	ray_y = vars->imp->center_y;
-	ray_dir_x = ray_x;
-	ray_dir_y = ray_y;
-	while (!is_wall(vars, ray_dir_y, ray_dir_x))
-	{
-		ray_dir_x += cos(ray_angle);
-		ray_dir_y += sin(ray_angle);
-		//put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
-		if (!vars->imp->detected_player)
-		{
-			vars->imp->detected_player = is_player(vars, ray_dir_y, ray_dir_x);
-			if (vars->imp->detected_player && angle_offset > 0.00)
-				vars->imp->rot_dir = 1;
-			else if (vars->imp->detected_player && angle_offset < 0.00)
-				vars->imp->rot_dir = -1;
-		}
-	}
-}
-
-void	draw_ray_caco(t_vars *vars, double angle_offset)
-{
-	double	ray_x;
-	double	ray_y;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	ray_angle;
-
-	ray_angle = vars->caco->angle + angle_offset;
-	ray_x = vars->caco->center_x;
-	ray_y = vars->caco->center_y;
-	ray_dir_x = ray_x;
-	ray_dir_y = ray_y;
-	while (!is_wall(vars, ray_dir_y, ray_dir_x))
-	{
-		ray_dir_x += cos(ray_angle);
-		ray_dir_y += sin(ray_angle);
-		//put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
-		if (!vars->caco->detected_player)
-		{
-			vars->caco->detected_player = is_player(vars, ray_dir_y, ray_dir_x);
-			if (vars->caco->detected_player && angle_offset > 0.00)
-				vars->caco->rot_dir = 1;
-			else if (vars->caco->detected_player && angle_offset < 0.00)
-				vars->caco->rot_dir = -1;
-		}
-	}
-}
-
 void	draw_ray_segment_player(t_vars *vars)
 {
 	double	fov_half;
@@ -199,32 +141,46 @@ void	draw_ray_segment_player(t_vars *vars)
 	}
 }
 
-void	draw_ray_segment_imp(t_vars *vars)
+void	cast_ray_enemy(t_vars *vars, t_enemy *enemy, double angle_offset)
 {
-	double	fov_half;
-	double	radian;
+	double	ray_x;
+	double	ray_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	ray_angle;
 
-	fov_half = vars->player->fov / 2;
-	radian = 0;
-	vars->imp->detected_player = 0;
-	while (radian < vars->player->fov)
+	ray_angle = enemy->angle + angle_offset;
+	ray_x = enemy->center_x;
+	ray_y = enemy->center_y;
+	ray_dir_x = ray_x;
+	ray_dir_y = ray_y;
+	while (!is_wall(vars, ray_dir_y, ray_dir_x))
 	{
-		draw_ray_imp(vars, -fov_half + radian);
-		radian += 0.01;
+		ray_dir_x += cos(ray_angle);
+		ray_dir_y += sin(ray_angle);
+		//put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
+		if (!enemy->detected_player)
+		{
+			enemy->detected_player = is_player(vars, ray_dir_y, ray_dir_x);
+			if (enemy->detected_player && angle_offset > 0.00)
+				enemy->rot_dir = 1;
+			else if (enemy->detected_player && angle_offset < 0.00)
+				enemy->rot_dir = -1;
+		}
 	}
 }
 
-void	draw_ray_segment_caco(t_vars *vars)
+void	search_for_player_enemy(t_vars *vars, t_enemy *enemy)
 {
 	double	fov_half;
 	double	radian;
 
 	fov_half = vars->player->fov / 2;
 	radian = 0;
-	vars->caco->detected_player = 0;
+	enemy->detected_player = 0;
 	while (radian < vars->player->fov)
 	{
-		draw_ray_caco(vars, -fov_half + radian);
+		cast_ray_enemy(vars, enemy, -fov_half + radian);
 		radian += 0.01;
 	}
 }
@@ -252,114 +208,6 @@ void	draw_minimap(t_vars *vars)
 		}
 		i++;
 	}
-}
-
-void	draw_imp(t_vars *vars)
-{
-	double dirY = vars->player->dir_y;
-	double dirX = vars->player->dir_x;
-	double planeY = vars->player->plane_y;
-	double planeX = vars->player->plane_x;
-	int spriteX = vars->imp->center_x - vars->player->center_x;
-	int spriteY = vars->imp->center_y - vars->player->center_y;
-
-	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
-	
-	double transformX = invDet * (dirY * spriteX - dirX * spriteY);
-	double transformY = invDet * (-planeY * spriteX + planeX * spriteY);
-	
-	int spriteScreenX = (int)((vars->mlx->window_width / 2) * (1 + transformX / transformY));
-	int spriteHeight = abs((int)(vars->mlx->window_height * 50 / transformY));
-	int spriteWidth = abs((int)(vars->mlx->window_height * 50 / transformY));
-
-	int drawStartY = -spriteHeight / 2 + vars->mlx->window_height / 2;
-	if (drawStartY < 0) drawStartY = 0;
-
-	int drawEndY = spriteHeight / 2 + vars->mlx->window_height / 2;
-	if (drawEndY >= vars->mlx->window_height) drawEndY = vars->mlx->window_height - 1;
-
-	int drawStartX = -spriteWidth / 2 + spriteScreenX;
-	if (drawStartX < 0) drawStartX = 0;
-
-	int drawEndX = spriteWidth / 2 + spriteScreenX;
-	if (drawEndX >= vars->mlx->window_width) drawEndX = vars->mlx->window_width - 1;
-
-	//printf("transformY %f transformX %f drawEndY %d drawEndX %d drawStartY %d drawStartX %d \n", transformY, transformX, drawEndY, drawEndX, drawStartY, drawStartX);
-	for (int stripe = drawStartX; stripe < drawEndX; stripe++) {
-		t_img *tmp = vars->imp->current_animation->frames[vars->imp->current_animation->current_frame];
-	// Calculate the X-coordinate in the sprite's texture
-		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tmp->width / spriteWidth) / 256;
-
-		if (transformY > 0 && stripe > 0 && stripe < vars->mlx->window_width && transformY < vars->zbuffer[stripe]) {
-			for (int y = drawStartY; y < drawEndY; y++) {
-				// Calculate the Y-coordinate in the sprite's texture
-				int d = (y - vars->mlx->window_height / 2 + spriteHeight / 2) * 256;
-				int texY = ((d * tmp->height) / spriteHeight) / 256;
-
-				// Get the pixel color from the sprite's texture
-				int color = get_texture_color(tmp, texX, texY);
-				if (color != -1) {
-					put_pixel_to_image(vars, stripe, y + 50, color);
-
-					vars->zbuffer[stripe] = transformY;
-				}
-			}
-		}
-    }
-}
-
-void	draw_caco(t_vars *vars)
-{
-	double dirY = vars->player->dir_y;
-	double dirX = vars->player->dir_x;
-	double planeY = vars->player->plane_y;
-	double planeX = vars->player->plane_x;
-	int spriteX = vars->caco->center_x - vars->player->center_x;
-	int spriteY = vars->caco->center_y - vars->player->center_y;
-	t_img *tmp = vars->caco->current_animation->frames[vars->caco->current_animation->current_frame];
-
-	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
-	
-	double transformX = invDet * (dirY * spriteX - dirX * spriteY);
-	double transformY = invDet * (-planeY * spriteX + planeX * spriteY);
-	
-	int spriteScreenX = (int)((vars->mlx->window_width / 2) * (1 + transformX / transformY));
-	int spriteHeight = abs((int)(vars->mlx->window_height * 50 / transformY));
-	int spriteWidth = abs((int)(vars->mlx->window_height * 50 / transformY));
-
-	int drawStartY = -spriteHeight / 2 + vars->mlx->window_height / 2;
-	if (drawStartY < 0) drawStartY = 0;
-
-	int drawEndY = spriteHeight / 2 + vars->mlx->window_height / 2;
-	if (drawEndY >= vars->mlx->window_height) drawEndY = vars->mlx->window_height - 1;
-
-	int drawStartX = -spriteWidth / 2 + spriteScreenX;
-	if (drawStartX < 0) drawStartX = 0;
-
-	int drawEndX = spriteWidth / 2 + spriteScreenX;
-	if (drawEndX >= vars->mlx->window_width) drawEndX = vars->mlx->window_width - 1;
-
-	//printf("transformY %f transformX %f drawEndY %d drawEndX %d drawStartY %d drawStartX %d \n", transformY, transformX, drawEndY, drawEndX, drawStartY, drawStartX);
-	for (int stripe = drawStartX; stripe < drawEndX; stripe++) {
-	// Calculate the X-coordinate in the sprite's texture
-		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tmp->width / spriteWidth) / 256;
-
-		if (transformY > 0 && stripe > 0 && stripe < vars->mlx->window_width && transformY < vars->zbuffer[stripe]) {
-			for (int y = drawStartY; y < drawEndY; y++) {
-				// Calculate the Y-coordinate in the sprite's texture
-				int d = (y - vars->mlx->window_height / 2 + spriteHeight / 2) * 256;
-				int texY = ((d * tmp->height) / spriteHeight) / 256;
-
-				// Get the pixel color from the sprite's texture
-				int color = get_texture_color(tmp, texX, texY);
-				if (color != -1) {
-					put_pixel_to_image(vars, stripe, y + 50, color);
-
-					vars->zbuffer[stripe] = transformY;
-				}
-			}
-		}
-    }
 }
 
 void	draw_door(t_vars *vars)
@@ -425,33 +273,19 @@ void	draw_fire(t_vars *vars, double scale)
 	t_img *temp = (t_img *)vars->player->fire->frames[vars->player->fire->current_frame];
 	int		gun_width = temp->width;   // Original texture width
 	int		gun_height = temp->height;  // Original texture height
-
-	// Calculate the scaled dimensions
 	int		scaled_width = gun_width * scale;
 	int		scaled_height = gun_height * scale;
-
-	// Calculate the starting point for the gun on the screen (centered horizontally, at the bottom)
 	int		screen_x_start = (vars->mlx->window_width / 2) - (scaled_width / 2) + 18;
 	int		screen_y_start = vars->mlx->window_height - scaled_height;
-
-	// Loop through each screen pixel for the scaled gun sprite
 	for (screen_y = 0; screen_y < scaled_height; screen_y++)
 	{
-		// Calculate which texture Y-coordinate corresponds to the screen Y-coordinate
 		tex_y = screen_y / scale;
-
 		for (screen_x = 0; screen_x < scaled_width; screen_x++)
 		{
-			// Calculate which texture X-coordinate corresponds to the screen X-coordinate
 			tex_x = screen_x / scale;
-
-			// Get the texture pixel color from the gun texture
 			color = get_texture_color(temp, tex_x, tex_y);
-
-			// Ignore transparent pixels (assuming 0xFF00FF is transparent)
 			if (color != -1)
 			{
-				// Draw the scaled pixel to the main image buffer at the correct screen location
 				put_pixel_to_image(vars, screen_x_start + screen_x, screen_y_start + screen_y - 250, color);
 			}
 		}
@@ -466,48 +300,34 @@ void	draw_gun(t_vars *vars, double scale)
 	t_img *temp = (t_img *)vars->player->gun->frames[vars->player->gun->current_frame];
 	int		gun_width = temp->width;   // Original texture width
 	int		gun_height = temp->height;  // Original texture height
-
-	// Calculate the scaled dimensions
 	int		scaled_width = gun_width * scale;
 	int		scaled_height = gun_height * scale;
-
-	// Calculate the starting point for the gun on the screen (centered horizontally, at the bottom)
 	int		screen_x_start = (vars->mlx->window_width / 2) - (scaled_width / 2);
 	int		screen_y_start = vars->mlx->window_height - scaled_height;
-
-	// Loop through each screen pixel for the scaled gun sprite
 	for (screen_y = 0; screen_y < scaled_height; screen_y++)
 	{
-		// Calculate which texture Y-coordinate corresponds to the screen Y-coordinate
 		tex_y = screen_y / scale;
-
 		for (screen_x = 0; screen_x < scaled_width; screen_x++)
 		{
-			// Calculate which texture X-coordinate corresponds to the screen X-coordinate
 			tex_x = screen_x / scale;
-
-			// Get the texture pixel color from the gun texture
 			color = get_texture_color(temp, tex_x, tex_y);
-
-			// Ignore transparent pixels (assuming 0xFF00FF is transparent)
 			if (color != -1)
 			{
-				// Draw the scaled pixel to the main image buffer at the correct screen location
 				put_pixel_to_image(vars, screen_x_start + screen_x, screen_y_start + screen_y - 100, color);
 			}
 		}
 	}
 }
 
-void	draw_imp_fire_ball(t_vars *vars)
+void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, int object_y, int scale)
 {
 	double dirY = vars->player->dir_y;
 	double dirX = vars->player->dir_x;
 	double planeY = vars->player->plane_y;
 	double planeX = vars->player->plane_x;
-	int spriteX = vars->imp->fire_ball_x - vars->player->center_x;
-	int spriteY = vars->imp->fire_ball_y - vars->player->center_y;
-	t_img *tmp = vars->imp->fire_ball->frames[vars->imp->fire_ball->current_frame];
+	int spriteX = object_x - vars->player->center_x;
+	int spriteY = object_y - vars->player->center_y;
+	t_img *tmp = sprite->frames[sprite->current_frame];
 
 	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
 	
@@ -515,8 +335,8 @@ void	draw_imp_fire_ball(t_vars *vars)
 	double transformY = invDet * (-planeY * spriteX + planeX * spriteY);
 	
 	int spriteScreenX = (int)((vars->mlx->window_width / 2) * (1 + transformX / transformY));
-	int spriteHeight = abs((int)(vars->mlx->window_height * 20 / transformY));
-	int spriteWidth = abs((int)(vars->mlx->window_height * 20 / transformY));
+	int spriteHeight = abs((int)(vars->mlx->window_height * scale / transformY));
+	int spriteWidth = abs((int)(vars->mlx->window_height * scale / transformY));
 
 	int drawStartY = -spriteHeight / 2 + vars->mlx->window_height / 2;
 	if (drawStartY < 0) drawStartY = 0;
@@ -543,7 +363,7 @@ void	draw_imp_fire_ball(t_vars *vars)
 				// Get the pixel color from the sprite's texture
 				int color = get_texture_color(tmp, texX, texY);
 				if (color != -1) {
-					put_pixel_to_image(vars, stripe, y, color);
+					put_pixel_to_image(vars, stripe, y + 50, color);
 
 					vars->zbuffer[stripe] = transformY;
 				}
@@ -552,84 +372,36 @@ void	draw_imp_fire_ball(t_vars *vars)
     }
 }
 
-void	draw_caco_fire_ball(t_vars *vars)
-{
-	double dirY = vars->player->dir_y;
-	double dirX = vars->player->dir_x;
-	double planeY = vars->player->plane_y;
-	double planeX = vars->player->plane_x;
-	int spriteX = vars->caco->fire_ball_x - vars->player->center_x;
-	int spriteY = vars->caco->fire_ball_y - vars->player->center_y;
-	t_img *tmp = vars->caco->fire_ball->frames[vars->caco->fire_ball->current_frame];
+// void	draw_satatic_sprite()
+// {
 
-	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
-	
-	double transformX = invDet * (dirY * spriteX - dirX * spriteY);
-	double transformY = invDet * (-planeY * spriteX + planeX * spriteY);
-	
-	int spriteScreenX = (int)((vars->mlx->window_width / 2) * (1 + transformX / transformY));
-	int spriteHeight = abs((int)(vars->mlx->window_height * 20 / transformY));
-	int spriteWidth = abs((int)(vars->mlx->window_height * 20 / transformY));
-
-	int drawStartY = -spriteHeight / 2 + vars->mlx->window_height / 2;
-	if (drawStartY < 0) drawStartY = 0;
-
-	int drawEndY = spriteHeight / 2 + vars->mlx->window_height / 2;
-	if (drawEndY >= vars->mlx->window_height) drawEndY = vars->mlx->window_height - 1;
-
-	int drawStartX = -spriteWidth / 2 + spriteScreenX;
-	if (drawStartX < 0) drawStartX = 0;
-
-	int drawEndX = spriteWidth / 2 + spriteScreenX;
-	if (drawEndX >= vars->mlx->window_width) drawEndX = vars->mlx->window_width - 1;
-
-	//printf("transformY %f transformX %f drawEndY %d drawEndX %d drawStartY %d drawStartX %d \n", transformY, transformX, drawEndY, drawEndX, drawStartY, drawStartX);
-	for (int stripe = drawStartX; stripe < drawEndX; stripe++) {
-	// Calculate the X-coordinate in the sprite's texture
-		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tmp->width / spriteWidth) / 256;
-		if (transformY > 0 && stripe > 0 && stripe < vars->mlx->window_width && transformY < vars->zbuffer[stripe]) {
-			for (int y = drawStartY; y < drawEndY; y++) {
-				// Calculate the Y-coordinate in the sprite's texture
-				int d = (y - vars->mlx->window_height / 2 + spriteHeight / 2) * 256;
-				int texY = ((d * tmp->height) / spriteHeight) / 256;
-
-				// Get the pixel color from the sprite's texture
-				int color = get_texture_color(tmp, texX, texY);
-				if (color != -1) {
-					put_pixel_to_image(vars, stripe, y, color);
-
-					vars->zbuffer[stripe] = transformY;
-				}
-			}
-		}
-    }
-}
+// }
 
 void	draw_map(t_vars *vars)
 {
 	raycast(vars);
-	//draw_door(vars);
 	if (!vars->imp->is_dead)
-		draw_imp(vars);
+		draw_dynamic_sprite(vars, vars->imp->current_animation,
+			vars->imp->center_x, vars->imp->center_y, 50);
 	if (!vars->caco->is_dead)
-		draw_caco(vars);
+		draw_dynamic_sprite(vars, vars->caco->current_animation,
+			vars->caco->center_x, vars->caco->center_y, 50);
 	draw_gun(vars, 4.0);
-	//draw_minimap(vars);
-	//draw_player(vars, RED);
-	//draw_ray_segment_player(vars);
 	if (!vars->imp->is_dead)
 	{
-	//	draw_monster(vars, BLUE);
-		draw_ray_segment_imp(vars);
+		search_for_player_enemy(vars, vars->imp);
 	}
 	if (!vars->caco->is_dead)
 	{
-	//	draw_monster(vars, BLUE);
-		draw_ray_segment_caco(vars);
+		search_for_player_enemy(vars, vars->caco);
 	}
 	if (vars->imp->detected_player)
-		draw_imp_fire_ball(vars);
+	{
+		draw_dynamic_sprite(vars, vars->imp->fire_ball,
+			vars->imp->fire_ball_x, vars->imp->fire_ball_y, 20);
+	}
 	if (vars->caco->detected_player)
-		draw_caco_fire_ball(vars);
+		draw_dynamic_sprite(vars, vars->caco->fire_ball,
+			vars->caco->fire_ball_x, vars->caco->fire_ball_y, 20);
 	update_player_position(vars);
 }
