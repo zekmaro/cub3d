@@ -124,6 +124,40 @@ void	check_imp_collision(t_vars *vars)
 	}
 }
 
+void	check_caco_collision(t_vars *vars)
+{
+	double	ray_x;
+	double	ray_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	ray_angle;
+	int caco_flag;
+
+	ray_angle = vars->player->angle;
+	ray_x = vars->player->center_x;
+	ray_y = vars->player->center_y;
+	ray_dir_x = ray_x;
+	ray_dir_y = ray_y;
+	caco_flag = 0;
+	while (!is_wall(vars, ray_dir_y, ray_dir_x) && !caco_flag)
+	{
+		ray_dir_x += cos(ray_angle);
+		ray_dir_y += sin(ray_angle);
+		caco_flag = is_caco(vars, ray_dir_y, ray_dir_x);
+	}
+	if (caco_flag)
+	{
+		system("aplay ./assets/caco_pain.wav -q &");
+		vars->caco->health -= 20;
+	}
+	if (vars->caco->health == 0)
+	{
+		if (!vars->caco->is_dead)
+			system("aplay ./assets/caco_death.wav -q &");
+		vars->caco->current_animation = vars->caco->death_animation;
+	}
+}
+
 int	animate_shooting(t_vars *vars)
 {
 	static int frame_count = 0;
@@ -168,6 +202,7 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 		vars->player->shoot = 1;
 		vars->player->fire_done = 0;
 		check_imp_collision(vars);
+		check_caco_collision(vars);
 	}
 	return (0);
 }

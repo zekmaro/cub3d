@@ -37,6 +37,11 @@ int	is_imp(t_vars *vars, int y, int x)
 	return (abs(y - vars->imp->center_y) < 40 && abs(x - vars->imp->center_x) < 40);
 }
 
+int	is_caco(t_vars *vars, int y, int x)
+{
+	return (abs(y - vars->caco->center_y) < 40 && abs(x - vars->caco->center_x) < 40);
+}
+
 int	is_wall(t_vars *vars, int y, int x)
 {
 	return (vars->map->grid[y / vars->unit_size][x \

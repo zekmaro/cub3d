@@ -94,6 +94,13 @@ typedef enum e_tex_typ
 	TEXTURE_NONE
 }	t_tex_typ;
 
+typedef enum e_enemy_type
+{
+	IMP,
+	CACO,
+	CYBER_DEMON
+}	t_enemy_type;
+
 
 typedef struct s_img
 {
@@ -121,6 +128,8 @@ typedef struct s_map
 	char	player_dir;
 	int		monster_x;
 	int		monster_y;
+	int		caco_x;
+	int		caco_y;
 	int		door_x;
 	int		door_y;
 	int		num_doors;
@@ -248,6 +257,32 @@ typedef struct s_imp
 	struct timeval time1;
 }	t_imp;
 
+typedef struct s_caco
+{
+	int health;
+	int damage;
+	int	is_dead;
+	int	x;
+	int	y;
+	int	center_x;
+	int	center_y;
+	int	rot_dir;
+	double	angle;
+	int	detected_player;
+	t_img	*move_animation;
+	t_img	*death_animation;
+	t_img	*attack_animation;
+	t_img	*fire_ball;
+	int		fire_ball_x;
+	int		fire_ball_y;
+	int		fire_delta_x;
+	int		fire_delta_y;
+	int		shoot_ball;
+	t_img	*current_animation;
+	struct timeval time0;
+	struct timeval time1;
+}	t_caco;
+
 typedef struct s_vars
 {
 	int				unit_size;
@@ -257,6 +292,7 @@ typedef struct s_vars
 	t_line			*line;
 	t_player		*player;
 	t_imp			*imp;
+	t_caco			*caco;
 	t_ray			*ray;
 	t_door			*door;
 	t_img			*textures[5];
@@ -364,6 +400,7 @@ int			read_map(int fd, t_map *map, char *file_name);
 void		print_map(t_map *map);
 int			is_player(t_vars *vars, int y, int x);
 int			is_imp(t_vars *vars, int y, int x);
+int			is_caco(t_vars *vars, int y, int x);
 int			is_wall(t_vars *vars, int y, int x);
 int			player_inside_map(t_vars *vars, int x, int y);
 int			can_move(t_vars *vars, int y, int x);
