@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 23:13:34 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/08 15:51:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 # define ORANGE 0xFFA500
 # define LIGHT_BLUE 0x7FDBFF
 # define LIGHT_GREEN 0x90EE90
+
+# define TRANSPARENT MAGENTA
 
 // DOOR STATES
 # define DOOR_CLOSED 0

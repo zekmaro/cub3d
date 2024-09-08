@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:54:25 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 18:39:50 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/08 15:51:04 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	put_pixel_to_image(t_vars *vars, int x, int y, int color)
 {
 	int	index;
 
+	if (color == TRANSPARENT)
+		return ;
 	if (x >= 0 && x < vars->mlx->window_width
 		&& y >= 0 && y < vars->mlx->window_height)
 	{
