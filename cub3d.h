@@ -189,7 +189,7 @@ typedef struct s_ray
 	int		draw_start;
 	int		draw_end;
 	int		hit_door;
-	double	door_height;
+	double	door_factor;
 }	t_ray;
 
 typedef struct s_player

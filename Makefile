@@ -42,6 +42,7 @@ SRC		:=	src/cub3d.c \
 			src/ray_drawing.c \
 			src/ray_handlers.c \
 			src/sprites.c \
+			src/doors.c \
 			src/gradient.c
 
 # LIBS 

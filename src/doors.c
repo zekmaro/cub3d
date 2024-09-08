@@ -58,17 +58,17 @@
 // 	return (DOOR_NONE);
 // }
 
-// void	open_door(t_vars *vars, int x, int y)
-// {
-// 	if (is_door(vars, x, y))
-// 		vars->map->doors[get_door_index(vars, x, y)].state = DOOR_OPEN;
-// }
+void	open_door(t_vars *vars, int x, int y)
+{
+	if (is_door(vars, x, y))
+        vars->map->grid[y][x] = '0';
+}
 
-// void	close_door(t_vars *vars, int x, int y)
-// {
-// 	if (is_door(vars, x, y))
-// 		vars->map->doors[get_door_index(vars, x, y)].state = DOOR_CLOSED;
-// }
+void	close_door(t_vars *vars, int x, int y)
+{
+    if (is_door(vars, x, y))
+        vars->map->grid[y][x] = 'D';
+}
 
 // void	toggle_door(t_vars *vars, int x, int y)
 // {
