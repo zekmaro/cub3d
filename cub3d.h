@@ -35,6 +35,7 @@
 # define KEY_DOWN 65364
 # define ESCAPE 65307
 # define SPACE 32
+# define E 101
 # define KEY_OPEN_DOOR SPACE
 
 // KEY DEFINITION MAC
@@ -229,6 +230,7 @@ typedef struct s_keys
 	int		a;
 	int		s;
 	int		d;
+	int		space;
 	int		left;
 	int		right;
 }	t_keys;
@@ -421,4 +423,5 @@ void	draw_door(t_vars *vars);
 void	init_imp_sprites(t_vars *vars, t_enemy *imp);
 int	is_enemy(t_enemy *enemy, int y, int x);
 void	init_caco_sprites(t_vars *vars, t_enemy *caco);
+int	functioin(t_vars *vars);
 #endif // CUB3D_H

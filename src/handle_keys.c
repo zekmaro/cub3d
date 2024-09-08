@@ -26,23 +26,10 @@ int	mouse_move(int x, int y, t_vars *vars)
 {
 	int center_x = vars->mlx->window_width / 2;
 	(void)y;
-   // int center_y = vars->mlx->window_height / 2;
- 
 	int dx = x - center_x;
-    //int dy = y - center_y;
-	// double magnitude;
-
-	// magnitude = sqrt(x * x + y * y);
-	// dx /= magnitude;
-    // Update player angle based on mouse movement (dx affects rotation)
-    double rot_speed = 0.0004; // Adjust this for desired sensitivity
-
+    double rot_speed = 0.0003;
 	vars->player->angle += dx * rot_speed;
-	// printf("mouse moved: %d %f\n", dx, vars->player->angle);
-
-    // Reset the mouse back to the center after processing the movement
 	reset_mouse_to_center(vars);
-
     return (0);
 }
 
@@ -85,9 +72,9 @@ void	update_position(t_vars *vars)
 		move_player(vars, -move_y * cos(vars->player->angle), \
 			move_x * sin(vars->player->angle));
 	if (vars->keys.left == 1)
-		vars->player->angle -= M_PI / 90;
+		vars->player->angle -= M_PI / 45;
 	if (vars->keys.right == 1)
-		vars->player->angle += M_PI / 90;
+		vars->player->angle += M_PI / 45;
 }
 
 void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)

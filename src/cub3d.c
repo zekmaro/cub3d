@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <mlx.h>
 
 long	update_imp_time(t_vars *vars)
 {
@@ -34,6 +35,8 @@ int	key_press(int keycode, t_vars *vars)
 		vars->keys.a = 1;
 	if (keycode == D)
 		vars->keys.d = 1;
+	if (keycode == SPACE)
+		vars->keys.space = 1;
 	if (keycode == KEY_LEFT)
 		vars->keys.left = 1;
 	if (keycode == KEY_RIGHT)
@@ -53,6 +56,8 @@ int	key_up(int keycode, t_vars *vars)
 		vars->keys.a = 0;
 	if (keycode == D)
 		vars->keys.d = 0;
+	if (keycode == SPACE)
+		vars->keys.space = 0;
 	if (keycode == KEY_LEFT)
 		vars->keys.left = 0;
 	if (keycode == KEY_RIGHT)
@@ -217,12 +222,13 @@ int	main_loop_hook(t_vars *vars)
 	double abc;
 
 	get_current_time(&t);
-	get_current_time(&vars->player->time1);
 	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
+	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 200, vars->map->caco_list_size);
-	update_position(vars);
+	if (!vars->player->shoot)
+		update_position(vars);
 	draw_sprite(vars);
 	if (vars->player->shoot)
 		animate_shooting(vars);
