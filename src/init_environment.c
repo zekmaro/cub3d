@@ -47,6 +47,10 @@ void	initialise_textures(t_vars *vars)
 	load_texture(vars, TEXTURE_SOUTH, "./assets/wall2.xpm");
 	load_texture(vars, TEXTURE_WEST, "./assets/wall3.xpm");
 	load_texture(vars, TEXTURE_EAST, "./assets/wall4.xpm");
+	load_texture(vars, TEXTURE_DOOR0, "./assets/door0.xpm");
+	load_texture(vars, TEXTURE_DOOR1, "./assets/door1.xpm");
+	load_texture(vars, TEXTURE_DOOR2, "./assets/door2.xpm");
+	load_texture(vars, TEXTURE_DOOR3, "./assets/door3.xpm");
 }
 
 void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_path)

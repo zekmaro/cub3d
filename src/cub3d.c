@@ -173,7 +173,7 @@ void	run_screen(t_vars *vars)
 	get_data_image(vars, vars->image, vars->mlx);
 	initialise_textures(vars);
 	initialise_sprites(vars);
-	draw_door(vars);
+	//draw_door(vars);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);

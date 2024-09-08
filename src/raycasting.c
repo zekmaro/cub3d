@@ -33,7 +33,7 @@ t_tex_typ define_texture_type(t_vars *vars)
     }
     else if (vars->map->grid[map_y][map_x] == 'D')
     {
-        return TEXTURE_DOOR;
+        return TEXTURE_DOOR0;
     }
 
     return TEXTURE_NONE;
@@ -89,12 +89,12 @@ void draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	{
 		get_texture_coords(vars, texture_index, &tex_x);
 		tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size / vars->ray->line_height);
-		if (texture_index == TEXTURE_SOUTH)
-			tex_y += 1;
-		if (texture_index == TEXTURE_DOOR)
+		if (texture_index == TEXTURE_DOOR0)
 			texture = &vars->door_textures[0];
 		else
 			texture = vars->textures[texture_index];
+		if (texture_index == TEXTURE_SOUTH)
+			tex_y += 1;
 		color = get_texture_color(texture, tex_x, tex_y);
 		put_pixel_to_image(vars, ray_id, y, color);
 		y++;
