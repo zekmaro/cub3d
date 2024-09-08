@@ -188,6 +188,8 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	int		hit_door;
+	double	door_height;
 }	t_ray;
 
 typedef struct s_player
@@ -274,7 +276,7 @@ typedef struct s_vars
 	t_enemy			*caco;
 	t_ray			*ray;
 	t_door			*door;
-	t_img			*textures[5];
+	t_img			*textures[8];
 	t_img			*animated_sprite;
 	int				is_monster;
 	struct timeval	program_start;
@@ -370,7 +372,7 @@ void		initialise_textures(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 void		initialise_map(t_vars *vars);
 void		initialise_vars(t_vars *vars);
-void		initialise_doors(t_vars *vars);
+//void		initialise_doors(t_vars *vars);
 
 /* Parsing.c */
 int			read_map(int fd, t_map *map, char *file_name);
