@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/08 16:05:26 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/08 16:14:50 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,13 @@ int	can_move(t_vars *vars, int y, int x)
 
 int	get_texture_color(t_img *texture, int x, int y)
 {
-	char	*pixel;
-	int		color;
+	int	index;
+	int	color;
 
-	pixel = texture->addr + (y * texture->line_len \
-		+ x * (texture->bits_per_pixel / 8));
-	color = *(unsigned int *)pixel;
+	index = (x * (texture->bits_per_pixel / 8)) + (y * texture->line_len);
+	color = (texture->addr[index] & 0xFF) \
+			| ((texture->addr[index + 1] & 0xFF) << 8) \
+			| ((texture->addr[index + 2] & 0xFF) << 16);
 	if ((color & 0x00FFFFFF) == TRANSPARENT)
 		return (-1);
 	return (color);
