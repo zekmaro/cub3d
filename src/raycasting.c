@@ -64,8 +64,8 @@ void	setup_ray(t_vars *vars, double ray_x, double ray_y)
 		* vars->unit_size / vars->ray->distance_to_wall);
 	vars->ray->draw_start = -vars->ray->line_height / 2 \
 		+ vars->mlx->window_height / 2;
-	if (vars->ray->draw_start < 0)
-		vars->ray->draw_start = 0;
+	// if (vars->ray->draw_start < 0)
+	// 	vars->ray->draw_start = 0;
 	vars->ray->draw_end = vars->ray->line_height / 2 \
 		+ vars->mlx->window_height / 2;
 	if (vars->ray->draw_end >= vars->mlx->window_height)
