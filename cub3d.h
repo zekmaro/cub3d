@@ -236,7 +236,7 @@ typedef struct s_keys
 	int		right;
 }	t_keys;
 
-typedef struct s_imp
+typedef struct s_enemy
 {
 	int health;
 	int damage;
@@ -260,33 +260,7 @@ typedef struct s_imp
 	t_img	*current_animation;
 	struct timeval time0;
 	struct timeval time1;
-}	t_imp;
-
-typedef struct s_caco
-{
-	int health;
-	int damage;
-	int	is_dead;
-	int	x;
-	int	y;
-	int	center_x;
-	int	center_y;
-	int	rot_dir;
-	double	angle;
-	int	detected_player;
-	t_img	*move_animation;
-	t_img	*death_animation;
-	t_img	*attack_animation;
-	t_img	*fire_ball;
-	int		fire_ball_x;
-	int		fire_ball_y;
-	int		fire_delta_x;
-	int		fire_delta_y;
-	int		shoot_ball;
-	t_img	*current_animation;
-	struct timeval time0;
-	struct timeval time1;
-}	t_caco;
+}	t_enemy;
 
 typedef struct s_vars
 {
@@ -296,8 +270,8 @@ typedef struct s_vars
 	t_mlx			*mlx;
 	t_line			*line;
 	t_player		*player;
-	t_imp			*imp;
-	t_caco			*caco;
+	t_enemy			*imp;
+	t_enemy			*caco;
 	t_ray			*ray;
 	t_door			*door;
 	t_img			*textures[5];
