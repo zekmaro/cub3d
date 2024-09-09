@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/09 21:04:42 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/09 21:20:25 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC		:=	src/cub3d.c \
 			src/doors.c \
 			src/gradient.c \
 			src/draw_player.c \
+			src/draw_monster.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
