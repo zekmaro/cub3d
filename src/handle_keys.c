@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 22:58:11 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/09 14:17:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,17 @@ void	reset_mouse_to_center(t_vars *vars)
 
 int	mouse_move(int x, int y, t_vars *vars)
 {
-	int center_x = vars->mlx->window_width / 2;
+	int		center_x;
+	int		dx;
+	double	rot_speed;
+
 	(void)y;
-	int dx = x - center_x;
-    double rot_speed = 0.0003;
+	center_x = vars->mlx->window_width / 2;
+	dx = x - center_x;
+	rot_speed = 0.0003;
 	vars->player->angle += dx * rot_speed;
 	reset_mouse_to_center(vars);
-    return (0);
+	return (0);
 }
 
 void	move_player(t_vars *vars, int move_y, int move_x)
@@ -45,7 +49,7 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 	save_x = x;
 	save_y = y;
 	rotate_around_point(vars, &x, &y);
-	if (can_move(vars, save_y / vars->unit_size , save_x / vars->unit_size))
+	if (can_move(vars, save_y / vars->unit_size, save_x / vars->unit_size))
 	{
 		vars->player->y += move_y;
 		vars->player->x += move_x;
@@ -84,7 +88,7 @@ void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	ray_angle;
-	int enemy_flag;
+	int		enemy_flag;
 
 	ray_angle = vars->player->angle;
 	ray_x = vars->player->center_x;
@@ -113,11 +117,11 @@ void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 
 int	animate_shooting(t_vars *vars)
 {
-	static int frame_count = 0;
+	static int	frame_count = 0;
+	long		elapsed_time;
 
 	if (!vars->player->shoot)
 		return (0);
-	long elapsed_time;
 	get_current_time(&vars->current_time);
 	elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 	if (frame_count == 2 && !vars->player->fire_done)
@@ -139,33 +143,29 @@ int	animate_shooting(t_vars *vars)
 		draw_fire(vars, 4.0);
 		update_sprite_frame(vars->player->fire);
 	}
-	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, vars->image->mlx_img, 0, 0);
+	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
+		vars->image->mlx_img, 0, 0);
 	frame_count++;
-    return (0);
+	return (0);
 }
 
 int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 {
+	int	i;
+
 	(void)x;
 	(void)y;
-
 	if (button == MOUSE_CLICK_LEFT && !vars->player->shoot)
 	{
 		system("aplay ./assets/gunshot.wav -q &");
 		vars->player->shoot = 1;
 		vars->player->fire_done = 0;
-		int i = 0;
-		while (i < vars->map->imp_list_size)
-		{
+		i = -1;
+		while (++i < vars->map->imp_list_size)
 			check_enemy_collision(vars, &vars->imp_list[i], 50);
-			i++;
-		}
-		i = 0;
-		while (i < vars->map->caco_list_size)
-		{
+		i = -1;
+		while (++i < vars->map->caco_list_size)
 			check_enemy_collision(vars, &vars->caco_list[i], 20);
-			i++;
-		}
 	}
 	return (0);
 }
