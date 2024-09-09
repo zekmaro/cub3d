@@ -380,28 +380,44 @@ void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, int object_y
 void	draw_map(t_vars *vars)
 {
 	raycast(vars);
-	// if (!vars->imp->is_dead)
-	// 	draw_dynamic_sprite(vars, vars->imp->current_animation,
-	// 		vars->imp->center_x, vars->imp->center_y, 50);
-	// if (!vars->caco->is_dead)
-	// 	draw_dynamic_sprite(vars, vars->caco->current_animation,
-	// 		vars->caco->center_x, vars->caco->center_y, 50);
+	int i = 0;
+	while (i < vars->map->imp_list_size)
+	{
+		if (!vars->imp_list[i].is_dead)
+		{
+			draw_dynamic_sprite(vars, vars->imp_list[i].current_animation,
+				vars->imp_list[i].center_x, vars->imp_list[i].center_y, 50);
+			if (!vars->imp_list[i].is_dead)
+			{
+				search_for_player_enemy(vars, &vars->imp_list[i]);
+			}
+			if (vars->imp_list[i].detected_player)
+			{
+				draw_dynamic_sprite(vars, vars->imp_list[i].fire_ball,
+					vars->imp_list[i].fire_ball_x, vars->imp_list[i].fire_ball_y, 20);
+			}
+		}
+		i++;
+	}
+	i = 0;
+	while (i < vars->map->caco_list_size)
+	{
+		if (!vars->caco_list[i].is_dead)
+		{
+			draw_dynamic_sprite(vars, vars->caco_list[i].current_animation,
+				vars->caco_list[i].center_x, vars->caco_list[i].center_y, 50);
+			if (!vars->caco_list[i].is_dead)
+			{
+				search_for_player_enemy(vars, &vars->caco_list[i]);
+			}
+			if (vars->caco_list[i].detected_player)
+			{
+				draw_dynamic_sprite(vars, vars->caco_list[i].fire_ball,
+					vars->caco_list[i].fire_ball_x, vars->caco_list[i].fire_ball_y, 20);
+			}
+		}
+		i++;
+	}
 	draw_gun(vars, 4.0);
-	// if (!vars->imp->is_dead)
-	// {
-	// 	search_for_player_enemy(vars, vars->imp);
-	// }
-	// if (!vars->caco->is_dead)
-	// {
-	// 	search_for_player_enemy(vars, vars->caco);
-	// }
-	// if (vars->imp->detected_player)
-	// {
-	// 	draw_dynamic_sprite(vars, vars->imp->fire_ball,
-	// 		vars->imp->fire_ball_x, vars->imp->fire_ball_y, 20);
-	// }
-	// if (vars->caco->detected_player)
-	// 	draw_dynamic_sprite(vars, vars->caco->fire_ball,
-	// 		vars->caco->fire_ball_x, vars->caco->fire_ball_y, 20);
 	update_player_position(vars);
 }
