@@ -6,12 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 19:51:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:50:22 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 
 int	count_new_lines(int fd)
 {

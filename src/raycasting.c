@@ -6,12 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/09 13:21:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:50:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 
 t_tex_typ	define_texture_type(t_vars *vars)
 {
