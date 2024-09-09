@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/09 17:22:14 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:22:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,33 +273,50 @@ void	draw_gun(t_vars *vars, double scale)
 
 void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, int object_y, int scale)
 {
-	double dirY = vars->player->dir_y;
-	double dirX = vars->player->dir_x;
-	double planeY = vars->player->plane_y;
-	double planeX = vars->player->plane_x;
-	int spriteX = object_x - vars->player->center_x;
-	int spriteY = object_y - vars->player->center_y;
-	t_img *tmp = sprite->frames[sprite->current_frame];
-	double invDet = 1.0 / (planeX * dirY - dirX * planeY);
-	double transformX = invDet * (dirY * spriteX - dirX * spriteY);
-	double transformY = invDet * (-planeY * spriteX + planeX * spriteY);
-	int spriteScreenX = (int)((vars->mlx->window_width / 2) * (1 + transformX / transformY));
-	int spriteHeight = abs((int)(vars->mlx->window_height * scale / transformY));
-	int spriteWidth = abs((int)(vars->mlx->window_height * scale / transformY));
-	int drawStartY = -spriteHeight / 2 + vars->mlx->window_height / 2;
-	int stripe;
-	int y;
-	int texX;
+	double	dirY;
+	double	dirX;
+	double	planeY;
+	double	planeX;
+	int		spriteX;
+	int		spriteY;
+	t_img	*tmp;
+	double	invDet;
+	double	transformX;
+	double	transformY;
+	int		spriteScreenX;
+	int		spriteHeight;
+	int		spriteWidth;
+	int		drawStartY;
+	int		stripe;
+	int		y;
+	int		texX;
+	int		drawEndY;
+	int		drawStartX;
+	int		drawEndX;
 
+	dirY = vars->player->dir_y;
+	dirX = vars->player->dir_x;
+	planeY = vars->player->plane_y;
+	planeX = vars->player->plane_x;
+	spriteX = object_x - vars->player->center_x;
+	spriteY = object_y - vars->player->center_y;
+	tmp = sprite->frames[sprite->current_frame];
+	invDet = 1.0 / (planeX * dirY - dirX * planeY);
+	transformX = invDet * (dirY * spriteX - dirX * spriteY);
+	transformY = invDet * (-planeY * spriteX + planeX * spriteY);
+	spriteScreenX = (int)((vars->mlx->window_width / 2) * (1 + transformX / transformY));
+	spriteHeight = abs((int)(vars->mlx->window_height * scale / transformY));
+	spriteWidth = abs((int)(vars->mlx->window_height * scale / transformY));
+	drawStartY = -spriteHeight / 2 + vars->mlx->window_height / 2;
 	if (drawStartY < 0)
 		drawStartY = 0;
-	int drawEndY = spriteHeight / 2 + vars->mlx->window_height / 2;
+	drawEndY = spriteHeight / 2 + vars->mlx->window_height / 2;
 	if (drawEndY >= vars->mlx->window_height)
 		drawEndY = vars->mlx->window_height - 1;
-	int drawStartX = -spriteWidth / 2 + spriteScreenX;
+	drawStartX = -spriteWidth / 2 + spriteScreenX;
 	if (drawStartX < 0)
 		drawStartX = 0;
-	int drawEndX = spriteWidth / 2 + spriteScreenX;
+	drawEndX = spriteWidth / 2 + spriteScreenX;
 	if (drawEndX >= vars->mlx->window_width)
 		drawEndX = vars->mlx->window_width - 1;
 	//printf("transformY %f transformX %f drawEndY %d drawEndX %d drawStartY %d drawStartX %d \n", transformY, transformX, drawEndY, drawEndX, drawStartY, drawStartX);
