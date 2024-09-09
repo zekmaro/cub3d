@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 23:29:24 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/09 14:38:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ long	update_imp_time(t_vars *vars)
 	elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
 	return (elapsed_time);
 }
-
 
 int	key_press(int keycode, t_vars *vars)
 {
@@ -74,13 +73,15 @@ int	player_damaged_enemy(t_vars *vars, t_enemy *enemy)
 
 void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 {
-	long enemy_elapsed_time;
-	int i = 0;
+	long	enemy_elapsed_time;
+	int		i;
 
-	while (i < size)
+	i = -1;
+	while (++i < size)
 	{
 		get_current_time(&enemy_list[i].time1);
-		enemy_elapsed_time = get_elapsed_time(&enemy_list[i].time0, &enemy_list[i].time1);
+		enemy_elapsed_time = get_elapsed_time(&enemy_list[i].time0, \
+			&enemy_list[i].time1);
 		if (enemy_elapsed_time > delay)
 		{
 			if (enemy_list[i].current_animation == enemy_list[i].death_animation
@@ -92,13 +93,13 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 				enemy_list[i].center_y = -100;
 			}
 			update_sprite_frame(enemy_list[i].current_animation);
-			if (enemy_list[i].current_animation == enemy_list[i].attack_animation
-			&& enemy_list[i].current_animation->current_frame
-			== enemy_list[i].current_animation->frame_count - 1)
+			if (enemy_list[i].current_animation \
+				== enemy_list[i].attack_animation
+				&& enemy_list[i].current_animation->current_frame \
+				== enemy_list[i].current_animation->frame_count - 1)
 				enemy_list[i].current_animation = enemy_list[i].move_animation;
 			enemy_list[i].time0 = enemy_list[i].time1;
 		}
-		i++;
 	}
 }
 
@@ -129,7 +130,7 @@ void	enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector)
 	enemy->shoot_ball = 1;
 }
 
-void	handle_enemy_shot(t_vars *vars, t_enemy * enemy)
+void	handle_enemy_shot(t_vars *vars, t_enemy *enemy)
 {
 	if (player_damaged_enemy(vars, enemy))
 	{
@@ -140,21 +141,23 @@ void	handle_enemy_shot(t_vars *vars, t_enemy * enemy)
 	else
 	{
 		enemy->fire_ball_y += enemy->fire_delta_y;
-		enemy->fire_ball_x += enemy->fire_delta_x;		
+		enemy->fire_ball_x += enemy->fire_delta_x;
 	}
 }
 
 void	enemy_act(t_vars *vars, t_enemy *enemy)
 {
-	int vector_x = vars->player->center_x - enemy->center_x;
-	int vector_y = vars->player->center_y - enemy->center_y;
-	int vector = sqrt(vector_x * vector_x + vector_y * vector_y);
+	int	vector_x;
+	int	vector_y;
+	int	vector;
+
+	vector_x = vars->player->center_x - enemy->center_x;
+	vector_y = vars->player->center_y - enemy->center_y;
+	vector = sqrt(vector_x * vector_x + vector_y * vector_y);
 	enemy->center_x += vector_x / 40;
 	enemy->center_y += vector_y / 40;
 	if (!enemy->shoot_ball)
-	{
 		enemy_shoot(enemy, vector_x, vector_y, vector);
-	}
 	if (is_wall(vars, enemy->fire_ball_y, enemy->fire_ball_x))
 	{
 		enemy->fire_ball_y = enemy->center_y;
@@ -162,64 +165,52 @@ void	enemy_act(t_vars *vars, t_enemy *enemy)
 		enemy->shoot_ball = 0;
 	}
 	else
-	{
 		handle_enemy_shot(vars, enemy);
-	}
 	enemy->detected_player = 0;
 }
 
 void	handle_player_damaged_time(t_vars *vars)
 {
-	long time_player_damaged;
-	
-	time_player_damaged = get_elapsed_time(&vars->player->time0, &vars->player->time1);
+	long	time_player_damaged;
+
+	time_player_damaged = get_elapsed_time(&vars->player->time0, \
+		&vars->player->time1);
 	if (time_player_damaged > 500)
-	{
 		vars->player->is_damaged = 0;
-	}
 }
 
 void	search_for_player(t_vars *vars)
 {
-	int i = 0;
-	while (i < vars->map->imp_list_size)
-	{
+	int	i;
+
+	i = -1;
+	while (++i < vars->map->imp_list_size)
 		if (!vars->imp_list[i].detected_player)
 			vars->imp_list[i].angle += M_PI / 10 * vars->imp_list[i].rot_dir;
-		i++;
-	}
-	i = 0;
-	while (i < vars->map->caco_list_size)
-	{
+	i = -1;
+	while (++i < vars->map->caco_list_size)
 		if (!vars->caco_list[i].detected_player)
 			vars->caco_list[i].angle += M_PI / 10 * vars->caco_list[i].rot_dir;
-		i++;
-	}
 }
 
 void	act_detected_enemies(t_vars *vars)
 {
-	int i = 0;
+	int	i;
 
-	while (i < vars->map->imp_list_size)
-	{
+	i = -1;
+	while (++i < vars->map->imp_list_size)
 		if (vars->imp_list[i].detected_player)
 			enemy_act(vars, &vars->imp_list[i]);
-		i++;
-	}
-	i = 0;
-	while (i < vars->map->caco_list_size)
-	{
+	i = -1;
+	while (++i < vars->map->caco_list_size)
 		if (vars->caco_list[i].detected_player)
 			enemy_act(vars, &vars->caco_list[i]);
-		i++;
-	}
 }
 
 int	main_loop_hook(t_vars *vars)
 {
-	struct timeval t;
-	double abc;
+	struct timeval	t;
+	double			abc;
 
 	get_current_time(&t);
 	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
@@ -283,11 +274,15 @@ void	setup_caco(t_vars *vars, t_enemy *caco)
 
 void	init_enemies(t_vars *vars)
 {
-	int i = 0;
-	int j = 0;
-	int counter_imp = 0;
-	int counter_caco = 0;
+	int	i;
+	int	j;
+	int	counter_imp;
+	int	counter_caco;
 
+	i = 0;
+	j = 0;
+	counter_imp = 0;
+	counter_caco = 0;
 	while (vars->map->grid[i])
 	{
 		j = 0;
@@ -363,8 +358,10 @@ void	setup_player(t_vars *vars)
 
 void	setup_door(t_vars *vars)
 {
-	vars->door->center_x = vars->map->door_x * vars->unit_size + vars->unit_size / 2;
-	vars->door->center_y = vars->map->door_y * vars->unit_size + vars->unit_size / 2;
+	vars->door->center_x = vars->map->door_x * vars->unit_size \
+		+ vars->unit_size / 2;
+	vars->door->center_y = vars->map->door_y * vars->unit_size \
+		+ vars->unit_size / 2;
 }
 
 void	init_lists(t_vars *vars)
@@ -372,7 +369,6 @@ void	init_lists(t_vars *vars)
 	vars->imp_list = ft_calloc(sizeof(t_enemy), vars->map->imp_list_size);
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
 }
-
 
 int	main(int argc, char **argv)
 {
