@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 00:13:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 00:39:28 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,8 +337,10 @@ typedef struct s_draw_image_params
 void		draw_line(t_vars *vars, unsigned long color);
 
 /* Draw_entities.c */
-void		draw_square(t_vars *vars, int x, int y, int color);
-void		rotate_around_point(t_vars *vars, int *x, int *y);
+void		draw_minimap(t_vars *vars);
+void		draw_and_update_entities(t_vars *vars, t_enemy *entity_list, \
+				int list_size);
+void   		draw_map(t_vars *vars);
 
 /* Draw_player.c */
 void		draw_player(t_vars *vars, unsigned int color);
