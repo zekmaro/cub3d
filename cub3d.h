@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/09 21:20:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 21:35:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,8 +304,6 @@ void		draw_line(t_vars *vars, unsigned long color);
 /* Draw_entities.c */
 void		draw_square(t_vars *vars, int x, int y, int color);
 void		rotate_around_point(t_vars *vars, int *x, int *y);
-void		draw_ray(t_vars *vars, double angle_offset);
-void		draw_ray_segment(t_vars *vars);
 
 /* Draw_player.c */
 void		draw_player(t_vars *vars, unsigned int color);
@@ -315,6 +313,10 @@ void		update_player_position(t_vars *vars);
 void		draw_monster(t_vars *vars, unsigned int color);
 void		cast_ray_enemy(t_vars *vars, t_enemy *enemy, double angle_offset);
 void		search_for_player_enemy(t_vars *vars, t_enemy *enemy);
+
+/* Draw_raycasting.c */
+void		draw_ray(t_vars *vars, double angle_offset);
+void		draw_ray_segment_player(t_vars *vars);
 
 /* Draw_environment.c */
 void		draw_floor(t_vars *vars);
