@@ -47,7 +47,7 @@ uint32_t	combine_colors(uint32_t color1, uint32_t color2)
 	return ((255 << 24) | r_blend | g_blend | b_blend);
 }
 
-void	lend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)
+void	blend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)
 {
 	uint32_t	original_color;
 	uint32_t	blended_color;
