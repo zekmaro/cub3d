@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 22:10:20 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/09 21:06:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 01:53:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,37 +57,40 @@ void	blend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)
 	put_pixel_to_image(vars, x, y, blended_color);
 }
 
-void	draw_player_damaged(t_vars *vars)
+void	process_pixel(t_vars *vars, int x, int y, t_pixel_params *params)
 {
-	int			screen_width;
-	int			screen_height;
-	int			center_x;
-	int			center_y;
-	double		max_distance;
-	int			x;
-	int			y;	
 	double		distance;
 	double		intensity;
 	uint32_t	red_color;
 
+	distance = sqrt((x - params->center_x) * (x - params->center_x) \
+					+ (y - params->center_y) * (y - params->center_y));
+	intensity = 1.0 - (distance / params->max_distance);
+	if (intensity < 0)
+		intensity = 0;
+	red_color = apply_transparency(RED, intensity);
+	blend_pixel_to_image(vars, x, y, red_color);
+}
+
+void	draw_player_damaged(t_vars *vars)
+{
+	t_pixel_params	params;
+	int				screen_width;
+	int				screen_height;
+	int				x;
+	int				y;
+
 	screen_width = vars->mlx->window_width;
 	screen_height = vars->mlx->window_height;
-	center_x = screen_width / 2;
-	center_y = screen_height / 2;
-	max_distance = sqrt(center_x * center_x + center_y * center_y);
+	params.center_x = screen_width / 2;
+	params.center_y = screen_height / 2;
+	params.max_distance = sqrt(params.center_x * params.center_x \
+							+ params.center_y * params.center_y);
 	y = -1;
 	while (++y < screen_height)
 	{
 		x = -1;
 		while (++x < screen_width)
-		{
-			distance = sqrt((x - center_x) * (x - center_x) \
-				+ (y - center_y) * (y - center_y));
-			intensity = 1.0 - (distance / max_distance);
-			if (intensity < 0)
-				intensity = 0;
-			red_color = apply_transparency(RED, intensity);
-			blend_pixel_to_image(vars, x, y, red_color);
-		}
+			process_pixel(vars, x, y, &params);
 	}
 }
