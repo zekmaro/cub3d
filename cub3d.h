@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/08 15:51:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:09:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ typedef enum e_enemy_type
 	CYBER_DEMON
 }	t_enemy_type;
 
-
 typedef struct s_img
 {
 	void		*mlx_img;
@@ -138,7 +137,7 @@ typedef struct s_map
 	int		caco_y;
 	int		door_x;
 	int		door_y;
-	int 	imp_list_size;
+	int		imp_list_size;
 	int		caco_list_size;
 	int		num_doors;
 }	t_map;
@@ -151,7 +150,6 @@ typedef struct s_door
 	double	animation_progress;
 	t_img	*textures;
 }	t_door;
-
 
 typedef struct s_mlx
 {
@@ -197,29 +195,28 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
-	double	fov;
-	int		move_speed;
-	int		rot_speed;
-	int		player_size;
-	int		center_x;
-	int		center_y;
-	int		health;
-	int		is_damaged;
-	double	angle;
-	double	plane_x;
-	double	plane_y;
-	double	dir_x;
-	double	dir_y;
-	int		shoot;
-	t_img	*gun;
-	t_img	*fire;
-	int		fire_done;
-	struct timeval time0;
-	struct timeval time1;
+	int				x;
+	int				y;
+	double			fov;
+	int				move_speed;
+	int				rot_speed;
+	int				player_size;
+	int				center_x;
+	int				center_y;
+	int				health;
+	int				is_damaged;
+	double			angle;
+	double			plane_x;
+	double			plane_y;
+	double			dir_x;
+	double			dir_y;
+	int				shoot;
+	t_img			*gun;
+	t_img			*fire;
+	int				fire_done;
+	struct timeval	time0;
+	struct timeval	time1;
 }	t_player;
-
 
 typedef struct s_sprite
 {
@@ -244,30 +241,30 @@ typedef struct s_keys
 
 typedef struct s_enemy
 {
-	int health;
-	int damage;
-	int	is_dead;
-	int	x;
-	int	y;
-	int	grid_x;
-	int	grid_y;
-	int	center_x;
-	int	center_y;
-	int	rot_dir;
-	double	angle;
-	int	detected_player;
-	t_img	*move_animation;
-	t_img	*death_animation;
-	t_img	*attack_animation;
-	t_img	*fire_ball;
-	int		fire_ball_x;
-	int		fire_ball_y;
-	int		fire_delta_x;
-	int		fire_delta_y;
-	int		shoot_ball;
-	t_img	*current_animation;
-	struct timeval time0;
-	struct timeval time1;
+	int				health;
+	int				damage;
+	int				is_dead;
+	int				x;
+	int				y;
+	int				grid_x;
+	int				grid_y;
+	int				center_x;
+	int				center_y;
+	int				rot_dir;
+	double			angle;
+	int				detected_player;
+	t_img			*move_animation;
+	t_img			*death_animation;
+	t_img			*attack_animation;
+	t_img			*fire_ball;
+	int				fire_ball_x;
+	int				fire_ball_y;
+	int				fire_delta_x;
+	int				fire_delta_y;
+	int				shoot_ball;
+	t_img			*current_animation;
+	struct timeval	time0;
+	struct timeval	time1;
 }	t_enemy;
 
 typedef struct s_vars
@@ -318,13 +315,13 @@ void		draw_map(t_vars *vars);
 void		draw_minimap(t_vars *vars);
 
 /* Drawing.c */
-void	rotate_around_point(t_vars *vars, int *x, int *y);
-void	draw_map(t_vars *vars);
-void	draw_floor(t_vars *vars);
-void	draw_ceiling(t_vars *vars);
-void	draw_fire(t_vars *vars, double scale);
-void	draw_gun(t_vars *vars, double scale);
-void	draw_imp_fire_ball(t_vars *vars);
+void		rotate_around_point(t_vars *vars, int *x, int *y);
+void		draw_map(t_vars *vars);
+void		draw_floor(t_vars *vars);
+void		draw_ceiling(t_vars *vars);
+void		draw_fire(t_vars *vars, double scale);
+void		draw_gun(t_vars *vars, double scale);
+void		draw_imp_fire_ball(t_vars *vars);
 
 /* Free_memory_utils.c */
 void		free_memory(char **arr);
@@ -425,10 +422,11 @@ void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
 
-void	draw_player_damaged(t_vars *vars);
-void	draw_door(t_vars *vars);
-void	init_imp_sprites(t_vars *vars, t_enemy *imp);
-int	is_enemy(t_enemy *enemy, int y, int x);
-void	init_caco_sprites(t_vars *vars, t_enemy *caco);
-int	functioin(t_vars *vars);
+void		draw_player_damaged(t_vars *vars);
+void		draw_door(t_vars *vars);
+void		init_imp_sprites(t_vars *vars, t_enemy *imp);
+int			is_enemy(t_enemy *enemy, int y, int x);
+void		init_caco_sprites(t_vars *vars, t_enemy *caco);
+int			functioin(t_vars *vars);
+
 #endif // CUB3D_H
