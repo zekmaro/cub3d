@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
+#    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/07 22:11:06 by anarama          ###   ########.fr        #
+#    Updated: 2024/09/09 21:04:42 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRC		:=	src/cub3d.c \
 			src/ray_handlers.c \
 			src/sprites.c \
 			src/doors.c \
-			src/gradient.c
+			src/gradient.c \
+			src/draw_player.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
