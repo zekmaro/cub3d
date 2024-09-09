@@ -189,6 +189,19 @@ void	act_detected_enemies(t_vars *vars)
 	}
 }
 
+void	detect_door_and_open(t_vars *vars)
+{
+	int x;
+	int y;
+
+	x = vars->player->center_x / vars->unit_size;
+	y = vars->player->center_y / vars->unit_size;
+	if (vars->ray->hit_door && vars->ray->distance_to_wall < vars->unit_size)
+	{		
+		open_door(vars, x, y);
+	}
+}
+
 int	main_loop_hook(t_vars *vars)
 {
 	struct timeval t;
@@ -210,6 +223,7 @@ int	main_loop_hook(t_vars *vars)
 	{
 		draw_player_damaged(vars);
 	}
+	detect_door_and_open(vars);
 	get_current_time(&t);
 	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
 	return (0);

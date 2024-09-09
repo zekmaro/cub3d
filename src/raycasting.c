@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <stdio.h>
 
 t_tex_typ	define_texture_type(t_vars *vars)
 {
@@ -35,7 +36,7 @@ t_tex_typ	define_texture_type(t_vars *vars)
 			return (TEXTURE_EAST);
 	}
 	else if (vars->map->grid[map_y][map_x] == 'D')
-		return (TEXTURE_DOOR2);
+		return (TEXTURE_DOOR0);
 	return (TEXTURE_NONE);
 }
 
@@ -53,6 +54,15 @@ void	get_ray_target_coords(t_vars *vars)
 		vars->ray->ray_x += vars->ray->ray_dir_x;
 		vars->ray->ray_y += vars->ray->ray_dir_y;
 	}
+	if (is_door(vars, vars->ray->ray_y, vars->ray->ray_x))
+	{
+        vars->ray->hit_door = 1;
+        vars->ray->door_factor = 0.5;
+    }
+	else
+    {
+        vars->ray->hit_door = 0;
+    }
 }
 
 void	setup_ray(t_vars *vars, double ray_x, double ray_y)
@@ -62,7 +72,7 @@ void	setup_ray(t_vars *vars, double ray_x, double ray_y)
 	vars->ray->distance_to_wall *= cos(vars->player->angle \
 		- vars->ray->ray_angle);
 	vars->ray->line_height = (int)(vars->mlx->window_height \
-		* vars->unit_size / vars->ray->distance_to_wall);
+		* vars->unit_size / vars->ray->distance_to_wall);	
 	vars->ray->draw_start = -vars->ray->line_height / 2 \
 		+ vars->mlx->window_height / 2;
 	// if (vars->ray->draw_start < 0)
