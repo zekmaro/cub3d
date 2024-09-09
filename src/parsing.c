@@ -48,13 +48,11 @@ int	validate_line(char *line, int row, t_map *map)
 		}
 		else if (line[i] == 'M')
 		{
-			map->monster_x = i;
-			map->monster_y = row;
+			map->imp_list_size++;
 		}
 		else if (line[i] == 'C')
 		{
-			map->caco_x = i;
-			map->caco_y = row;
+			map->caco_list_size++;
 		}
 		else if (line[i] == 'D')
 		{

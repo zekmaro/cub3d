@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <mlx.h>
 
 long	update_imp_time(t_vars *vars)
 {
@@ -34,6 +35,8 @@ int	key_press(int keycode, t_vars *vars)
 		vars->keys.a = 1;
 	if (keycode == D)
 		vars->keys.d = 1;
+	if (keycode == SPACE)
+		vars->keys.space = 1;
 	if (keycode == KEY_LEFT)
 		vars->keys.left = 1;
 	if (keycode == KEY_RIGHT)
@@ -53,6 +56,8 @@ int	key_up(int keycode, t_vars *vars)
 		vars->keys.a = 0;
 	if (keycode == D)
 		vars->keys.d = 0;
+	if (keycode == SPACE)
+		vars->keys.space = 0;
 	if (keycode == KEY_LEFT)
 		vars->keys.left = 0;
 	if (keycode == KEY_RIGHT)
@@ -67,28 +72,33 @@ int	player_damaged_enemy(t_vars *vars, t_enemy *enemy)
 		&& !vars->player->is_damaged);
 }
 
-void	update_enemy(t_enemy *enemy, long delay)
+void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 {
 	long enemy_elapsed_time;
+	int i = 0;
 
-	get_current_time(&enemy->time1);
-	enemy_elapsed_time = get_elapsed_time(&enemy->time0, &enemy->time1);
-	if (enemy_elapsed_time > delay)
+	while (i < size)
 	{
-		if (enemy->current_animation == enemy->death_animation
-			&& enemy->current_animation->current_frame
-			== enemy->current_animation->frame_count - 1)
+		get_current_time(&enemy_list[i].time1);
+		enemy_elapsed_time = get_elapsed_time(&enemy_list[i].time0, &enemy_list[i].time1);
+		if (enemy_elapsed_time > delay)
 		{
-			enemy->is_dead = 1;
-			enemy->center_x = -100;
-			enemy->center_y = -100;
+			if (enemy_list[i].current_animation == enemy_list[i].death_animation
+				&& enemy_list[i].current_animation->current_frame
+				== enemy_list[i].current_animation->frame_count - 1)
+			{
+				enemy_list[i].is_dead = 1;
+				enemy_list[i].center_x = -100;
+				enemy_list[i].center_y = -100;
+			}
+			update_sprite_frame(enemy_list[i].current_animation);
+			if (enemy_list[i].current_animation == enemy_list[i].attack_animation
+			&& enemy_list[i].current_animation->current_frame
+			== enemy_list[i].current_animation->frame_count - 1)
+				enemy_list[i].current_animation = enemy_list[i].move_animation;
+			enemy_list[i].time0 = enemy_list[i].time1;
 		}
-		update_sprite_frame(enemy->current_animation);
-		if (enemy->current_animation == enemy->attack_animation
-		&& enemy->current_animation->current_frame
-		== enemy->current_animation->frame_count - 1)
-			enemy->current_animation = enemy->move_animation;
-		enemy->time0 = enemy->time1;
+		i++;
 	}
 }
 
@@ -171,21 +181,38 @@ void	handle_player_damaged_time(t_vars *vars)
 
 void	search_for_player(t_vars *vars)
 {
-	if (!vars->imp->detected_player)
-		vars->imp->angle += M_PI / 10 * vars->imp->rot_dir;
-	if (!vars->caco->detected_player)
-		vars->caco->angle += M_PI / 10 * vars->imp->rot_dir;
+	int i = 0;
+	while (i < vars->map->imp_list_size)
+	{
+		if (!vars->imp_list[i].detected_player)
+			vars->imp_list[i].angle += M_PI / 10 * vars->imp_list[i].rot_dir;
+		i++;
+	}
+	i = 0;
+	while (i < vars->map->caco_list_size)
+	{
+		if (!vars->caco_list[i].detected_player)
+			vars->caco_list[i].angle += M_PI / 10 * vars->caco_list[i].rot_dir;
+		i++;
+	}
 }
 
 void	act_detected_enemies(t_vars *vars)
 {
-	if (vars->imp->detected_player)
+	int i = 0;
+
+	while (i < vars->map->imp_list_size)
 	{
-		enemy_act(vars, vars->imp);
+		if (vars->imp_list[i].detected_player)
+			enemy_act(vars, &vars->imp_list[i]);
+		i++;
 	}
-	if (vars->caco->detected_player)
+	i = 0;
+	while (i < vars->map->caco_list_size)
 	{
-		enemy_act(vars, vars->caco);
+		if (vars->caco_list[i].detected_player)
+			enemy_act(vars, &vars->caco_list[i]);
+		i++;
 	}
 }
 
@@ -195,24 +222,94 @@ int	main_loop_hook(t_vars *vars)
 	double abc;
 
 	get_current_time(&t);
-	get_current_time(&vars->player->time1);
 	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
+	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
-	update_enemy(vars->imp, 200);
-	update_enemy(vars->caco, 300);
+	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
+	update_enemy_list(vars->caco_list, 200, vars->map->caco_list_size);
 	update_position(vars);
 	draw_sprite(vars);
 	if (vars->player->shoot)
 		animate_shooting(vars);
 	search_for_player(vars);
-	act_detected_enemies(vars);
+	//act_detected_enemies(vars);
 	if (vars->player->is_damaged)
-	{
 		draw_player_damaged(vars);
-	}
 	get_current_time(&t);
 	printf("diff: %1.12f\n", ((double)t.tv_sec + (double)t.tv_usec / 1000000) - abc);
 	return (0);
+}
+
+void	setup_imp(t_vars *vars, t_enemy *imp)
+{
+	imp->x = (imp->grid_x * vars->unit_size);
+	imp->y = (imp->grid_y * vars->unit_size);
+	imp->center_x = imp->x + vars->unit_size / 2;
+	imp->center_y = imp->y + vars->unit_size / 2;
+	imp->angle = -M_PI / 2;
+	imp->rot_dir = 1;
+	imp->fire_ball_x = imp->center_x;
+	imp->fire_ball_y = imp->center_y;
+	imp->health = 100;
+	imp->is_dead = 0;
+	imp->move_animation = ft_calloc(sizeof(t_img), 1);
+	imp->death_animation = ft_calloc(sizeof(t_img), 1);
+	imp->attack_animation = ft_calloc(sizeof(t_img), 1);
+	imp->fire_ball = ft_calloc(sizeof(t_img), 1);
+	get_current_time(&imp->time0);
+	init_imp_sprites(vars, imp);
+}
+
+void	setup_caco(t_vars *vars, t_enemy *caco)
+{
+	caco->x = (caco->grid_x * vars->unit_size);
+	caco->y = (caco->grid_y * vars->unit_size);
+	caco->center_x = caco->x + vars->unit_size / 2;
+	caco->center_y = caco->y + vars->unit_size / 2;
+	caco->angle = -M_PI / 2;
+	caco->rot_dir = 1;
+	caco->fire_ball_x = caco->center_x;
+	caco->fire_ball_y = caco->center_y;
+	caco->health = 100;
+	caco->is_dead = 0;
+	caco->move_animation = ft_calloc(sizeof(t_img), 1);
+	caco->death_animation = ft_calloc(sizeof(t_img), 1);
+	caco->attack_animation = ft_calloc(sizeof(t_img), 1);
+	caco->fire_ball = ft_calloc(sizeof(t_img), 1);
+	get_current_time(&caco->time0);
+	init_caco_sprites(vars, caco);
+}
+
+void	init_enemies(t_vars *vars)
+{
+	int i = 0;
+	int j = 0;
+	int counter_imp = 0;
+	int counter_caco = 0;
+
+	while (vars->map->grid[i])
+	{
+		j = 0;
+		while (vars->map->grid[i][j])
+		{
+			if (vars->map->grid[i][j] == 'M')
+			{
+				vars->imp_list[counter_imp].grid_x = j;
+				vars->imp_list[counter_imp].grid_y = i;
+				setup_imp(vars, &vars->imp_list[counter_imp]);
+				counter_imp++;
+			}
+			else if (vars->map->grid[i][j] == 'C')
+			{
+				vars->caco_list[counter_caco].grid_x = j;
+				vars->caco_list[counter_caco].grid_y = i;
+				setup_caco(vars, &vars->caco_list[counter_caco]);
+				counter_caco++;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 void	run_screen(t_vars *vars)
@@ -223,6 +320,7 @@ void	run_screen(t_vars *vars)
 	get_data_image(vars, vars->image, vars->mlx);
 	initialise_textures(vars);
 	initialise_sprites(vars);
+	init_enemies(vars);
 	draw_door(vars);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
@@ -235,16 +333,6 @@ void	run_screen(t_vars *vars)
 	mlx_loop_hook(vars->mlx->mlx, main_loop_hook, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
-}
-//mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
-// mlx_key_hook(vars->mlx->win, key_hook, vars);
-
-int	game_loop(t_vars *vars)
-{
-	draw_map(vars);
-	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
-		vars->image->mlx_img, 0, 0);
-	return (0);
 }
 
 void	setup_player(t_vars *vars)
@@ -272,37 +360,18 @@ void	setup_player(t_vars *vars)
 	vars->player->health = 100;
 }
 
-void	setup_imp(t_vars *vars)
-{
-	vars->imp->x = (vars->map->monster_x * vars->unit_size);
-	vars->imp->y = (vars->map->monster_y * vars->unit_size);
-	vars->imp->center_x = vars->imp->x + vars->unit_size / 2;
-	vars->imp->center_y = vars->imp->y + vars->unit_size / 2;
-	vars->imp->angle = -M_PI / 2;
-	vars->imp->rot_dir = 1;
-	vars->imp->fire_ball_x = vars->imp->center_x;
-	vars->imp->fire_ball_y = vars->imp->center_y;
-}
-
-void	setup_caco(t_vars *vars)
-{
-	vars->caco->x = (vars->map->caco_x * vars->unit_size);
-	vars->caco->y = (vars->map->caco_y * vars->unit_size);
-	vars->caco->center_x = vars->caco->x + vars->unit_size / 2;
-	vars->caco->center_y = vars->caco->y + vars->unit_size / 2;
-	vars->caco->angle = -M_PI / 2;
-	vars->caco->rot_dir = 1;
-	vars->caco->fire_ball_x = vars->caco->center_x;
-	vars->caco->fire_ball_y = vars->caco->center_y;
-}
-
 void	setup_door(t_vars *vars)
 {
 	vars->door->center_x = vars->map->door_x * vars->unit_size + vars->unit_size / 2;
 	vars->door->center_y = vars->map->door_y * vars->unit_size + vars->unit_size / 2;
-	printf("door center x: %d\n", vars->door->center_x);
-	printf("door center y: %d\n", vars->door->center_y);
 }
+
+void	init_lists(t_vars *vars)
+{
+	vars->imp_list = ft_calloc(sizeof(t_enemy), vars->map->imp_list_size);
+	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -324,18 +393,10 @@ int	main(int argc, char **argv)
 	initialise_vars(&vars);
 	if (!read_map(fd, vars.map, argv[1]))
 		free_and_exit(&vars);
+	init_lists(&vars);
 	setup_player(&vars);
-	setup_imp(&vars);
 	setup_door(&vars);
-	setup_caco(&vars);
 	get_current_time(&vars.program_start);
-	get_current_time(&vars.imp->time0);
-	get_current_time(&vars.caco->time0);
-	//print_map(vars.map);
 	run_screen(&vars);
 	return (0);
 }
-
-// get_current_time(&vars.program_start);
-//print_map(vars.map);
-// run_screen(&vars);
