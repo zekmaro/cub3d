@@ -118,12 +118,12 @@ void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 int	animate_shooting(t_vars *vars)
 {
 	static int	frame_count = 0;
-	long		elapsed_time;
+	//long		elapsed_time;
 
 	if (!vars->player->shoot)
 		return (0);
 	get_current_time(&vars->current_time);
-	elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
+	//elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 	if (frame_count == 2 && !vars->player->fire_done)
 	{
 		vars->player->fire_done = 1;
@@ -170,19 +170,19 @@ int	shoot_this_shit(int button, int x, int y, t_vars *vars)
 	return (0);
 }
 
-void	handle_key(int keycode, t_vars *vars)
-{
-	int	x;
-	int	y;
+// void	handle_key(int keycode, t_vars *vars)
+// {
+// 	int	x;
+// 	int	y;
 
-	if (keycode == KEY_OPEN_DOOR)
-	{
-		x = vars->player->x / vars->unit_size;
-		y = vars->player->y / vars->unit_size;
-		//toggle_door(vars, x, y);
-	}
-	update_position(vars);
-}
+// 	if (keycode == KEY_OPEN_DOOR)
+// 	{
+// 		x = vars->player->x / vars->unit_size;
+// 		y = vars->player->y / vars->unit_size;
+// 		//toggle_door(vars, x, y);
+// 	}
+// 	update_position(vars);
+// }
 
 // int	key_hook(int keycode, t_vars *vars)
 // {

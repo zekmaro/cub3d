@@ -280,7 +280,6 @@ void	init_enemies(t_vars *vars)
 	int	counter_caco;
 
 	i = 0;
-	j = 0;
 	counter_imp = 0;
 	counter_caco = 0;
 	while (vars->map->grid[i])
