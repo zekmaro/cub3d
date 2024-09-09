@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/09 23:57:40 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 00:13:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ typedef struct s_pix_inf
 
 typedef struct s_tex_coords
 {
-	int		tex_x;
-	int		tex_y;
+	int	tex_x;
+	int	tex_y;
 }	t_tex_coords;
 
 typedef enum e_tex_typ
@@ -295,35 +295,40 @@ typedef struct s_vars
 	t_keys			keys;
 }	t_vars;
 
-typedef struct s_dim {
-    int width;
-    int height;
-} t_dim;
+typedef struct s_dim
+{
+	int	width;
+	int	height;
+}	t_dim;
 
-typedef struct s_scr_pos {
-    int x;
-    int y;
-} t_scr_pos;
+typedef struct s_scr_pos
+{
+	int	x;
+	int	y;
+}	t_scr_pos;
 
-typedef struct s_tex_pos {
-    int x;
-    int y;
-} t_tex_pos;
+typedef struct s_tex_pos
+{
+	int	x;
+	int	y;
+}	t_tex_pos;
 
-typedef struct s_draw_params {
-    t_vars *vars;
-    t_img *image;
-    t_scr_pos screen_start;
-    double scale;
-} t_draw_params;
+typedef struct s_draw_params
+{
+	t_vars		*vars;
+	t_img		*image;
+	t_scr_pos	screen_start;
+	double		scale;
+}	t_draw_params;
 
-typedef struct s_draw_image_params {
-    t_vars *vars;
-    t_img *image;
-    double scale;
-    int offset_x;
-    int offset_y;
-} t_draw_image_params;
+typedef struct s_draw_image_params
+{
+	t_vars	*vars;
+	t_img	*image;
+	double	scale;
+	int		offset_x;
+	int		offset_y;
+}	t_draw_image_params;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
@@ -365,6 +370,10 @@ t_scr_pos	init_scr_pos(int x, int y);
 /* Draw_utils.c */
 void		draw_square(t_vars *vars, int x, int y, int color);
 void		rotate_around_point(t_vars *vars, int *x, int *y);
+
+/* Draw_dynamic_sprite.c */
+void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
+				int object_y, int scale);
 
 /* Draw_environment.c */
 void		draw_floor(t_vars *vars);
