@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/09 21:35:44 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 23:57:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,36 @@ typedef struct s_vars
 	t_keys			keys;
 }	t_vars;
 
+typedef struct s_dim {
+    int width;
+    int height;
+} t_dim;
+
+typedef struct s_scr_pos {
+    int x;
+    int y;
+} t_scr_pos;
+
+typedef struct s_tex_pos {
+    int x;
+    int y;
+} t_tex_pos;
+
+typedef struct s_draw_params {
+    t_vars *vars;
+    t_img *image;
+    t_scr_pos screen_start;
+    double scale;
+} t_draw_params;
+
+typedef struct s_draw_image_params {
+    t_vars *vars;
+    t_img *image;
+    double scale;
+    int offset_x;
+    int offset_y;
+} t_draw_image_params;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -317,6 +347,24 @@ void		search_for_player_enemy(t_vars *vars, t_enemy *enemy);
 /* Draw_raycasting.c */
 void		draw_ray(t_vars *vars, double angle_offset);
 void		draw_ray_segment_player(t_vars *vars);
+
+/* Draw_gunshot.c */
+void		draw_scaled_image(t_draw_image_params *params);
+void		draw_fire(t_vars *vars, double scale);
+void		draw_gun(t_vars *vars, double scale);
+
+/* Draw_gunshot_helper.c */
+t_dim		calculate_scaled_dimensions(t_img *image, double scale);
+t_dim		calculate_screen_start_position(t_vars *vars, \
+				t_dim scaled_dimensions, int offset_x, int offset_y);
+void		draw_pixel(t_draw_params *params, t_scr_pos screen_pos, \
+				t_tex_pos tex_pos);
+t_tex_pos	init_tex_pos(int x, int y);
+t_scr_pos	init_scr_pos(int x, int y);
+
+/* Draw_utils.c */
+void		draw_square(t_vars *vars, int x, int y, int color);
+void		rotate_around_point(t_vars *vars, int *x, int *y);
 
 /* Draw_environment.c */
 void		draw_floor(t_vars *vars);
