@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 17:45:13 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/07 19:55:13 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:18:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@
 void	open_door(t_vars *vars, int x, int y)
 {
 	if (is_door(vars, x, y))
-        vars->map->grid[y][x] = '0';
+		vars->map->grid[y][x] = '0';
 }
 
 void	close_door(t_vars *vars, int x, int y)
 {
-    if (is_door(vars, x, y))
-        vars->map->grid[y][x] = 'D';
+	if (is_door(vars, x, y))
+		vars->map->grid[y][x] = 'D';
 }
 
 // void	toggle_door(t_vars *vars, int x, int y)

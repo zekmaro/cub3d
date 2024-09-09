@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/06 18:48:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:33:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,22 @@ void	calculate_sprite_distances(t_vars *vars)
 
 void	project_sprite(t_vars *vars, t_sprite *sprite)
 {
-	double sprite_x = sprite->x - vars->player->x;
-	double sprite_y = sprite->y - vars->player->y;
-	double inv_det = 1.0 / (vars->player->plane_x * vars->player->dir_y - vars->player->dir_x * vars->player->plane_y);
-	double transform_x = inv_det * (vars->player->dir_y * sprite_x - vars->player->dir_x * sprite_y);
-	double transform_y = inv_det * (-vars->player->plane_y * sprite_x + vars->player->plane_x * sprite_y);
-	sprite->screen_x = (int)((vars->mlx->window_width / 2) * (1 + transform_x / transform_y));
+	double	sprite_x;
+	double	sprite_y;
+	double	inv_det;
+	double	transform_x;
+	double	transform_y;
+
+	sprite_x = sprite->x - vars->player->x;
+	sprite_y = sprite->y - vars->player->y;
+	inv_det = 1.0 / (vars->player->plane_x * vars->player->dir_y \
+		- vars->player->dir_x * vars->player->plane_y);
+	transform_x = inv_det * (vars->player->dir_y * sprite_x \
+		- vars->player->dir_x * sprite_y);
+	transform_y = inv_det * (-vars->player->plane_y * sprite_x \
+		+ vars->player->plane_x * sprite_y);
+	sprite->screen_x = (int)((vars->mlx->window_width / 2) \
+		* (1 + transform_x / transform_y));
 	sprite->height = abs((int)(vars->mlx->window_height / transform_y));
 	sprite->width = abs((int)(vars->mlx->window_height / transform_y));
 }
@@ -124,6 +134,15 @@ void	sort_sprites(t_vars *vars)
 void	draw_sprites(t_vars *vars)
 {
 	int	i;
+	int	draw_start_y;
+	int	draw_end_y;
+	int	draw_start_x;
+	int	draw_end_x;
+	int	stripe;
+	int	y;
+	int	tex_x;
+	int	tex_y;
+	int	color;
 
 	i = 0;
 	calculate_sprite_distances(vars);
@@ -132,29 +151,38 @@ void	draw_sprites(t_vars *vars)
 	while (i < vars->num_sprites)
 	{
 		project_sprite(vars, &vars->sprites[i]);
-		int draw_start_y = -vars->sprites[i].height / 2 + vars->mlx->window_height / 2;
-		if (draw_start_y < 0) draw_start_y = 0;
-		int draw_end_y = vars->sprites[i].height / 2 + vars->mlx->window_height / 2;
-		if (draw_end_y >= vars->mlx->window_height) draw_end_y = vars->mlx->window_height - 1;
-		int draw_start_x = -vars->sprites[i].width / 2 + vars->sprites[i].screen_x;
-		if (draw_start_x < 0) draw_start_x = 0;
-		int draw_end_x = vars->sprites[i].width / 2 + vars->sprites[i].screen_x;
-		if (draw_end_x >= vars->mlx->window_width) draw_end_x = vars->mlx->window_width - 1;
-		int stripe = draw_start_x;
+		draw_start_y = -vars->sprites[i].height / 2 \
+			+ vars->mlx->window_height / 2;
+		if (draw_start_y < 0)
+			draw_start_y = 0;
+		draw_end_y = vars->sprites[i].height / 2 + vars->mlx->window_height / 2;
+		if (draw_end_y >= vars->mlx->window_height)
+			draw_end_y = vars->mlx->window_height - 1;
+		draw_start_x = -vars->sprites[i].width / 2 + vars->sprites[i].screen_x;
+		if (draw_start_x < 0)
+			draw_start_x = 0;
+		draw_end_x = vars->sprites[i].width / 2 + vars->sprites[i].screen_x;
+		if (draw_end_x >= vars->mlx->window_width)
+			draw_end_x = vars->mlx->window_width - 1;
+		stripe = draw_start_x;
 		while (stripe < draw_end_x)
 		{
 			if (vars->sprites[i].distance < vars->zbuffer[stripe])
 			{
-				int y = draw_start_y;
+				y = draw_start_y;
 				while (y < draw_end_y)
 				{
-					int tex_x = (int)((stripe - (-vars->sprites[i].width / 2 + vars->sprites[i].screen_x)) * vars->sprite_texture->width / vars->sprites[i].width);
-					int tex_y = (int)((y - (-vars->sprites[i].height / 2 + vars->mlx->window_height / 2)) * vars->sprite_texture->height / vars->sprites[i].height);
-					int color = get_texture_color(vars->sprite_texture, tex_x, tex_y);
+					tex_x = (int)((stripe - (-vars->sprites[i].width / 2 \
+						+ vars->sprites[i].screen_x)) \
+						* vars->sprite_texture->width / vars->sprites[i].width);
+					tex_y = (int)((y - (-vars->sprites[i].height / 2 \
+						+ vars->mlx->window_height / 2)) \
+						* vars->sprite_texture->height \
+						/ vars->sprites[i].height);
+					color = get_texture_color(vars->sprite_texture, \
+						tex_x, tex_y);
 					if (color != -1)
-					{
 						put_pixel_to_image(vars, stripe, y, color);
-					}
 					y++;
 				}
 			}

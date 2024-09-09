@@ -49,11 +49,13 @@ void	rotate_around_point(t_vars *vars, int *x, int *y)
 
 void	update_player_position(t_vars *vars)
 {
+	double plane_length;
+
 	vars->player->center_x = vars->player->x + vars->player->player_size / 2;
 	vars->player->center_y = vars->player->y + vars->player->player_size / 2;
 	vars->player->dir_x = cos(vars->player->angle);
 	vars->player->dir_y = sin(vars->player->angle);
-	double plane_length = tan(vars->player->fov / 2);
+	plane_length = tan(vars->player->fov / 2);
 	vars->player->plane_x = -vars->player->dir_y * plane_length;
 	vars->player->plane_y = vars->player->dir_x * plane_length;
 }
