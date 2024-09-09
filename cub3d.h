@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 01:15:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 01:30:55 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,6 +453,16 @@ void		initialise_vars(t_vars *vars);
 void		load_texture(t_vars *vars, int texture_index, \
 				const char *file_path);
 void		initialise_textures(t_vars *vars);
+
+/* Init_sprites.c	*/
+int			count_frames(const char **frames);
+void		initialise_enemy_textures(t_vars *vars, t_img *animation,
+				const char **frames);
+void		load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
+				const char *file_path);
+void		init_imp_sprites(t_vars *vars, t_enemy *imp);
+void		init_caco_sprites(t_vars *vars, t_enemy *caco);
+void		initialise_sprites(t_vars *vars);
 
 /* Parsing.c */
 int			read_map(int fd, t_map *map, char *file_name);

@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/10 01:15:12 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/10 01:29:02 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC		:=	src/cub3d.c \
 			src/draw_dynamic_sprite.c \
 			src/is_entity.c \
 			src/init_textures.c \
+			src/init_sprites.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
