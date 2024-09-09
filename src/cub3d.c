@@ -218,13 +218,12 @@ int	main_loop_hook(t_vars *vars)
 	handle_player_damaged_time(vars);
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 200, vars->map->caco_list_size);
-	if (!vars->player->shoot)
-		update_position(vars);
+	update_position(vars);
 	draw_sprite(vars);
 	if (vars->player->shoot)
 		animate_shooting(vars);
 	search_for_player(vars);
-	act_detected_enemies(vars);
+	//act_detected_enemies(vars);
 	if (vars->player->is_damaged)
 		draw_player_damaged(vars);
 	get_current_time(&t);
@@ -392,13 +391,7 @@ int	main(int argc, char **argv)
 	init_lists(&vars);
 	setup_player(&vars);
 	setup_door(&vars);
-	//setup_caco(&vars);
 	get_current_time(&vars.program_start);
-	//print_map(vars.map);
 	run_screen(&vars);
 	return (0);
 }
-
-// get_current_time(&vars.program_start);
-//print_map(vars.map);
-// run_screen(&vars);
