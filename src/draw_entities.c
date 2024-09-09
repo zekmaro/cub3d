@@ -6,42 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/09 21:30:45 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 22:38:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	draw_square(t_vars *vars, int x, int y, int color)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < vars->unit_size)
-	{
-		j = -1;
-		while (++j < vars->unit_size)
-			put_pixel_to_image(vars, x + j, y + i, color);
-	}
-}
-
-void	rotate_around_point(t_vars *vars, int *x, int *y)
-{
-	int		temp_x;
-	int		temp_y;
-	double	angle;
-	int		cx;
-	int		cy;
-
-	angle = vars->player->angle;
-	cx = vars->player->center_x;
-	cy = vars->player->center_y;
-	temp_x = *x - cx;
-	temp_y = *y - cy;
-	*x = temp_x * cos(angle) - temp_y * sin(angle) + cx;
-	*y = temp_x * sin(angle) + temp_y * cos(angle) + cy;
-}
 
 void	draw_minimap(t_vars *vars)
 {
@@ -62,83 +31,6 @@ void	draw_minimap(t_vars *vars)
 				draw_square(vars, vars->line->x0, vars->line->y0, YELLOW);
 			else
 				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
-		}
-	}
-}
-
-void	draw_fire(t_vars *vars, double scale)
-{
-	int		screen_x;
-	int		screen_y;
-	int		tex_x;
-	int		tex_y;
-	int		color;
-	t_img	*temp;
-	int		gun_width;
-	int		gun_height;
-	int		scaled_width;
-	int		scaled_height;
-	int		screen_x_start;
-	int		screen_y_start;
-
-	temp = \
-		(t_img *)vars->player->fire->frames[vars->player->fire->current_frame];
-	gun_width = temp->width;
-	gun_height = temp->height;
-	scaled_width = gun_width * scale;
-	scaled_height = gun_height * scale;
-	screen_x_start = (vars->mlx->window_width / 2) - (scaled_width / 2) + 18;
-	screen_y_start = vars->mlx->window_height - scaled_height;
-	screen_y = -1;
-	while (++screen_y < scaled_height)
-	{
-		tex_y = screen_y / scale;
-		screen_x = -1;
-		while (++screen_x < scaled_width)
-		{
-			tex_x = screen_x / scale;
-			color = get_texture_color(temp, tex_x, tex_y);
-			if (color != -1)
-				put_pixel_to_image(vars, screen_x_start + screen_x, \
-					screen_y_start + screen_y - 250, color);
-		}
-	}
-}
-
-void	draw_gun(t_vars *vars, double scale)
-{
-	int		screen_x;
-	int		screen_y;
-	int		tex_x;
-	int		tex_y;
-	int		color;
-	t_img	*temp;
-	int		gun_width;
-	int		gun_height;
-	int		scaled_width;
-	int		scaled_height;
-	int		screen_x_start;
-	int		screen_y_start;
-
-	temp = (t_img *)vars->player->gun->frames[vars->player->gun->current_frame];
-	gun_width = temp->width;
-	gun_height = temp->height;
-	scaled_width = gun_width * scale;
-	scaled_height = gun_height * scale;
-	screen_x_start = (vars->mlx->window_width / 2) - (scaled_width / 2);
-	screen_y_start = vars->mlx->window_height - scaled_height;
-	screen_y = -1;
-	while (++screen_y < scaled_height)
-	{
-		tex_y = screen_y / scale;
-		screen_x = -1;
-		while (++screen_x < scaled_width)
-		{
-			tex_x = screen_x / scale;
-			color = get_texture_color(temp, tex_x, tex_y);
-			if (color != -1)
-				put_pixel_to_image(vars, screen_x_start + screen_x, \
-					screen_y_start + screen_y - 100, color);
 		}
 	}
 }
