@@ -314,7 +314,6 @@ void	run_screen(t_vars *vars)
 	initialise_textures(vars);
 	initialise_sprites(vars);
 	init_enemies(vars);
-	draw_door(vars);
 	draw_map(vars);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
 		vars->image->mlx_img, 0, 0);
