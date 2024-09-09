@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/09 13:09:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 21:03:50 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,9 +304,13 @@ void		draw_line(t_vars *vars, unsigned long color);
 /* Draw_entities.c */
 void		draw_square(t_vars *vars, int x, int y, int color);
 void		rotate_around_point(t_vars *vars, int *x, int *y);
-void		draw_player(t_vars *vars, unsigned int color);
+
 void		draw_ray(t_vars *vars, double angle_offset);
 void		draw_ray_segment(t_vars *vars);
+
+/* Draw_player.c */
+void		draw_player(t_vars *vars, unsigned int color);
+void		update_player_position(t_vars *vars);
 
 /* Draw_environment.c */
 void		draw_floor(t_vars *vars);
