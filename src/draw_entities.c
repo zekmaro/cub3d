@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/08 15:21:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:03:26 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	update_player_position(t_vars *vars)
 	vars->player->center_x = vars->player->x + vars->player->player_size / 2;
 	vars->player->center_y = vars->player->y + vars->player->player_size / 2;
 	vars->player->dir_x = cos(vars->player->angle);
-    vars->player->dir_y = sin(vars->player->angle);
-    double plane_length = tan(vars->player->fov / 2);
-    vars->player->plane_x = -vars->player->dir_y * plane_length;
-    vars->player->plane_y = vars->player->dir_x * plane_length;
+	vars->player->dir_y = sin(vars->player->angle);
+	double plane_length = tan(vars->player->fov / 2);
+	vars->player->plane_x = -vars->player->dir_y * plane_length;
+	vars->player->plane_y = vars->player->dir_x * plane_length;
 }
 
 void	draw_player(t_vars *vars, unsigned int color)
