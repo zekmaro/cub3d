@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 01:30:55 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 01:49:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,6 +329,13 @@ typedef struct s_draw_image_params
 	int		offset_x;
 	int		offset_y;
 }	t_draw_image_params;
+
+typedef struct s_pixel_params
+{
+	int		center_x;
+	int		center_y;
+	double	max_distance;
+}	t_pixel_params;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
