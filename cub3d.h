@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 00:39:28 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 00:51:05 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,9 +338,10 @@ void		draw_line(t_vars *vars, unsigned long color);
 
 /* Draw_entities.c */
 void		draw_minimap(t_vars *vars);
+void		draw_and_update_entity(t_vars *vars, t_enemy *entity);
 void		draw_and_update_entities(t_vars *vars, t_enemy *entity_list, \
 				int list_size);
-void   		draw_map(t_vars *vars);
+void		draw_map(t_vars *vars);
 
 /* Draw_player.c */
 void		draw_player(t_vars *vars, unsigned int color);
