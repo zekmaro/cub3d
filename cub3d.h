@@ -424,4 +424,7 @@ void	init_imp_sprites(t_vars *vars, t_enemy *imp);
 int	is_enemy(t_enemy *enemy, int y, int x);
 void	init_caco_sprites(t_vars *vars, t_enemy *caco);
 int	functioin(t_vars *vars);
+void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, int object_y, int scale);
+void	search_for_player_enemy(t_vars *vars, t_enemy *enemy);
+void	update_player_position(t_vars *vars);
 #endif // CUB3D_H
