@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 00:51:05 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 01:15:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -448,6 +448,11 @@ void		initialise_sprites(t_vars *vars);
 void		initialise_map(t_vars *vars);
 void		initialise_vars(t_vars *vars);
 //void		initialise_doors(t_vars *vars);
+
+/* Init_textures.c*/
+void		load_texture(t_vars *vars, int texture_index, \
+				const char *file_path);
+void		initialise_textures(t_vars *vars);
 
 /* Parsing.c */
 int			read_map(int fd, t_map *map, char *file_name);

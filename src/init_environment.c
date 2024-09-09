@@ -6,52 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/09 13:20:44 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 01:12:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	load_texture(t_vars *vars, int texture_index, const char *file_path)
-{
-	int	width;
-	int	height;
-
-	vars->textures[texture_index] = mlx_xpm_file_to_image(vars->mlx->mlx, \
-		(char *)file_path, &width, &height);
-	if (!vars->textures[texture_index])
-	{
-		perror("Failed to load texture");
-		free_and_exit(vars);
-	}
-	vars->textures[texture_index]->addr = mlx_get_data_addr(\
-		vars->textures[texture_index], \
-		&vars->textures[texture_index]->bits_per_pixel, \
-		&vars->textures[texture_index]->line_len, \
-		&vars->textures[texture_index]->endian);
-	if (!vars->textures[texture_index]->addr)
-	{
-		perror("Failed to get texture data address");
-		free_and_exit(vars);
-	}
-}
-
-void	initialise_textures(t_vars *vars)
-{
-	if (!vars->mlx || !vars->mlx->mlx)
-	{
-		perror("MLX not initialized");
-		free_and_exit(vars);
-	}
-	load_texture(vars, TEXTURE_NORTH, "./assets/wall1.xpm");
-	load_texture(vars, TEXTURE_SOUTH, "./assets/wall2.xpm");
-	load_texture(vars, TEXTURE_WEST, "./assets/wall3.xpm");
-	load_texture(vars, TEXTURE_EAST, "./assets/wall4.xpm");
-	load_texture(vars, TEXTURE_DOOR0, "./assets/door0.xpm");
-	load_texture(vars, TEXTURE_DOOR1, "./assets/door1.xpm");
-	load_texture(vars, TEXTURE_DOOR2, "./assets/door2.xpm");
-	load_texture(vars, TEXTURE_DOOR3, "./assets/door3.xpm");
-}
 
 int	count_frames(const char **frames)
 {
@@ -75,7 +34,8 @@ void	initialise_enemy_textures(t_vars *vars, t_img *animation,
 	load_animated_sprite(vars, animation, frames, frame_count);
 }
 
-void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, const char *file_path)
+void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
+			const char *file_path)
 {
 	int	width;
 	int	height;
@@ -196,7 +156,6 @@ void	initialise_sprites(t_vars *vars)
 		free_and_exit(vars);
 	}
 	load_sprite_texture(vars, vars->sprite_texture, "./assets/lamp.xpm");
-
 	const char *gun_frames[] \
 	= {
 		"./assets/gun1.xpm",
@@ -216,7 +175,6 @@ void	initialise_sprites(t_vars *vars)
 		"./assets/door2.xpm",
 		"./assets/door3.xpm",
 	};
-
 	vars->player->gun = ft_calloc(sizeof(t_img), 1);
 	if (!vars->player->gun)
 	{
@@ -267,8 +225,6 @@ void	initialise_zbuffer(t_vars *vars)
 
 void	initialise_doors(t_vars *vars)
 {
-	// int	i;
-
 	vars->map->num_doors = 0;
 	vars->door = ft_calloc(1, sizeof(t_door));
 	if (!vars->door)
@@ -276,14 +232,6 @@ void	initialise_doors(t_vars *vars)
 		perror("Failed to allocate memory for doors");
 		free_and_exit(vars);
 	}
-	// i = -1;
-	// while (++i < MAX_DOORS)
-	// {
-	// 	vars->map->doors[i].x = -1;
-	// 	vars->map->doors[i].y = -1;
-	// 	vars->map->doors[i].state = DOOR_CLOSED;
-	// 	vars->map->doors[i].animation_progress = 0.0;
-	// }
 }
 
 void	initialise_vars(t_vars *vars)
