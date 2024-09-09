@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:37:12 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/02 11:43:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:19:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,3 @@ void	draw_ceiling(t_vars *vars)
 		i--;
 	}
 }
-

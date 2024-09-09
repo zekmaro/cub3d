@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/09 12:57:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:21:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	get_ray_target_coords(t_vars *vars)
 	}
 	if (is_door(vars, vars->ray->ray_y, vars->ray->ray_x))
 	{
-        vars->ray->hit_door = 1;
-        vars->ray->door_factor = 0.5;
-    }
+		vars->ray->hit_door = 1;
+		vars->ray->door_factor = 0.5;
+	}
 	else
-    {
-        vars->ray->hit_door = 0;
-    }
+	{
+		vars->ray->hit_door = 0;
+	}
 }
 
 void	setup_ray(t_vars *vars, double ray_x, double ray_y)

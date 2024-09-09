@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/07 19:56:36 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:20:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	initialise_textures(t_vars *vars)
 
 int	count_frames(const char **frames)
 {
-	int result;
+	int	result;
 
 	result = 0;
 	while (*frames)
@@ -241,7 +241,6 @@ void	initialise_sprites(t_vars *vars)
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	load_animated_sprite(vars, vars->door->textures, door_frames, 4);
 }
-
 
 void	initialise_map(t_vars *vars)
 {
