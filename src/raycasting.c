@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/08 19:30:05 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:57:10 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	setup_ray(t_vars *vars, double ray_x, double ray_y)
 		* vars->unit_size / vars->ray->distance_to_wall);	
 	vars->ray->draw_start = -vars->ray->line_height / 2 \
 		+ vars->mlx->window_height / 2;
-	// if (vars->ray->draw_start < 0)
-	// 	vars->ray->draw_start = 0;
 	vars->ray->draw_end = vars->ray->line_height / 2 \
 		+ vars->mlx->window_height / 2;
 	if (vars->ray->draw_end >= vars->mlx->window_height)
