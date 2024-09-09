@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/09 23:56:14 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/10 00:04:30 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC		:=	src/cub3d.c \
 			src/draw_gunshot.c \
 			src/draw_gunshot_helper.c \
 			src/draw_utils.c \
+			src/draw_dynamic_sprite.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
