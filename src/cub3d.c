@@ -222,7 +222,7 @@ int	main_loop_hook(t_vars *vars)
 	if (vars->player->shoot)
 		animate_shooting(vars);
 	search_for_player(vars);
-	//act_detected_enemies(vars);
+	act_detected_enemies(vars);
 	if (vars->player->is_damaged)
 		draw_player_damaged(vars);
 	get_current_time(&t);
