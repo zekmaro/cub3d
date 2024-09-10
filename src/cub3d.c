@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 22:27:07 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 23:12:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,24 @@ int	main_loop_hook(t_vars *vars)
 
 void	safe_init_mlx(t_vars *vars)
 {
-	vars->mlx->mlx = NULL; // mlx_init();
+	vars->mlx->mlx = mlx_init();
 	if (!vars->mlx->mlx)
 	{
-		perror("Error\n");
-		free_and_exit(vars);
+		free(vars->mlx);
+		vars->mlx = NULL;
+		exit_with_error(vars, "Failed to initialise mlx");
+		exit(EXIT_FAILURE);
 	}
 	vars->mlx->win = mlx_new_window(vars->mlx->mlx, vars->mlx->window_width, \
-		vars->mlx->window_height, "Gestalt Cube3D");
+		vars->mlx->window_height, "Gestalt DOOM Cube3D");
 	if (!vars->mlx->win)
 	{
-		perror("Error\n");
-		free_and_exit(vars);
+		mlx_destroy_display(vars->mlx->mlx);
+		free(vars->mlx->mlx);
+		vars->mlx->mlx = NULL;
+		free(vars->mlx);
+		vars->mlx = NULL;
+		exit_with_error(vars, "Failed to create window");
 	}
 }
 
