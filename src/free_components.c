@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:19:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/02 12:20:44 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:10:10 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,10 @@ void	free_vars_ray(t_vars *vars)
 		free(vars->ray);
 		vars->ray = NULL;
 	}
+}
+
+void	exit_with_error(t_vars *vars, char *error_message)
+{
+	perror(error_message);
+	free_and_exit(vars);
 }

@@ -444,13 +444,14 @@ void		cleanup_vars(t_vars *vars);
 void		free_vars_map(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
+void		free_vars_line(t_vars *vars);
 
 /* Free_components.c */
 void		free_vars_image(t_vars *vars);
 void		free_vars_player(t_vars *vars);
 void		free_vars_mlx(t_vars *vars);
-void		free_vars_line(t_vars *vars);
 void		free_vars_ray(t_vars *vars);
+void		exit_with_error(t_vars *vars, char *error_message);
 
 /* Free_vars.c */
 void		free_vars_map(t_vars *vars);

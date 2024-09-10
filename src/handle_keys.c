@@ -135,12 +135,10 @@ void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 int	animate_shooting(t_vars *vars)
 {
 	static int	frame_count = 0;
-	//long		elapsed_time;
 
 	if (!vars->player->shoot)
 		return (0);
 	get_current_time(&vars->current_time);
-	//elapsed_time = get_elapsed_time(&vars->program_start, &vars->current_time);
 	if (frame_count == 2 && !vars->player->fire_done)
 	{
 		vars->player->fire_done = 1;
