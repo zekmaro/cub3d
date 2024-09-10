@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 13:48:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:18:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,13 +425,17 @@ void		draw_map(t_vars *vars);
 void		draw_minimap(t_vars *vars);
 
 /* Drawing.c */
-void		rotate_around_point(t_vars *vars, int *x, int *y);
 void		draw_map(t_vars *vars);
 void		draw_floor(t_vars *vars);
 void		draw_ceiling(t_vars *vars);
 void		draw_fire(t_vars *vars, double scale);
 void		draw_gun(t_vars *vars, double scale);
 void		draw_imp_fire_ball(t_vars *vars);
+
+/* Player_move */
+void	move_player(t_vars *vars, int move_y, int move_x);
+void	update_position(t_vars *vars);
+void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage);
 
 /* Free_memory_utils.c */
 void		free_memory(char **arr);

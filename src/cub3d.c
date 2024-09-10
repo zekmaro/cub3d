@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 13:47:23 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:14:22 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,13 +236,13 @@ void	init_enemies(t_vars *vars)
 	int	counter_imp;
 	int	counter_caco;
 
-	i = 0;
 	counter_imp = 0;
 	counter_caco = 0;
-	while (vars->map->grid[i])
+	i = -1;
+	while (vars->map->grid[++i])
 	{
-		j = 0;
-		while (vars->map->grid[i][j])
+		j = -1;
+		while (vars->map->grid[i][++j])
 		{
 			if (vars->map->grid[i][j] == 'M')
 			{
@@ -258,9 +258,7 @@ void	init_enemies(t_vars *vars)
 				setup_caco(vars, &vars->caco_list[counter_caco]);
 				counter_caco++;
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
@@ -324,7 +322,7 @@ void	setup_door(t_vars *vars)
 		+ vars->unit_size / 2;
 }
 
-void	init_lists(t_vars *vars)
+void	init_enemy_lists(t_vars *vars)
 {
 	vars->imp_list = ft_calloc(sizeof(t_enemy), vars->map->imp_list_size);
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
@@ -350,7 +348,7 @@ int	main(int argc, char **argv)
 	initialise_vars(&vars);
 	if (!read_map(fd, vars.map, argv[1]))
 		free_and_exit(&vars);
-	init_lists(&vars);
+	init_enemy_lists(&vars);
 	setup_player(&vars);
 	setup_door(&vars);
 	get_current_time(&vars.program_start);
