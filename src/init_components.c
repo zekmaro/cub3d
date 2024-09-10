@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/02 11:59:11 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 12:54:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	initialise_mlx(t_vars *vars)
 	mlx = (t_mlx *)(malloc(sizeof(t_mlx)));
 	if (!mlx)
 	{
-		cleanup_vars(vars);
+		exit_with_error(vars, "Failed to allocate memory for mlx");
+		exit(EXIT_FAILURE);
 	}
 	ft_bzero(mlx, sizeof(t_mlx));
 	mlx->window_height = 1080;
@@ -34,7 +35,8 @@ void	initialise_line(t_vars *vars)
 	line = (t_line *)(malloc(sizeof(t_line)));
 	if (!line)
 	{
-		cleanup_vars(vars);
+		exit_with_error(vars, "Failed to allocate memory for line");
+		exit(EXIT_FAILURE);
 	}
 	ft_bzero(line, sizeof(t_line));
 	line->src_x = 1000;
@@ -49,7 +51,8 @@ void	initialise_image(t_vars *vars)
 	image = (t_img *)(malloc(sizeof(t_img)));
 	if (!image)
 	{
-		cleanup_vars(vars);
+		exit_with_error(vars, "Failed to allocate memory for image");
+		exit(EXIT_FAILURE);
 	}
 	ft_bzero(image, sizeof(t_img));
 	vars->image = image;
@@ -62,7 +65,8 @@ void	initialise_player(t_vars *vars)
 	player = (t_player *)(malloc(sizeof(t_player)));
 	if (!player)
 	{
-		cleanup_vars(vars);
+		exit_with_error(vars, "Failed to allocate memory for player");
+		exit(EXIT_FAILURE);
 	}
 	ft_bzero(player, sizeof(t_player));
 	player->player_size = 8;
@@ -76,7 +80,8 @@ void	initialise_ray(t_vars *vars)
 	ray = (t_ray *)(malloc(sizeof(t_ray)));
 	if (!ray)
 	{
-		cleanup_vars(vars);
+		exit_with_error(vars, "Failed to allocate memory for ray");
+		exit(EXIT_FAILURE);
 	}
 	ft_bzero(ray, sizeof(t_ray));
 	vars->ray = ray;

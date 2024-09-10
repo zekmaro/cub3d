@@ -6,11 +6,12 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/09 21:06:37 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:09:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <time.h>
 
 long	update_imp_time(t_vars *vars)
 {
@@ -308,6 +309,11 @@ void	init_enemies(t_vars *vars)
 void	run_screen(t_vars *vars)
 {
 	vars->mlx->mlx = mlx_init();
+	if (!vars->mlx->mlx)
+	{
+		perror("Error\n");
+		free_and_exit(vars);
+	}
 	vars->mlx->win = mlx_new_window(vars->mlx->mlx, vars->mlx->window_width, \
 		vars->mlx->window_height, "Gestalt Cube3D");
 	get_data_image(vars, vars->image, vars->mlx);

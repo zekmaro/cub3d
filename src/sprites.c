@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/09 13:33:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:16:03 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 	sprite->frames = malloc(sizeof(void *) * frame_count);
 	if (!sprite->frames)
 	{
-		perror("Failed to allocate memory for sprite frames");
-		free_and_exit(vars);
+		exit_with_error(vars, "Failed to allocate memory for sprite frames");
+		exit(EXIT_FAILURE);
 	}
 	i = -1;
 	while (++i < frame_count)
@@ -41,8 +41,8 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 		&tmp->endian);
 		if (!sprite->frames[i])
 		{
-			perror("Failed to load sprite frame");
-			free_and_exit(vars);
+			exit_with_error(vars, "Failed to load sprite frame");
+			exit(EXIT_FAILURE);
 		}
 		tmp->width = width;
 		tmp->height = height;
@@ -144,7 +144,6 @@ void	draw_sprites(t_vars *vars)
 	int	tex_y;
 	int	color;
 
-	i = 0;
 	calculate_sprite_distances(vars);
 	sort_sprites(vars);
 	i = 0;

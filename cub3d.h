@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 11:41:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:05:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -444,13 +444,14 @@ void		cleanup_vars(t_vars *vars);
 void		free_vars_map(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
+void		free_vars_line(t_vars *vars);
 
 /* Free_components.c */
 void		free_vars_image(t_vars *vars);
 void		free_vars_player(t_vars *vars);
 void		free_vars_mlx(t_vars *vars);
-void		free_vars_line(t_vars *vars);
 void		free_vars_ray(t_vars *vars);
+void		exit_with_error(t_vars *vars, char *error_message);
 
 /* Free_vars.c */
 void		free_vars_map(t_vars *vars);
