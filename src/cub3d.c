@@ -6,12 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 14:14:22 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:32:29 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <time.h>
 
 long	update_imp_time(t_vars *vars)
 {
@@ -20,13 +19,6 @@ long	update_imp_time(t_vars *vars)
 	get_current_time(&vars->imp->time1);
 	elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
 	return (elapsed_time);
-}
-
-int	player_damaged_enemy(t_vars *vars, t_enemy *enemy)
-{
-	return (abs(enemy->fire_ball_x - vars->player->center_x) < 20
-		&& abs(enemy->fire_ball_y - vars->player->center_y) < 20
-		&& !vars->player->is_damaged);
 }
 
 void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
@@ -61,20 +53,6 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 	}
 }
 
-void	update_damaged_player(t_vars *vars)
-{
-	vars->player->is_damaged = 1;
-	vars->player->health -= 20;
-	get_current_time(&vars->player->time0);
-	system("aplay ./assets/player_pain.wav -q &");
-	if (vars->player->health == 0)
-	{
-		printf("GAME OVER!\n");
-		system("aplay ./assets/player_dead.wav -q &");
-		free_and_exit(vars);
-	}
-}
-
 void	enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector)
 {
 	if (enemy->health > 0)
@@ -86,21 +64,6 @@ void	enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector)
 	if (vector_x < 0)
 		enemy->fire_delta_x *= -1;
 	enemy->shoot_ball = 1;
-}
-
-void	handle_enemy_shot(t_vars *vars, t_enemy *enemy)
-{
-	if (player_damaged_enemy(vars, enemy))
-	{
-		update_damaged_player(vars);
-		enemy->fire_ball_y = 0;
-		enemy->fire_ball_x = 0;
-	}
-	else
-	{
-		enemy->fire_ball_y += enemy->fire_delta_y;
-		enemy->fire_ball_x += enemy->fire_delta_x;
-	}
 }
 
 void	enemy_act(t_vars *vars, t_enemy *enemy)
@@ -125,16 +88,6 @@ void	enemy_act(t_vars *vars, t_enemy *enemy)
 	else
 		handle_enemy_shot(vars, enemy);
 	enemy->detected_player = 0;
-}
-
-void	handle_player_damaged_time(t_vars *vars)
-{
-	long	time_player_damaged;
-
-	time_player_damaged = get_elapsed_time(&vars->player->time0, \
-		&vars->player->time1);
-	if (time_player_damaged > 500)
-		vars->player->is_damaged = 0;
 }
 
 void	search_for_player(t_vars *vars)
@@ -287,31 +240,6 @@ void	run_screen(t_vars *vars)
 	mlx_loop_hook(vars->mlx->mlx, main_loop_hook, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);
 	mlx_loop(vars->mlx->mlx);
-}
-
-void	setup_player(t_vars *vars)
-{
-	double	plane_length;
-
-	vars->player->x = (vars->map->player_x * vars->unit_size) \
-		+ vars->unit_size / 2;
-	vars->player->y = (vars->map->player_y * vars->unit_size) \
-		+ vars->unit_size / 2;
-	vars->player->fov = M_PI / 3;
-	if (vars->map->player_dir == 'N')
-		vars->player->angle = -M_PI / 2;
-	else if (vars->map->player_dir == 'W')
-		vars->player->angle = -M_PI;
-	else if (vars->map->player_dir == 'S')
-		vars->player->angle = -3 * M_PI / 2;
-	else if (vars->map->player_dir == 'E')
-		vars->player->angle = 0;
-	vars->player->dir_x = cos(vars->player->angle);
-	vars->player->dir_y = sin(vars->player->angle);
-	plane_length = tan(vars->player->fov / 2);
-	vars->player->plane_x = -vars->player->dir_y * plane_length;
-	vars->player->plane_y = vars->player->dir_x * plane_length;
-	vars->player->health = 100;
 }
 
 void	setup_door(t_vars *vars)

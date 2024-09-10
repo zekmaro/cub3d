@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/10 14:19:16 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/10 14:33:03 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC		:=	src/cub3d.c \
 			src/init_textures.c \
 			src/init_sprites.c \
 			src/player_move.c \
+			src/handle_player.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
