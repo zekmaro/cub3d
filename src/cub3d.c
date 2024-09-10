@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 13:09:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:47:23 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,6 @@ long	update_imp_time(t_vars *vars)
 	get_current_time(&vars->imp->time1);
 	elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
 	return (elapsed_time);
-}
-
-int	key_press(int keycode, t_vars *vars)
-{
-	if (keycode == ESCAPE)
-		free_and_exit(vars);
-	if (keycode == W)
-		vars->keys.w = 1;
-	if (keycode == S)
-		vars->keys.s = 1;
-	if (keycode == A)
-		vars->keys.a = 1;
-	if (keycode == D)
-		vars->keys.d = 1;
-	if (keycode == SPACE)
-		vars->keys.space = 1;
-	if (keycode == KEY_LEFT)
-		vars->keys.left = 1;
-	if (keycode == KEY_RIGHT)
-		vars->keys.right = 1;
-	return (0);
-}
-
-int	key_up(int keycode, t_vars *vars)
-{
-	if (keycode == ESCAPE)
-		free_and_exit(vars);
-	if (keycode == W)
-		vars->keys.w = 0;
-	if (keycode == S)
-		vars->keys.s = 0;
-	if (keycode == A)
-		vars->keys.a = 0;
-	if (keycode == D)
-		vars->keys.d = 0;
-	if (keycode == SPACE)
-		vars->keys.space = 0;
-	if (keycode == KEY_LEFT)
-		vars->keys.left = 0;
-	if (keycode == KEY_RIGHT)
-		vars->keys.right = 0;
-	return (0);
 }
 
 int	player_damaged_enemy(t_vars *vars, t_enemy *enemy)
@@ -326,7 +284,7 @@ void	run_screen(t_vars *vars)
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
 	mlx_hook(vars->mlx->win, 3, 1L << 1, key_up, vars);
-	mlx_mouse_hook(vars->mlx->win, shoot_this_shit, vars);
+	mlx_mouse_hook(vars->mlx->win, shoot_entity, vars);
 	mlx_hook(vars->mlx->win, 6, 1L << 6, mouse_move, vars);
 	mlx_loop_hook(vars->mlx->mlx, main_loop_hook, vars);
 	mlx_hook(vars->mlx->win, 17, 0, free_and_exit, vars);

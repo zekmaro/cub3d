@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/10 01:29:02 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/10 13:45:14 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC		:=	src/cub3d.c \
 			src/free_components.c \
 			src/handle_image.c \
 			src/handle_keys.c \
+			src/handle_mouse.c \
 			src/init_components.c \
 			src/init_environment.c \
 			src/parsing.c \

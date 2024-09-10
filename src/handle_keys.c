@@ -6,34 +6,51 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 13:08:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:47:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	reset_mouse_to_center(t_vars *vars)
+int	key_press(int keycode, t_vars *vars)
 {
-	int	center_x;
-	int	center_y;
-
-	center_x = vars->mlx->window_width / 2;
-	center_y = vars->mlx->window_height / 2;
-	mlx_mouse_move(vars->mlx->mlx, vars->mlx->win, center_x, center_y);
+	if (keycode == ESCAPE)
+		free_and_exit(vars);
+	if (keycode == W)
+		vars->keys.w = 1;
+	if (keycode == S)
+		vars->keys.s = 1;
+	if (keycode == A)
+		vars->keys.a = 1;
+	if (keycode == D)
+		vars->keys.d = 1;
+	if (keycode == SPACE)
+		vars->keys.space = 1;
+	if (keycode == KEY_LEFT)
+		vars->keys.left = 1;
+	if (keycode == KEY_RIGHT)
+		vars->keys.right = 1;
+	return (0);
 }
 
-int	mouse_move(int x, int y, t_vars *vars)
+int	key_up(int keycode, t_vars *vars)
 {
-	int		center_x;
-	int		dx;
-	double	rot_speed;
-
-	(void)y;
-	center_x = vars->mlx->window_width / 2;
-	dx = x - center_x;
-	rot_speed = 0.0003;
-	vars->player->angle += dx * rot_speed;
-	reset_mouse_to_center(vars);
+	if (keycode == ESCAPE)
+		free_and_exit(vars);
+	if (keycode == W)
+		vars->keys.w = 0;
+	if (keycode == S)
+		vars->keys.s = 0;
+	if (keycode == A)
+		vars->keys.a = 0;
+	if (keycode == D)
+		vars->keys.d = 0;
+	if (keycode == SPACE)
+		vars->keys.space = 0;
+	if (keycode == KEY_LEFT)
+		vars->keys.left = 0;
+	if (keycode == KEY_RIGHT)
+		vars->keys.right = 0;
 	return (0);
 }
 
@@ -144,27 +161,6 @@ int	animate_shooting(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
 	frame_count++;
-	return (0);
-}
-
-int	shoot_this_shit(int button, int x, int y, t_vars *vars)
-{
-	int	i;
-
-	(void)x;
-	(void)y;
-	if (button == MOUSE_CLICK_LEFT && !vars->player->shoot)
-	{
-		system("aplay ./assets/gunshot.wav -q &");
-		vars->player->shoot = 1;
-		vars->player->fire_done = 0;
-		i = -1;
-		while (++i < vars->map->imp_list_size)
-			check_enemy_collision(vars, &vars->imp_list[i], 50);
-		i = -1;
-		while (++i < vars->map->caco_list_size)
-			check_enemy_collision(vars, &vars->caco_list[i], 20);
-	}
 	return (0);
 }
 

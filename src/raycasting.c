@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 13:07:19 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:30:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,7 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	(void)ray_id;
 	y = vars->ray->draw_start;
 	while (temp++ < y)
-	{
 		put_pixel_to_image(vars, ray_id, temp, RED);
-	}
 	while (y < vars->ray->draw_end)
 	{
 		get_texture_coords(vars, texture_index, &tex_x);
@@ -107,9 +105,7 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		y++;
 	}
 	while (y++ < vars->mlx->window_height)
-	{
 		put_pixel_to_image(vars, ray_id, y, BROWN);
-	}
 }
 
 void	cast_ray(t_vars *vars, int ray_id)

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 13:05:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:48:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -467,12 +467,17 @@ void		clean_screen(t_vars *vars);
 void		get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 
 /* Handle_keys.c */
-void		reset_mouse_to_center(t_vars *vars);
-int			mouse_move(int x, int y, t_vars *vars);
+int			key_press(int keycode, t_vars *vars);
+int			key_up(int keycode, t_vars *vars);
 int			key_hook(int keycode, t_vars *vars);
 int			animate_shooting(t_vars *vars);
 void		update_position(t_vars *vars);
-int			shoot_this_shit(int button, int x, int y, t_vars *vars);
+void		check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage);
+
+/* Handle_mouse.c */
+void		reset_mouse_to_center(t_vars *vars);
+int			mouse_move(int x, int y, t_vars *vars);
+int			shoot_entity(int button, int x, int y, t_vars *vars);
 
 /* Init_components.c */
 void		initialise_mlx(t_vars *vars);
