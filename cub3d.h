@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 14:50:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:07:05 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,6 +418,10 @@ void		draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
 				int object_y, int scale);
 
+/* Draw_sprite.c */
+void		draw_sprites(t_vars *vars);
+int			draw_sprite(t_vars *vars);
+
 /* Draw_environment.c */
 void		draw_floor(t_vars *vars);
 void		draw_ceiling(t_vars *vars);
@@ -557,12 +561,13 @@ void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \
 				int *tex_x);
 int			is_monster(t_vars *vars, int x, int y);
 
-/* Sprites.c */
+/* Handle_sprites.c */
 void		load_animated_sprite(t_vars *vars, t_img *sprite, \
 				const char **file_paths, int frame_count);
 void		update_sprite_frame(t_img *sprite);
-void		put_enemy_on_screen(t_vars *vars);
-int			draw_sprite(t_vars *vars);
+void		calculate_sprite_distances(t_vars *vars);
+void		project_sprite(t_vars *vars, t_sprite *sprite);
+void		sort_sprites(t_vars *vars);
 
 /* Doors */
 int			is_door(t_vars *vars, int x, int y);

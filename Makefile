@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/10 14:48:39 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/10 15:07:27 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRC		:=	src/cub3d.c \
 			src/raycasting.c \
 			src/ray_drawing.c \
 			src/ray_handlers.c \
-			src/sprites.c \
+			src/handle_sprites.c \
 			src/doors.c \
 			src/gradient.c \
 			src/draw_player.c \
@@ -52,6 +52,7 @@ SRC		:=	src/cub3d.c \
 			src/draw_gunshot_helper.c \
 			src/draw_utils.c \
 			src/draw_dynamic_sprite.c \
+			src/draw_sprites.c \
 			src/is_entity.c \
 			src/init_textures.c \
 			src/init_sprites.c \
