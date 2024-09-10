@@ -6,12 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/10 20:34:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 22:31:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 
 void	free_memory(char **arr)
 {
@@ -37,16 +36,6 @@ void	free_map(t_map *map)
 		i++;
 	}
 	free(map->grid);
-	// if (map->doors)
-	// {
-	// 	// i = 0;
-	// 	// while (i < map->num_doors)
-	// 	// {
-	// 	// 	free(map->doors[i]);
-	// 	// 	i++;
-	// 	// }
-	// 	free(map->doors);
-	// }
 }
 
 void	free_animated_sprite(t_img *sprite)
@@ -79,6 +68,8 @@ void	free_animated_sprite(t_img *sprite)
 
 void	free_sprites(t_vars *vars)
 {
+	if (!vars)
+		return ;
 	if (vars->player->gun)
 	{
 		free_animated_sprite(vars->player->gun);
@@ -111,6 +102,50 @@ void	free_sprites(t_vars *vars)
 	}
 }
 
+void	free_imp_list(t_vars *vars)
+{
+	int	i;
+
+	if (vars->imp_list)
+	{
+		i = 0;
+		while (i < vars->map->imp_list_size)
+		{
+			free(vars->imp_list[i].move_animation);
+			free(vars->imp_list[i].death_animation);
+			free(vars->imp_list[i].attack_animation);
+			free(vars->imp_list[i].fire_ball);
+			i++;
+		}
+		free(vars->imp_list);
+	}
+}
+
+void	free_caco_list(t_vars *vars)
+{
+	int	i;
+
+	if (vars->caco_list)
+	{
+		i = 0;
+		while (i < vars->map->caco_list_size)
+		{
+			free(vars->caco_list[i].move_animation);
+			free(vars->caco_list[i].death_animation);
+			free(vars->caco_list[i].attack_animation);
+			free(vars->caco_list[i].fire_ball);
+			i++;
+		}
+		free(vars->caco_list);
+	}
+}
+
+void	free_enemy_list(t_vars *vars)
+{
+	free_imp_list(vars);
+	free_caco_list(vars);
+}
+
 int	free_and_exit(t_vars *vars)
 {
 	cleanup_vars(vars);
@@ -119,6 +154,7 @@ int	free_and_exit(t_vars *vars)
 
 void	cleanup_vars(t_vars *vars)
 {
+	free_enemy_list(vars);
 	free_sprites(vars);
 	free_environment(vars);
 	free_vars_map(vars);
