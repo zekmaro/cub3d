@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 22:27:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 01:53:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,50 @@ void	init_enemy_lists(t_vars *vars)
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
 }
 
-void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
+void	handle_enemy_death(t_enemy *enemy)
+{
+	if (enemy->current_animation == enemy->death_animation \
+		&& enemy->current_animation->current_frame \
+		== enemy->death_animation->frame_count - 1)
+	{
+		enemy->is_dead = 1;
+		enemy->center_x = -100;
+		enemy->center_y = -100;
+	}
+}
+
+void	handle_enemy_attack(t_enemy *enemy)
+{
+	if (enemy->current_animation == enemy->attack_animation \
+		&& enemy->current_animation->current_frame \
+		== enemy->attack_animation->frame_count - 1)
+	{
+		enemy->current_animation = enemy->move_animation;
+	}
+}
+
+void	update_enemy(t_enemy *enemy, long delay)
 {
 	long	enemy_elapsed_time;
-	int		i;
+
+	get_current_time(&enemy->time1);
+	enemy_elapsed_time = get_elapsed_time(&enemy->time0, &enemy->time1);
+	if (enemy_elapsed_time > delay)
+	{
+		handle_enemy_death(enemy);
+		update_sprite_frame(enemy->current_animation);
+		handle_enemy_attack(enemy);
+		enemy->time0 = enemy->time1;
+	}
+}
+
+void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
+{
+	int	i;
 
 	i = -1;
 	while (++i < size)
-	{
-		get_current_time(&enemy_list[i].time1);
-		enemy_elapsed_time = get_elapsed_time(&enemy_list[i].time0, \
-			&enemy_list[i].time1);
-		if (enemy_elapsed_time > delay)
-		{
-			if (enemy_list[i].current_animation == enemy_list[i].death_animation
-				&& enemy_list[i].current_animation->current_frame
-				== enemy_list[i].current_animation->frame_count - 1)
-			{
-				enemy_list[i].is_dead = 1;
-				enemy_list[i].center_x = -100;
-				enemy_list[i].center_y = -100;
-			}
-			update_sprite_frame(enemy_list[i].current_animation);
-			if (enemy_list[i].current_animation \
-				== enemy_list[i].attack_animation
-				&& enemy_list[i].current_animation->current_frame \
-				== enemy_list[i].current_animation->frame_count - 1)
-				enemy_list[i].current_animation = enemy_list[i].move_animation;
-			enemy_list[i].time0 = enemy_list[i].time1;
-		}
-	}
+		update_enemy(&enemy_list[i], delay);
 }
 
 long	update_imp_time(t_vars *vars)
