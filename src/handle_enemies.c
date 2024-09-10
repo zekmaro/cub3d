@@ -6,40 +6,41 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:40:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 14:41:17 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:49:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
+void	init_enemies(t_vars *vars)
 {
-	long	enemy_elapsed_time;
-	int		i;
+	int	i;
+	int	j;
+	int	counter_imp;
+	int	counter_caco;
 
+	counter_imp = 0;
+	counter_caco = 0;
 	i = -1;
-	while (++i < size)
+	while (vars->map->grid[++i])
 	{
-		get_current_time(&enemy_list[i].time1);
-		enemy_elapsed_time = get_elapsed_time(&enemy_list[i].time0, \
-			&enemy_list[i].time1);
-		if (enemy_elapsed_time > delay)
+		j = -1;
+		while (vars->map->grid[i][++j])
 		{
-			if (enemy_list[i].current_animation == enemy_list[i].death_animation
-				&& enemy_list[i].current_animation->current_frame
-				== enemy_list[i].current_animation->frame_count - 1)
+			if (vars->map->grid[i][j] == 'M')
 			{
-				enemy_list[i].is_dead = 1;
-				enemy_list[i].center_x = -100;
-				enemy_list[i].center_y = -100;
+				vars->imp_list[counter_imp].grid_x = j;
+				vars->imp_list[counter_imp].grid_y = i;
+				setup_imp(vars, &vars->imp_list[counter_imp]);
+				counter_imp++;
 			}
-			update_sprite_frame(enemy_list[i].current_animation);
-			if (enemy_list[i].current_animation \
-				== enemy_list[i].attack_animation
-				&& enemy_list[i].current_animation->current_frame \
-				== enemy_list[i].current_animation->frame_count - 1)
-				enemy_list[i].current_animation = enemy_list[i].move_animation;
-			enemy_list[i].time0 = enemy_list[i].time1;
+			else if (vars->map->grid[i][j] == 'C')
+			{
+				vars->caco_list[counter_caco].grid_x = j;
+				vars->caco_list[counter_caco].grid_y = i;
+				setup_caco(vars, &vars->caco_list[counter_caco]);
+				counter_caco++;
+			}
 		}
 	}
 }
