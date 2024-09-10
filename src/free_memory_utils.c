@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/10 22:31:11 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 22:46:48 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,15 @@ void	free_enemy_list(t_vars *vars)
 	free_caco_list(vars);
 }
 
+void	free_doors(t_vars *vars)
+{
+	if (vars->door)
+	{
+		free(vars->door);
+		vars->door = NULL;
+	}
+}
+
 int	free_and_exit(t_vars *vars)
 {
 	cleanup_vars(vars);
@@ -157,6 +166,7 @@ void	cleanup_vars(t_vars *vars)
 	free_enemy_list(vars);
 	free_sprites(vars);
 	free_environment(vars);
+	free_doors(vars);
 	free_vars_map(vars);
 	free_vars_image(vars);
 	free_vars_mlx(vars);
