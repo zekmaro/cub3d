@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 22:27:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 01:10:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,6 +364,14 @@ typedef struct s_draw_sprite_params
 	int		scale;
 }	t_draw_sprite_params;
 
+typedef struct s_draw_limits
+{
+	int	draw_start_y;
+	int	draw_end_y;
+	int	draw_start_x;
+	int	draw_end_x;
+}	t_draw_limits;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -420,6 +428,10 @@ void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
 
 /* Draw_sprite.c */
 void		draw_sprites(t_vars *vars);
+void		calculate_draw_limits(t_vars *vars, t_sprite *sprite, \
+				t_draw_limits *limits);
+void		draw_sprites_stripe(t_vars *vars, t_sprite *sprite, int stripe, \
+				t_draw_limits *limits);
 int			draw_sprite(t_vars *vars);
 
 /* Draw_environment.c */
