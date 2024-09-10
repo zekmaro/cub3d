@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/10 22:46:48 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 01:22:55 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,35 +66,37 @@ void	free_animated_sprite(t_img *sprite)
 	}
 }
 
+void	free_animated_sprite_if_exists(t_img **sprite)
+{
+	if (*sprite)
+	{
+		free_animated_sprite(*sprite);
+		*sprite = NULL;
+	}
+}
+
+void	free_texture_if_exists(t_vars *vars, t_img **texture)
+{
+	if (*texture)
+	{
+		if ((*texture)->mlx_img)
+		{
+			mlx_destroy_image(vars->mlx->mlx, (*texture)->mlx_img);
+			(*texture)->mlx_img = NULL;
+		}
+		free(*texture);
+		*texture = NULL;
+	}
+}
+
 void	free_sprites(t_vars *vars)
 {
 	if (!vars)
 		return ;
-	if (vars->player->gun)
-	{
-		free_animated_sprite(vars->player->gun);
-		vars->player->gun = NULL;
-	}
-	if (vars->player->fire)
-	{
-		free_animated_sprite(vars->player->fire);
-		vars->player->fire = NULL;
-	}
-	if (vars->door->textures)
-	{
-		free_animated_sprite(vars->door->textures);
-		vars->door->textures = NULL;
-	}
-	if (vars->sprite_texture)
-	{
-		if (vars->sprite_texture->mlx_img)
-		{
-			mlx_destroy_image(vars->mlx->mlx, vars->sprite_texture->mlx_img);
-			vars->sprite_texture->mlx_img = NULL;
-		}
-		free(vars->sprite_texture);
-		vars->sprite_texture = NULL;
-	}
+	free_animated_sprite_if_exists(&vars->player->gun);
+	free_animated_sprite_if_exists(&vars->player->fire);
+	free_animated_sprite_if_exists(&vars->door->textures);
+	free_texture_if_exists(vars, &vars->sprite_texture);
 	if (vars->sprites)
 	{
 		free(vars->sprites);
