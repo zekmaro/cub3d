@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 01:49:44 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 03:20:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,6 +337,33 @@ typedef struct s_pixel_params
 	double	max_distance;
 }	t_pixel_params;
 
+typedef struct s_sprite_params
+{
+	int	sprite_screen_x;
+	int	sprite_height;
+	int	sprite_width;
+	int	draw_start_y;
+	int	draw_end_y;
+	int	draw_start_x;
+	int	draw_end_x;
+}	t_sprite_params;
+
+typedef struct s_sprite_calc_params
+{
+	double	transform_x;
+	double	transform_y;
+	int		scale;
+}	t_sprite_calc_params;
+
+typedef struct s_draw_sprite_params
+{
+	t_vars	*vars;
+	t_img	*sprite;
+	int		object_x;
+	int		object_y;
+	int		scale;
+}	t_draw_sprite_params;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -382,6 +409,12 @@ void		draw_square(t_vars *vars, int x, int y, int color);
 void		rotate_around_point(t_vars *vars, int *x, int *y);
 
 /* Draw_dynamic_sprite.c */
+void		calculate_sprite_params(t_vars *vars, t_sprite_calc_params \
+				*calc_params, t_sprite_params *params);
+void		calculate_transform(t_draw_sprite_params *draw_params, \
+				t_sprite_calc_params *calc_params);
+void		draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
+				t_sprite_calc_params *calc_params, t_img *tmp);
 void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
 				int object_y, int scale);
 

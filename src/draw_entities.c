@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/10 00:52:34 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 03:14:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,15 @@ void	draw_minimap(t_vars *vars)
 
 void	draw_and_update_entity(t_vars *vars, t_enemy *entity)
 {
-	int	center_x;
-	int	center_y;
-	int	fire_ball_x;
-	int	fire_ball_y;
-
 	if (!entity->is_dead)
 	{
-		center_x = entity->center_x;
-		center_y = entity->center_y;
-		draw_dynamic_sprite(vars, entity->current_animation, center_x, \
-			center_y, 50);
+		draw_dynamic_sprite(vars, entity->current_animation, \
+			entity->center_x, entity->center_y, 50);
 		if (!entity->is_dead)
 			search_for_player_enemy(vars, entity);
 		if (entity->detected_player)
-		{
-			fire_ball_x = entity->fire_ball_x;
-			fire_ball_y = entity->fire_ball_y;
-			draw_dynamic_sprite(vars, entity->fire_ball, fire_ball_x, \
-				fire_ball_y, 20);
-		}
+			draw_dynamic_sprite(vars, entity->fire_ball, \
+				entity->fire_ball_x, entity->fire_ball_y, 20);
 	}
 }
 
