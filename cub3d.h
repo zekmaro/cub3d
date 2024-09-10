@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 14:36:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:43:43 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,6 +443,13 @@ int			player_damaged_enemy(t_vars *vars, t_enemy *enemy);
 void		update_damaged_player(t_vars *vars);
 void		handle_player_damaged_time(t_vars *vars);
 void		handle_enemy_shot(t_vars *vars, t_enemy *enemy);
+
+/* Handle_enemies.c */
+void		update_enemy_list(t_enemy *enemy_list, long delay, int size);
+void		enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector);
+void		enemy_act(t_vars *vars, t_enemy *enemy);
+void		search_for_player(t_vars *vars);
+void		act_detected_enemies(t_vars *vars);
 
 /* Free_memory_utils.c */
 void		free_memory(char **arr);
