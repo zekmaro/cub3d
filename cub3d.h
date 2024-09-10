@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 14:18:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:36:56 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,9 +433,16 @@ void		draw_gun(t_vars *vars, double scale);
 void		draw_imp_fire_ball(t_vars *vars);
 
 /* Player_move */
-void	move_player(t_vars *vars, int move_y, int move_x);
-void	update_position(t_vars *vars);
-void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage);
+void		move_player(t_vars *vars, int move_y, int move_x);
+void		update_position(t_vars *vars);
+void		check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage);
+
+/* Handle_player.c */
+void		setup_player(t_vars *vars);
+int			player_damaged_enemy(t_vars *vars, t_enemy *enemy);
+void		update_damaged_player(t_vars *vars);
+void		handle_player_damaged_time(t_vars *vars);
+void		handle_enemy_shot(t_vars *vars, t_enemy *enemy);
 
 /* Free_memory_utils.c */
 void		free_memory(char **arr);
