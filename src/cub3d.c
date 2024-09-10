@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 16:02:44 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 22:27:07 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main_loop_hook(t_vars *vars)
 
 void	safe_init_mlx(t_vars *vars)
 {
-	vars->mlx->mlx = mlx_init();
+	vars->mlx->mlx = NULL; // mlx_init();
 	if (!vars->mlx->mlx)
 	{
 		perror("Error\n");
