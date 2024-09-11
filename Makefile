@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
+#    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/10 16:55:18 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/11 14:58:10 by anarama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC		:=	src/cub3d.c \
 			src/handle_player.c \
 			src/handle_enemies.c \
 			src/handle_enemy_list.c \
+			src/init_animations.c \
 
 # LIBS 
 LIBS	:= libft/libft.a

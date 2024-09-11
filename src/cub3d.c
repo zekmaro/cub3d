@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/11 00:55:31 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:02:03 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main_loop_hook(t_vars *vars)
 	update_enemy_list(vars->imp_list, 300, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 300, vars->map->caco_list_size);
 	search_for_player(vars);
-	act_detected_enemies(vars);
+	//act_detected_enemies(vars);
 	update_position(vars);
 	draw_map(vars);
 	if (vars->player->shoot)
@@ -70,6 +70,8 @@ void	run_screen(t_vars *vars)
 	get_data_image(vars, vars->image, vars->mlx);
 	initialise_textures(vars);
 	initialise_sprites(vars);
+	init_imp_animation(vars);
+	init_caco_animation(vars);
 	init_enemies(vars);
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);

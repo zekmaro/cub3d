@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_enemy_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 22:27:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:56:55 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 			&enemy_list[i].time1);
 		if (enemy_elapsed_time > delay)
 		{
-			if (enemy_list[i].current_animation == enemy_list[i].death_animation
+			if (enemy_list[i].current_animation == enemy_list[i].death
 				&& enemy_list[i].current_animation->current_frame
 				== enemy_list[i].current_animation->frame_count - 1)
 				enemy_list[i].is_dead = 1;
 			update_sprite_frame(enemy_list[i].current_animation);
 			if (enemy_list[i].current_animation \
-				== enemy_list[i].attack_animation
+				== enemy_list[i].attack
 				&& enemy_list[i].current_animation->current_frame \
 				== enemy_list[i].current_animation->frame_count - 1)
-				enemy_list[i].current_animation = enemy_list[i].move_animation;
+				enemy_list[i].current_animation = enemy_list[i].move;
 			enemy_list[i].time0 = enemy_list[i].time1;
 		}
 	}
@@ -63,16 +63,15 @@ void	setup_imp(t_vars *vars, t_enemy *imp)
 	imp->center_y = imp->y + vars->unit_size / 2;
 	imp->angle = -M_PI / 2;
 	imp->rot_dir = 1;
-	imp->fire_ball_x = imp->center_x;
-	imp->fire_ball_y = imp->center_y;
+	// imp->fire_ball_x = imp->center_x;
+	// imp->fire_ball_y = imp->center_y;
 	imp->health = 100;
 	imp->is_dead = 0;
-	imp->move_animation = ft_calloc(sizeof(t_img), 1);
-	imp->death_animation = ft_calloc(sizeof(t_img), 1);
-	imp->attack_animation = ft_calloc(sizeof(t_img), 1);
-	imp->fire_ball = ft_calloc(sizeof(t_img), 1);
+	imp->current_animation = vars->imp_animation->move;
+	imp->move = vars->imp_animation->move;
+	imp->death = vars->imp_animation->death;
+	imp->attack = vars->imp_animation->attack;
 	get_current_time(&imp->time0);
-	init_imp_sprites(vars, imp);
 }
 
 void	setup_caco(t_vars *vars, t_enemy *caco)
@@ -83,14 +82,13 @@ void	setup_caco(t_vars *vars, t_enemy *caco)
 	caco->center_y = caco->y + vars->unit_size / 2;
 	caco->angle = -M_PI / 2;
 	caco->rot_dir = 1;
-	caco->fire_ball_x = caco->center_x;
-	caco->fire_ball_y = caco->center_y;
+	// caco->fire_ball_x = caco->center_x;
+	// caco->fire_ball_y = caco->center_y;
 	caco->health = 100;
 	caco->is_dead = 0;
-	caco->move_animation = ft_calloc(sizeof(t_img), 1);
-	caco->death_animation = ft_calloc(sizeof(t_img), 1);
-	caco->attack_animation = ft_calloc(sizeof(t_img), 1);
-	caco->fire_ball = ft_calloc(sizeof(t_img), 1);
+	caco->current_animation = vars->caco_animation->move;
+	caco->move = vars->caco_animation->move;
+	caco->death = vars->caco_animation->death;
+	caco->attack = vars->caco_animation->attack;
 	get_current_time(&caco->time0);
-	init_caco_sprites(vars, caco);
 }

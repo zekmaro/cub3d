@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:17:29 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 14:17:37 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:55:35 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 	{
 		// if (!vars->imp->is_dead)
 		// 	system("aplay ./assets/imp_death.wav -q &");
-		enemy->current_animation = enemy->death_animation;
+		enemy->current_animation = enemy->death;
 	}
 }

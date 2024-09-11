@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/11 01:10:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:01:52 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,22 @@ typedef struct s_keys
 	int		right;
 }	t_keys;
 
+typedef struct s_animation
+{
+	t_img	*move;
+	t_img	*death;
+	t_img	*attack;
+}	t_animation;
+
+typedef struct s_fire_ball
+{
+	t_img	*fire_ball;
+	int	fire_ball_x;
+	int	fire_ball_y;
+	int	fire_delta_x;
+	int	fire_delta_y;
+}	t_fire_ball;
+
 typedef struct s_enemy
 {
 	int				health;
@@ -253,18 +269,13 @@ typedef struct s_enemy
 	int				center_x;
 	int				center_y;
 	int				rot_dir;
-	double			angle;
 	int				detected_player;
-	t_img			*move_animation;
-	t_img			*death_animation;
-	t_img			*attack_animation;
-	t_img			*fire_ball;
-	int				fire_ball_x;
-	int				fire_ball_y;
-	int				fire_delta_x;
-	int				fire_delta_y;
 	int				shoot_ball;
+	t_img			*move;
+	t_img			*death;
+	t_img			*attack;
 	t_img			*current_animation;
+	double			angle;
 	struct timeval	time0;
 	struct timeval	time1;
 }	t_enemy;
@@ -279,8 +290,10 @@ typedef struct s_vars
 	t_player		*player;
 	t_enemy			*imp;
 	t_enemy			*imp_list;
+	t_animation		*imp_animation;
 	t_enemy			*caco;
 	t_enemy			*caco_list;
+	t_animation 	*caco_animation;
 	t_ray			*ray;
 	t_door			*door;
 	int				minimap_update_x;
@@ -616,4 +629,6 @@ int			is_enemy(t_enemy *enemy, int y, int x);
 void		init_caco_sprites(t_vars *vars, t_enemy *caco);
 int			functioin(t_vars *vars);
 
+void	init_imp_animation(t_vars *vars);
+void	init_caco_animation(t_vars *vars);
 #endif // CUB3D_H

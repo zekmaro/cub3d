@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/11 01:22:55 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:56:07 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,49 +104,49 @@ void	free_sprites(t_vars *vars)
 	}
 }
 
-void	free_imp_list(t_vars *vars)
-{
-	int	i;
+// void	free_imp_list(t_vars *vars)
+// {
+// 	int	i;
 
-	if (vars->imp_list)
-	{
-		i = 0;
-		while (i < vars->map->imp_list_size)
-		{
-			free(vars->imp_list[i].move_animation);
-			free(vars->imp_list[i].death_animation);
-			free(vars->imp_list[i].attack_animation);
-			free(vars->imp_list[i].fire_ball);
-			i++;
-		}
-		free(vars->imp_list);
-	}
-}
+// 	if (vars->imp_list)
+// 	{
+// 		i = 0;
+// 		while (i < vars->map->imp_list_size)
+// 		{
+// 			free(vars->imp_list[i].move_animation);
+// 			free(vars->imp_list[i].death_animation);
+// 			free(vars->imp_list[i].attack_animation);
+// 			free(vars->imp_list[i].fire_ball);
+// 			i++;
+// 		}
+// 		free(vars->imp_list);
+// 	}
+// }
 
-void	free_caco_list(t_vars *vars)
-{
-	int	i;
+// void	free_caco_list(t_vars *vars)
+// {
+// 	int	i;
 
-	if (vars->caco_list)
-	{
-		i = 0;
-		while (i < vars->map->caco_list_size)
-		{
-			free(vars->caco_list[i].move_animation);
-			free(vars->caco_list[i].death_animation);
-			free(vars->caco_list[i].attack_animation);
-			free(vars->caco_list[i].fire_ball);
-			i++;
-		}
-		free(vars->caco_list);
-	}
-}
+// 	if (vars->caco_list)
+// 	{
+// 		i = 0;
+// 		while (i < vars->map->caco_list_size)
+// 		{
+// 			free(vars->caco_list[i].move_animation);
+// 			free(vars->caco_list[i].death_animation);
+// 			free(vars->caco_list[i].attack_animation);
+// 			free(vars->caco_list[i].fire_ball);
+// 			i++;
+// 		}
+// 		free(vars->caco_list);
+// 	}
+// }
 
-void	free_enemy_list(t_vars *vars)
-{
-	free_imp_list(vars);
-	free_caco_list(vars);
-}
+// void	free_enemy_list(t_vars *vars)
+// {
+// 	free_imp_list(vars);
+// 	free_caco_list(vars);
+// }
 
 void	free_doors(t_vars *vars)
 {
@@ -165,7 +165,7 @@ int	free_and_exit(t_vars *vars)
 
 void	cleanup_vars(t_vars *vars)
 {
-	free_enemy_list(vars);
+	//free_enemy_list(vars);
 	free_sprites(vars);
 	free_environment(vars);
 	free_doors(vars);

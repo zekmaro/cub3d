@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_entities.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/10 03:14:57 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:48:47 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	draw_and_update_entity(t_vars *vars, t_enemy *entity)
 			entity->center_x, entity->center_y, 50);
 		if (!entity->is_dead)
 			search_for_player_enemy(vars, entity);
-		if (entity->detected_player)
-			draw_dynamic_sprite(vars, entity->fire_ball, \
-				entity->fire_ball_x, entity->fire_ball_y, 20);
+		// if (entity->detected_player)
+		// 	draw_dynamic_sprite(vars, entity->fire_ball, \
+		// 		entity->fire_ball_x, entity->fire_ball_y, 20);
 	}
 }
 
