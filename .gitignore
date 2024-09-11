@@ -11,3 +11,4 @@ a.out
 .vscode
 libft/libft.a
 cub3d-tester/
+*.supp
