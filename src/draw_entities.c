@@ -28,7 +28,7 @@ void	draw_minimap(t_vars *vars)
 			vars->line->y0 += vars->minimap_update_y / 4;
 			vars->line->x0 += vars->minimap_update_x / 4;
 			if (vars->map->grid[i][j] == '1')
-				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
+				draw_square(vars, vars->line->x0, vars->line->y0, PURPLE);
 			else if (vars->map->grid[i][j] == 'D')
 				draw_square(vars, vars->line->x0, vars->line->y0, YELLOW);
 			else

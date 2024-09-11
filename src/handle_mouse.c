@@ -33,7 +33,6 @@ int	mouse_move(int x, int y, t_vars *vars)
 	dx = x - center_x;
 	rot_speed = 0.0003;
 	vars->player->angle += dx * rot_speed;
-	reset_mouse_to_center(vars);
 	return (0);
 }
 
@@ -45,7 +44,7 @@ int	shoot_entity(int button, int x, int y, t_vars *vars)
 	(void)y;
 	if (button == MOUSE_CLICK_LEFT && !vars->player->shoot)
 	{
-		system("aplay ./assets/gunshot.wav -q &");
+		// system("aplay ./assets/gunshot.wav -q &");
 		vars->player->shoot = 1;
 		vars->player->fire_done = 0;
 		i = -1;

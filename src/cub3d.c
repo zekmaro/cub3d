@@ -17,10 +17,11 @@ int	main_loop_hook(t_vars *vars)
 	struct timeval	t;
 	double			abc;
 
+	reset_mouse_to_center(vars);
 	get_current_time(&t);
 	abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
 	get_current_time(&vars->player->time1);
-	//handle_player_damaged_time(vars);
+	// handle_player_damaged_time(vars);
 	update_enemy_list(vars->imp_list, 300, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 300, vars->map->caco_list_size);
 	search_for_player(vars);
@@ -32,7 +33,7 @@ int	main_loop_hook(t_vars *vars)
 	// if (vars->player->is_damaged)
 	// 	draw_player_damaged(vars);
 	draw_minimap(vars);
-	draw_player(vars, YELLOW);
+	draw_player(vars, RED);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
 	get_current_time(&t);

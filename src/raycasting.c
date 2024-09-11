@@ -70,6 +70,8 @@ void	setup_ray(t_vars *vars, double ray_x, double ray_y)
 		- vars->player->x, 2) + pow(ray_y - vars->player->y, 2));
 	vars->ray->distance_to_wall *= cos(vars->player->angle \
 		- vars->ray->ray_angle);
+	if (vars->ray->distance_to_wall < 10)
+		vars->ray->distance_to_wall = 10;
 	vars->ray->line_height = (int)(vars->mlx->window_height \
 		* vars->unit_size / vars->ray->distance_to_wall);
 	vars->ray->draw_start = -vars->ray->line_height / 2 \
@@ -90,6 +92,7 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 
 	temp = 0;
 	(void)ray_id;
+	(void)texture_index;
 	y = vars->ray->draw_start;
 	while (temp++ < y)
 		put_pixel_to_image(vars, ray_id, temp, RED);
@@ -98,6 +101,8 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		get_texture_coords(vars, texture_index, &tex_x);
 		tex_y = (int)((y - vars->ray->draw_start) \
 			* vars->unit_size / vars->ray->line_height);
+		if (tex_y < 0)
+			tex_y = 0;
 		if (texture_index == TEXTURE_SOUTH)
 			tex_y += 1;
 		color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);

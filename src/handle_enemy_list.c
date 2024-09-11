@@ -34,11 +34,7 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 			if (enemy_list[i].current_animation == enemy_list[i].death_animation
 				&& enemy_list[i].current_animation->current_frame
 				== enemy_list[i].current_animation->frame_count - 1)
-			{
 				enemy_list[i].is_dead = 1;
-				enemy_list[i].center_x = -100;
-				enemy_list[i].center_y = -100;
-			}
 			update_sprite_frame(enemy_list[i].current_animation);
 			if (enemy_list[i].current_animation \
 				== enemy_list[i].attack_animation
