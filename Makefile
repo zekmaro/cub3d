@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/10 16:55:18 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/11 22:33:34 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,9 @@ SRC		:=	src/cub3d.c \
 			src/free_memory_utils.c \
 			src/free_environment.c \
 			src/free_components.c \
+			src/free_sprites.c \
+			src/free_textures.c \
+			src/free_enemies.c \
 			src/handle_image.c \
 			src/handle_keys.c \
 			src/handle_mouse.c \
@@ -60,6 +63,7 @@ SRC		:=	src/cub3d.c \
 			src/handle_player.c \
 			src/handle_enemies.c \
 			src/handle_enemy_list.c \
+			src/init_animations.c \
 
 # LIBS 
 LIBS	:= libft/libft.a

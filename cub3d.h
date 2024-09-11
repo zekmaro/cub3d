@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/11 01:10:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:34:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,22 @@ typedef struct s_keys
 	int		right;
 }	t_keys;
 
+typedef struct s_animation
+{
+	t_img	*move;
+	t_img	*death;
+	t_img	*attack;
+}	t_animation;
+
+typedef struct s_fire_ball
+{
+	t_img	*fire_ball;
+	int	fire_ball_x;
+	int	fire_ball_y;
+	int	fire_delta_x;
+	int	fire_delta_y;
+}	t_fire_ball;
+
 typedef struct s_enemy
 {
 	int				health;
@@ -253,18 +269,13 @@ typedef struct s_enemy
 	int				center_x;
 	int				center_y;
 	int				rot_dir;
-	double			angle;
 	int				detected_player;
-	t_img			*move_animation;
-	t_img			*death_animation;
-	t_img			*attack_animation;
-	t_img			*fire_ball;
-	int				fire_ball_x;
-	int				fire_ball_y;
-	int				fire_delta_x;
-	int				fire_delta_y;
 	int				shoot_ball;
+	t_img			*move;
+	t_img			*death;
+	t_img			*attack;
 	t_img			*current_animation;
+	double			angle;
 	struct timeval	time0;
 	struct timeval	time1;
 }	t_enemy;
@@ -279,8 +290,10 @@ typedef struct s_vars
 	t_player		*player;
 	t_enemy			*imp;
 	t_enemy			*imp_list;
+	t_animation		*imp_animation;
 	t_enemy			*caco;
 	t_enemy			*caco_list;
+	t_animation 	*caco_animation;
 	t_ray			*ray;
 	t_door			*door;
 	int				minimap_update_x;
@@ -489,8 +502,6 @@ void		cleanup_vars(t_vars *vars);
 
 /* Free_environment.c */
 void		free_vars_map(t_vars *vars);
-void		free_vars_textures(t_vars *vars);
-void		free_vars_sprites(t_vars *vars);
 void		free_vars_line(t_vars *vars);
 void		free_vars_animated_sprite(t_vars *vars);
 void		free_vars_gun(t_vars *vars);
@@ -500,6 +511,7 @@ void		free_vars_sprite_texture(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 void		free_vars_zbuffer(t_vars *vars);
 void		free_environment(t_vars *vars);
+void		free_doors(t_vars *vars);
 
 /* Free_components.c */
 void		free_vars_image(t_vars *vars);
@@ -507,6 +519,23 @@ void		free_vars_player(t_vars *vars);
 void		free_vars_mlx(t_vars *vars);
 void		free_vars_ray(t_vars *vars);
 void		exit_with_error(t_vars *vars, char *error_message);
+
+/* Free_sprites.c */
+void		free_animated_sprite(t_img *sprite);
+void		free_animated_sprite_if_exists(t_img **sprite);
+void		free_sprites(t_vars *vars);
+void		free_vars_sprites(t_vars *vars);
+
+/* Free_textures.c */
+void		free_texture_if_exists(t_vars *vars, t_img **texture);
+void		free_vars_door_textures(t_vars *vars);
+void		free_vars_textures(t_vars *vars);
+
+/* Free_enemies.c */
+void		free_enemy_list(t_vars *vars);
+void		free_enemies(t_vars *vars);
+void		free_vars_imp(t_vars *vars);
+void		free_vars_caco(t_vars *vars);
 
 /* Free_vars.c */
 void		free_vars_map(t_vars *vars);
@@ -616,4 +645,6 @@ int			is_enemy(t_enemy *enemy, int y, int x);
 void		init_caco_sprites(t_vars *vars, t_enemy *caco);
 int			functioin(t_vars *vars);
 
+void	init_imp_animation(t_vars *vars);
+void	init_caco_animation(t_vars *vars);
 #endif // CUB3D_H

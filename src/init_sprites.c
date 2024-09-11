@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 16:20:53 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:56:26 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,86 +46,86 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 	sprite_texture->height = height;
 }
 
-void	init_imp_sprites(t_vars *vars, t_enemy *imp)
-{
-	const char *imp_movement_frames[] \
-	= {
-		"./assets/imp_walk1.xpm",
-		"./assets/imp_walk2.xpm",
-		"./assets/imp_walk3.xpm",
-		"./assets/imp_walk4.xpm",
-		NULL
-	};
-	const char *imp_death_frames[] \
-	= {
-		"./assets/imp_dies1.xpm",
-		"./assets/imp_dies2.xpm",
-		"./assets/imp_dies3.xpm",
-		"./assets/imp_dies4.xpm",
-		"./assets/imp_dies5.xpm",
-		NULL
-	};
-	const char *imp_attack_frames[] \
-	= {
-		"./assets/imp_attack1.xpm",
-		"./assets/imp_attack2.xpm",
-		"./assets/imp_attack3.xpm",
-		NULL
-	};
-	const char *imp_fire_ball_frames[] \
-	= {
-		"./assets/imp_fire1.xpm",
-		"./assets/imp_fire2.xpm",
-		NULL
-	};
-	initialise_enemy_textures(vars, imp->move_animation, imp_movement_frames);
-	initialise_enemy_textures(vars, imp->death_animation, imp_death_frames);
-	initialise_enemy_textures(vars, imp->attack_animation, imp_attack_frames);
-	initialise_enemy_textures(vars, imp->fire_ball, imp_fire_ball_frames);
-	imp->current_animation = imp->move_animation;
-}
+// void	init_imp_sprites(t_vars *vars, t_enemy *imp)
+// {
+// 	const char *imp_movement_frames[] \
+// 	= {
+// 		"./assets/imp_walk1.xpm",
+// 		"./assets/imp_walk2.xpm",
+// 		"./assets/imp_walk3.xpm",
+// 		"./assets/imp_walk4.xpm",
+// 		NULL
+// 	};
+// 	const char *imp_death_frames[] \
+// 	= {
+// 		"./assets/imp_dies1.xpm",
+// 		"./assets/imp_dies2.xpm",
+// 		"./assets/imp_dies3.xpm",
+// 		"./assets/imp_dies4.xpm",
+// 		"./assets/imp_dies5.xpm",
+// 		NULL
+// 	};
+// 	const char *imp_attack_frames[] \
+// 	= {
+// 		"./assets/imp_attack1.xpm",
+// 		"./assets/imp_attack2.xpm",
+// 		"./assets/imp_attack3.xpm",
+// 		NULL
+// 	};
+// 	const char *imp_fire_ball_frames[] \
+// 	= {
+// 		"./assets/imp_fire1.xpm",
+// 		"./assets/imp_fire2.xpm",
+// 		NULL
+// 	};
+// 	initialise_enemy_textures(vars, imp->move_animation, imp_movement_frames);
+// 	initialise_enemy_textures(vars, imp->death_animation, imp_death_frames);
+// 	initialise_enemy_textures(vars, imp->attack_animation, imp_attack_frames);
+// 	initialise_enemy_textures(vars, imp->fire_ball, imp_fire_ball_frames);
+// 	imp->current_animation = imp->move_animation;
+// }
 
-void	init_caco_sprites(t_vars *vars, t_enemy *caco)
-{
-	(void)vars;
-	const char *caco_movement_frames[] \
-	= {
-		"./assets/cacodemon1.xpm",
-		"./assets/caco_walk1.xpm",
-		"./assets/caco_walk2.xpm",
-		"./assets/caco_walk3.xpm",
-		"./assets/caco_walk4.xpm",
-		"./assets/caco_walk5.xpm",
-		"./assets/caco_walk6.xpm",
-		NULL
-	};
-	const char *caco_death_frames[] \
-	= {
-		"./assets/caco_dies1.xpm",
-		"./assets/caco_dies2.xpm",
-		"./assets/caco_dies3.xpm",
-		"./assets/caco_dies4.xpm",
-		"./assets/caco_dies5.xpm",
-		NULL
-	};
-	const char *caco_attack_frames[] \
-	= {
-		"./assets/cacodemon2.xpm",
-		"./assets/cacodemon3.xpm",
-		"./assets/cacodemon4.xpm",
-		NULL
-	};
-	const char *caco_fire_ball_frames[] \
-	= {
-		"./assets/caco_fire1.xpm",
-		NULL
-	};
-	initialise_enemy_textures(vars, caco->move_animation, caco_movement_frames);
-	initialise_enemy_textures(vars, caco->death_animation, caco_death_frames);
-	initialise_enemy_textures(vars, caco->attack_animation, caco_attack_frames);
-	initialise_enemy_textures(vars, caco->fire_ball, caco_fire_ball_frames);
-	caco->current_animation = caco->move_animation;
-}
+// void	init_caco_sprites(t_vars *vars, t_enemy *caco)
+// {
+// 	(void)vars;
+// 	const char *caco_movement_frames[] \
+// 	= {
+// 		"./assets/cacodemon1.xpm",
+// 		"./assets/caco_walk1.xpm",
+// 		"./assets/caco_walk2.xpm",
+// 		"./assets/caco_walk3.xpm",
+// 		"./assets/caco_walk4.xpm",
+// 		"./assets/caco_walk5.xpm",
+// 		"./assets/caco_walk6.xpm",
+// 		NULL
+// 	};
+// 	const char *caco_death_frames[] \
+// 	= {
+// 		"./assets/caco_dies1.xpm",
+// 		"./assets/caco_dies2.xpm",
+// 		"./assets/caco_dies3.xpm",
+// 		"./assets/caco_dies4.xpm",
+// 		"./assets/caco_dies5.xpm",
+// 		NULL
+// 	};
+// 	const char *caco_attack_frames[] \
+// 	= {
+// 		"./assets/cacodemon2.xpm",
+// 		"./assets/cacodemon3.xpm",
+// 		"./assets/cacodemon4.xpm",
+// 		NULL
+// 	};
+// 	const char *caco_fire_ball_frames[] \
+// 	= {
+// 		"./assets/caco_fire1.xpm",
+// 		NULL
+// 	};
+// 	initialise_enemy_textures(vars, caco->move_animation, caco_movement_frames);
+// 	initialise_enemy_textures(vars, caco->death_animation, caco_death_frames);
+// 	initialise_enemy_textures(vars, caco->attack_animation, caco_attack_frames);
+// 	initialise_enemy_textures(vars, caco->fire_ball, caco_fire_ball_frames);
+// 	caco->current_animation = caco->move_animation;
+// }
 
 void	initialise_sprites(t_vars *vars)
 {

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_components.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
 /*   Updated: 2024/09/11 21:20:30 by iberegsz         ###   ########.fr       */
