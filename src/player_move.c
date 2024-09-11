@@ -28,6 +28,8 @@ void	move_player(t_vars *vars, int move_y, int move_x)
 	{
 		vars->player->y += move_y;
 		vars->player->x += move_x;
+		vars->minimap_update_y -= move_y;
+		vars->minimap_update_x -= move_x;
 	}
 }
 

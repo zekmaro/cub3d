@@ -31,6 +31,8 @@ int	main_loop_hook(t_vars *vars)
 		animate_shooting(vars);
 	// if (vars->player->is_damaged)
 	// 	draw_player_damaged(vars);
+	draw_minimap(vars);
+	draw_player(vars, YELLOW);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
 	get_current_time(&t);

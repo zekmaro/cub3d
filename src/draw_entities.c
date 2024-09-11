@@ -23,8 +23,10 @@ void	draw_minimap(t_vars *vars)
 		j = -1;
 		while (++j < vars->map->width)
 		{
-			vars->line->x0 = j * vars->unit_size;
-			vars->line->y0 = i * vars->unit_size;
+			vars->line->x0 = 100 + j * 16 - vars->map->player_x * 16;
+			vars->line->y0 = 100 + i * 16 - vars->map->player_y * 16;
+			vars->line->y0 += vars->minimap_update_y / 4;
+			vars->line->x0 += vars->minimap_update_x / 4;
 			if (vars->map->grid[i][j] == '1')
 				draw_square(vars, vars->line->x0, vars->line->y0, BEIGE);
 			else if (vars->map->grid[i][j] == 'D')
