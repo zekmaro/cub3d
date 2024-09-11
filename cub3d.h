@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 15:07:05 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 01:10:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,6 +368,14 @@ typedef struct s_draw_sprite_params
 	int		scale;
 }	t_draw_sprite_params;
 
+typedef struct s_draw_limits
+{
+	int	draw_start_y;
+	int	draw_end_y;
+	int	draw_start_x;
+	int	draw_end_x;
+}	t_draw_limits;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -424,6 +432,10 @@ void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
 
 /* Draw_sprite.c */
 void		draw_sprites(t_vars *vars);
+void		calculate_draw_limits(t_vars *vars, t_sprite *sprite, \
+				t_draw_limits *limits);
+void		draw_sprites_stripe(t_vars *vars, t_sprite *sprite, int stripe, \
+				t_draw_limits *limits);
 int			draw_sprite(t_vars *vars);
 
 /* Draw_environment.c */
@@ -469,8 +481,10 @@ void		setup_caco(t_vars *vars, t_enemy *caco);
 /* Free_memory_utils.c */
 void		free_memory(char **arr);
 void		free_map(t_map *map);
-int			free_and_exit(void *param);
+int			free_and_exit(t_vars *vars);
 void		free_vars_doors(t_vars *vars);
+void		free_animated_sprite(t_img *sprite);
+void		free_sprites(t_vars *vars);
 void		cleanup_vars(t_vars *vars);
 
 /* Free_environment.c */
@@ -478,6 +492,14 @@ void		free_vars_map(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 void		free_vars_line(t_vars *vars);
+void		free_vars_animated_sprite(t_vars *vars);
+void		free_vars_gun(t_vars *vars);
+void		free_vars_fire(t_vars *vars);
+void		free_vars_door_textures(t_vars *vars);
+void		free_vars_sprite_texture(t_vars *vars);
+void		free_vars_sprites(t_vars *vars);
+void		free_vars_zbuffer(t_vars *vars);
+void		free_environment(t_vars *vars);
 
 /* Free_components.c */
 void		free_vars_image(t_vars *vars);

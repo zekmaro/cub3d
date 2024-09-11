@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:19:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 13:10:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 23:01:45 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_vars_player(t_vars *vars)
 
 void	free_vars_mlx(t_vars *vars)
 {
-	if (vars->mlx->win)
+	if (vars->mlx)
 	{
 		if (vars->mlx->win)
 		{

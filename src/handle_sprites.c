@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 15:11:14 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/10 22:27:32 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 		sprite->frames[i] = mlx_xpm_file_to_image(vars->mlx->mlx, \
 			(char *)file_paths[i], &width, &height);
 		tmp = (t_img *)sprite->frames[i];
-		tmp->addr = mlx_get_data_addr(\
-		tmp, \
-		&tmp->bits_per_pixel, \
-		&tmp->line_len, \
-		&tmp->endian);
 		if (!sprite->frames[i])
 		{
 			exit_with_error(vars, "Failed to load sprite frame");
 			exit(EXIT_FAILURE);
 		}
+		tmp->addr = mlx_get_data_addr(\
+			tmp, \
+			&tmp->bits_per_pixel, \
+			&tmp->line_len, \
+			&tmp->endian);
 		tmp->width = width;
 		tmp->height = height;
 	}
