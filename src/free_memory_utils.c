@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/11 21:20:19 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:10:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,145 +25,12 @@ void	free_memory(char **arr)
 	free(temp);
 }
 
-void	free_map(t_map *map)
+void	free_vars_zbuffer(t_vars *vars)
 {
-	int	i;
-
-	i = 0;
-	while (i < map->width)
+	if (vars->zbuffer)
 	{
-		free(map->grid[i]);
-		i++;
-	}
-	free(map->grid);
-}
-
-void	free_animated_sprite(t_img *sprite)
-{
-	int		i;
-	t_img	*tmp;
-
-	if (sprite)
-	{
-		if (sprite->frames)
-		{
-			i = -1;
-			while (++i < sprite->frame_count)
-			{
-				if (sprite->frames[i])
-				{
-					tmp = (t_img *)sprite->frames[i];
-					if (tmp->mlx_img)
-					{
-						free(tmp->mlx_img);
-						tmp->mlx_img = NULL;
-					}
-					free(sprite->frames[i]);
-					sprite->frames[i] = NULL;
-				}
-			}
-			free(sprite->frames);
-			sprite->frames = NULL;
-		}
-		free(sprite);
-		sprite = NULL;
-	}
-}
-
-void	free_animated_sprite_if_exists(t_img **sprite)
-{
-	if (sprite && *sprite)
-	{
-		free_animated_sprite(*sprite);
-		*sprite = NULL;
-	}
-}
-
-void	free_texture_if_exists(t_vars *vars, t_img **texture)
-{
-	if (*texture)
-	{
-		if ((*texture)->mlx_img)
-		{
-			mlx_destroy_image(vars->mlx->mlx, (*texture)->mlx_img);
-			(*texture)->mlx_img = NULL;
-		}
-		free(*texture);
-		*texture = NULL;
-	}
-}
-
-void	free_sprites(t_vars *vars)
-{
-	if (!vars)
-		return ;
-	if (vars->player)
-	{
-		free_animated_sprite_if_exists(&vars->player->gun);
-		free_animated_sprite_if_exists(&vars->player->fire);
-	}
-	if (vars->door)
-	{
-		free_animated_sprite_if_exists(&vars->door->textures);
-	}
-	free_texture_if_exists(vars, &vars->sprite_texture);
-	if (vars->sprites)
-	{
-		free(vars->sprites);
-		vars->sprites = NULL;
-	}
-}
-
-void	free_imp_list(t_vars *vars)
-{
-	int	i;
-
-	if (vars->imp_list)
-	{
-		i = 0;
-		while (i < vars->map->imp_list_size)
-		{
-			free(vars->imp_list[i].move_animation);
-			free(vars->imp_list[i].death_animation);
-			free(vars->imp_list[i].attack_animation);
-			free(vars->imp_list[i].fire_ball);
-			i++;
-		}
-		free(vars->imp_list);
-	}
-}
-
-void	free_caco_list(t_vars *vars)
-{
-	int	i;
-
-	if (vars->caco_list)
-	{
-		i = 0;
-		while (i < vars->map->caco_list_size)
-		{
-			free(vars->caco_list[i].move_animation);
-			free(vars->caco_list[i].death_animation);
-			free(vars->caco_list[i].attack_animation);
-			free(vars->caco_list[i].fire_ball);
-			i++;
-		}
-		free(vars->caco_list);
-	}
-}
-
-void	free_enemy_list(t_vars *vars)
-{
-	free_imp_list(vars);
-	free_caco_list(vars);
-}
-
-void	free_doors(t_vars *vars)
-{
-	if (vars->door)
-	{
-		free(vars->door);
-		vars->door = NULL;
+		free(vars->zbuffer);
+		vars->zbuffer = NULL;
 	}
 }
 
@@ -171,6 +38,12 @@ int	free_and_exit(t_vars *vars)
 {
 	cleanup_vars(vars);
 	exit(0);
+}
+
+void	exit_with_error(t_vars *vars, char *error_message)
+{
+	perror(error_message);
+	free_and_exit(vars);
 }
 
 void	cleanup_vars(t_vars *vars)

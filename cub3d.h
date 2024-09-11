@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/11 01:10:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:09:03 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -489,8 +489,6 @@ void		cleanup_vars(t_vars *vars);
 
 /* Free_environment.c */
 void		free_vars_map(t_vars *vars);
-void		free_vars_textures(t_vars *vars);
-void		free_vars_sprites(t_vars *vars);
 void		free_vars_line(t_vars *vars);
 void		free_vars_animated_sprite(t_vars *vars);
 void		free_vars_gun(t_vars *vars);
@@ -500,6 +498,7 @@ void		free_vars_sprite_texture(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 void		free_vars_zbuffer(t_vars *vars);
 void		free_environment(t_vars *vars);
+void		free_doors(t_vars *vars);
 
 /* Free_components.c */
 void		free_vars_image(t_vars *vars);
@@ -507,6 +506,23 @@ void		free_vars_player(t_vars *vars);
 void		free_vars_mlx(t_vars *vars);
 void		free_vars_ray(t_vars *vars);
 void		exit_with_error(t_vars *vars, char *error_message);
+
+/* Free_sprites.c */
+void		free_animated_sprite(t_img *sprite);
+void		free_animated_sprite_if_exists(t_img **sprite);
+void		free_sprites(t_vars *vars);
+void		free_vars_sprites(t_vars *vars);
+
+/* Free_textures.c */
+void		free_texture_if_exists(t_vars *vars, t_img **texture);
+void		free_vars_door_textures(t_vars *vars);
+void		free_vars_textures(t_vars *vars);
+
+/* Free_enemies.c */
+void		free_enemy_list(t_vars *vars);
+void		free_enemies(t_vars *vars);
+void		free_vars_imp(t_vars *vars);
+void		free_vars_caco(t_vars *vars);
 
 /* Free_vars.c */
 void		free_vars_map(t_vars *vars);
