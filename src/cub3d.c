@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/11 00:55:31 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 21:25:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	main_loop_hook(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
 	get_current_time(&t);
-	printf("diff: %1.12f\n", ((double)t.tv_sec \
-		+ (double)t.tv_usec / 1000000) - abc);
+	//printf("diff: %1.12f\n", ((double)t.tv_sec \
+	//	+ (double)t.tv_usec / 1000000) - abc);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/10 20:39:34 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 21:20:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	free_vars_textures(t_vars *vars)
 		{
 			free(vars->textures[i]->mlx_img);
 			free(vars->textures[i]);
+			vars->textures[i] = NULL;
 		}
 	}
 }
@@ -40,7 +41,10 @@ void	free_vars_textures(t_vars *vars)
 void	free_vars_line(t_vars *vars)
 {
 	if (vars->line)
+	{
 		free(vars->line);
+		vars->line = NULL;
+	}
 }
 
 void	free_vars_animated_sprite(t_vars *vars)
@@ -58,11 +62,17 @@ void	free_vars_animated_sprite(t_vars *vars)
 				if (vars->animated_sprite->frames[i])
 				{
 					temp = (t_img *)vars->animated_sprite->frames[i];
-					free(temp->mlx_img);
+					if (temp->mlx_img)
+					{
+						free(temp->mlx_img);
+						temp->mlx_img = NULL;
+					}
 					free(vars->animated_sprite->frames[i]);
+					vars->animated_sprite->frames[i] = NULL;
 				}
 			}
 			free(vars->animated_sprite->frames);
+			vars->animated_sprite->frames = NULL;
 		}
 		free(vars->animated_sprite);
 		vars->animated_sprite = NULL;
