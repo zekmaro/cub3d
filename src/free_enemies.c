@@ -21,10 +21,10 @@ void	free_imp_list(t_vars *vars)
 		i = 0;
 		while (i < vars->map->imp_list_size)
 		{
-			free(vars->imp_list[i].move_animation);
-			free(vars->imp_list[i].death_animation);
-			free(vars->imp_list[i].attack_animation);
-			free(vars->imp_list[i].fire_ball);
+			// free(vars->imp_list[i].move_animation);
+			// free(vars->imp_list[i].death_animation);
+			// free(vars->imp_list[i].attack_animation);
+			// free(vars->imp_list[i].fire_ball);
 			i++;
 		}
 		free(vars->imp_list);
@@ -40,10 +40,10 @@ void	free_caco_list(t_vars *vars)
 		i = 0;
 		while (i < vars->map->caco_list_size)
 		{
-			free(vars->caco_list[i].move_animation);
-			free(vars->caco_list[i].death_animation);
-			free(vars->caco_list[i].attack_animation);
-			free(vars->caco_list[i].fire_ball);
+			// free(vars->caco_list[i].move_animation);
+			// free(vars->caco_list[i].death_animation);
+			// free(vars->caco_list[i].attack_animation);
+			// free(vars->caco_list[i].fire_ball);
 			i++;
 		}
 		free(vars->caco_list);

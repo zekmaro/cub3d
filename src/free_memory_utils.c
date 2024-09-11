@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/11 22:10:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:35:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	exit_with_error(t_vars *vars, char *error_message)
 
 void	cleanup_vars(t_vars *vars)
 {
-	free_enemy_list(vars);
+	//free_enemy_list(vars);
 	free_sprites(vars);
 	free_environment(vars);
 	free_doors(vars);
