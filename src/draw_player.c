@@ -26,9 +26,9 @@ void	draw_player(t_vars *vars, unsigned int color)
 		j = -1;
 		while (++j < vars->player->player_size)
 		{
-			pixel_x = vars->player->x + j;
-			pixel_y = vars->player->y + i;
-			rotate_around_point(vars, &pixel_x, &pixel_y);
+			pixel_x = 100 + j;
+			pixel_y = 100 + i;
+			//rotate_around_point(vars, &pixel_x, &pixel_y);
 			put_pixel_to_image(vars, pixel_x, pixel_y, color);
 		}
 	}

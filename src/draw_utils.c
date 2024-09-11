@@ -18,11 +18,14 @@ void	draw_square(t_vars *vars, int x, int y, int color)
 	int	j;
 
 	i = -1;
-	while (++i < vars->unit_size)
+	while (++i < 16)
 	{
 		j = -1;
-		while (++j < vars->unit_size)
-			put_pixel_to_image(vars, x + j, y + i, color);
+		while (++j < 16)
+		{
+			if (abs(x + j - 100 < 100) && abs(y + i - 100 < 100))
+				put_pixel_to_image(vars, x + j, y + i, color);
+		}
 	}
 }
 

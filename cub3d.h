@@ -23,6 +23,8 @@
 # include <math.h>
 # include "mlx.h"
 
+# define MINIMAP_RADIUS 100
+
 // KEY DEFINITION LINUX
 # define W 119
 # define D 100
@@ -281,6 +283,8 @@ typedef struct s_vars
 	t_enemy			*caco_list;
 	t_ray			*ray;
 	t_door			*door;
+	int				minimap_update_x;
+	int				minimap_update_y;
 	t_img			*textures[8];
 	t_img			*animated_sprite;
 	int				is_monster;
