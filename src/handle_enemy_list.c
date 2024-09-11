@@ -29,7 +29,7 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 		get_current_time(&enemy_list[i].time1);
 		enemy_elapsed_time = get_elapsed_time(&enemy_list[i].time0, \
 			&enemy_list[i].time1);
-		if (enemy_elapsed_time > delay)
+		if (!enemy_list[i].is_dead && enemy_elapsed_time > delay)
 		{
 			if (enemy_list[i].current_animation == enemy_list[i].death
 				&& enemy_list[i].current_animation->current_frame
