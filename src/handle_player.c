@@ -37,12 +37,12 @@ void	setup_player(t_vars *vars)
 	vars->player->health = 100;
 }
 
-// int	player_damaged_enemy(t_vars *vars, t_enemy *enemy)
-// {
-// 	return (abs(enemy->fire_ball_x - vars->player->center_x) < 20
-// 		&& abs(enemy->fire_ball_y - vars->player->center_y) < 20
-// 		&& !vars->player->is_damaged);
-// }
+int	player_damaged_enemy(t_vars *vars, t_enemy *enemy)
+{
+	return (abs(enemy->fire_ball_x - vars->player->center_x) < 20
+		&& abs(enemy->fire_ball_y - vars->player->center_y) < 20
+		&& !vars->player->is_damaged);
+}
 
 void	update_damaged_player(t_vars *vars)
 {
@@ -68,17 +68,17 @@ void	handle_player_damaged_time(t_vars *vars)
 		vars->player->is_damaged = 0;
 }
 
-// void	handle_enemy_shot(t_vars *vars, t_enemy *enemy)
-// {
-// 	if (player_damaged_enemy(vars, enemy))
-// 	{
-// 		update_damaged_player(vars);
-// 		enemy->fire_ball_y = 0;
-// 		enemy->fire_ball_x = 0;
-// 	}
-// 	else
-// 	{
-// 		enemy->fire_ball_y += enemy->fire_delta_y;
-// 		enemy->fire_ball_x += enemy->fire_delta_x;
-// 	}
-// }
+void	handle_enemy_shot(t_vars *vars, t_enemy *enemy)
+{
+	if (player_damaged_enemy(vars, enemy))
+	{
+		update_damaged_player(vars);
+		enemy->fire_ball_y = 0;
+		enemy->fire_ball_x = 0;
+	}
+	else
+	{
+		enemy->fire_ball_y += enemy->fire_delta_y;
+		enemy->fire_ball_x += enemy->fire_delta_x;
+	}
+}

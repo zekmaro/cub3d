@@ -246,16 +246,8 @@ typedef struct s_animation
 	t_img	*move;
 	t_img	*death;
 	t_img	*attack;
+	t_img	*bullet;
 }	t_animation;
-
-typedef struct s_fire_ball
-{
-	t_img	*fire_ball;
-	int	fire_ball_x;
-	int	fire_ball_y;
-	int	fire_delta_x;
-	int	fire_delta_y;
-}	t_fire_ball;
 
 typedef struct s_enemy
 {
@@ -275,6 +267,11 @@ typedef struct s_enemy
 	t_img			*death;
 	t_img			*attack;
 	t_img			*current_animation;
+	int	fire_ball_x;
+	int	fire_ball_y;
+	int	fire_delta_x;
+	int	fire_delta_y;
+	t_img			*fire_ball;
 	double			angle;
 	struct timeval	time0;
 	struct timeval	time1;

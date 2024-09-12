@@ -38,16 +38,16 @@ void	init_imp_sprite(t_vars *vars, t_animation *imp_animation)
 		"./assets/imp_attack3.xpm",
 		NULL
 	};
-	// const char *imp_fire_ball_frames[] \
-	// = {
-	// 	"./assets/imp_fire1.xpm",
-	// 	"./assets/imp_fire2.xpm",
-	// 	NULL
-	// };
+	const char *imp_fire_ball_frames[] \
+	= {
+		"./assets/imp_fire1.xpm",
+		"./assets/imp_fire2.xpm",
+		NULL
+	};
 	initialise_enemy_textures(vars, imp_animation->move, imp_move_frames);
 	initialise_enemy_textures(vars, imp_animation->death, imp_death_frames);
 	initialise_enemy_textures(vars, imp_animation->attack, imp_attack_frames);
-	//initialise_enemy_textures(vars, imp_animation->fire_ball, imp_fire_ball_frames);
+	initialise_enemy_textures(vars, imp_animation->bullet, imp_fire_ball_frames);
 }
 
 void	init_caco_sprite(t_vars *vars, t_animation *caco_animation)
@@ -79,15 +79,15 @@ void	init_caco_sprite(t_vars *vars, t_animation *caco_animation)
 		"./assets/cacodemon4.xpm",
 		NULL
 	};
-	// const char *caco_fire_ball_frames[] \
-	// = {
-	// 	"./assets/caco_fire1.xpm",
-	// 	NULL
-	// };
+	const char *caco_fire_ball_frames[] \
+	= {
+		"./assets/caco_fire1.xpm",
+		NULL
+	};
 	initialise_enemy_textures(vars, caco_animation->move, caco_move_frames);
 	initialise_enemy_textures(vars, caco_animation->death, caco_death_frames);
 	initialise_enemy_textures(vars, caco_animation->attack, caco_attack_frames);
-	//initialise_enemy_textures(vars, caco_animation->fire_ball, caco_fire_ball_frames);
+	initialise_enemy_textures(vars, caco_animation->bullet, caco_fire_ball_frames);
 }
 
 void	init_imp_animation(t_vars *vars)
@@ -99,6 +99,7 @@ void	init_imp_animation(t_vars *vars)
 	vars->imp_animation->move = ft_calloc(sizeof(t_img), 1);
 	vars->imp_animation->death = ft_calloc(sizeof(t_img), 1);
 	vars->imp_animation->attack = ft_calloc(sizeof(t_img), 1);
+	vars->imp_animation->bullet = ft_calloc(sizeof(t_img), 1);
 	init_imp_sprite(vars, vars->imp_animation);
 }
 
@@ -111,5 +112,6 @@ void	init_caco_animation(t_vars *vars)
 	vars->caco_animation->move = ft_calloc(sizeof(t_img), 1);
 	vars->caco_animation->death = ft_calloc(sizeof(t_img), 1);
 	vars->caco_animation->attack = ft_calloc(sizeof(t_img), 1);
+	vars->caco_animation->bullet = ft_calloc(sizeof(t_img), 1);
 	init_caco_sprite(vars, vars->caco_animation);
 }
