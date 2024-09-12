@@ -18,6 +18,11 @@ void	init_enemy_lists(t_vars *vars)
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
 }
 
+void	update_sprite_frame_enemy(t_enemy *enemy)
+{
+	enemy->current_frame = (enemy->current_frame + 1) % enemy->current_animation->frame_count;
+}
+
 void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 {
 	long	enemy_elapsed_time;
@@ -31,16 +36,22 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 			&enemy_list[i].time1);
 		if (!enemy_list[i].is_dead && enemy_elapsed_time > delay)
 		{
+			if (enemy_list[i].health == 0)
+			{
+				printf("current frame %d index %d action %p\n", enemy_list[i].current_frame, i,  enemy_list[i].current_animation);
+			}
 			if (enemy_list[i].current_animation == enemy_list[i].death
-				&& enemy_list[i].current_animation->current_frame
+				&& enemy_list[i].current_frame
 				== enemy_list[i].current_animation->frame_count - 1)
+			{
 				enemy_list[i].is_dead = 1;
-			update_sprite_frame(enemy_list[i].current_animation);
+			}
 			if (enemy_list[i].current_animation \
 				== enemy_list[i].attack
-				&& enemy_list[i].current_animation->current_frame \
+				&& enemy_list[i].current_frame \
 				== enemy_list[i].current_animation->frame_count - 1)
 				enemy_list[i].current_animation = enemy_list[i].move;
+			update_sprite_frame_enemy(&enemy_list[i]);
 			enemy_list[i].time0 = enemy_list[i].time1;
 		}
 	}

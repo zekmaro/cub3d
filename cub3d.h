@@ -267,6 +267,7 @@ typedef struct s_enemy
 	t_img			*death;
 	t_img			*attack;
 	t_img			*current_animation;
+	int				current_frame;
 	int	fire_ball_x;
 	int	fire_ball_y;
 	int	fire_delta_x;
@@ -437,8 +438,8 @@ void		calculate_transform(t_draw_sprite_params *draw_params, \
 				t_sprite_calc_params *calc_params);
 void		draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 				t_sprite_calc_params *calc_params, t_img *tmp);
-void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
-				int object_y, int scale);
+void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
+			int object_y, int scale, int current_frame);
 
 /* Draw_sprite.c */
 void		draw_sprites(t_vars *vars);

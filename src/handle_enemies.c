@@ -47,8 +47,11 @@ void	init_enemies(t_vars *vars)
 
 void	enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector)
 {
-	if (enemy->health > 0)
+	if (enemy->health > 0 && enemy->current_animation != enemy->death)
+	{
 		enemy->current_animation = enemy->attack;
+		enemy->current_frame = 0;
+	}
 	enemy->fire_delta_y = (vector_y * vector_y / vector) / 10;
 	if (vector_y < 0)
 		enemy->fire_delta_y *= -1;

@@ -41,13 +41,14 @@ void	draw_and_update_entity(t_vars *vars, t_enemy *entity)
 {
 	if (!entity->is_dead)
 	{
+		//printf("entity->current_frame %d\n", entity->current_frame);
 		draw_dynamic_sprite(vars, entity->current_animation, \
-			entity->center_x, entity->center_y, 50);
+			entity->center_x, entity->center_y, 50, entity->current_frame);
 		if (!entity->is_dead)
 			search_for_player_enemy(vars, entity);
 		if (entity->detected_player)
 			draw_dynamic_sprite(vars, entity->fire_ball, \
-				entity->fire_ball_x, entity->fire_ball_y, 20);
+				entity->fire_ball_x, entity->fire_ball_y, 20, 0);
 	}
 }
 
