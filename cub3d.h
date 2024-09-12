@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/12 17:25:29 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:32:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,7 @@ typedef struct s_enemy
 	t_img			*death;
 	t_img			*attack;
 	t_img			*current_animation;
+	int				current_frame;
 	int				fire_ball_x;
 	int				fire_ball_y;
 	int				fire_delta_x;
@@ -447,7 +448,7 @@ void		calculate_transform(t_draw_sprite_params *draw_params, \
 void		draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 				t_sprite_calc_params *calc_params, t_img *tmp);
 void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
-				int object_y, int scale);
+				int object_y, int scale, int current_frame);
 
 /* Draw_sprite.c */
 void		draw_sprites(t_vars *vars);
