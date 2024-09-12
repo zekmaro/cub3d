@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 14:59:58 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/08/29 22:24:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:19:17 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	define_step(const int a, const int b)
+static int	define_step(const int a, const int b)
 {
 	if (a < b)
 		return (1);
@@ -22,7 +22,7 @@ int	define_step(const int a, const int b)
 		return (0);
 }
 
-void	get_line_data(t_line *line)
+static void	get_line_data(t_line *line)
 {
 	line->step_x = define_step(line->x0, line->x1);
 	line->step_y = define_step(line->y0, line->y1);

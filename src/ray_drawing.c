@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/08 15:22:06 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 13:45:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,31 @@ void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 	}
 }
 
-int	is_monster(t_vars *vars, int x, int y)
+t_tex_typ	define_texture_type(t_vars *vars)
 {
-	return (x == vars->map->monster_x && y == vars->map->monster_y);
+	int	map_x;
+	int	map_y;
+	int	dx;
+	int	dy;
+
+	map_x = (int)vars->ray->ray_x / vars->unit_size;
+	map_y = (int)vars->ray->ray_y / vars->unit_size;
+	if (vars->map->grid[map_y][map_x] == '1')
+	{
+		dx = (int)vars->ray->last_ray_x / vars->unit_size - map_x;
+		dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
+		if (dy == 1)
+			return (TEXTURE_NORTH);
+		else if (dy == -1)
+			return (TEXTURE_SOUTH);
+		else if (dx == 1)
+			return (TEXTURE_WEST);
+		else if (dx == -1)
+			return (TEXTURE_EAST);
+	}
+	else if (vars->map->grid[map_y][map_x] == 'D')
+		return (TEXTURE_DOOR0);
+	return (TEXTURE_NONE);
 }
 
 int	get_map_x(t_vars *vars)
