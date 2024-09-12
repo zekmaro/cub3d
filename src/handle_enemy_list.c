@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/12 17:30:36 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:35:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	update_enemy(t_enemy *enemy, long delay)
 void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 {
 	long	enemy_elapsed_time;
-	int	i;
+	int		i;
 
 	i = -1;
 	while (++i < size)
