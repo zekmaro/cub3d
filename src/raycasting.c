@@ -94,6 +94,8 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	(void)ray_id;
 	(void)texture_index;
 	y = vars->ray->draw_start;
+	if (y < 0)
+		y = 0;
 	while (temp++ < y)
 		put_pixel_to_image(vars, ray_id, temp, RED);
 	while (y < vars->ray->draw_end)
