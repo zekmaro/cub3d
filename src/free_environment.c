@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/12 12:49:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:58:00 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ void	free_vars_gun(t_vars *vars)
 
 void	free_doors(t_vars *vars)
 {
-	int i = 0;
-	t_img *tmp;
+	int		i;
+	t_img	*tmp;
 
+	i = 0;
 	while (i < 4)
 	{
 		tmp = (t_img *)vars->door->textures->frames[i];
