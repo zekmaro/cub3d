@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/12 17:02:32 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:35:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main_loop_hook(t_vars *vars)
 {
 	struct timeval	t;
 	//double			abc;
-
 	reset_mouse_to_center(vars);
 	get_current_time(&t);
 	//abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
