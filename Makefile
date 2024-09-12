@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
+#    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/11 14:58:10 by anarama          ###   ########.fr        #
+#    Updated: 2024/09/11 22:33:34 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,9 @@ SRC		:=	src/cub3d.c \
 			src/free_memory_utils.c \
 			src/free_environment.c \
 			src/free_components.c \
+			src/free_sprites.c \
+			src/free_textures.c \
+			src/free_enemies.c \
 			src/handle_image.c \
 			src/handle_keys.c \
 			src/handle_mouse.c \

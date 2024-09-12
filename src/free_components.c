@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:19:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 23:01:45 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:10:18 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ void	free_vars_image(t_vars *vars)
 		mlx_destroy_image(vars->mlx->mlx, vars->image->mlx_img);
 	}
 	free(vars->image);
+	vars->image = NULL;
 }
 
 void	free_vars_player(t_vars *vars)
 {
 	if (vars->player)
+	{
 		free(vars->player);
+		vars->player = NULL;
+	}
 }
 
 void	free_vars_mlx(t_vars *vars)
@@ -48,6 +52,15 @@ void	free_vars_mlx(t_vars *vars)
 	}
 }
 
+void	free_vars_line(t_vars *vars)
+{
+	if (vars->line)
+	{
+		free(vars->line);
+		vars->line = NULL;
+	}
+}
+
 void	free_vars_ray(t_vars *vars)
 {
 	if (vars->ray)
@@ -55,10 +68,4 @@ void	free_vars_ray(t_vars *vars)
 		free(vars->ray);
 		vars->ray = NULL;
 	}
-}
-
-void	exit_with_error(t_vars *vars, char *error_message)
-{
-	perror(error_message);
-	free_and_exit(vars);
 }
