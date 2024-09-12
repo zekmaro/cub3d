@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/12 14:32:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 01:06:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -662,12 +662,18 @@ int			is_door(t_vars *vars, int y, int x);
 
 void		draw_player_damaged(t_vars *vars);
 void		draw_door(t_vars *vars);
-void		init_imp_sprites(t_vars *vars, t_enemy *imp);
 int			is_enemy(t_enemy *enemy, int y, int x);
-void		init_caco_sprites(t_vars *vars, t_enemy *caco);
 int			functioin(t_vars *vars);
 
+/* Init_animations.c */
+void		init_imp_sprites(t_vars *vars, t_enemy *imp);
+void		init_caco_sprites(t_vars *vars, t_enemy *caco);
 void		init_imp_animation(t_vars *vars);
 void		init_caco_animation(t_vars *vars);
+
+/* Init_enemy.c */
+void		init_imp(t_vars *vars, int i, int j, int *counter_imp);
+void		init_caco(t_vars *vars, int i, int j, int *counter_caco);
+void		init_enemies(t_vars *vars);
 
 #endif // CUB3D_H
