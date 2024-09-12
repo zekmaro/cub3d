@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:14:05 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/11 14:58:26 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/12 14:55:34 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	init_imp_sprite(t_vars *vars, t_animation *imp_animation)
 	initialise_enemy_textures(vars, imp_animation->move, imp_move_frames);
 	initialise_enemy_textures(vars, imp_animation->death, imp_death_frames);
 	initialise_enemy_textures(vars, imp_animation->attack, imp_attack_frames);
-	initialise_enemy_textures(vars, imp_animation->bullet, imp_fire_ball_frames);
+	initialise_enemy_textures(vars, imp_animation->bullet, \
+		imp_fire_ball_frames);
 }
 
 void	init_caco_sprite(t_vars *vars, t_animation *caco_animation)
@@ -87,12 +88,13 @@ void	init_caco_sprite(t_vars *vars, t_animation *caco_animation)
 	initialise_enemy_textures(vars, caco_animation->move, caco_move_frames);
 	initialise_enemy_textures(vars, caco_animation->death, caco_death_frames);
 	initialise_enemy_textures(vars, caco_animation->attack, caco_attack_frames);
-	initialise_enemy_textures(vars, caco_animation->bullet, caco_fire_ball_frames);
+	initialise_enemy_textures(vars, caco_animation->bullet, \
+		caco_fire_ball_frames);
 }
 
 void	init_imp_animation(t_vars *vars)
 {
-	t_animation *imp_animation;
+	t_animation	*imp_animation;
 
 	imp_animation = (t_animation *)(malloc(sizeof(t_animation)));
 	vars->imp_animation = imp_animation;
@@ -105,7 +107,7 @@ void	init_imp_animation(t_vars *vars)
 
 void	init_caco_animation(t_vars *vars)
 {
-	t_animation *caco_animation;
+	t_animation	*caco_animation;
 
 	caco_animation = (t_animation *)(malloc(sizeof(t_animation)));
 	vars->caco_animation = caco_animation;
