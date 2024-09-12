@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 01:06:33 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 01:21:26 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -533,7 +533,7 @@ void		free_sprites(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 
 /* Free_textures.c */
-void		free_texture_if_exists(t_vars *vars, t_img **texture);
+void		free_textures(t_vars *vars);
 void		free_vars_door_textures(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
 
@@ -542,6 +542,16 @@ void		free_enemy_list(t_vars *vars);
 void		free_enemies(t_vars *vars);
 void		free_vars_imp(t_vars *vars);
 void		free_vars_caco(t_vars *vars);
+
+/* Free_imp_animations.c */
+void		free_imp_animations(t_vars *vars);
+
+/* Free_caco_animations.c */
+void		free_caco_animations(t_vars *vars);
+
+/* Free_gun_and_fire */
+void		free_gun(t_vars *vars);
+void		free_fire(t_vars *vars);
 
 /* Free_vars.c */
 void		free_vars_map(t_vars *vars);
