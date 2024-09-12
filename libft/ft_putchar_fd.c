@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 12:44:47 by anarama           #+#    #+#             */
 /*   Updated: 2024/04/07 14:28:29 by anarama          ###   ########.fr       */

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:07:22 by anarama           #+#    #+#             */
 /*   Updated: 2024/04/09 12:13:57 by anarama          ###   ########.fr       */

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:21:46 by anarama           #+#    #+#             */
 /*   Updated: 2024/05/23 21:32:25 by anarama          ###   ########.fr       */

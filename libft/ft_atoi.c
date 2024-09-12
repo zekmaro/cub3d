@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:58:11 by anarama           #+#    #+#             */
 /*   Updated: 2024/05/23 14:13:17 by anarama          ###   ########.fr       */

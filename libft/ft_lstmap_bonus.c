@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:39:03 by anarama           #+#    #+#             */
 /*   Updated: 2024/04/09 12:56:37 by anarama          ###   ########.fr       */

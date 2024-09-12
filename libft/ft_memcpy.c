@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 17:45:29 by anarama           #+#    #+#             */
 /*   Updated: 2024/04/09 11:44:30 by anarama          ###   ########.fr       */

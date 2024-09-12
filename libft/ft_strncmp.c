@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:41:51 by anarama           #+#    #+#             */
 /*   Updated: 2024/04/07 14:29:14 by anarama          ###   ########.fr       */
