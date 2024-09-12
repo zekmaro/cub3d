@@ -6,11 +6,43 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 17:45:13 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/09 13:18:40 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 00:30:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+// void	check_player_proximity_to_doors(t_vars *vars)
+// {
+//     int		i;
+//     double	distance;
+//     double	player_x = vars->player->x;
+//     double	player_y = vars->player->y;
+
+// 	i = 0;
+// 	while (i < vars->map->num_doors)
+// 	{
+// 		t_door *door = &vars->map->doors[i];
+// 		distance = sqrt(pow(player_x - door->center_x, 2) + pow(player_y - door->center_y, 2));
+// 		if (distance < DOOR_PROXIMITY_THRESHOLD)
+// 		{
+// 			open_door(vars, door->x, door->y);
+// 		}
+// 		i++;
+// 	}
+// }
+
+void	open_door(t_vars *vars, int x, int y)
+{
+	if (is_door(vars, x, y))
+		vars->map->grid[y][x] = '0';
+}
+
+void	close_door(t_vars *vars, int x, int y)
+{
+	if (is_door(vars, x, y))
+		vars->map->grid[y][x] = 'D';
+}
 
 // int	is_door(t_vars *vars, int x, int y)
 // {
@@ -57,18 +89,6 @@
 // 		return (vars->map->doors[get_door_index(vars, x, y)].state);
 // 	return (DOOR_NONE);
 // }
-
-void	open_door(t_vars *vars, int x, int y)
-{
-	if (is_door(vars, x, y))
-		vars->map->grid[y][x] = '0';
-}
-
-void	close_door(t_vars *vars, int x, int y)
-{
-	if (is_door(vars, x, y))
-		vars->map->grid[y][x] = 'D';
-}
 
 // void	toggle_door(t_vars *vars, int x, int y)
 // {
