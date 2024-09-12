@@ -136,13 +136,13 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for sprites");
 		free_and_exit(vars);
 	}
-	vars->sprite_texture = ft_calloc(sizeof(t_img), 1);
-	if (!vars->sprite_texture)
-	{
-		perror("Failed to allocate memory for sprite texture");
-		free_and_exit(vars);
-	}
-	load_sprite_texture(vars, vars->sprite_texture, "./assets/lamp.xpm");
+	// vars->sprite_texture = ft_calloc(sizeof(t_img), 1);
+	// if (!vars->sprite_texture)
+	// {
+	// 	perror("Failed to allocate memory for sprite texture");
+	// 	free_and_exit(vars);
+	// }
+	// load_sprite_texture(vars, vars->sprite_texture, "./assets/lamp.xpm");
 	const char *gun_frames[] \
 	= {
 		"./assets/gun1.xpm",

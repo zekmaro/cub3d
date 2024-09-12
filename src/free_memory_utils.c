@@ -152,15 +152,49 @@ void	free_textures(t_vars *vars)
 	}
 }
 
+void	free_gun(t_vars *vars)
+{
+	int i = 0;
+	t_img *tmp;
+
+	while (i < 4)
+	{
+		tmp = (t_img *)vars->player->gun->frames[i];
+		free(tmp->mlx_img);
+		free(tmp);
+		i++;
+	}
+	free(vars->player->gun->frames);
+	free(vars->player->gun);
+}
+
+void	free_fire(t_vars *vars)
+{
+	int i = 0;
+	t_img *tmp;
+
+	while (i < 2)
+	{
+		tmp = (t_img *)vars->player->fire->frames[i];
+		free(tmp->mlx_img);
+		free(tmp);
+		i++;
+	}
+	free(vars->player->fire->frames);
+	free(vars->player->fire);
+}
+
 void	cleanup_vars(t_vars *vars)
 {
 	free_imp_animations(vars);
 	free_caco_animations(vars);
 	free_enemy_list(vars);
 	free_textures(vars);
-	free_sprites(vars);
+	//free_sprites(vars);
 	//free_environment(vars);
 	free_doors(vars);
+	free_gun(vars);
+	free_fire(vars);
 	free_vars_map(vars);
 	free_vars_image(vars);
 	free_vars_mlx(vars);
