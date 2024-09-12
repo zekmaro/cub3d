@@ -16,7 +16,7 @@ void	free_vars_image(t_vars *vars)
 {
 	if (vars->image->mlx_img)
 	{
-		free_vars_textures(vars);
+		// free_vars_textures(vars);
 		mlx_destroy_image(vars->mlx->mlx, vars->image->mlx_img);
 	}
 	free(vars->image);
