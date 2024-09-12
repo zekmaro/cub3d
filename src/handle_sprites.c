@@ -22,7 +22,7 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 
 	sprite->frame_count = frame_count;
 	sprite->current_frame = 0;
-	sprite->frames = malloc(sizeof(t_img *) * frame_count);
+	sprite->frames = malloc(sizeof(void *) * frame_count);
 	if (!sprite->frames)
 	{
 		exit_with_error(vars, "Failed to allocate memory for sprite frames");
