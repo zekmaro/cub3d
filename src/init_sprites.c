@@ -48,7 +48,7 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 
 // void	init_imp_sprites(t_vars *vars, t_enemy *imp)
 // {
-// 	const char *imp_movement_frames[] \
+// 	const char *imp_movement_frames[]
 // 	= {
 // 		"./assets/imp_walk1.xpm",
 // 		"./assets/imp_walk2.xpm",
@@ -56,7 +56,7 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 // 		"./assets/imp_walk4.xpm",
 // 		NULL
 // 	};
-// 	const char *imp_death_frames[] \
+// 	const char *imp_death_frames[]
 // 	= {
 // 		"./assets/imp_dies1.xpm",
 // 		"./assets/imp_dies2.xpm",
@@ -65,14 +65,14 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 // 		"./assets/imp_dies5.xpm",
 // 		NULL
 // 	};
-// 	const char *imp_attack_frames[] \
+// 	const char *imp_attack_frames[]
 // 	= {
 // 		"./assets/imp_attack1.xpm",
 // 		"./assets/imp_attack2.xpm",
 // 		"./assets/imp_attack3.xpm",
 // 		NULL
 // 	};
-// 	const char *imp_fire_ball_frames[] \
+// 	const char *imp_fire_ball_frames[]
 // 	= {
 // 		"./assets/imp_fire1.xpm",
 // 		"./assets/imp_fire2.xpm",
@@ -88,7 +88,7 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 // void	init_caco_sprites(t_vars *vars, t_enemy *caco)
 // {
 // 	(void)vars;
-// 	const char *caco_movement_frames[] \
+// 	const char *caco_movement_frames[]
 // 	= {
 // 		"./assets/cacodemon1.xpm",
 // 		"./assets/caco_walk1.xpm",
@@ -99,7 +99,7 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 // 		"./assets/caco_walk6.xpm",
 // 		NULL
 // 	};
-// 	const char *caco_death_frames[] \
+// 	const char *caco_death_frames[]
 // 	= {
 // 		"./assets/caco_dies1.xpm",
 // 		"./assets/caco_dies2.xpm",
@@ -108,14 +108,14 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 // 		"./assets/caco_dies5.xpm",
 // 		NULL
 // 	};
-// 	const char *caco_attack_frames[] \
+// 	const char *caco_attack_frames[]
 // 	= {
 // 		"./assets/cacodemon2.xpm",
 // 		"./assets/cacodemon3.xpm",
 // 		"./assets/cacodemon4.xpm",
 // 		NULL
 // 	};
-// 	const char *caco_fire_ball_frames[] \
+// 	const char *caco_fire_ball_frames[]
 // 	= {
 // 		"./assets/caco_fire1.xpm",
 // 		NULL
