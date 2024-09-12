@@ -52,6 +52,8 @@ void	free_caco_list(t_vars *vars)
 
 void	free_enemy_list(t_vars *vars)
 {
-	free_imp_list(vars);
-	free_caco_list(vars);
+	// free_imp_list(vars);
+	// free_caco_list(vars);
+	free(vars->caco_list);
+	free(vars->imp_list);
 }

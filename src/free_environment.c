@@ -46,11 +46,19 @@ void	free_vars_gun(t_vars *vars)
 
 void	free_doors(t_vars *vars)
 {
-	if (vars->door)
+	int i = 0;
+	t_img *tmp;
+
+	while (i < 4)
 	{
-		free(vars->door);
-		vars->door = NULL;
+		tmp = (t_img *)vars->door->textures->frames[i];
+		free(tmp->mlx_img);
+		free(tmp);
+		i++;
 	}
+	free(vars->door->textures->frames);
+	free(vars->door->textures);
+	free(vars->door);
 }
 
 void	free_environment(t_vars *vars)
