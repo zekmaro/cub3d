@@ -57,21 +57,21 @@ void	free_sprites(t_vars *vars)
 {
 	if (!vars)
 		return ;
-	if (vars->player)
-	{
-		free_animated_sprite_if_exists(vars, &vars->player->gun);
-		free_animated_sprite_if_exists(vars, &vars->player->fire);
-	}
-	if (vars->door)
-	{
-		free_animated_sprite_if_exists(vars, &vars->door->textures);
-	}
-	free_texture_if_exists(vars, &vars->sprite_texture);
-	if (vars->sprites)
-	{
-		free(vars->sprites);
-		vars->sprites = NULL;
-	}
+	// if (vars->player)
+	// {
+	// 	free_animated_sprite_if_exists(vars, &vars->player->gun);
+	// 	free_animated_sprite_if_exists(vars, &vars->player->fire);
+	// }
+	// if (vars->door)
+	// {
+	// 	free_animated_sprite_if_exists(vars, &vars->door->textures);
+	// }
+	// free_texture_if_exists(vars, &vars->sprite_texture);
+	// if (vars->sprites)
+	// {
+	// 	free(vars->sprites);
+	// 	vars->sprites = NULL;
+	// }
 }
 
 void	free_vars_sprites(t_vars *vars)
