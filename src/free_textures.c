@@ -6,23 +6,22 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:48:15 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 22:06:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 01:17:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_texture_if_exists(t_vars *vars, t_img **texture)
+void	free_textures(t_vars *vars)
 {
-	if (*texture)
+	int	i;
+
+	i = 0;
+	while (i < 8)
 	{
-		if ((*texture)->mlx_img)
-		{
-			mlx_destroy_image(vars->mlx->mlx, (*texture)->mlx_img);
-			(*texture)->mlx_img = NULL;
-		}
-		free(*texture);
-		*texture = NULL;
+		free(vars->textures[i]->mlx_img);
+		free(vars->textures[i]);
+		i++;
 	}
 }
 
