@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/11 22:35:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:51:42 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ void	exit_with_error(t_vars *vars, char *error_message)
 
 void	free_imp_animations(t_vars *vars)
 {
-	int i = 0;
-	t_img *tmp;
+	int		i;
+	t_img	*tmp;
 
+	i = 0;
 	while (i < 3)
 	{
 		tmp = (t_img *)vars->imp_animation->attack->frames[i];
@@ -95,9 +96,10 @@ void	free_imp_animations(t_vars *vars)
 
 void	free_caco_animations(t_vars *vars)
 {
-	int i = 0;
-	t_img *tmp;
+	int		i;
+	t_img	*tmp;
 
+	i = 0;
 	while (i < 3)
 	{
 		tmp = (t_img *)vars->caco_animation->attack->frames[i];
@@ -142,8 +144,9 @@ void	free_caco_animations(t_vars *vars)
 
 void	free_textures(t_vars *vars)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (i < 8)
 	{
 		free(vars->textures[i]->mlx_img);
@@ -154,9 +157,10 @@ void	free_textures(t_vars *vars)
 
 void	free_gun(t_vars *vars)
 {
-	int i = 0;
-	t_img *tmp;
+	int		i;
+	t_img	*tmp;
 
+	i = 0;
 	while (i < 4)
 	{
 		tmp = (t_img *)vars->player->gun->frames[i];
@@ -170,9 +174,10 @@ void	free_gun(t_vars *vars)
 
 void	free_fire(t_vars *vars)
 {
-	int i = 0;
-	t_img *tmp;
+	int		i;
+	t_img	*tmp;
 
+	i = 0;
 	while (i < 2)
 	{
 		tmp = (t_img *)vars->player->fire->frames[i];
@@ -190,8 +195,6 @@ void	cleanup_vars(t_vars *vars)
 	free_caco_animations(vars);
 	free_enemy_list(vars);
 	free_textures(vars);
-	//free_sprites(vars);
-	//free_environment(vars);
 	free_doors(vars);
 	free_gun(vars);
 	free_fire(vars);
@@ -204,4 +207,3 @@ void	cleanup_vars(t_vars *vars)
 	free_vars_sprites(vars);
 	free_vars_zbuffer(vars);
 }
-//free_vars_doors(vars);
