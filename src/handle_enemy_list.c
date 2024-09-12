@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_enemy_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 14:56:55 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/12 17:30:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,47 @@ void	init_enemy_lists(t_vars *vars)
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
 }
 
+void	handle_enemy_death(t_enemy *enemy)
+{
+	if (enemy->current_animation == enemy->death \
+		&& enemy->current_animation->current_frame \
+		== enemy->death->frame_count - 1)
+	{
+		enemy->is_dead = 1;
+		enemy->center_x = -100;
+		enemy->center_y = -100;
+	}
+}
+
+void	handle_enemy_attack(t_enemy *enemy)
+{
+	if (enemy->current_animation == enemy->attack \
+		&& enemy->current_animation->current_frame \
+		== enemy->attack->frame_count - 1)
+	{
+		enemy->current_animation = enemy->move;
+	}
+}
+
+void	update_enemy(t_enemy *enemy, long delay)
+{
+	long	enemy_elapsed_time;
+
+	get_current_time(&enemy->time1);
+	enemy_elapsed_time = get_elapsed_time(&enemy->time0, &enemy->time1);
+	if (enemy_elapsed_time > delay)
+	{
+		handle_enemy_death(enemy);
+		update_sprite_frame(enemy->current_animation);
+		handle_enemy_attack(enemy);
+		enemy->time0 = enemy->time1;
+	}
+}
+
 void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 {
 	long	enemy_elapsed_time;
-	int		i;
+	int	i;
 
 	i = -1;
 	while (++i < size)
