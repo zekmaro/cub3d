@@ -49,10 +49,16 @@ int	shoot_entity(int button, int x, int y, t_vars *vars)
 		vars->player->fire_done = 0;
 		i = -1;
 		while (++i < vars->map->imp_list_size)
-			check_enemy_collision(vars, &vars->imp_list[i], 50);
+		{
+			if (!vars->imp_list[i].is_dead)
+				check_enemy_collision(vars, &vars->imp_list[i], 50);
+		}
 		i = -1;
 		while (++i < vars->map->caco_list_size)
-			check_enemy_collision(vars, &vars->caco_list[i], 20);
+		{
+			if (!vars->caco_list[i].is_dead)
+				check_enemy_collision(vars, &vars->caco_list[i], 20);
+		}
 	}
 	return (0);
 }

@@ -107,7 +107,7 @@ void	draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 }
 
 void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
-			int object_y, int scale)
+			int object_y, int scale, int current_frame)
 {
 	t_sprite_params			params;
 	t_sprite_calc_params	calc_params;
@@ -121,5 +121,5 @@ void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
 	calculate_transform(&draw_params, &calc_params);
 	calculate_sprite_params(vars, &calc_params, &params);
 	draw_sprite_stripe(vars, &params, &calc_params, \
-		sprite->frames[sprite->current_frame]);
+		sprite->frames[current_frame]);
 }
