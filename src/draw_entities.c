@@ -45,9 +45,9 @@ void	draw_and_update_entity(t_vars *vars, t_enemy *entity)
 			entity->center_x, entity->center_y, 50);
 		if (!entity->is_dead)
 			search_for_player_enemy(vars, entity);
-		// if (entity->detected_player)
-		// 	draw_dynamic_sprite(vars, entity->fire_ball, \
-		// 		entity->fire_ball_x, entity->fire_ball_y, 20);
+		if (entity->detected_player)
+			draw_dynamic_sprite(vars, entity->fire_ball, \
+				entity->fire_ball_x, entity->fire_ball_y, 20);
 	}
 }
 
