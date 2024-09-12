@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:00:29 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 01:03:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 13:43:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	is_caco(t_vars *vars, int y, int x)
 		&& abs(x - vars->caco->center_x) < 40);
 }
 
-int	is_wall(t_vars *vars, int y, int x)
+int	is_monster(t_vars *vars, int x, int y)
 {
-	return (vars->map->grid[y / vars->unit_size][x \
-		/ vars->unit_size] == '1');
+	return (x == vars->map->monster_x && y == vars->map->monster_y);
 }
