@@ -6,13 +6,13 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:44:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 22:02:57 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:49:06 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_animated_sprite(t_img *sprite)
+void	free_animated_sprite(t_vars *vars, t_img *sprite)
 {
 	int		i;
 	t_img	*tmp;
@@ -29,7 +29,7 @@ void	free_animated_sprite(t_img *sprite)
 					tmp = (t_img *)sprite->frames[i];
 					if (tmp->mlx_img)
 					{
-						free(tmp->mlx_img);
+						mlx_destroy_image(vars->mlx->mlx, tmp->mlx_img);
 						tmp->mlx_img = NULL;
 					}
 					free(sprite->frames[i]);
@@ -44,11 +44,11 @@ void	free_animated_sprite(t_img *sprite)
 	}
 }
 
-void	free_animated_sprite_if_exists(t_img **sprite)
+void	free_animated_sprite_if_exists(t_vars *vars, t_img **sprite)
 {
 	if (sprite && *sprite)
 	{
-		free_animated_sprite(*sprite);
+		free_animated_sprite(vars, *sprite);
 		*sprite = NULL;
 	}
 }
@@ -59,12 +59,12 @@ void	free_sprites(t_vars *vars)
 		return ;
 	if (vars->player)
 	{
-		free_animated_sprite_if_exists(&vars->player->gun);
-		free_animated_sprite_if_exists(&vars->player->fire);
+		free_animated_sprite_if_exists(vars, &vars->player->gun);
+		free_animated_sprite_if_exists(vars, &vars->player->fire);
 	}
 	if (vars->door)
 	{
-		free_animated_sprite_if_exists(&vars->door->textures);
+		free_animated_sprite_if_exists(vars, &vars->door->textures);
 	}
 	free_texture_if_exists(vars, &vars->sprite_texture);
 	if (vars->sprites)

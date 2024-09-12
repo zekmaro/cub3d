@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 21:21:49 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:49:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 
 	sprite->frame_count = frame_count;
 	sprite->current_frame = 0;
-	sprite->frames = malloc(sizeof(void *) * frame_count);
+	sprite->frames = malloc(sizeof(t_img *) * frame_count);
 	if (!sprite->frames)
 	{
 		exit_with_error(vars, "Failed to allocate memory for sprite frames");
@@ -31,14 +31,14 @@ void	load_animated_sprite(t_vars *vars, t_img *sprite, \
 	i = -1;
 	while (++i < frame_count)
 	{
-		sprite->frames[i] = mlx_xpm_file_to_image(vars->mlx->mlx, \
+		sprite->frames[i] = (t_img *) mlx_xpm_file_to_image(vars->mlx->mlx, \
 			(char *)file_paths[i], &width, &height);
 		if (!sprite->frames[i])
 		{
 			while (--i >= 0)
 			{
-				mlx_destroy_image(vars->mlx->mlx, sprite->frames[i]);
-				free(sprite->frames[i]);
+				tmp = (t_img *)sprite->frames[i];
+				mlx_destroy_image(vars->mlx->mlx, tmp->mlx_img);
 				sprite->frames[i] = NULL;
 			}
 			free(sprite->frames);

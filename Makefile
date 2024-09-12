@@ -6,14 +6,16 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/11 22:33:34 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/12 12:48:49 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	cub3D
 
 CC		:=	cc
-CFLAGS	:= -Wall -Wextra -Werror -g
+CFLAGS	:= -Wall -Wextra -Werror -g#3 -fsanitize=address,undefined,leak
+#LDFLAGS := -fsanitize=address,undefined,leak
+MLXFLAGS:= -lmlx -lXext -lX11 -lm
 
 # DIRECTORIES
 SRCDIR	:=	src
@@ -78,7 +80,8 @@ all		: $(NAME)
 
 $(NAME)	: $(OBJ_SRC) $(OBJ_GNL) cub3d.h
 	make -C libft all -j
-	$(CC) $(OBJ_SRC) $(OBJ_GNL) $(LIBS) -lmlx -lXext -lX11 -lm -o $(NAME)
+	$(CC) $(OBJ_SRC) $(OBJ_GNL) $(LIBS) $(MLXFLAGS) -o $(NAME)
+# $(LDFLAGS) -o $(NAME)
 
 clean	:
 	make -C libft clean -j
