@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/11 22:34:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:48:56 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -493,7 +493,6 @@ void		free_memory(char **arr);
 void		free_map(t_map *map);
 int			free_and_exit(t_vars *vars);
 void		free_vars_doors(t_vars *vars);
-void		free_animated_sprite(t_img *sprite);
 void		free_sprites(t_vars *vars);
 void		cleanup_vars(t_vars *vars);
 
@@ -518,8 +517,8 @@ void		free_vars_ray(t_vars *vars);
 void		exit_with_error(t_vars *vars, char *error_message);
 
 /* Free_sprites.c */
-void		free_animated_sprite(t_img *sprite);
-void		free_animated_sprite_if_exists(t_img **sprite);
+void		free_animated_sprite(t_vars *vars, t_img *sprite);
+void		free_animated_sprite_if_exists(t_vars *vars, t_img **sprite);
 void		free_sprites(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 
