@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/13 18:23:32 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/13 19:03:51 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC		:=	src/cub3d.c \
 			src/handle_mouse.c \
 			src/init_components.c \
 			src/init_environment.c \
+			src/init_enemy_sprites.c \
 			src/parsing.c \
 			src/map_utils.c \
 			src/time_utils.c \
