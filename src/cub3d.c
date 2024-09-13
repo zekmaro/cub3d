@@ -23,6 +23,7 @@ int	main_loop_hook(t_vars *vars)
 	//handle_player_damaged_time(vars);
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 300, vars->map->caco_list_size);
+	update_enemy_frames(vars->boss, 200);
 	search_for_player(vars);
 	act_detected_enemies(vars);
 	update_position(vars);
@@ -73,6 +74,8 @@ void	run_screen(t_vars *vars)
 	init_imp_animation(vars);
 	init_caco_animation(vars);
 	init_enemies(vars);
+	init_boss(vars);
+	setup_boss(vars, vars->boss);
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
 	mlx_hook(vars->mlx->win, 3, 1L << 1, key_up, vars);

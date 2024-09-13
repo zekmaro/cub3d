@@ -77,3 +77,33 @@ void	init_caco_animation(t_vars *vars)
 	vars->caco_animation->bullet = ft_calloc(sizeof(t_img), 1);
 	init_caco_sprite(vars, vars->caco_animation);
 }
+
+void	init_boss_sprite(t_vars *vars, t_animation *boss_animation)
+{
+	const char	*boss_move_frames[] = {"./assets/cydem_walk1.xpm", \
+		"./assets/cydem_walk2.xpm", "./assets/cydem_walk3.xpm", NULL};
+	const char	*boss_death_frames[] = {"./assets/cydem_dies1.xpm", \
+		"./assets/cydem_dies2.xpm", "./assets/cydem_dies3.xpm", \
+		"./assets/cydem_dies4.xpm", "./assets/cydem_dies5.xpm", NULL};
+	const char	*boss_attack_frames[] = {"./assets/cydem_atck1.xpm", \
+		"./assets/cydem_atck2.xpm", NULL};
+	//const char	*boss_fire_ball_frames[] = {"./assets/caco_fire1.xpm", NULL};
+
+	initialise_enemy_textures(vars, boss_animation->move, boss_move_frames);
+	initialise_enemy_textures(vars, boss_animation->death, boss_death_frames);
+	initialise_enemy_textures(vars, boss_animation->attack, boss_attack_frames);
+	//initialise_enemy_textures(vars, boss_animation->bullet, boss_fire_ball_frames);
+}
+
+void	init_cyber_demon_animation(t_vars *vars)
+{
+	t_animation	*boss_animation;
+
+	boss_animation = (t_animation *)(malloc(sizeof(t_animation)));
+	vars->boss_animation = boss_animation;
+	vars->boss_animation->move = ft_calloc(sizeof(t_img), 1);
+	vars->boss_animation->death = ft_calloc(sizeof(t_img), 1);
+	vars->boss_animation->attack = ft_calloc(sizeof(t_img), 1);
+	vars->boss_animation->bullet = ft_calloc(sizeof(t_img), 1);
+	init_boss_sprite(vars, vars->boss_animation);
+}

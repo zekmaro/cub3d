@@ -45,6 +45,11 @@ int	validate_line(char *line, int row, t_map *map)
 			map->player_dir = line[i];
 			line[i] = 'P';
 		}
+		else if(line[i] == 'B')
+		{
+			map->boss_x = i;
+			map->boss_y = row;
+		}
 		else if (line[i] == 'M')
 			map->imp_list_size++;
 		else if (line[i] == 'C')
