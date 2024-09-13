@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/13 01:21:48 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/13 02:33:44 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC		:=	src/cub3d.c \
 			src/free_gun_and_fire.c \
 			src/free_imp_animations.c \
 			src/free_caco_animations.c \
+			src/free_animated_frames.c \
 			src/handle_image.c \
 			src/handle_keys.c \
 			src/handle_mouse.c \

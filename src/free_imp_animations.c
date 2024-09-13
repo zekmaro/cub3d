@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:11:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 01:11:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 02:33:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,27 @@
 
 void	free_imp_animations(t_vars *vars)
 {
-	int		i;
-	t_img	*tmp;
-
-	i = 0;
-	while (i < 3)
+	if (vars->imp_animation == NULL)
+		return ;
+	if (vars->imp_animation->attack != NULL)
 	{
-		tmp = (t_img *)vars->imp_animation->attack->frames[i];
-		free(tmp->mlx_img);
-		free(tmp);
-		i++;
+		free_animated_frames((t_img **)vars->imp_animation->attack->frames, 3);
+		free(vars->imp_animation->attack);
 	}
-	free(vars->imp_animation->attack->frames);
-	i = 0;
-	free(vars->imp_animation->attack);
-	while (i < 4)
+	if (vars->imp_animation->move != NULL)
 	{
-		tmp = (t_img *)vars->imp_animation->move->frames[i];
-		free(tmp->mlx_img);
-		free(tmp);
-		i++;
+		free_animated_frames((t_img **)vars->imp_animation->move->frames, 4);
+		free(vars->imp_animation->move);
 	}
-	free(vars->imp_animation->move->frames);
-	i = 0;
-	free(vars->imp_animation->move);
-	while (i < 5)
+	if (vars->imp_animation->death != NULL)
 	{
-		tmp = (t_img *)vars->imp_animation->death->frames[i];
-		free(tmp->mlx_img);
-		free(tmp);
-		i++;
+		free_animated_frames((t_img **)vars->imp_animation->death->frames, 5);
+		free(vars->imp_animation->death);
 	}
-	free(vars->imp_animation->death->frames);
-	i = 0;
-	free(vars->imp_animation->death);
-	while (i < 2)
+	if (vars->imp_animation->bullet != NULL)
 	{
-		tmp = (t_img *)vars->imp_animation->bullet->frames[i];
-		free(tmp->mlx_img);
-		free(tmp);
-		i++;
+		free_animated_frames((t_img **)vars->imp_animation->bullet->frames, 2);
+		free(vars->imp_animation->bullet);
 	}
-	free(vars->imp_animation->bullet->frames);
-	free(vars->imp_animation->bullet);
 	free(vars->imp_animation);
 }

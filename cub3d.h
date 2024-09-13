@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 01:21:26 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 02:31:42 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -552,6 +552,9 @@ void		free_caco_animations(t_vars *vars);
 /* Free_gun_and_fire */
 void		free_gun(t_vars *vars);
 void		free_fire(t_vars *vars);
+
+/* Free_animation_frames.c */
+void		free_animated_frames(t_img **frames, int count);
 
 /* Free_vars.c */
 void		free_vars_map(t_vars *vars);
