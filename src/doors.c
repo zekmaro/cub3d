@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 17:45:13 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 02:53:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:36:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // 	while (i < vars->map->num_doors)
 // 	{
 // 		t_door *door = &vars->map->doors[i];
-// 		distance = sqrt(pow(player_x - door->center_x, 2) \
+// 		distance = sqrt(pow(player_x - door->center_x, 2)
 //			+ pow(player_y - door->center_y, 2));
 // 		if (distance < DOOR_PROXIMITY_THRESHOLD)
 // 		{

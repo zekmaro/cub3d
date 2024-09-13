@@ -6,20 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 02:37:04 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:31:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	initialise_enemy_textures(t_vars *vars, t_img *animation,
-							const char **frames)
-{
-	int	frame_count;
-
-	frame_count = count_frames(frames);
-	load_animated_sprite(vars, animation, frames, frame_count);
-}
 
 void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 			const char *file_path)
@@ -39,14 +30,24 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 		&sprite_texture->endian);
 	if (!sprite_texture->addr)
 	{
-		perror("Failed to get sprite texture data address");
-		free_and_exit(vars);
+		exit_with_error(vars, "Failed to get sprite texture data address");
 	}
 	sprite_texture->width = width;
 	sprite_texture->height = height;
 }
 
-void	initialise_sprites(t_vars *vars)
+void	allocate_sprite_memory(t_vars *vars, t_img **sprite, \
+			const char *error_message)
+{
+	*sprite = ft_calloc(sizeof(t_img), 1);
+	if (!*sprite)
+	{
+		perror(error_message);
+		free_and_exit(vars);
+	}
+}
+
+void	allocate_memory_for_sprites(t_vars *vars)
 {
 	vars->num_sprites = 1;
 	vars->sprites = ft_calloc(sizeof(t_sprite), vars->num_sprites);
@@ -55,44 +56,30 @@ void	initialise_sprites(t_vars *vars)
 		perror("Failed to allocate memory for sprites");
 		free_and_exit(vars);
 	}
-	const char *gun_frames[] \
-	= {
-		"./assets/gun1.xpm",
-		"./assets/gun2.xpm",
-		"./assets/gun3.xpm",
-		"./assets/gun4.xpm"
-	};
-	const char *fire_frames[] \
-	= {
-		"./assets/gunfire1.xpm",
-		"./assets/gunfire2.xpm",
-	};
-	const char *door_frames[] \
-	= {
-		"./assets/door0.xpm",
-		"./assets/door1.xpm",
-		"./assets/door2.xpm",
-		"./assets/door3.xpm",
-	};
-	vars->player->gun = ft_calloc(sizeof(t_img), 1);
-	if (!vars->player->gun)
-	{
-		perror("Failed to allocate memory for gun sprite");
-		free_and_exit(vars);
-	}
-	vars->player->fire = ft_calloc(sizeof(t_img), 1);
-	if (!vars->player->fire)
-	{
-		perror("Failed to allocate memory for fire sprite");
-		free_and_exit(vars);
-	}
-	vars->door->textures = ft_calloc(sizeof(t_img), 1);
-	if (!vars->door->textures)
-	{
-		perror("Failed to allocate memory for door textures");
-		free_and_exit(vars);
-	}
+}
+
+void	load_sprites(t_vars *vars)
+{
+	const char	*gun_frames[] = {"./assets/gun1.xpm", \
+		"./assets/gun2.xpm", "./assets/gun3.xpm", "./assets/gun4.xpm"};
+	const char	*fire_frames[] = {"./assets/gunfire1.xpm", \
+		"./assets/gunfire2.xpm"};
+	const char	*door_frames[] = {"./assets/door0.xpm", \
+		"./assets/door1.xpm", "./assets/door2.xpm", "./assets/door3.xpm"};
+
+	allocate_sprite_memory(vars, &vars->player->gun, \
+		"Failed to allocate memory for gun sprite");
+	allocate_sprite_memory(vars, &vars->player->fire, \
+		"Failed to allocate memory for fire sprite");
+	allocate_sprite_memory(vars, &vars->door->textures, \
+		"Failed to allocate memory for door textures");
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	load_animated_sprite(vars, vars->door->textures, door_frames, 4);
+}
+
+void	initialise_sprites(t_vars *vars)
+{
+	allocate_memory_for_sprites(vars);
+	load_sprites(vars);
 }
