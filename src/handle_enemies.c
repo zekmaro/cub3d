@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:40:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 01:03:01 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 02:52:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,13 @@ void	act_detected_enemies(t_vars *vars)
 	while (++i < vars->map->caco_list_size)
 		if (vars->caco_list[i].detected_player)
 			enemy_act(vars, &vars->caco_list[i]);
+}
+
+long	update_imp_time(t_vars *vars)
+{
+	long	elapsed_time;
+
+	get_current_time(&vars->imp->time1);
+	elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
+	return (elapsed_time);
 }

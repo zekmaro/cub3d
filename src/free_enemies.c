@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:51:57 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 00:57:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 02:48:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	free_caco_list(t_vars *vars)
 
 void	free_enemy_list(t_vars *vars)
 {
-	// free_imp_list(vars);
-	// free_caco_list(vars);
 	free(vars->caco_list);
 	free(vars->imp_list);
 }
