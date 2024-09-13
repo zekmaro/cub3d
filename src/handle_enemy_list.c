@@ -6,11 +6,25 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 22:46:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:07:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	cleanup_enemy_lists(t_vars *vars)
+{
+	if (vars->imp_list)
+	{
+		free(vars->imp_list);
+		vars->imp_list = NULL;
+	}
+	if (vars->caco_list)
+	{
+		free(vars->caco_list);
+		vars->caco_list = NULL;
+	}
+}
 
 void	init_enemy_lists(t_vars *vars)
 {
@@ -22,7 +36,7 @@ void	init_enemy_lists(t_vars *vars)
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
 	if (!vars->caco_list)
 	{
-		free(vars->imp_list);
+		cleanup_enemy_lists(vars);
 		exit_with_error(vars, "Failed to allocate memory for caco list");
 	}
 }
