@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/12 18:35:37 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 21:52:25 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 int	main_loop_hook(t_vars *vars)
 {
 	struct timeval	t;
-	//double			abc;
+
 	reset_mouse_to_center(vars);
 	get_current_time(&t);
-	//abc = (double)t.tv_sec + (double)t.tv_usec / 1000000;
 	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
@@ -37,8 +36,6 @@ int	main_loop_hook(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
 	get_current_time(&t);
-	//printf("diff: %1.12f\n", ((double)t.tv_sec
-	//	+ (double)t.tv_usec / 1000000) - abc);
 	return (0);
 }
 
