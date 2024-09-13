@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 16:40:36 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:23:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,8 +453,6 @@ void		calculate_sprite_params(t_vars *vars, t_sprite_calc_params \
 				*calc_params, t_sprite_params *params);
 void		calculate_transform(t_draw_sprite_params *draw_params, \
 				t_sprite_calc_params *calc_params);
-void		draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
-				t_sprite_calc_params *calc_params, t_img *tmp);
 void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
 				int object_y, int scale, int current_frame);
 
@@ -462,9 +460,11 @@ void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
 void		draw_sprites(t_vars *vars);
 void		calculate_draw_limits(t_vars *vars, t_sprite *sprite, \
 				t_draw_limits *limits);
-void		draw_sprites_stripe(t_vars *vars, t_sprite *sprite, int stripe, \
-				t_draw_limits *limits);
 int			draw_sprite(t_vars *vars);
+
+/* Draw_sprite_stripe.c */
+void		draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
+				t_sprite_calc_params *calc_params, t_img *tmp);
 
 /* Draw_environment.c */
 void		draw_floor(t_vars *vars);

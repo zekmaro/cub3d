@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:03:27 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 16:42:13 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:50:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,43 +63,6 @@ void	calculate_transform(t_draw_sprite_params *draw_params, \
 	calc_params->transform_y = inv_det * (-player_params.plane_y \
 		* sprite_x + player_params.plane_x * sprite_y);
 	calc_params->scale = draw_params->scale;
-}
-
-void	draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
-			t_sprite_calc_params *calc_params, t_img *tmp)
-{
-	int	stripe;
-	int	tex_x;
-	int	tex_y;
-	int	y;
-	int	d;
-	int	color;
-
-	stripe = params->draw_start_x - 1;
-	while (++stripe < params->draw_end_x)
-	{
-		tex_x = (int)(256 * (stripe - (-params->sprite_width / 2 \
-			+ params->sprite_screen_x)) * tmp->width \
-			/ params->sprite_width) / 256;
-		if (calc_params->transform_y > 0 && stripe > 0 \
-			&& stripe < vars->mlx->window_width \
-			&& calc_params->transform_y < vars->zbuffer[stripe])
-		{
-			y = params->draw_start_y - 1;
-			while (++y < params->draw_end_y)
-			{
-				d = (y - vars->mlx->window_height / 2 \
-					+ params->sprite_height / 2) * 256;
-				tex_y = ((d * tmp->height) / params->sprite_height) / 256;
-				color = get_texture_color(tmp, tex_x, tex_y);
-				if (color != -1)
-				{
-					put_pixel_to_image(vars, stripe, y + 50, color);
-					vars->zbuffer[stripe] = calc_params->transform_y;
-				}
-			}
-		}
-	}
 }
 
 void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
