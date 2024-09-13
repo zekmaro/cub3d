@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 19:03:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 21:32:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -408,6 +408,15 @@ typedef struct s_player_params
 	double	plane_x;
 }	t_player_params;
 
+typedef struct s_sprite_info
+{
+	t_img	*sprite;
+	int		object_x;
+	int		object_y;
+	int		scale;
+	int		current_frame;
+}			t_sprite_info;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -457,8 +466,7 @@ void		calculate_sprite_params(t_vars *vars, t_sprite_calc_params \
 				*calc_params, t_sprite_params *params);
 void		calculate_transform(t_draw_sprite_params *draw_params, \
 				t_sprite_calc_params *calc_params);
-void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
-				int object_y, int scale, int current_frame);
+void		draw_dynamic_sprite(t_vars *vars, t_sprite_info *sprite_info);
 
 /* Draw_sprite.c */
 void		draw_sprites(t_vars *vars);
