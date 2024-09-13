@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 14:18:13 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:40:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,6 +399,14 @@ typedef struct s_ray_par
 	double	dir_y;
 	double	angle;
 }	t_ray_par;
+
+typedef struct s_player_params
+{
+	double	dir_y;
+	double	dir_x;
+	double	plane_y;
+	double	plane_x;
+}	t_player_params;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
