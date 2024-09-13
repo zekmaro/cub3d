@@ -32,8 +32,8 @@ int	validate_line(char *line, int row, t_map *map)
 {
 	int	i;
 
-	i = 0;
-	while (line[i] && line[i] != '\n')
+	i = -1;
+	while (line[++i] && line[i] != '\n')
 	{
 		if (line[i] == 'N' || line[i] == 'S' \
 			|| line[i] == 'W' || line[i] == 'E')
@@ -46,24 +46,13 @@ int	validate_line(char *line, int row, t_map *map)
 			line[i] = 'P';
 		}
 		else if (line[i] == 'M')
-		{
 			map->imp_list_size++;
-		}
 		else if (line[i] == 'C')
-		{
 			map->caco_list_size++;
-		}
 		else if (line[i] == 'D')
-		{
-			if (map->num_doors >= MAX_DOORS)
-				return (printf("Too many doors in the map\n"), 0);
-			map->door_x = i;
-			map->door_y = row;
 			map->num_doors++;
-		}
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
 			return (printf("world\n"), 0);
-		i++;
 	}
 	if (i > map->width)
 		map->width = i;
