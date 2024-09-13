@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:14:05 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/13 17:58:05 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/13 18:39:58 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	init_caco_animation(t_vars *vars)
 void	init_boss_sprite(t_vars *vars, t_animation *boss_animation)
 {
 	const char	*boss_move_frames[] = {"./assets/cydem_walk1.xpm", \
-		"./assets/cydem_walk2.xpm", "./assets/cydem_walk3.xpm", 
+		"./assets/cydem_walk2.xpm", "./assets/cydem_walk3.xpm", \
 		"./assets/cydem_walk4.xpm", NULL};
 	const char	*boss_death_frames[] = {"./assets/cydem_dies1.xpm", \
 		"./assets/cydem_dies2.xpm", "./assets/cydem_dies3.xpm", \
-		"./assets/cydem_dies4.xpm", "./assets/cydem_dies5.xpm", 
-		"./assets/cydem_dies6.xpm", "./assets/cydem_dies7.xpm",
+		"./assets/cydem_dies4.xpm", "./assets/cydem_dies5.xpm", \
+		"./assets/cydem_dies6.xpm", "./assets/cydem_dies7.xpm", \
 		"./assets/cydem_dies8.xpm", "./assets/cydem_dies9.xpm", NULL};
 	const char	*boss_attack_frames[] = {"./assets/cydem_atck1.xpm", \
 		"./assets/cydem_atck2.xpm", NULL};
@@ -95,7 +95,8 @@ void	init_boss_sprite(t_vars *vars, t_animation *boss_animation)
 	initialise_enemy_textures(vars, boss_animation->move, boss_move_frames);
 	initialise_enemy_textures(vars, boss_animation->death, boss_death_frames);
 	initialise_enemy_textures(vars, boss_animation->attack, boss_attack_frames);
-	initialise_enemy_textures(vars, boss_animation->bullet, boss_fire_ball_frames);
+	initialise_enemy_textures(vars, boss_animation->bullet, \
+		boss_fire_ball_frames);
 }
 
 void	init_cyber_demon_animation(t_vars *vars)
