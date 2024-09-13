@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/12 17:32:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:26:58 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void	initialise_mlx(t_vars *vars)
 	mlx = (t_mlx *)(malloc(sizeof(t_mlx)));
 	if (!mlx)
 	{
-		vars->mlx = NULL;
 		exit_with_error(vars, "Failed to allocate memory for mlx");
-		exit(EXIT_FAILURE);
+		return ;
 	}
 	ft_bzero(mlx, sizeof(t_mlx));
 	mlx->window_height = 1080;
@@ -34,13 +33,11 @@ void	initialise_line(t_vars *vars)
 {
 	t_line	*line;
 
-	line = NULL;
 	line = (t_line *)(malloc(sizeof(t_line)));
 	if (!line)
 	{
-		vars->line = NULL;
 		exit_with_error(vars, "Failed to allocate memory for line");
-		exit(EXIT_FAILURE);
+		return ;
 	}
 	ft_bzero(line, sizeof(t_line));
 	line->src_x = 1000;
@@ -52,13 +49,11 @@ void	initialise_image(t_vars *vars)
 {
 	t_img	*image;
 
-	image = NULL;
 	image = (t_img *)(malloc(sizeof(t_img)));
 	if (!image)
 	{
-		vars->image = NULL;
 		exit_with_error(vars, "Failed to allocate memory for image");
-		exit(EXIT_FAILURE);
+		return ;
 	}
 	ft_bzero(image, sizeof(t_img));
 	vars->image = image;
@@ -68,13 +63,11 @@ void	initialise_player(t_vars *vars)
 {
 	t_player	*player;
 
-	player = NULL;
 	player = (t_player *)(malloc(sizeof(t_player)));
 	if (!player)
 	{
-		vars->player = NULL;
 		exit_with_error(vars, "Failed to allocate memory for player");
-		exit(EXIT_FAILURE);
+		return ;
 	}
 	ft_bzero(player, sizeof(t_player));
 	player->player_size = 8;
@@ -85,13 +78,11 @@ void	initialise_ray(t_vars *vars)
 {
 	t_ray	*ray;
 
-	ray = NULL;
 	ray = (t_ray *)(malloc(sizeof(t_ray)));
 	if (!ray)
 	{
-		vars->ray = NULL;
 		exit_with_error(vars, "Failed to allocate memory for ray");
-		exit(EXIT_FAILURE);
+		return ;
 	}
 	ft_bzero(ray, sizeof(t_ray));
 	vars->ray = ray;
