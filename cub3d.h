@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 02:31:42 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:25:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,8 +527,6 @@ void		free_vars_ray(t_vars *vars);
 void		exit_with_error(t_vars *vars, char *error_message);
 
 /* Free_sprites.c */
-void		free_animated_sprite(t_vars *vars, t_img *sprite);
-void		free_animated_sprite_if_exists(t_vars *vars, t_img **sprite);
 void		free_sprites(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 
