@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:44:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/12 12:49:06 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 02:36:49 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,6 @@ void	free_sprites(t_vars *vars)
 {
 	if (!vars)
 		return ;
-	// if (vars->player)
-	// {
-	// 	free_animated_sprite_if_exists(vars, &vars->player->gun);
-	// 	free_animated_sprite_if_exists(vars, &vars->player->fire);
-	// }
-	// if (vars->door)
-	// {
-	// 	free_animated_sprite_if_exists(vars, &vars->door->textures);
-	// }
-	// free_texture_if_exists(vars, &vars->sprite_texture);
-	// if (vars->sprites)
-	// {
-	// 	free(vars->sprites);
-	// 	vars->sprites = NULL;
-	// }
 }
 
 void	free_vars_sprites(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/12 18:35:12 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 02:35:49 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,23 @@
 void	init_enemy_lists(t_vars *vars)
 {
 	vars->imp_list = ft_calloc(sizeof(t_enemy), vars->map->imp_list_size);
+	if (!vars->imp_list)
+	{
+		exit_with_error(vars, "Failed to allocate memory for imp list");
+		exit(EXIT_FAILURE);
+	}
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
+	if (!vars->caco_list)
+	{
+		exit_with_error(vars, "Failed to allocate memory for caco list");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	update_sprite_frame_enemy(t_enemy *enemy)
 {
-	enemy->current_frame = (enemy->current_frame + 1) % enemy->current_animation->frame_count;
+	enemy->current_frame = (enemy->current_frame + 1) \
+		% enemy->current_animation->frame_count;
 }
 
 void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
@@ -38,7 +49,9 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 		{
 			if (enemy_list[i].health == 0)
 			{
-				printf("current frame %d index %d action %p\n", enemy_list[i].current_frame, i,  enemy_list[i].current_animation);
+				printf("current frame %d index %d action %p\n", \
+					enemy_list[i].current_frame, i,  \
+					enemy_list[i].current_animation);
 			}
 			if (enemy_list[i].current_animation == enemy_list[i].death
 				&& enemy_list[i].current_frame
