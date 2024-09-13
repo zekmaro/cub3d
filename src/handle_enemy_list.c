@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 18:22:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 22:46:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ void	init_enemy_lists(t_vars *vars)
 	if (!vars->imp_list)
 	{
 		exit_with_error(vars, "Failed to allocate memory for imp list");
-		exit(EXIT_FAILURE);
 	}
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
 	if (!vars->caco_list)
 	{
+		free(vars->imp_list);
 		exit_with_error(vars, "Failed to allocate memory for caco list");
-		exit(EXIT_FAILURE);
 	}
 }
 
