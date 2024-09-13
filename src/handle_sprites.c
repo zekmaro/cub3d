@@ -6,56 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/12 12:49:11 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:05:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	load_animated_sprite(t_vars *vars, t_img *sprite, \
-			const char **file_paths, int frame_count)
-{
-	int		width;
-	int		height;
-	t_img	*tmp;
-	int		i;
-
-	sprite->frame_count = frame_count;
-	sprite->current_frame = 0;
-	sprite->frames = malloc(sizeof(t_img *) * frame_count);
-	if (!sprite->frames)
-	{
-		exit_with_error(vars, "Failed to allocate memory for sprite frames");
-		exit(EXIT_FAILURE);
-	}
-	i = -1;
-	while (++i < frame_count)
-	{
-		sprite->frames[i] = (t_img *) mlx_xpm_file_to_image(vars->mlx->mlx, \
-			(char *)file_paths[i], &width, &height);
-		if (!sprite->frames[i])
-		{
-			while (--i >= 0)
-			{
-				tmp = (t_img *)sprite->frames[i];
-				mlx_destroy_image(vars->mlx->mlx, tmp->mlx_img);
-				sprite->frames[i] = NULL;
-			}
-			free(sprite->frames);
-			sprite->frames = NULL;
-			exit_with_error(vars, "Failed to load sprite frame");
-			exit(EXIT_FAILURE);
-		}
-		tmp = (t_img *)sprite->frames[i];
-		tmp->addr = mlx_get_data_addr(\
-			tmp, \
-			&tmp->bits_per_pixel, \
-			&tmp->line_len, \
-			&tmp->endian);
-		tmp->width = width;
-		tmp->height = height;
-	}
-}
 
 void	update_sprite_frame(t_img *sprite)
 {
@@ -116,15 +71,3 @@ void	sort_sprites(t_vars *vars)
 		}
 	}
 }
-// void	put_enemy_on_screen(t_vars *vars)
-// {
-// 	int	screen_x;
-// 	int	screen_y;
-//
-// 	screen_x = (vars->map->monster_x * vars->unit_size) + vars->unit_size / 2;
-// 	screen_y = (vars->map->monster_y * vars->unit_size) + vars->unit_size / 2;
-// 	vars->animated_sprite->current_frame_ptr = 
-// 		vars->animated_sprite->frames[vars->animated_sprite->current_frame];
-// 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, 
-// 		vars->animated_sprite->current_frame_ptr, screen_x, screen_y);
-// }

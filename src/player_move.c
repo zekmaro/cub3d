@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:17:29 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 14:55:35 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/13 03:03:07 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,36 +58,45 @@ void	update_position(t_vars *vars)
 		vars->player->angle += M_PI / 45;
 }
 
+void	update_ray_position(t_ray_par *ray)
+{
+	ray->dir_x += cos(ray->angle);
+	ray->dir_y += sin(ray->angle);
+}
+
+int	check_collision(t_vars *vars, t_enemy *enemy, t_ray_par *ray)
+{
+	int	enemy_flag;
+
+	enemy_flag = 0;
+	while (!is_wall(vars, ray->dir_y, ray->dir_x) && !enemy_flag)
+	{
+		update_ray_position(ray);
+		enemy_flag = is_enemy(enemy, ray->dir_y, ray->dir_x);
+	}
+	return (enemy_flag);
+}
+
 void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 {
-	double	ray_x;
-	double	ray_y;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	ray_angle;
-	int		enemy_flag;
+	t_ray_par	ray;
+	int			enemy_flag;
 
-	ray_angle = vars->player->angle;
-	ray_x = vars->player->center_x;
-	ray_y = vars->player->center_y;
-	ray_dir_x = ray_x;
-	ray_dir_y = ray_y;
-	enemy_flag = 0;
-	while (!is_wall(vars, ray_dir_y, ray_dir_x) && !enemy_flag)
-	{
-		ray_dir_x += cos(ray_angle);
-		ray_dir_y += sin(ray_angle);
-		enemy_flag = is_enemy(enemy, ray_dir_y, ray_dir_x);
-	}
+	ray.x = vars->player->center_x;
+	ray.y = vars->player->center_y;
+	ray.dir_x = ray.x;
+	ray.dir_y = ray.y;
+	ray.angle = vars->player->angle;
+	enemy_flag = check_collision(vars, enemy, &ray);
 	if (enemy_flag)
 	{
-		//system("aplay ./assets/imp_pain.wav -q &");
+		system("aplay ./assets/imp_pain.wav -q &");
 		enemy->health -= damage;
 	}
 	if (enemy->health == 0)
 	{
-		// if (!vars->imp->is_dead)
-		// 	system("aplay ./assets/imp_death.wav -q &");
+		if (!vars->imp->is_dead)
+			system("aplay ./assets/imp_death.wav -q &");
 		enemy->current_animation = enemy->death;
 		enemy->current_frame = 0;
 		enemy->health -= 10;

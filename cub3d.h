@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/12 12:48:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:18:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,10 +268,10 @@ typedef struct s_enemy
 	t_img			*attack;
 	t_img			*current_animation;
 	int				current_frame;
-	int	fire_ball_x;
-	int	fire_ball_y;
-	int	fire_delta_x;
-	int	fire_delta_y;
+	int				fire_ball_x;
+	int				fire_ball_y;
+	int				fire_delta_x;
+	int				fire_delta_y;
 	t_img			*fire_ball;
 	double			angle;
 	struct timeval	time0;
@@ -291,7 +291,7 @@ typedef struct s_vars
 	t_animation		*imp_animation;
 	t_enemy			*caco;
 	t_enemy			*caco_list;
-	t_animation 	*caco_animation;
+	t_animation		*caco_animation;
 	t_ray			*ray;
 	t_door			*door;
 	int				minimap_update_x;
@@ -387,6 +387,15 @@ typedef struct s_draw_limits
 	int	draw_end_x;
 }	t_draw_limits;
 
+typedef struct s_ray_par
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	angle;
+}	t_ray_par;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -438,8 +447,8 @@ void		calculate_transform(t_draw_sprite_params *draw_params, \
 				t_sprite_calc_params *calc_params);
 void		draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 				t_sprite_calc_params *calc_params, t_img *tmp);
-void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
-			int object_y, int scale, int current_frame);
+void		draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
+				int object_y, int scale, int current_frame);
 
 /* Draw_sprite.c */
 void		draw_sprites(t_vars *vars);
@@ -518,13 +527,11 @@ void		free_vars_ray(t_vars *vars);
 void		exit_with_error(t_vars *vars, char *error_message);
 
 /* Free_sprites.c */
-void		free_animated_sprite(t_vars *vars, t_img *sprite);
-void		free_animated_sprite_if_exists(t_vars *vars, t_img **sprite);
 void		free_sprites(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 
 /* Free_textures.c */
-void		free_texture_if_exists(t_vars *vars, t_img **texture);
+void		free_textures(t_vars *vars);
 void		free_vars_door_textures(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
 
@@ -533,6 +540,19 @@ void		free_enemy_list(t_vars *vars);
 void		free_enemies(t_vars *vars);
 void		free_vars_imp(t_vars *vars);
 void		free_vars_caco(t_vars *vars);
+
+/* Free_imp_animations.c */
+void		free_imp_animations(t_vars *vars);
+
+/* Free_caco_animations.c */
+void		free_caco_animations(t_vars *vars);
+
+/* Free_gun_and_fire */
+void		free_gun(t_vars *vars);
+void		free_fire(t_vars *vars);
+
+/* Free_animation_frames.c */
+void		free_animated_frames(t_img **frames, int count);
 
 /* Free_vars.c */
 void		free_vars_map(t_vars *vars);
@@ -606,26 +626,31 @@ int			get_texture_color(t_img *texture, int x, int y);
 long		get_elapsed_time(struct timeval *start, struct timeval *end);
 void		get_current_time(struct timeval *time);
 
-/* Raycast.c */
-void		cast_ray(t_vars *vars, int ray_id);
-void		raycast(t_vars *vars);
-void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \
-				int *tex_x);
-int			is_monster(t_vars *vars, int x, int y);
-
 /* Handle_sprites.c */
-void		load_animated_sprite(t_vars *vars, t_img *sprite, \
-				const char **file_paths, int frame_count);
 void		update_sprite_frame(t_img *sprite);
 void		calculate_sprite_distances(t_vars *vars);
 void		project_sprite(t_vars *vars, t_sprite *sprite);
 void		sort_sprites(t_vars *vars);
+
+/* Load_animated_sprite.c */
+void		cleanup_sprite_frames(t_vars *vars, t_img **frames, \
+				int frame_count);
+t_img		*load_sprite_frame(t_vars *vars, const char *file_path, \
+				int *width, int *height);
+void		load_animated_sprite(t_vars *vars, t_img *sprite, \
+				const char **file_paths, int frame_count);
 
 /* Doors */
 int			is_door(t_vars *vars, int x, int y);
 void		open_door(t_vars *vars, int x, int y);
 void		close_door(t_vars *vars, int x, int y);
 void		toggle_door(t_vars *vars, int x, int y);
+
+/* Ray_drawing */
+void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \
+				int *tex_x);
+t_tex_typ	define_texture_type(t_vars *vars);
+void		draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index);
 
 /* Ray_handlers.c */
 void		handle_monster(t_vars *vars, int ray_id, int y, int color);
@@ -635,13 +660,37 @@ void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
 
+/* Raycasting.c */
+void		cast_ray(t_vars *vars, int ray_id);
+void		raycast(t_vars *vars);
+
+int			is_monster(t_vars *vars, int x, int y);
+
+/* Is_entity.c */
+int			is_player(t_vars *vars, int y, int x);
+int			is_enemy(t_enemy *enemy, int y, int x);
+int			is_imp(t_vars *vars, int y, int x);
+int			is_caco(t_vars *vars, int y, int x);
+int			is_monster(t_vars *vars, int x, int y);
+
+/* Is_construction.c */
+int			is_wall(t_vars *vars, int y, int x);
+int			is_door(t_vars *vars, int y, int x);
+
 void		draw_player_damaged(t_vars *vars);
 void		draw_door(t_vars *vars);
-void		init_imp_sprites(t_vars *vars, t_enemy *imp);
 int			is_enemy(t_enemy *enemy, int y, int x);
-void		init_caco_sprites(t_vars *vars, t_enemy *caco);
 int			functioin(t_vars *vars);
 
-void	init_imp_animation(t_vars *vars);
-void	init_caco_animation(t_vars *vars);
+/* Init_animations.c */
+void		init_imp_sprites(t_vars *vars, t_enemy *imp);
+void		init_caco_sprites(t_vars *vars, t_enemy *caco);
+void		init_imp_animation(t_vars *vars);
+void		init_caco_animation(t_vars *vars);
+
+/* Init_enemy.c */
+void		init_imp(t_vars *vars, int i, int j, int *counter_imp);
+void		init_caco(t_vars *vars, int i, int j, int *counter_caco);
+void		init_enemies(t_vars *vars);
+
 #endif // CUB3D_H

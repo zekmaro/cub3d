@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_enemies.c                                     :+:      :+:    :+:   */
+/*   is_construction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 21:51:57 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 02:48:02 by iberegsz         ###   ########.fr       */
+/*   Created: 2024/09/12 13:42:14 by iberegsz          #+#    #+#             */
+/*   Updated: 2024/09/12 13:43:28 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_imp_list(t_vars *vars)
+int	is_wall(t_vars *vars, int y, int x)
 {
-	if (vars->imp_list)
-		free(vars->imp_list);
+	return (vars->map->grid[y / vars->unit_size][x \
+		/ vars->unit_size] == '1');
 }
 
-void	free_caco_list(t_vars *vars)
+int	is_door(t_vars *vars, int y, int x)
 {
-	if (vars->caco_list)
-		free(vars->caco_list);
-}
-
-void	free_enemy_list(t_vars *vars)
-{
-	free(vars->caco_list);
-	free(vars->imp_list);
+	return (vars->map->grid[y / vars->unit_size][x \
+		/ vars->unit_size] == 'D');
 }

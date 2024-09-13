@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:19:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 22:10:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 03:03:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	free_vars_image(t_vars *vars)
 {
 	if (vars->image->mlx_img)
-	{
-		// free_vars_textures(vars);
 		mlx_destroy_image(vars->mlx->mlx, vars->image->mlx_img);
-	}
 	free(vars->image);
 	vars->image = NULL;
 }

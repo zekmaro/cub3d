@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_enemies.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:40:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 14:59:05 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/13 02:52:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	init_enemies(t_vars *vars)
-{
-	int	i;
-	int	j;
-	int	counter_imp;
-	int	counter_caco;
-
-	counter_imp = 0;
-	counter_caco = 0;
-	i = -1;
-	while (vars->map->grid[++i])
-	{
-		j = -1;
-		while (vars->map->grid[i][++j])
-		{
-			if (vars->map->grid[i][j] == 'M')
-			{
-				vars->imp_list[counter_imp].grid_x = j;
-				vars->imp_list[counter_imp].grid_y = i;
-				setup_imp(vars, &vars->imp_list[counter_imp]);
-				counter_imp++;
-			}
-			else if (vars->map->grid[i][j] == 'C')
-			{
-				vars->caco_list[counter_caco].grid_x = j;
-				vars->caco_list[counter_caco].grid_y = i;
-				setup_caco(vars, &vars->caco_list[counter_caco]);
-				counter_caco++;
-			}
-		}
-	}
-}
 
 void	enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector)
 {
@@ -111,4 +78,13 @@ void	act_detected_enemies(t_vars *vars)
 	while (++i < vars->map->caco_list_size)
 		if (vars->caco_list[i].detected_player)
 			enemy_act(vars, &vars->caco_list[i]);
+}
+
+long	update_imp_time(t_vars *vars)
+{
+	long	elapsed_time;
+
+	get_current_time(&vars->imp->time1);
+	elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
+	return (elapsed_time);
 }

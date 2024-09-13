@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_entities.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/11 14:48:47 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/13 03:03:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_minimap(t_vars *vars)
 			if (vars->map->grid[i][j] == '1')
 				draw_square(vars, vars->line->x0, vars->line->y0, PURPLE);
 			else if (vars->map->grid[i][j] == 'D')
-				draw_square(vars, vars->line->x0, vars->line->y0, YELLOW);
+				draw_square(vars, vars->line->x0, vars->line->y0, GRAY);
 			else
 				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
 		}
@@ -41,7 +41,6 @@ void	draw_and_update_entity(t_vars *vars, t_enemy *entity)
 {
 	if (!entity->is_dead)
 	{
-		//printf("entity->current_frame %d\n", entity->current_frame);
 		draw_dynamic_sprite(vars, entity->current_animation, \
 			entity->center_x, entity->center_y, 50, entity->current_frame);
 		if (!entity->is_dead)

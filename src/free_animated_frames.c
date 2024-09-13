@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_enemies.c                                     :+:      :+:    :+:   */
+/*   free_animated_frames.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 21:51:57 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 02:48:02 by iberegsz         ###   ########.fr       */
+/*   Created: 2024/09/13 02:15:59 by iberegsz          #+#    #+#             */
+/*   Updated: 2024/09/13 02:34:26 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_imp_list(t_vars *vars)
+void	free_animated_frames(t_img **frames, int count)
 {
-	if (vars->imp_list)
-		free(vars->imp_list);
-}
+	int		i;
+	t_img	*tmp;
 
-void	free_caco_list(t_vars *vars)
-{
-	if (vars->caco_list)
-		free(vars->caco_list);
-}
-
-void	free_enemy_list(t_vars *vars)
-{
-	free(vars->caco_list);
-	free(vars->imp_list);
+	if (frames == NULL)
+		return ;
+	i = 0;
+	while (i < count)
+	{
+		tmp = frames[i];
+		if (tmp != NULL)
+		{
+			if (tmp->mlx_img != NULL)
+				free(tmp->mlx_img);
+			free(tmp);
+		}
+		i++;
+	}
+	free(frames);
 }

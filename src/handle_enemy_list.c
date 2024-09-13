@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_enemy_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 14:56:55 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/13 02:52:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,23 @@
 void	init_enemy_lists(t_vars *vars)
 {
 	vars->imp_list = ft_calloc(sizeof(t_enemy), vars->map->imp_list_size);
+	if (!vars->imp_list)
+	{
+		exit_with_error(vars, "Failed to allocate memory for imp list");
+		exit(EXIT_FAILURE);
+	}
 	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
+	if (!vars->caco_list)
+	{
+		exit_with_error(vars, "Failed to allocate memory for caco list");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	update_sprite_frame_enemy(t_enemy *enemy)
 {
-	enemy->current_frame = (enemy->current_frame + 1) % enemy->current_animation->frame_count;
+	enemy->current_frame = (enemy->current_frame + 1) \
+		% enemy->current_animation->frame_count;
 }
 
 void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
@@ -36,16 +47,10 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 			&enemy_list[i].time1);
 		if (!enemy_list[i].is_dead && enemy_elapsed_time > delay)
 		{
-			if (enemy_list[i].health == 0)
-			{
-				printf("current frame %d index %d action %p\n", enemy_list[i].current_frame, i,  enemy_list[i].current_animation);
-			}
 			if (enemy_list[i].current_animation == enemy_list[i].death
 				&& enemy_list[i].current_frame
 				== enemy_list[i].current_animation->frame_count - 1)
-			{
 				enemy_list[i].is_dead = 1;
-			}
 			if (enemy_list[i].current_animation \
 				== enemy_list[i].attack
 				&& enemy_list[i].current_frame \
@@ -55,15 +60,6 @@ void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
 			enemy_list[i].time0 = enemy_list[i].time1;
 		}
 	}
-}
-
-long	update_imp_time(t_vars *vars)
-{
-	long	elapsed_time;
-
-	get_current_time(&vars->imp->time1);
-	elapsed_time = get_elapsed_time(&vars->imp->time0, &vars->imp->time1);
-	return (elapsed_time);
 }
 
 void	setup_imp(t_vars *vars, t_enemy *imp)

@@ -6,38 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 13:30:12 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/12 13:45:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-t_tex_typ	define_texture_type(t_vars *vars)
-{
-	int	map_x;
-	int	map_y;
-	int	dx;
-	int	dy;
-
-	map_x = (int)vars->ray->ray_x / vars->unit_size;
-	map_y = (int)vars->ray->ray_y / vars->unit_size;
-	if (vars->map->grid[map_y][map_x] == '1')
-	{
-		dx = (int)vars->ray->last_ray_x / vars->unit_size - map_x;
-		dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
-		if (dy == 1)
-			return (TEXTURE_NORTH);
-		else if (dy == -1)
-			return (TEXTURE_SOUTH);
-		else if (dx == 1)
-			return (TEXTURE_WEST);
-		else if (dx == -1)
-			return (TEXTURE_EAST);
-	}
-	else if (vars->map->grid[map_y][map_x] == 'D')
-		return (TEXTURE_DOOR0);
-	return (TEXTURE_NONE);
-}
 
 void	get_ray_target_coords(t_vars *vars)
 {

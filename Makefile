@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/12 12:48:49 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/13 14:18:33 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,10 @@ SRC		:=	src/cub3d.c \
 			src/free_sprites.c \
 			src/free_textures.c \
 			src/free_enemies.c \
+			src/free_gun_and_fire.c \
+			src/free_imp_animations.c \
+			src/free_caco_animations.c \
+			src/free_animated_frames.c \
 			src/handle_image.c \
 			src/handle_keys.c \
 			src/handle_mouse.c \
@@ -59,6 +63,7 @@ SRC		:=	src/cub3d.c \
 			src/draw_dynamic_sprite.c \
 			src/draw_sprites.c \
 			src/is_entity.c \
+			src/is_construction.c \
 			src/init_textures.c \
 			src/init_sprites.c \
 			src/player_move.c \
@@ -66,6 +71,8 @@ SRC		:=	src/cub3d.c \
 			src/handle_enemies.c \
 			src/handle_enemy_list.c \
 			src/init_animations.c \
+			src/init_enemies.c \
+			src/load_animated_sprite.c \
 
 # LIBS 
 LIBS	:= libft/libft.a

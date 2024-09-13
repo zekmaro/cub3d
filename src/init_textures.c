@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:12:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 01:16:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:31:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,13 @@ void	initialise_textures(t_vars *vars)
 	load_texture(vars, TEXTURE_DOOR1, "./assets/door1.xpm");
 	load_texture(vars, TEXTURE_DOOR2, "./assets/door2.xpm");
 	load_texture(vars, TEXTURE_DOOR3, "./assets/door3.xpm");
+}
+
+void	initialise_enemy_textures(t_vars *vars, t_img *animation,
+							const char **frames)
+{
+	int	frame_count;
+
+	frame_count = count_frames(frames);
+	load_animated_sprite(vars, animation, frames, frame_count);
 }
