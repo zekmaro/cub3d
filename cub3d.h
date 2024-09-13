@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 12:25:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:18:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -627,12 +627,19 @@ long		get_elapsed_time(struct timeval *start, struct timeval *end);
 void		get_current_time(struct timeval *time);
 
 /* Handle_sprites.c */
-void		load_animated_sprite(t_vars *vars, t_img *sprite, \
-				const char **file_paths, int frame_count);
 void		update_sprite_frame(t_img *sprite);
 void		calculate_sprite_distances(t_vars *vars);
 void		project_sprite(t_vars *vars, t_sprite *sprite);
 void		sort_sprites(t_vars *vars);
+
+
+/* Load_animated_sprite.c */
+void		cleanup_sprite_frames(t_vars *vars, t_img **frames, \
+				int frame_count);
+t_img		*load_sprite_frame(t_vars *vars, const char *file_path, \
+				int *width, int *height);
+void		load_animated_sprite(t_vars *vars, t_img *sprite, \
+				const char **file_paths, int frame_count);
 
 /* Doors */
 int			is_door(t_vars *vars, int x, int y);
