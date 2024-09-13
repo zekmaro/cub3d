@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:03:27 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 16:50:33 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 21:30:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,19 @@ void	calculate_transform(t_draw_sprite_params *draw_params, \
 	calc_params->scale = draw_params->scale;
 }
 
-void	draw_dynamic_sprite(t_vars *vars, t_img *sprite, int object_x, \
-			int object_y, int scale, int current_frame)
+void	draw_dynamic_sprite(t_vars *vars, t_sprite_info *sprite_info)
 {
 	t_sprite_params			params;
 	t_sprite_calc_params	calc_params;
 	t_draw_sprite_params	draw_params;
 
 	draw_params.vars = vars;
-	draw_params.sprite = sprite;
-	draw_params.object_x = object_x;
-	draw_params.object_y = object_y;
-	draw_params.scale = scale;
+	draw_params.sprite = sprite_info->sprite;
+	draw_params.object_x = sprite_info->object_x;
+	draw_params.object_y = sprite_info->object_y;
+	draw_params.scale = sprite_info->scale;
 	calculate_transform(&draw_params, &calc_params);
 	calculate_sprite_params(vars, &calc_params, &params);
 	draw_sprite_stripe(vars, &params, &calc_params, \
-		sprite->frames[current_frame]);
+		sprite_info->sprite->frames[sprite_info->current_frame]);
 }
