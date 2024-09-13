@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:38:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 13:56:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 03:03:46 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	shoot_entity(int button, int x, int y, t_vars *vars)
 	(void)y;
 	if (button == MOUSE_CLICK_LEFT && !vars->player->shoot)
 	{
-		// system("aplay ./assets/gunshot.wav -q &");
+		system("aplay ./assets/gunshot.wav -q &");
 		vars->player->shoot = 1;
 		vars->player->fire_done = 0;
 		i = -1;

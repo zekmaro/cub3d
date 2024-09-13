@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:17:29 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/12 17:32:03 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 03:03:07 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,6 @@ void	update_position(t_vars *vars)
 		vars->player->angle += M_PI / 45;
 }
 
-void	play_sound(const char *sound_path)
-{
-	char	*command;
-	char	*temp;
-
-	temp = ft_strjoin("aplay ", sound_path);
-	command = ft_strjoin(temp, " -q &");
-	free(temp);
-	if (command)
-	{
-		system(command);
-		free(command);
-	}
-}
-
 void	update_ray_position(t_ray_par *ray)
 {
 	ray->dir_x += cos(ray->angle);
@@ -105,13 +90,13 @@ void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 	enemy_flag = check_collision(vars, enemy, &ray);
 	if (enemy_flag)
 	{
-		play_sound("./assets/imp_pain.wav");
+		system("aplay ./assets/imp_pain.wav -q &");
 		enemy->health -= damage;
 	}
 	if (enemy->health == 0)
 	{
-		// if (!vars->imp->is_dead)
-		// 	system("aplay ./assets/imp_death.wav -q &");
+		if (!vars->imp->is_dead)
+			system("aplay ./assets/imp_death.wav -q &");
 		enemy->current_animation = enemy->death;
 		enemy->current_frame = 0;
 		enemy->health -= 10;

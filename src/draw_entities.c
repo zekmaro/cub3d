@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/13 00:31:03 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 03:03:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	draw_and_update_entity(t_vars *vars, t_enemy *entity)
 {
 	if (!entity->is_dead)
 	{
-		//printf("entity->current_frame %d\n", entity->current_frame);
 		draw_dynamic_sprite(vars, entity->current_animation, \
 			entity->center_x, entity->center_y, 50, entity->current_frame);
 		if (!entity->is_dead)

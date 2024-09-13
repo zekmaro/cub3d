@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/12 12:49:11 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 03:04:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,3 @@ void	sort_sprites(t_vars *vars)
 		}
 	}
 }
-// void	put_enemy_on_screen(t_vars *vars)
-// {
-// 	int	screen_x;
-// 	int	screen_y;
-//
-// 	screen_x = (vars->map->monster_x * vars->unit_size) + vars->unit_size / 2;
-// 	screen_y = (vars->map->monster_y * vars->unit_size) + vars->unit_size / 2;
-// 	vars->animated_sprite->current_frame_ptr = 
-// 		vars->animated_sprite->frames[vars->animated_sprite->current_frame];
-// 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, 
-// 		vars->animated_sprite->current_frame_ptr, screen_x, screen_y);
-// }
