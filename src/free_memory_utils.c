@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/13 01:21:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:56:10 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	cleanup_vars(t_vars *vars)
 {
 	free_imp_animations(vars);
 	free_caco_animations(vars);
+	free_boss_animations(vars);
 	free_enemy_list(vars);
 	free_textures(vars);
 	free_doors(vars);

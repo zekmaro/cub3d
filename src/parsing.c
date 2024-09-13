@@ -52,6 +52,11 @@ int	validate_line(char *line, int row, t_map *map)
 			if (!handle_player_direction(line, i, row, map))
 				return (0);
 		}
+		else if(line[i] == 'B')
+		{
+			map->boss_x = i;
+			map->boss_y = row;
+		}
 		else if (line[i] == 'M')
 			map->imp_list_size++;
 		else if (line[i] == 'C')

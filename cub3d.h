@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 17:23:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:13:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ typedef struct s_map
 	int		monster_y;
 	int		caco_x;
 	int		caco_y;
+	int		boss_x;
+	int		boss_y;
 	int		door_x;
 	int		door_y;
 	int		imp_list_size;
@@ -292,6 +294,8 @@ typedef struct s_vars
 	t_enemy			*caco;
 	t_enemy			*caco_list;
 	t_animation		*caco_animation;
+	t_enemy			*boss;
+	t_animation		*boss_animation;
 	t_ray			*ray;
 	t_door			*door;
 	int				minimap_update_x;
@@ -412,7 +416,7 @@ void		draw_line(t_vars *vars, unsigned long color);
 
 /* Draw_entities.c */
 void		draw_minimap(t_vars *vars);
-void		draw_and_update_entity(t_vars *vars, t_enemy *entity);
+void		draw_and_update_entity(t_vars *vars, t_enemy *entity, int scale);
 void		draw_and_update_entities(t_vars *vars, t_enemy *entity_list, \
 				int list_size);
 void		draw_map(t_vars *vars);
@@ -493,6 +497,8 @@ void		handle_player_damaged_time(t_vars *vars);
 void		handle_enemy_shot(t_vars *vars, t_enemy *enemy);
 
 /* Handle_enemies.c */
+void		update_enemy_frames(t_enemy *enemy, long delay);
+void		setup_boss(t_vars *vars, t_enemy *boss);
 void		init_enemies(t_vars *vars);
 void		enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector);
 void		enemy_act(t_vars *vars, t_enemy *enemy);
@@ -551,6 +557,7 @@ void		free_vars_caco(t_vars *vars);
 
 /* Free_imp_animations.c */
 void		free_imp_animations(t_vars *vars);
+void		free_boss_animations(t_vars *vars);
 
 /* Free_caco_animations.c */
 void		free_caco_animations(t_vars *vars);
@@ -695,10 +702,12 @@ void		init_imp_sprites(t_vars *vars, t_enemy *imp);
 void		init_caco_sprites(t_vars *vars, t_enemy *caco);
 void		init_imp_animation(t_vars *vars);
 void		init_caco_animation(t_vars *vars);
+void		init_cyber_demon_animation(t_vars *vars);
 
 /* Init_enemy.c */
 void		init_imp(t_vars *vars, int i, int j, int *counter_imp);
 void		init_caco(t_vars *vars, int i, int j, int *counter_caco);
 void		init_enemies(t_vars *vars);
+void		init_boss(t_vars *vars);
 
 #endif // CUB3D_H

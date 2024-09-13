@@ -28,6 +28,12 @@ void	init_caco(t_vars *vars, int i, int j, int *counter_caco)
 	(*counter_caco)++;
 }
 
+void	init_boss(t_vars *vars)
+{
+	vars->boss = ft_calloc(sizeof(t_enemy), 1);
+	init_cyber_demon_animation(vars);
+}
+
 void	init_enemies(t_vars *vars)
 {
 	int	i;

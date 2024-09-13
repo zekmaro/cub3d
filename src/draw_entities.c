@@ -37,12 +37,12 @@ void	draw_minimap(t_vars *vars)
 	}
 }
 
-void	draw_and_update_entity(t_vars *vars, t_enemy *entity)
+void	draw_and_update_entity(t_vars *vars, t_enemy *entity, int scale)
 {
 	if (!entity->is_dead)
 	{
 		draw_dynamic_sprite(vars, entity->current_animation, \
-			entity->center_x, entity->center_y, 50, entity->current_frame);
+			entity->center_x, entity->center_y, scale, entity->current_frame);
 		if (!entity->is_dead)
 			search_for_player_enemy(vars, entity);
 		if (entity->detected_player)
@@ -58,7 +58,7 @@ void	draw_and_update_entities(t_vars *vars, t_enemy *entity_list, \
 
 	i = -1;
 	while (++i < list_size)
-		draw_and_update_entity(vars, &entity_list[i]);
+		draw_and_update_entity(vars, &entity_list[i], 50);
 }
 
 void	draw_map(t_vars *vars)
@@ -66,6 +66,7 @@ void	draw_map(t_vars *vars)
 	raycast(vars);
 	draw_and_update_entities(vars, vars->imp_list, vars->map->imp_list_size);
 	draw_and_update_entities(vars, vars->caco_list, vars->map->caco_list_size);
+	draw_and_update_entity(vars, vars->boss, 100);
 	draw_gun(vars, 4.0);
 	update_player_position(vars);
 }

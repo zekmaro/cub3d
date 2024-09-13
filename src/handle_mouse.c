@@ -59,6 +59,7 @@ int	shoot_entity(int button, int x, int y, t_vars *vars)
 			if (!vars->caco_list[i].is_dead)
 				check_enemy_collision(vars, &vars->caco_list[i], 20);
 		}
+		check_enemy_collision(vars, vars->boss, 20);
 	}
 	return (0);
 }
