@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/09 16:50:22 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:06:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ int	count_new_lines(int fd)
 	return (new_lines);
 }
 
+int	handle_player_direction(char *line, int i, int row, t_map *map)
+{
+	if (map->player_dir != 0)
+		return (printf("hello\n"), 0);
+	map->player_x = i;
+	map->player_y = row;
+	map->player_dir = line[i];
+	line[i] = 'P';
+	return (1);
+}
+
 int	validate_line(char *line, int row, t_map *map)
 {
 	int	i;
@@ -38,12 +49,8 @@ int	validate_line(char *line, int row, t_map *map)
 		if (line[i] == 'N' || line[i] == 'S' \
 			|| line[i] == 'W' || line[i] == 'E')
 		{
-			if (map->player_dir != 0)
-				return (printf("hello\n"), 0);
-			map->player_x = i;
-			map->player_y = row;
-			map->player_dir = line[i];
-			line[i] = 'P';
+			if (!handle_player_direction(line, i, row, map))
+				return (0);
 		}
 		else if (line[i] == 'M')
 			map->imp_list_size++;
