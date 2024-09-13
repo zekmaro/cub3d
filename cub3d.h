@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 18:13:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:24:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -709,5 +709,10 @@ void		init_imp(t_vars *vars, int i, int j, int *counter_imp);
 void		init_caco(t_vars *vars, int i, int j, int *counter_caco);
 void		init_enemies(t_vars *vars);
 void		init_boss(t_vars *vars);
+
+/* Setup_enemies.c */
+void		setup_imp(t_vars *vars, t_enemy *imp);
+void		setup_caco(t_vars *vars, t_enemy *caco);
+void		setup_boss(t_vars *vars, t_enemy *boss);
 
 #endif // CUB3D_H
