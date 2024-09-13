@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:00:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/09 21:02:05 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:19:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	draw_player(t_vars *vars, unsigned int color)
 		{
 			pixel_x = 100 + j;
 			pixel_y = 100 + i;
-			//rotate_around_point(vars, &pixel_x, &pixel_y);
 			put_pixel_to_image(vars, pixel_x, pixel_y, color);
 		}
 	}
