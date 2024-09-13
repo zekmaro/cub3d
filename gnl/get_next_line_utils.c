@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "../libft/libft.h"
 
 void	*ft_calloc_gnl(size_t num, size_t size)
 {
@@ -83,7 +84,7 @@ char	*ft_strdup_gnl(const char *s)
 	if (s == NULL)
 		return (NULL);
 	len_s = ft_strlen_gnl(s);
-	dup_s = (char *)malloc(sizeof(char) * len_s + 1);
+	dup_s = (char *)malloc(sizeof(char) * (len_s + 1));
 	if (!dup_s)
 		return (NULL);
 	temp_dup_s = dup_s;
@@ -95,14 +96,7 @@ char	*ft_strdup_gnl(const char *s)
 
 void	*ft_memcpy_gnl(void *dest, const void *src, size_t n)
 {
-	char		*temp_dest;
-	char		*temp_src;
-
-	if (dest == NULL && src == NULL)
+	if (dest == NULL || src == NULL)
 		return (NULL);
-	temp_dest = (char *)dest;
-	temp_src = (char *)src;
-	while (n--)
-		*temp_dest++ = *temp_src++;
-	return (dest);
+	return (ft_memmove(dest, src, n));
 }
