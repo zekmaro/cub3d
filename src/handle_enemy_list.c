@@ -34,31 +34,36 @@ void	update_sprite_frame_enemy(t_enemy *enemy)
 		% enemy->current_animation->frame_count;
 }
 
-void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
+void	update_enemy_frames(t_enemy *enemy, long delay)
 {
 	long	enemy_elapsed_time;
+	get_current_time(&enemy->time1);
+	enemy_elapsed_time = get_elapsed_time(&enemy->time0, \
+		&enemy->time1);
+	if (!enemy->is_dead && enemy_elapsed_time > delay)
+	{
+		if (enemy->current_animation == enemy->death
+			&& enemy->current_frame
+			== enemy->current_animation->frame_count - 1)
+			enemy->is_dead = 1;
+		if (enemy->current_animation \
+			== enemy->attack
+			&& enemy->current_frame \
+			== enemy->current_animation->frame_count - 1)
+			enemy->current_animation = enemy->move;
+		update_sprite_frame_enemy(enemy);
+		enemy->time0 = enemy->time1;
+	}
+}
+
+void	update_enemy_list(t_enemy *enemy_list, long delay, int size)
+{
 	int		i;
 
 	i = -1;
 	while (++i < size)
 	{
-		get_current_time(&enemy_list[i].time1);
-		enemy_elapsed_time = get_elapsed_time(&enemy_list[i].time0, \
-			&enemy_list[i].time1);
-		if (!enemy_list[i].is_dead && enemy_elapsed_time > delay)
-		{
-			if (enemy_list[i].current_animation == enemy_list[i].death
-				&& enemy_list[i].current_frame
-				== enemy_list[i].current_animation->frame_count - 1)
-				enemy_list[i].is_dead = 1;
-			if (enemy_list[i].current_animation \
-				== enemy_list[i].attack
-				&& enemy_list[i].current_frame \
-				== enemy_list[i].current_animation->frame_count - 1)
-				enemy_list[i].current_animation = enemy_list[i].move;
-			update_sprite_frame_enemy(&enemy_list[i]);
-			enemy_list[i].time0 = enemy_list[i].time1;
-		}
+		update_enemy_frames(&enemy_list[i], delay);
 	}
 }
 
@@ -100,4 +105,24 @@ void	setup_caco(t_vars *vars, t_enemy *caco)
 	caco->attack = vars->caco_animation->attack;
 	caco->fire_ball = vars->caco_animation->bullet;
 	get_current_time(&caco->time0);
+}
+
+void	setup_boss(t_vars *vars, t_enemy *boss)
+{
+	boss->x = (vars->map->boss_x * vars->unit_size);
+	boss->y = (vars->map->boss_y * vars->unit_size);
+	boss->center_x = boss->x + vars->unit_size / 2;
+	boss->center_y = boss->y + vars->unit_size / 2;
+	boss->angle = -M_PI / 2;
+	boss->rot_dir = 1;
+	boss->fire_ball_x = boss->center_x;
+	boss->fire_ball_y = boss->center_y;
+	boss->health = 1000;
+	boss->is_dead = 0;
+	boss->current_animation = vars->boss_animation->move;
+	boss->move = vars->boss_animation->move;
+	boss->death = vars->boss_animation->death;
+	boss->attack = vars->boss_animation->attack;
+	boss->fire_ball = vars->boss_animation->bullet;
+	get_current_time(&boss->time0);
 }

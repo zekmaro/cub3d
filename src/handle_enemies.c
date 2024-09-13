@@ -64,6 +64,8 @@ void	search_for_player(t_vars *vars)
 	while (++i < vars->map->caco_list_size)
 		if (!vars->caco_list[i].detected_player)
 			vars->caco_list[i].angle += M_PI / 10 * vars->caco_list[i].rot_dir;
+	if (!vars->boss->detected_player)
+		vars->boss->angle += M_PI / 10 * vars->boss->rot_dir;
 }
 
 void	act_detected_enemies(t_vars *vars)
@@ -78,6 +80,8 @@ void	act_detected_enemies(t_vars *vars)
 	while (++i < vars->map->caco_list_size)
 		if (vars->caco_list[i].detected_player)
 			enemy_act(vars, &vars->caco_list[i]);
+	if (vars->boss->detected_player)
+		enemy_act(vars, vars->boss);
 }
 
 long	update_imp_time(t_vars *vars)
