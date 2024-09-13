@@ -95,7 +95,7 @@ void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 	}
 	if (enemy->health == 0)
 	{
-		if (!vars->imp->is_dead)
+		if (!enemy->is_dead)
 			system("aplay ./assets/imp_death.wav -q &");
 		enemy->current_animation = enemy->death;
 		enemy->current_frame = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 16:40:36 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:56:57 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -557,6 +557,7 @@ void		free_vars_caco(t_vars *vars);
 
 /* Free_imp_animations.c */
 void		free_imp_animations(t_vars *vars);
+void		free_boss_animations(t_vars *vars);
 
 /* Free_caco_animations.c */
 void		free_caco_animations(t_vars *vars);
