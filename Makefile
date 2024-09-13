@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/13 14:18:33 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/13 17:59:33 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRC		:=	src/cub3d.c \
 			src/draw_gunshot_helper.c \
 			src/draw_utils.c \
 			src/draw_dynamic_sprite.c \
+			src/draw_sprite_stripe.c \
 			src/draw_sprites.c \
 			src/is_entity.c \
 			src/is_construction.c \
