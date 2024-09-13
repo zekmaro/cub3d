@@ -632,7 +632,6 @@ void		calculate_sprite_distances(t_vars *vars);
 void		project_sprite(t_vars *vars, t_sprite *sprite);
 void		sort_sprites(t_vars *vars);
 
-
 /* Load_animated_sprite.c */
 void		cleanup_sprite_frames(t_vars *vars, t_img **frames, \
 				int frame_count);
