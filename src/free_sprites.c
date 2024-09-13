@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:44:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 12:26:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:44:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,22 @@ void	free_vars_sprites(t_vars *vars)
 	}
 }
 
+void	free_sprite_frame(t_img *frame)
+{
+	if (frame)
+	{
+		if (frame->mlx_img)
+		{
+			free(frame->mlx_img);
+			frame->mlx_img = NULL;
+		}
+		free(frame);
+	}
+}
+
 void	free_vars_animated_sprite(t_vars *vars)
 {
-	int		i;
-	t_img	*temp;
+	int	i;
 
 	if (vars->animated_sprite)
 	{
@@ -39,17 +51,8 @@ void	free_vars_animated_sprite(t_vars *vars)
 			i = -1;
 			while (++i < vars->animated_sprite->frame_count)
 			{
-				if (vars->animated_sprite->frames[i])
-				{
-					temp = (t_img *)vars->animated_sprite->frames[i];
-					if (temp->mlx_img)
-					{
-						free(temp->mlx_img);
-						temp->mlx_img = NULL;
-					}
-					free(vars->animated_sprite->frames[i]);
-					vars->animated_sprite->frames[i] = NULL;
-				}
+				free_sprite_frame((t_img *)vars->animated_sprite->frames[i]);
+				vars->animated_sprite->frames[i] = NULL;
 			}
 			free(vars->animated_sprite->frames);
 			vars->animated_sprite->frames = NULL;
