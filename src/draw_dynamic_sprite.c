@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:03:27 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/10 03:10:19 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:42:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,23 @@ void	calculate_sprite_params(t_vars *vars, t_sprite_calc_params \
 void	calculate_transform(t_draw_sprite_params *draw_params, \
 			t_sprite_calc_params *calc_params)
 {
-	double	dir_y;
-	double	dir_x;
-	double	plane_y;
-	double	plane_x;
-	int		sprite_x;
-	int		sprite_y;
-	double	inv_det;
+	t_player_params	player_params;
+	double			inv_det;
+	int				sprite_x;
+	int				sprite_y;
 
-	dir_y = draw_params->vars->player->dir_y;
-	dir_x = draw_params->vars->player->dir_x;
-	plane_y = draw_params->vars->player->plane_y;
-	plane_x = draw_params->vars->player->plane_x;
-	sprite_x = draw_params->object_x \
-		- draw_params->vars->player->center_x;
-	sprite_y = draw_params->object_y \
-		- draw_params->vars->player->center_y;
-	inv_det = 1.0 / (plane_x * dir_y - dir_x * plane_y);
-	calc_params->transform_x = inv_det * (dir_y * sprite_x \
-		- dir_x * sprite_y);
-	calc_params->transform_y = inv_det * (-plane_y * sprite_x \
-		+ plane_x * sprite_y);
+	player_params.dir_y = draw_params->vars->player->dir_y;
+	player_params.dir_x = draw_params->vars->player->dir_x;
+	player_params.plane_y = draw_params->vars->player->plane_y;
+	player_params.plane_x = draw_params->vars->player->plane_x;
+	sprite_x = draw_params->object_x - draw_params->vars->player->center_x;
+	sprite_y = draw_params->object_y - draw_params->vars->player->center_y;
+	inv_det = 1.0 / (player_params.plane_x * player_params.dir_y \
+		- player_params.dir_x * player_params.plane_y);
+	calc_params->transform_x = inv_det * (player_params.dir_y \
+		* sprite_x - player_params.dir_x * sprite_y);
+	calc_params->transform_y = inv_det * (-player_params.plane_y \
+		* sprite_x + player_params.plane_x * sprite_y);
 	calc_params->scale = draw_params->scale;
 }
 
