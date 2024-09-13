@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 16:50:17 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 17:47:26 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/13 20:00:42 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@ static int	calculate_tex_y(t_vars *vars, t_sprite_params *params, int y)
 	return (((d * params->sprite_height) / params->sprite_height) / 256);
 }
 
-static void	draw_sprite_pixel(t_vars *vars, int stripe, int y, int color, \
-				double transform_y)
+static void	draw_raycaster_pixel(t_vars *vars, int stripe, int y, int color)
 {
 	if (color != -1)
 	{
 		put_pixel_to_image(vars, stripe, y + 50, color);
-		vars->zbuffer[stripe] = transform_y;
 	}
+}
+
+static void	update_zbuffer(t_vars *vars, int stripe, double transform_y)
+{
+	vars->zbuffer[stripe] = transform_y;
 }
 
 void	draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
@@ -59,8 +62,8 @@ void	draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 			{
 				tex_y = calculate_tex_y(vars, params, y);
 				color = get_texture_color(tmp, tex_x, tex_y);
-				draw_sprite_pixel(vars, stripe, y, color, \
-					calc_params->transform_y);
+				draw_raycaster_pixel(vars, stripe, y, color);
+				update_zbuffer(vars, stripe, calc_params->transform_y);
 			}
 		}
 	}
