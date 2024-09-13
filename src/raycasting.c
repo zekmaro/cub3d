@@ -67,8 +67,6 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 	(void)ray_id;
 	(void)texture_index;
 	y = vars->ray->draw_start;
-	if (y < 0)
-		y = 0;
 	while (temp++ < y)
 		put_pixel_to_image(vars, ray_id, temp, RED);
 	while (y < vars->ray->draw_end)
@@ -76,10 +74,9 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		get_texture_coords(vars, texture_index, &tex_x);
 		tex_y = (int)((y - vars->ray->draw_start) \
 			* vars->unit_size / vars->ray->line_height);
-		if (tex_y < 0)
-			tex_y = 0;
 		if (texture_index == TEXTURE_SOUTH)
 			tex_y += 1;
+		texture_index %= 8;
 		color = get_texture_color(vars->textures[texture_index], tex_x, tex_y);
 		put_pixel_to_image(vars, ray_id, y, color);
 		y++;
