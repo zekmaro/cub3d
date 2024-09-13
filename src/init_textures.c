@@ -34,6 +34,8 @@ void	load_texture(t_vars *vars, int texture_index, const char *file_path)
 		perror("Failed to get texture data address");
 		free_and_exit(vars);
 	}
+	vars->textures[texture_index]->width = width;
+	vars->textures[texture_index]->height = height;
 }
 
 void	initialise_textures(t_vars *vars)
