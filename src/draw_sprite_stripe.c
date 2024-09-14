@@ -19,12 +19,12 @@ static int	calculate_tex_x(t_sprite_params *params, t_img *tmp, int stripe)
 		/ 256);
 }
 
-static int	calculate_tex_y(t_vars *vars, t_sprite_params *params, int y)
+static int	calculate_tex_y(t_img *tmp, t_vars *vars, t_sprite_params *params, int y)
 {
 	int	d;
 
 	d = (y - vars->mlx->window_height / 2 + params->sprite_height / 2) * 256;
-	return (((d * params->sprite_height) / params->sprite_height) / 256);
+	return (((d * tmp->height) / params->sprite_height) / 256);
 }
 
 static void	draw_raycaster_pixel(t_vars *vars, int stripe, int y, int color)
@@ -35,9 +35,12 @@ static void	draw_raycaster_pixel(t_vars *vars, int stripe, int y, int color)
 	}
 }
 
-static void	update_zbuffer(t_vars *vars, int stripe, double transform_y)
+static void	update_zbuffer(t_vars *vars, int stripe, double transform_y, int color)
 {
-	vars->zbuffer[stripe] = transform_y;
+	if (color != -1)
+	{
+		vars->zbuffer[stripe] = transform_y;
+	}
 }
 
 void	draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
@@ -60,10 +63,10 @@ void	draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 			y = params->draw_start_y - 1;
 			while (++y < params->draw_end_y)
 			{
-				tex_y = calculate_tex_y(vars, params, y);
+				tex_y = calculate_tex_y(tmp, vars, params, y);
 				color = get_texture_color(tmp, tex_x, tex_y);
 				draw_raycaster_pixel(vars, stripe, y, color);
-				update_zbuffer(vars, stripe, calc_params->transform_y);
+				update_zbuffer(vars, stripe, calc_params->transform_y, color);
 			}
 		}
 	}
