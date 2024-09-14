@@ -55,12 +55,12 @@ int	get_texture_color(t_img *texture, int x, int y)
 		perror("Error: Null texture or texture address\n");
 		return (-1);
 	}
-	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
-	{
-		printf("%d %d\n",texture->width, texture->height);
-		perror("Error: Texture coordinates out of bounds\n");
-		return (-1);
-	}
+	// if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+	// {
+	// 	printf("x %d width %d y %d height %d \n", x, texture->width, y, texture->height);
+	// 	perror("Error: Texture coordinates out of bounds\n");
+	// 	return (-1);
+	// }
 	index = (x * (texture->bits_per_pixel / 8)) + (y * texture->line_len);
 	color = (texture->addr[index] & 0xFF) \
 		| ((texture->addr[index + 1] & 0xFF) << 8) \
