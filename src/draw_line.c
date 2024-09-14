@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 14:59:58 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/12 14:19:17 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:32:58 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	get_line_data(t_line *line)
 	line->amount_pixels = sqrt(line->dx * line->dx + line->dy * line->dy);
 }
 
-void	increment_step(int *x0, int *y0, t_line *line)
+static void	increment_step(int *x0, int *y0, t_line *line)
 {
 	int	error;
 
