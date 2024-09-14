@@ -11,29 +11,47 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <unistd.h>
 
-void	get_ray_target_coords(t_vars *vars)
+int inside_door(t_vars *vars, int door_flag, int ray_y, int ray_x, int offset)
 {
+	(void)ray_y;
+	if (ray_x < offset)
+	{
+		return (0);
+	}
+	return (door_flag && ((ray_x % vars->unit_size < offset)));
+
+	// || (ray_y % vars->unit_size < vars->unit_size / 2))
+}
+
+static void	get_ray_target_coords(t_vars *vars, int offset)
+{
+	int	door_flag;
+
+	door_flag = 0;
 	vars->ray->ray_x = vars->player->x;
 	vars->ray->ray_y = vars->player->y;
 	vars->ray->ray_dir_x = cos(vars->ray->ray_angle);
 	vars->ray->ray_dir_y = sin(vars->ray->ray_angle);
 	while (!is_wall(vars, vars->ray->ray_y, vars->ray->ray_x) \
-		&& !is_door(vars, vars->ray->ray_y, vars->ray->ray_x))
+		&& !inside_door(vars, door_flag, vars->ray->ray_y, vars->ray->ray_x, offset))
 	{
 		vars->ray->last_ray_x = vars->ray->ray_x;
 		vars->ray->last_ray_y = vars->ray->ray_y;
 		vars->ray->ray_x += vars->ray->ray_dir_x;
 		vars->ray->ray_y += vars->ray->ray_dir_y;
-	}
-	if (is_door(vars, vars->ray->ray_y, vars->ray->ray_x))
-	{
-		vars->ray->hit_door = 1;
-		vars->ray->door_factor = 0.5;
-	}
-	else
-	{
-		vars->ray->hit_door = 0;
+		door_flag = is_door(vars, vars->ray->ray_y, vars->ray->ray_x);
+		if (door_flag)
+		{
+			int dy = vars->ray->ray_y - vars->player->y;
+			int dx = vars->ray->ray_x - vars->player->x;
+			vars->distance_to_door = sqrt(dy * dy + dx * dx);
+			if (vars->distance_to_door < 150)
+				vars->door->draw = 1;
+			else
+				vars->door->draw = 0;
+		}
 	}
 }
 
@@ -83,11 +101,12 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		put_pixel_to_image(vars, ray_id, y, BROWN);
 }
 
-void	cast_ray(t_vars *vars, int ray_id)
+static void	cast_ray(t_vars *vars, int ray_id, int offset)
 {
 	t_tex_typ	texture_index;
+	(void)offset;
 
-	get_ray_target_coords(vars);
+	get_ray_target_coords(vars, vars->unit_size - offset);
 	setup_ray(vars, vars->ray->ray_x, vars->ray->ray_y);
 	texture_index = define_texture_type(vars);
 	draw_ray_column(vars, ray_id, texture_index);
@@ -106,7 +125,7 @@ void	raycast(t_vars *vars)
 	while (x < vars->mlx->window_width)
 	{
 		vars->ray->ray_angle = start_angle + x * angle_step;
-		cast_ray(vars, x);
+		cast_ray(vars, x, vars->offset);
 		x++;
 	}
 }

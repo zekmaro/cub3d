@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 23:26:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 14:10:42 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	initialise_mlx(t_vars *vars)
 {
 	t_mlx	*mlx;
 
-	vars->mlx = NULL;
 	mlx = (t_mlx *)(malloc(sizeof(t_mlx)));
 	if (!mlx)
 	{

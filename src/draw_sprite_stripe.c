@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 16:50:17 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 20:00:42 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:52:43 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	calculate_tex_x(t_sprite_params *params, t_img *tmp, int stripe)
 		/ 256);
 }
 
-static int	calculate_tex_y(t_img *tmp, t_vars *vars, t_sprite_params *params, int y)
+static int	calculate_tex_y(t_img *tmp, t_vars *vars, \
+				t_sprite_params *params, int y)
 {
 	int	d;
 
@@ -35,7 +36,8 @@ static void	draw_raycaster_pixel(t_vars *vars, int stripe, int y, int color)
 	}
 }
 
-static void	update_zbuffer(t_vars *vars, int stripe, double transform_y, int color)
+static void	update_zbuffer(t_vars *vars, int stripe, double transform_y, \
+				int color)
 {
 	if (color != -1)
 	{

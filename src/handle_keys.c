@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 23:55:11 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/10 14:17:26 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 14:58:25 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,29 +80,3 @@ int	animate_shooting(t_vars *vars)
 	frame_count++;
 	return (0);
 }
-
-// void	handle_key(int keycode, t_vars *vars)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	if (keycode == KEY_OPEN_DOOR)
-// 	{
-// 		x = vars->player->x / vars->unit_size;
-// 		y = vars->player->y / vars->unit_size;
-// 		//toggle_door(vars, x, y);
-// 	}
-// 	update_position(vars);
-// }
-
-// int	key_hook(int keycode, t_vars *vars)
-// {
-// 	if (keycode == ESCAPE)
-// 		free_and_exit(vars);
-// 	else
-// 	{
-// 		handle_key(keycode, vars);
-// 		animate_shooting(vars);
-// 	}
-// 	return (0);
-// }

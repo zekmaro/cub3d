@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 21:52:25 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:06:29 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ int	main_loop_hook(t_vars *vars)
 	get_current_time(&t);
 	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
+	get_current_time(&vars->door->time1);
+	// if (vars->door->draw && vars->offset < vars->unit_size)
+	// {
+	vars->door_elapsed_time = get_elapsed_time(&vars->door->time0, \
+		&vars->door->time1);
+	if (vars->door_elapsed_time > 50)
+	{
+		if (vars->door->draw && vars->offset < vars->unit_size)
+			vars->offset += 4;
+		else if (!vars->door->draw && vars->offset > 0)
+			vars->offset -= 4;
+		vars->door->time0 = vars->door->time1;
+	}
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 300, vars->map->caco_list_size);
 	update_enemy_frames(vars->boss, 200);
@@ -72,6 +85,9 @@ void	run_screen(t_vars *vars)
 	init_caco_animation(vars);
 	init_enemies(vars);
 	init_boss(vars);
+	init_doors(vars);
+	setup_door(vars, vars->door);
+	printout_doors(vars);
 	setup_boss(vars, vars->boss);
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
@@ -81,14 +97,6 @@ void	run_screen(t_vars *vars)
 	mlx_mouse_hook(vars->mlx->win, shoot_entity, vars);
 	mlx_loop_hook(vars->mlx->mlx, main_loop_hook, vars);
 	mlx_loop(vars->mlx->mlx);
-}
-
-void	setup_door(t_vars *vars)
-{
-	vars->door->center_x = vars->map->door_x * vars->unit_size \
-		+ vars->unit_size / 2;
-	vars->door->center_y = vars->map->door_y * vars->unit_size \
-		+ vars->unit_size / 2;
 }
 
 int	main(int argc, char **argv)
@@ -111,9 +119,9 @@ int	main(int argc, char **argv)
 	initialise_vars(&vars);
 	if (!read_map(fd, vars.map, argv[1]))
 		free_and_exit(&vars);
+	initialise_doors(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);
-	setup_door(&vars);
 	get_current_time(&vars.program_start);
 	run_screen(&vars);
 	return (0);
