@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 20:06:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 23:35:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,8 +315,8 @@ typedef struct s_vars
 	int				*sprite_order;
 	t_sprite		*sprites;
 	t_img			*sprite_texture;
+	char			*texture_names[4];
 	int				num_sprites;
-	t_img			*door_textures;
 	t_keys			keys;
 }	t_vars;
 
@@ -542,10 +542,10 @@ void		free_sprite_frame(t_img *frame);
 
 /* Free_textures.c */
 void		free_textures(t_vars *vars);
-void		free_vars_door_textures(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
 void		free_vars_sprite_texture(t_vars *vars);
 void		free_vars_fire(t_vars *vars);
+void		free_vars_texture_names(t_vars *vars);
 
 /* Free_enemies.c */
 void		free_enemy_list(t_vars *vars);
@@ -642,7 +642,6 @@ void		load_animated_sprite(t_vars *vars, t_img *sprite, \
 /* Doors */
 void		open_door(t_vars *vars, int x, int y);
 void		close_door(t_vars *vars, int x, int y);
-void		toggle_door(t_vars *vars, int x, int y);
 
 /* Ray_drawing */
 void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \

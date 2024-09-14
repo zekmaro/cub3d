@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/13 17:56:10 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/14 23:35:48 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void	cleanup_vars(t_vars *vars)
 	free_vars_ray(vars);
 	free_vars_sprites(vars);
 	free_vars_zbuffer(vars);
+	free_vars_texture_names(vars);
 }

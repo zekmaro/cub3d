@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 20:06:41 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 23:35:56 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	initialise_doors(t_vars *vars)
 {
 	t_door	*door;
 
-	printf("Number of doors: %d\n", vars->map->num_doors);
 	door = ft_calloc(vars->map->num_doors, sizeof(t_door));
 	if (!door)
 	{
@@ -69,6 +68,7 @@ void	initialise_vars(t_vars *vars)
 {
 	vars->unit_size = 64;
 	ft_bzero(vars->textures, sizeof(vars->textures));
+	ft_bzero(vars->texture_names, sizeof(vars->texture_names));
 	initialise_image(vars);
 	initialise_map(vars);
 	initialise_mlx(vars);
