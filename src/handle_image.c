@@ -58,4 +58,6 @@ void	get_data_image(t_vars *vars, t_img *image, t_mlx *mlx)
 			&(image->line_len), &(image->endian));
 	if (!image->addr)
 		free_and_exit(vars);
+	image->width = vars->mlx->window_width;
+	image->height = vars->mlx->window_height;
 }

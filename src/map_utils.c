@@ -57,6 +57,7 @@ int	get_texture_color(t_img *texture, int x, int y)
 	}
 	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
 	{
+		printf("%d %d\n",texture->width, texture->height);
 		perror("Error: Texture coordinates out of bounds\n");
 		return (-1);
 	}
