@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:12:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/14 23:35:34 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 23:44:52 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	initialise_textures(t_vars *vars)
 	while (++i < 4)
 	{
 		if (!vars->texture_names[i])
-			exit_with_error(vars, "Failed to allocate memory for texture names");
+			exit_with_error(vars, "Texture names memory allocation error");
 		load_texture(vars, i, vars->texture_names[i]);
 	}
 	load_texture(vars, TEXTURE_DOOR0, "./assets/door0.xpm");
