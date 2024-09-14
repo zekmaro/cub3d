@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 21:52:25 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 13:59:25 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,6 @@ void	run_screen(t_vars *vars)
 	mlx_loop(vars->mlx->mlx);
 }
 
-void	setup_door(t_vars *vars)
-{
-	vars->door->center_x = vars->map->door_x * vars->unit_size \
-		+ vars->unit_size / 2;
-	vars->door->center_y = vars->map->door_y * vars->unit_size \
-		+ vars->unit_size / 2;
-}
-
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -113,7 +105,6 @@ int	main(int argc, char **argv)
 		free_and_exit(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);
-	setup_door(&vars);
 	get_current_time(&vars.program_start);
 	run_screen(&vars);
 	return (0);

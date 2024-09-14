@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/13 19:03:51 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/14 14:36:42 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ SRC		:=	src/cub3d.c \
 			src/handle_enemy_list.c \
 			src/init_animations.c \
 			src/init_enemies.c \
+			src/init_doors.c \
 			src/load_animated_sprite.c \
 			src/free_boss_animations.c \
 			src/setup_enemies.c \

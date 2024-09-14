@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 13:21:01 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:36:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,17 @@ typedef struct s_map
 
 typedef struct s_door
 {
-	int		center_x;
-	int		center_y;
-	int		state;
-	double	animation_progress;
-	t_img	*textures;
+	int				x;
+	int				y;
+	int				grid_x;
+	int				grid_y;
+	int				center_x;
+	int				center_y;
+	int				state;
+	double			animation_progress;
+	t_img			*textures;
+	struct timeval	time0;
+	struct timeval	time1;
 }	t_door;
 
 typedef struct s_mlx
@@ -444,6 +450,8 @@ void		draw_ray(t_vars *vars, double angle_offset);
 void		draw_ray_segment_player(t_vars *vars);
 
 /* Draw_gunshot.c */
+void		draw_row(t_draw_params *draw_params, t_tex_pos *tex_pos, \
+				int screen_y, int scaled_width);
 void		draw_scaled_image(t_draw_image_params *params);
 void		draw_fire(t_vars *vars, double scale);
 void		draw_gun(t_vars *vars, double scale);
@@ -481,16 +489,6 @@ void		draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 /* Draw_environment.c */
 void		draw_floor(t_vars *vars);
 void		draw_ceiling(t_vars *vars);
-void		draw_map(t_vars *vars);
-void		draw_minimap(t_vars *vars);
-
-/* Drawing.c */
-void		draw_map(t_vars *vars);
-void		draw_floor(t_vars *vars);
-void		draw_ceiling(t_vars *vars);
-void		draw_fire(t_vars *vars, double scale);
-void		draw_gun(t_vars *vars, double scale);
-void		draw_imp_fire_ball(t_vars *vars);
 
 /* Player_move */
 void		move_player(t_vars *vars, int move_y, int move_x);
@@ -505,53 +503,49 @@ void		handle_player_damaged_time(t_vars *vars);
 void		handle_enemy_shot(t_vars *vars, t_enemy *enemy);
 
 /* Handle_enemies.c */
-void		update_enemy_frames(t_enemy *enemy, long delay);
-void		setup_boss(t_vars *vars, t_enemy *boss);
 void		enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector);
 void		enemy_act(t_vars *vars, t_enemy *enemy);
 void		search_for_player(t_vars *vars);
 void		act_detected_enemies(t_vars *vars);
+long		update_imp_time(t_vars *vars);
 
 /* Handle_enemy_list.c */
 void		init_enemy_lists(t_vars *vars);
+void		update_enemy_frames(t_enemy *enemy, long delay);
 void		update_enemy_list(t_enemy *enemy_list, long delay, int size);
-long		update_imp_time(t_vars *vars);
-void		setup_imp(t_vars *vars, t_enemy *imp);
-void		setup_caco(t_vars *vars, t_enemy *caco);
 
 /* Free_memory_utils.c */
 void		free_memory(char **arr);
-void		free_map(t_map *map);
+void		free_vars_zbuffer(t_vars *vars);
 int			free_and_exit(t_vars *vars);
-void		free_vars_doors(t_vars *vars);
+void		exit_with_error(t_vars *vars, char *error_message);
 void		cleanup_vars(t_vars *vars);
 
 /* Free_environment.c */
 void		free_vars_map(t_vars *vars);
-void		free_vars_line(t_vars *vars);
+void		free_map(t_map *map);
 void		free_vars_gun(t_vars *vars);
-void		free_vars_fire(t_vars *vars);
-void		free_vars_door_textures(t_vars *vars);
-void		free_vars_sprite_texture(t_vars *vars);
-void		free_vars_zbuffer(t_vars *vars);
-void		free_environment(t_vars *vars);
+void		free_frames(t_img **frames, int count);
 void		free_doors(t_vars *vars);
 
 /* Free_components.c */
 void		free_vars_image(t_vars *vars);
 void		free_vars_player(t_vars *vars);
 void		free_vars_mlx(t_vars *vars);
+void		free_vars_line(t_vars *vars);
 void		free_vars_ray(t_vars *vars);
-void		exit_with_error(t_vars *vars, char *error_message);
 
 /* Free_sprites.c */
 void		free_sprites(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
+void		free_sprite_frame(t_img *frame);
 
 /* Free_textures.c */
 void		free_textures(t_vars *vars);
 void		free_vars_door_textures(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
+void		free_vars_sprite_texture(t_vars *vars);
+void		free_vars_fire(t_vars *vars);
 
 /* Free_enemies.c */
 void		free_enemy_list(t_vars *vars);
@@ -573,13 +567,6 @@ void		free_fire(t_vars *vars);
 /* Free_animation_frames.c */
 void		free_animated_frames(t_img **frames, int count);
 
-/* Free_vars.c */
-void		free_vars_map(t_vars *vars);
-void		free_vars_image(t_vars *vars);
-void		free_vars_player(t_vars *vars);
-void		free_vars_mlx(t_vars *vars);
-void		free_vars_zbuffer(t_vars *vars);
-
 /* Handle_image.c */
 void		put_pixel_to_image(t_vars *vars, int x, int y, int color);
 void		clean_screen(t_vars *vars);
@@ -588,10 +575,7 @@ void		get_data_image(t_vars *vars, t_img *image, t_mlx *mlx);
 /* Handle_keys.c */
 int			key_press(int keycode, t_vars *vars);
 int			key_up(int keycode, t_vars *vars);
-int			key_hook(int keycode, t_vars *vars);
 int			animate_shooting(t_vars *vars);
-void		update_position(t_vars *vars);
-void		check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage);
 
 /* Handle_mouse.c */
 void		reset_mouse_to_center(t_vars *vars);
@@ -606,41 +590,38 @@ void		initialise_player(t_vars *vars);
 void		initialise_ray(t_vars *vars);
 
 /* Init_environment.c */
-void		load_texture(t_vars *vars, int texture_index, \
-				const char *file_path);
-void		initialise_textures(t_vars *vars);
-void		initialise_sprites(t_vars *vars);
+int			count_frames(const char **frames);
 void		initialise_map(t_vars *vars);
+void		initialise_zbuffer(t_vars *vars);
+void		initialise_doors(t_vars *vars);
 void		initialise_vars(t_vars *vars);
-//void		initialise_doors(t_vars *vars);
 
 /* Init_textures.c*/
 void		load_texture(t_vars *vars, int texture_index, \
 				const char *file_path);
 void		initialise_textures(t_vars *vars);
-
-/* Init_sprites.c	*/
-int			count_frames(const char **frames);
 void		initialise_enemy_textures(t_vars *vars, t_img *animation,
 				const char **frames);
+
+/* Init_sprites.c	*/
 void		load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 				const char *file_path);
-void		init_imp_sprites(t_vars *vars, t_enemy *imp);
-void		init_caco_sprites(t_vars *vars, t_enemy *caco);
+void		allocate_sprite_memory(t_vars *vars, t_img **sprite, \
+				const char *error_message);
+void		allocate_memory_for_sprites(t_vars *vars);
+void		load_sprites(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 
 /* Parsing.c */
 int			read_map(int fd, t_map *map, char *file_name);
 
-/* Utils.c */
+/* Map_utils.c */
 void		print_map(t_map *map);
-int			is_player(t_vars *vars, int y, int x);
-int			is_imp(t_vars *vars, int y, int x);
-int			is_caco(t_vars *vars, int y, int x);
-int			is_wall(t_vars *vars, int y, int x);
 int			player_inside_map(t_vars *vars, int x, int y);
 int			can_move(t_vars *vars, int y, int x);
 int			get_texture_color(t_img *texture, int x, int y);
+
+/* Time_utils */
 long		get_elapsed_time(struct timeval *start, struct timeval *end);
 void		get_current_time(struct timeval *time);
 
@@ -659,7 +640,6 @@ void		load_animated_sprite(t_vars *vars, t_img *sprite, \
 				const char **file_paths, int frame_count);
 
 /* Doors */
-int			is_door(t_vars *vars, int x, int y);
 void		open_door(t_vars *vars, int x, int y);
 void		close_door(t_vars *vars, int x, int y);
 void		toggle_door(t_vars *vars, int x, int y);
@@ -668,7 +648,8 @@ void		toggle_door(t_vars *vars, int x, int y);
 void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \
 				int *tex_x);
 t_tex_typ	define_texture_type(t_vars *vars);
-void		draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index);
+int			get_map_x(t_vars *vars);
+int			get_map_y(t_vars *vars);
 
 /* Ray_handlers.c */
 void		handle_monster(t_vars *vars, int ray_id, int y, int color);
@@ -679,10 +660,11 @@ int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
 
 /* Raycasting.c */
+void		get_ray_target_coords(t_vars *vars);
+void		setup_ray(t_vars *vars, double ray_x, double ray_y);
+void		draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index);
 void		cast_ray(t_vars *vars, int ray_id);
 void		raycast(t_vars *vars);
-
-int			is_monster(t_vars *vars, int x, int y);
 
 /* Is_entity.c */
 int			is_player(t_vars *vars, int y, int x);
@@ -722,5 +704,10 @@ void		setup_boss(t_vars *vars, t_enemy *boss);
 void		init_imp_sprite(t_vars *vars, t_animation *imp_animation);
 void		init_caco_sprite(t_vars *vars, t_animation *caco_animation);
 void		init_boss_sprite(t_vars *vars, t_animation *boss_animation);
+
+/* Init_doors */
+void		setup_door(t_vars *vars, t_door *door);
+void		init_door(t_vars *vars, int i, int j, int *counter_doors);
+void		init_doors(t_vars *vars);
 
 #endif // CUB3D_H

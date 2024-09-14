@@ -6,13 +6,13 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:39:25 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/09 23:55:41 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:23:28 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-t_draw_params	init_draw_params(t_draw_image_params *params, \
+static t_draw_params	init_draw_params(t_draw_image_params *params, \
 					t_dim screen_start_position)
 {
 	t_draw_params	draw_params;
