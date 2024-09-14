@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:12:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/14 22:51:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 23:35:34 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,21 @@ void	load_texture(t_vars *vars, int texture_index, const char *file_path)
 
 void	initialise_textures(t_vars *vars)
 {
+	int	i;
+
 	if (!vars->mlx || !vars->mlx->mlx)
+		exit_with_error(vars, "MLX not initialized");
+	vars->texture_names[0] = ft_strdup("./assets/north_texture.xpm");
+	vars->texture_names[1] = ft_strdup("./assets/south_texture.xpm");
+	vars->texture_names[2] = ft_strdup("./assets/west_texture.xpm");
+	vars->texture_names[3] = ft_strdup("./assets/east_texture.xpm");
+	i = -1;
+	while (++i < 4)
 	{
-		perror("MLX not initialized");
-		free_and_exit(vars);
+		if (!vars->texture_names[i])
+			exit_with_error(vars, "Failed to allocate memory for texture names");
+		load_texture(vars, i, vars->texture_names[i]);
 	}
-	load_texture(vars, TEXTURE_NORTH, "./assets/north_texture.xpm");
-	load_texture(vars, TEXTURE_SOUTH, "./assets/south_texture.xpm");
-	load_texture(vars, TEXTURE_WEST, "./assets/west_texture.xpm");
-	load_texture(vars, TEXTURE_EAST, "./assets/east_texture.xpm");
 	load_texture(vars, TEXTURE_DOOR0, "./assets/door0.xpm");
 	load_texture(vars, TEXTURE_DOOR1, "./assets/door1.xpm");
 	load_texture(vars, TEXTURE_DOOR2, "./assets/door2.xpm");

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 22:50:52 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 23:35:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,6 +315,7 @@ typedef struct s_vars
 	int				*sprite_order;
 	t_sprite		*sprites;
 	t_img			*sprite_texture;
+	char			*texture_names[4];
 	int				num_sprites;
 	t_keys			keys;
 }	t_vars;
@@ -544,6 +545,7 @@ void		free_textures(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
 void		free_vars_sprite_texture(t_vars *vars);
 void		free_vars_fire(t_vars *vars);
+void		free_vars_texture_names(t_vars *vars);
 
 /* Free_enemies.c */
 void		free_enemy_list(t_vars *vars);
