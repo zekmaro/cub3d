@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 15:36:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:06:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -709,5 +709,6 @@ void		init_boss_sprite(t_vars *vars, t_animation *boss_animation);
 void		setup_door(t_vars *vars, t_door *door);
 void		init_door(t_vars *vars, int i, int j, int *counter_doors);
 void		init_doors(t_vars *vars);
+void		printout_doors(t_vars *vars);
 
 #endif // CUB3D_H

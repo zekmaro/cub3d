@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 13:59:25 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:06:29 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	run_screen(t_vars *vars)
 	init_caco_animation(vars);
 	init_enemies(vars);
 	init_boss(vars);
+	init_doors(vars);
+	setup_door(vars, vars->door);
+	printout_doors(vars);
 	setup_boss(vars, vars->boss);
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
@@ -103,6 +106,7 @@ int	main(int argc, char **argv)
 	initialise_vars(&vars);
 	if (!read_map(fd, vars.map, argv[1]))
 		free_and_exit(&vars);
+	initialise_doors(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);
 	get_current_time(&vars.program_start);
