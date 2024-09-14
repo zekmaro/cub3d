@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 21:32:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 13:21:01 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -507,7 +507,6 @@ void		handle_enemy_shot(t_vars *vars, t_enemy *enemy);
 /* Handle_enemies.c */
 void		update_enemy_frames(t_enemy *enemy, long delay);
 void		setup_boss(t_vars *vars, t_enemy *boss);
-void		init_enemies(t_vars *vars);
 void		enemy_shoot(t_enemy *enemy, int vector_x, int vector_y, int vector);
 void		enemy_act(t_vars *vars, t_enemy *enemy);
 void		search_for_player(t_vars *vars);
@@ -525,18 +524,15 @@ void		free_memory(char **arr);
 void		free_map(t_map *map);
 int			free_and_exit(t_vars *vars);
 void		free_vars_doors(t_vars *vars);
-void		free_sprites(t_vars *vars);
 void		cleanup_vars(t_vars *vars);
 
 /* Free_environment.c */
 void		free_vars_map(t_vars *vars);
 void		free_vars_line(t_vars *vars);
-void		free_vars_animated_sprite(t_vars *vars);
 void		free_vars_gun(t_vars *vars);
 void		free_vars_fire(t_vars *vars);
 void		free_vars_door_textures(t_vars *vars);
 void		free_vars_sprite_texture(t_vars *vars);
-void		free_vars_sprites(t_vars *vars);
 void		free_vars_zbuffer(t_vars *vars);
 void		free_environment(t_vars *vars);
 void		free_doors(t_vars *vars);
@@ -582,7 +578,6 @@ void		free_vars_map(t_vars *vars);
 void		free_vars_image(t_vars *vars);
 void		free_vars_player(t_vars *vars);
 void		free_vars_mlx(t_vars *vars);
-void		free_vars_sprites(t_vars *vars);
 void		free_vars_zbuffer(t_vars *vars);
 
 /* Handle_image.c */
@@ -723,7 +718,7 @@ void		setup_imp(t_vars *vars, t_enemy *imp);
 void		setup_caco(t_vars *vars, t_enemy *caco);
 void		setup_boss(t_vars *vars, t_enemy *boss);
 
-/* init_enemy_sprites.c */
+/* Init_enemy_sprites.c */
 void		init_imp_sprite(t_vars *vars, t_animation *imp_animation);
 void		init_caco_sprite(t_vars *vars, t_animation *caco_animation);
 void		init_boss_sprite(t_vars *vars, t_animation *boss_animation);
