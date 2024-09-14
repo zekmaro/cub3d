@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 14:11:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:06:41 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	initialise_doors(t_vars *vars)
 {
 	t_door	*door;
 
-	vars->map->num_doors = 0;
-	door = ft_calloc(1, sizeof(t_door));
+	printf("Number of doors: %d\n", vars->map->num_doors);
+	door = ft_calloc(vars->map->num_doors, sizeof(t_door));
 	if (!door)
 	{
 		exit_with_error(vars, "Failed to allocate memory for doors");
@@ -71,7 +71,6 @@ void	initialise_vars(t_vars *vars)
 	ft_bzero(vars->textures, sizeof(vars->textures));
 	initialise_image(vars);
 	initialise_map(vars);
-	initialise_doors(vars);
 	initialise_mlx(vars);
 	initialise_line(vars);
 	initialise_ray(vars);
