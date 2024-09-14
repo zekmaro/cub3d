@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/13 19:31:30 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:52:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	count_new_lines(int fd)
 int	handle_player_direction(char *line, int i, int row, t_map *map)
 {
 	if (map->player_dir != 0)
-		return (printf("hello\n"), 0);
+		return (perror("Multiple player directions found\n"), \
+					exit(EXIT_FAILURE), 1);
 	map->player_x = i;
 	map->player_y = row;
 	map->player_dir = line[i];
@@ -67,7 +68,7 @@ int	validate_line(char *line, int row, t_map *map)
 		else if (line[i] == 'D')
 			map->num_doors++;
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
-			return (printf("world\n"), 0);
+			return (perror("Invalid character in map"), exit(EXIT_FAILURE), 1);
 	}
 	if (i > map->width)
 		map->width = i;
