@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 23:35:44 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:31:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,6 +318,12 @@ typedef struct s_vars
 	char			*texture_names[4];
 	int				num_sprites;
 	t_keys			keys;
+	int				floor_r;
+	int				floor_g;
+	int				floor_b;
+	int				ceiling_r;
+	int				ceiling_g;
+	int				ceiling_b;
 }	t_vars;
 
 typedef struct s_dim
@@ -709,5 +715,11 @@ void		setup_door(t_vars *vars, t_door *door);
 void		init_door(t_vars *vars, int i, int j, int *counter_doors);
 void		init_doors(t_vars *vars);
 void		printout_doors(t_vars *vars);
+
+/* Parse_input.c */
+
+void		parse_color_components(char *line, int *r, int *g, int *b);
+void		parse_texture(t_vars *vars, char *line, char **texture);
+void		parse_line(t_vars *vars, char *line);
 
 #endif // CUB3D_H

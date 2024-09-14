@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
+/*   Updated: 2024/09/15 01:36:19 by iberegsz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
+
+void	parse_color_components(char *line, int *r, int *g, int *b)
+{
+	char	**components;
+
+	components = ft_split(line, ',');
+	if (!components)
+	{
+		perror("Failed to split color components");
+		exit(EXIT_FAILURE);
+	}
+	if (!components[0] || !components[1] || !components[2])
+	{
+		free(components[0]);
+		free(components[1]);
+		free(components[2]);
+		free(components);
+		perror("Invalid color components");
+		exit(EXIT_FAILURE);
+	}
+	*r = ft_atoi(components[0]);
+	*g = ft_atoi(components[1]);
+	*b = ft_atoi(components[2]);
+	free(components[0]);
+	free(components[1]);
+	free(components[2]);
+	free(components);
+}
+
+void	parse_texture(t_vars *vars, char *line, char **texture)
+{
+	*texture = ft_strdup(line + 3);
+	if (!*texture)
+		exit_with_error(vars, "Failed to allocate memory for texture");
+}
+
+void	parse_line( t_vars *vars, char *line)
+{
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		parse_texture(vars, line, &vars->texture_names[0]);
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		parse_texture(vars, line, &vars->texture_names[1]);
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		parse_texture(vars, line, &vars->texture_names[2]);
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		parse_texture(vars, line, &vars->texture_names[3]);
+	else if (ft_strncmp(line, "F ", 2) == 0)
+		parse_color_components(line + 2, \
+			&vars->floor_r, &vars->floor_g, &vars->floor_b);
+	else if (ft_strncmp(line, "C ", 2) == 0)
+		parse_color_components(line + 2, \
+			&vars->ceiling_r, &vars->ceiling_g, &vars->ceiling_b);
+}

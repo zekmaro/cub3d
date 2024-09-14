@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/14 14:36:42 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/15 00:40:50 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ SRC		:=	src/cub3d.c \
 			src/load_animated_sprite.c \
 			src/free_boss_animations.c \
 			src/setup_enemies.c \
+			src/parse_input.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
