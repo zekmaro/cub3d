@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:12:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 13:31:40 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:51:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	initialise_textures(t_vars *vars)
 		perror("MLX not initialized");
 		free_and_exit(vars);
 	}
-	load_texture(vars, TEXTURE_NORTH, "./assets/wall1.xpm");
-	load_texture(vars, TEXTURE_SOUTH, "./assets/wall2.xpm");
-	load_texture(vars, TEXTURE_WEST, "./assets/wall3.xpm");
-	load_texture(vars, TEXTURE_EAST, "./assets/wall4.xpm");
+	load_texture(vars, TEXTURE_NORTH, "./assets/north_texture.xpm");
+	load_texture(vars, TEXTURE_SOUTH, "./assets/south_texture.xpm");
+	load_texture(vars, TEXTURE_WEST, "./assets/west_texture.xpm");
+	load_texture(vars, TEXTURE_EAST, "./assets/east_texture.xpm");
 	load_texture(vars, TEXTURE_DOOR0, "./assets/door0.xpm");
 	load_texture(vars, TEXTURE_DOOR1, "./assets/door1.xpm");
 	load_texture(vars, TEXTURE_DOOR2, "./assets/door2.xpm");

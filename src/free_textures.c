@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:48:15 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 22:46:25 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:51:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,6 @@ void	free_textures(t_vars *vars)
 			vars->textures[i] = NULL;
 		}
 		i++;
-	}
-}
-
-void	free_vars_door_textures(t_vars *vars)
-{
-	if (vars->door->textures)
-	{
-		if (vars->door->textures->mlx_img)
-			free(vars->door->textures->mlx_img);
-		free(vars->door->textures);
-		vars->door->textures = NULL;
 	}
 }
 

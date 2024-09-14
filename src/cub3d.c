@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 20:06:29 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:51:04 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	run_screen(t_vars *vars)
 	init_boss(vars);
 	init_doors(vars);
 	setup_door(vars, vars->door);
-	printout_doors(vars);
 	setup_boss(vars, vars->boss);
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
