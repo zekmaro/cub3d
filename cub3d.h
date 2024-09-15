@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 01:31:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:59:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -717,9 +717,12 @@ void		init_doors(t_vars *vars);
 void		printout_doors(t_vars *vars);
 
 /* Parse_input.c */
-
 void		parse_color_components(char *line, int *r, int *g, int *b);
 void		parse_texture(t_vars *vars, char *line, char **texture);
 void		parse_line(t_vars *vars, char *line);
+
+/* Parse_map.c */
+int			is_map_surrounded_by_ones(t_map *map);
+void		fill_with_ones(t_map *map);
 
 #endif // CUB3D_H
