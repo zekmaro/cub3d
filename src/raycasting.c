@@ -6,36 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:15:16 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 16:27:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 23:42:10 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	get_ray_target_coords(t_vars *vars)
-{
-	vars->ray->ray_x = vars->player->x;
-	vars->ray->ray_y = vars->player->y;
-	vars->ray->ray_dir_x = cos(vars->ray->ray_angle);
-	vars->ray->ray_dir_y = sin(vars->ray->ray_angle);
-	while (!is_wall(vars, vars->ray->ray_y, vars->ray->ray_x) \
-		&& !is_door(vars, vars->ray->ray_y, vars->ray->ray_x))
-	{
-		vars->ray->last_ray_x = vars->ray->ray_x;
-		vars->ray->last_ray_y = vars->ray->ray_y;
-		vars->ray->ray_x += vars->ray->ray_dir_x;
-		vars->ray->ray_y += vars->ray->ray_dir_y;
-	}
-	if (is_door(vars, vars->ray->ray_y, vars->ray->ray_x))
-	{
-		vars->ray->hit_door = 1;
-		vars->ray->door_factor = 0.5;
-	}
-	else
-	{
-		vars->ray->hit_door = 0;
-	}
-}
 
 void	setup_ray(t_vars *vars, double ray_x, double ray_y)
 {
@@ -83,7 +58,7 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		put_pixel_to_image(vars, ray_id, y, BROWN);
 }
 
-void	cast_ray(t_vars *vars, int ray_id)
+static void	cast_ray(t_vars *vars, int ray_id)
 {
 	t_tex_typ	texture_index;
 

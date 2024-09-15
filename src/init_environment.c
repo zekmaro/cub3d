@@ -52,16 +52,16 @@ void	initialise_zbuffer(t_vars *vars)
 
 void	initialise_doors(t_vars *vars)
 {
-	t_door	*door;
+	t_door	*doors;
 
-	door = ft_calloc(vars->map->num_doors, sizeof(t_door));
-	if (!door)
+	doors = ft_calloc(vars->map->num_doors, sizeof(t_door));
+	if (!doors)
 	{
 		exit_with_error(vars, "Failed to allocate memory for doors");
 		return ;
 	}
-	ft_bzero(door, sizeof(t_door));
-	vars->door = door;
+	ft_bzero(doors, sizeof(t_door));
+	vars->doors = doors;
 }
 
 void	initialise_vars(t_vars *vars)

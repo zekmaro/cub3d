@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 20:02:19 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 00:25:18 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,14 +133,8 @@ typedef struct s_map
 	int		player_x;
 	int		player_y;
 	char	player_dir;
-	int		monster_x;
-	int		monster_y;
-	int		caco_x;
-	int		caco_y;
 	int		boss_x;
 	int		boss_y;
-	int		door_x;
-	int		door_y;
 	int		imp_list_size;
 	int		caco_list_size;
 	int		num_doors;
@@ -154,7 +148,11 @@ typedef struct s_door
 	int				grid_y;
 	int				center_x;
 	int				center_y;
+	int				offset;
+	int				open;
+	int				orientation;
 	int				state;
+	int				distance_to_door;
 	double			animation_progress;
 	t_img			*textures;
 	struct timeval	time0;
@@ -270,6 +268,7 @@ typedef struct s_enemy
 	int				center_y;
 	int				rot_dir;
 	int				detected_player;
+	int				draw;
 	int				shoot_ball;
 	t_img			*move;
 	t_img			*death;
@@ -303,7 +302,7 @@ typedef struct s_vars
 	t_enemy			*boss;
 	t_animation		*boss_animation;
 	t_ray			*ray;
-	t_door			*door;
+	t_door			*doors;
 	int				minimap_update_x;
 	int				minimap_update_y;
 	t_img			*textures[8];
@@ -428,6 +427,14 @@ typedef struct s_sprite_info
 	int		scale;
 	int		current_frame;
 }			t_sprite_info;
+
+typedef struct s_ray_params
+{
+	int	door_flag;
+	int	ray_y;
+	int	ray_x;
+	int	index;
+}	t_ray_params;
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
@@ -617,6 +624,9 @@ void		allocate_memory_for_sprites(t_vars *vars);
 void		load_sprites(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 
+/* Parsing.c */
+int			read_map(int fd, t_map *map, char *file_name);
+
 /* Map_utils.c */
 void		print_map(t_map *map);
 int			player_inside_map(t_vars *vars, int x, int y);
@@ -656,15 +666,12 @@ int			get_map_y(t_vars *vars);
 void		handle_monster(t_vars *vars, int ray_id, int y, int color);
 void		handle_door(t_vars *vars, int ray_id, int y, int color);
 void		handle_wall(t_vars *vars, int ray_id, int y, int color);
-void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
 
 /* Raycasting.c */
-void		get_ray_target_coords(t_vars *vars);
 void		setup_ray(t_vars *vars, double ray_x, double ray_y);
 void		draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index);
-void		cast_ray(t_vars *vars, int ray_id);
 void		raycast(t_vars *vars);
 
 /* Is_entity.c */
@@ -709,6 +716,22 @@ void		setup_door(t_vars *vars, t_door *door);
 void		init_door(t_vars *vars, int i, int j, int *counter_doors);
 void		init_doors(t_vars *vars);
 void		printout_doors(t_vars *vars);
+
+/* Handle_door_list.c */
+void		update_door_list(t_vars *vars, t_door *door_list, int size);
+int			inside_door(t_vars *vars, t_ray_params *params);
+int			get_door_id(t_vars *vars, int ray_x, int ray_y);
+
+/* Handle_objects.c */
+void		check_object(t_vars *vars, int y, int x);
+void		search_for_objects(t_vars *vars, double angle_offset);
+void		check_objects_to_draw(t_vars *vars);
+
+/* Raycasting_utils.c */
+void		get_ray_target_coords(t_vars *vars);
+
+/* Read_map.c */
+int			read_map(int fd, t_map *map, char *file_name);
 
 /* Parsing.c */
 int			count_new_lines(int fd);
