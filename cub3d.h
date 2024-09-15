@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 01:59:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:08:56 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -682,10 +682,8 @@ int			is_monster(t_vars *vars, int x, int y);
 int			is_wall(t_vars *vars, int y, int x);
 int			is_door(t_vars *vars, int y, int x);
 
+/* Gradient.c */
 void		draw_player_damaged(t_vars *vars);
-void		draw_door(t_vars *vars);
-int			is_enemy(t_enemy *enemy, int y, int x);
-int			functioin(t_vars *vars);
 
 /* Init_animations.c */
 void		init_imp_sprites(t_vars *vars, t_enemy *imp);

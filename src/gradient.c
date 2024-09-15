@@ -6,13 +6,13 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 22:10:20 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/10 01:53:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:09:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-uint32_t	apply_transparency(uint32_t color, double trans_coef)
+static uint32_t	apply_transparency(uint32_t color, double trans_coef)
 {
 	uint8_t	red;
 	uint8_t	green;
@@ -26,7 +26,7 @@ uint32_t	apply_transparency(uint32_t color, double trans_coef)
 	return ((alpha << 24) | (red << 16) | (green << 8) | blue);
 }
 
-uint32_t	combine_colors(uint32_t color1, uint32_t color2)
+static uint32_t	combine_colors(uint32_t color1, uint32_t color2)
 {
 	uint32_t	alpha;
 	uint32_t	result;
@@ -47,7 +47,7 @@ uint32_t	combine_colors(uint32_t color1, uint32_t color2)
 	return ((255 << 24) | r_blend | g_blend | b_blend);
 }
 
-void	blend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)
+static void	blend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)
 {
 	uint32_t	original_color;
 	uint32_t	blended_color;
@@ -57,7 +57,7 @@ void	blend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)
 	put_pixel_to_image(vars, x, y, blended_color);
 }
 
-void	process_pixel(t_vars *vars, int x, int y, t_pixel_params *params)
+static void	process_pixel(t_vars *vars, int x, int y, t_pixel_params *params)
 {
 	double		distance;
 	double		intensity;
