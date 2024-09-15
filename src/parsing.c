@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 01:52:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:16:55 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	handle_player_direction(char *line, int i, int row, t_map *map)
 	return (1);
 }
 
-void	handle_boss(int i, int row, t_map *map)
+static void	handle_boss(int i, int row, t_map *map)
 {
 	map->boss_x = i;
 	map->boss_y = row;
