@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 02:16:55 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 17:38:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	count_new_lines(int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	return (new_lines);
 }
 
@@ -68,7 +69,7 @@ int	validate_line(char *line, int row, t_map *map)
 		else if (line[i] == 'D')
 			map->num_doors++;
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
-			return (perror("Invalid character in map"), exit(EXIT_FAILURE), 1);
+			return (perror("Error\nInvalid character in map\n"), 0);
 	}
 	if (i > map->width)
 		map->width = i;
@@ -82,10 +83,9 @@ int	read_map(int fd, t_map *map, char *file_name)
 
 	i = 0;
 	map->height = count_new_lines(fd);
-	close(fd);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0 || map->height <= 0)
-		return (0);
+		return (close(fd), 0);
 	map->grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (!map->grid)
 		return (close(fd), 0);

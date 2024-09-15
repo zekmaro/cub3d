@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 02:16:43 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 20:02:19 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -559,12 +559,11 @@ void		free_enemies(t_vars *vars);
 void		free_vars_imp(t_vars *vars);
 void		free_vars_caco(t_vars *vars);
 
-/* Free_imp_animations.c */
+/* Free_animations.c */
+void		free_animation(t_img **animation, int frame_count);
 void		free_imp_animations(t_vars *vars);
-void		free_boss_animations(t_vars *vars);
-
-/* Free_caco_animations.c */
 void		free_caco_animations(t_vars *vars);
+void		free_boss_animations(t_vars *vars);
 
 /* Free_gun_and_fire */
 void		free_gun(t_vars *vars);
@@ -725,5 +724,9 @@ void		parse_line(t_vars *vars, char *line);
 /* Parse_map.c */
 int			is_map_surrounded_by_ones(t_map *map);
 void		fill_with_ones(t_map *map);
+void		parse_file_paths_and_colors(int fd, t_vars *vars);
+int			parse_map(int fd, t_map *map);
+int			read_map_form_file(int fd, t_map *map, t_vars *vars, \
+				char *file_name);
 
 #endif // CUB3D_H

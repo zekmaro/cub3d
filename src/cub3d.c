@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 22:51:04 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:48:23 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,31 @@ void	run_screen(t_vars *vars)
 	mlx_loop(vars->mlx->mlx);
 }
 
+int	validate_and_open_file(int argc, char **argv)
+{
+	int	fd;
+
+	if (argc != 2)
+		exit_with_error(NULL, "Error\nUsage: ./cub3D [path]<filename>.cub\n");
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Error\nInvalid file descriptor!\n");
+		exit(EXIT_FAILURE);
+	}
+	return (fd);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	int		fd;
 
-	if (argc != 2)
-	{
-		perror("Usage: ./cub3D [path]<filename>.cub\n");
-		exit(EXIT_FAILURE);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Invalid file descriptor!\n");
-		exit(EXIT_FAILURE);
-	}
+	fd = validate_and_open_file(argc, argv);
 	ft_bzero(&vars, sizeof(t_vars));
 	initialise_vars(&vars);
 	if (!read_map(fd, vars.map, argv[1]))
-		free_and_exit(&vars);
+		exit_with_error(&vars, "Error\nFailed to read map\n");
 	initialise_doors(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);

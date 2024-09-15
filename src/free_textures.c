@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:48:15 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/14 23:34:53 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:39:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_textures(t_vars *vars)
 {
 	int	i;
 
+	if (vars == NULL)
+		return ;
 	i = 0;
 	while (i < 8)
 	{
@@ -34,6 +36,8 @@ void	free_vars_textures(t_vars *vars)
 {
 	int	i;
 
+	if (vars == NULL)
+		return ;
 	i = -1;
 	while (++i < 4)
 	{
@@ -48,6 +52,8 @@ void	free_vars_textures(t_vars *vars)
 
 void	free_vars_sprite_texture(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	if (vars->sprite_texture)
 	{
 		free(vars->sprite_texture);
@@ -57,6 +63,8 @@ void	free_vars_sprite_texture(t_vars *vars)
 
 void	free_vars_fire(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	if (vars->player->fire)
 	{
 		free(vars->player->fire);
@@ -68,6 +76,8 @@ void	free_vars_texture_names(t_vars *vars)
 {
 	int	i;
 
+	if (vars == NULL)
+		return ;
 	i = -1;
 	while (++i < 4)
 	{
