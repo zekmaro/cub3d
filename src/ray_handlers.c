@@ -26,14 +26,6 @@ void	handle_wall(t_vars *vars, int ray_id, int y, int color)
 {
 	put_pixel_to_image(vars, ray_id, y, color);
 }
-
-void	handle_pixel(t_vars *vars, t_pix_inf *pix_inf)
-{
-	if (is_monster(vars, pix_inf->map_x, pix_inf->map_y))
-		handle_monster(vars, pix_inf->ray_id, pix_inf->y, pix_inf->color);
-	else
-		handle_wall(vars, pix_inf->ray_id, pix_inf->y, pix_inf->color);
-}
 // else if (is_door(vars, pix_inf->map_x, pix_inf->map_y))
 // 	handle_door(vars, pix_inf->ray_id, pix_inf->y, pix_inf->color);
 

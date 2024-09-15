@@ -63,16 +63,7 @@ t_tex_typ	define_texture_type(t_vars *vars)
 	}
 	else if (vars->map->grid[map_y][map_x] == 'D')
 	{
-		dx = (int)vars->ray->last_ray_x / vars->unit_size - map_x;
-		dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
-		if (dy == 1)
-			return (TEXTURE_DOOR0);
-		else if (dy == -1)
-			return (TEXTURE_DOOR1);
-		else if (dx == 1)
-			return (TEXTURE_DOOR2);
-		else if (dx == -1)
-			return (TEXTURE_DOOR3);
+		return (TEXTURE_DOOR0);
 	}
 	return (TEXTURE_NONE);
 }

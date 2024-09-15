@@ -13,21 +13,31 @@
 #include "../cub3d.h"
 #include <unistd.h>
 
-int inside_door(t_vars *vars, int door_flag, int ray_y, int ray_x, int offset)
+int inside_door(t_vars *vars, int door_flag, int ray_y, int ray_x, int index)
 {
 	(void)ray_y;
-	if (ray_x < offset)
-	{
-		return (0);
-	}
-	return (door_flag && ((ray_x % vars->unit_size < offset)));
-
+	return (door_flag && ((ray_x % vars->unit_size < (vars->unit_size - vars->doors[index].offset))));
 	// || (ray_y % vars->unit_size < vars->unit_size / 2))
 }
 
-static void	get_ray_target_coords(t_vars *vars, int offset)
+int	get_door_id(t_vars *vars, int ray_x, int ray_y)
+{
+	int i;
+
+	i = 0;
+	while (i < vars->map->num_doors)
+	{
+		if (abs(vars->doors[i].center_x - ray_x) < vars->unit_size && abs(vars->doors[i].center_y - ray_y) < vars->unit_size)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+static void	get_ray_target_coords(t_vars *vars)
 {
 	int	door_flag;
+	int index = 0;
 
 	door_flag = 0;
 	vars->ray->ray_x = vars->player->x;
@@ -35,7 +45,7 @@ static void	get_ray_target_coords(t_vars *vars, int offset)
 	vars->ray->ray_dir_x = cos(vars->ray->ray_angle);
 	vars->ray->ray_dir_y = sin(vars->ray->ray_angle);
 	while (!is_wall(vars, vars->ray->ray_y, vars->ray->ray_x) \
-		&& !inside_door(vars, door_flag, vars->ray->ray_y, vars->ray->ray_x, offset))
+		&& !inside_door(vars, door_flag, vars->ray->ray_y, vars->ray->ray_x, index))
 	{
 		vars->ray->last_ray_x = vars->ray->ray_x;
 		vars->ray->last_ray_y = vars->ray->ray_y;
@@ -44,13 +54,14 @@ static void	get_ray_target_coords(t_vars *vars, int offset)
 		door_flag = is_door(vars, vars->ray->ray_y, vars->ray->ray_x);
 		if (door_flag)
 		{
-			int dy = vars->door->center_y - vars->player->center_y;
-			int dx = vars->door->center_x - vars->player->center_x;
-			vars->distance_to_door = sqrt(dy * dy + dx * dx);
-			if (vars->distance_to_door < 150)
-				vars->door->draw = 1;
+			index =  get_door_id(vars, vars->ray->ray_x, vars->ray->ray_y);
+			int dy = vars->doors[index].center_y - vars->player->center_y;
+			int dx = vars->doors[index].center_x - vars->player->center_x;
+			vars->doors[index].distance_to_door = sqrt(dy * dy + dx * dx);
+			if (vars->doors[index].distance_to_door < 150)
+				vars->doors[index].open = 1;
 			else
-				vars->door->draw = 0;
+				vars->doors[index].open = 0;
 		}
 	}
 }
@@ -101,12 +112,11 @@ void	draw_ray_column(t_vars *vars, int ray_id, t_tex_typ texture_index)
 		put_pixel_to_image(vars, ray_id, y, BROWN);
 }
 
-static void	cast_ray(t_vars *vars, int ray_id, int offset)
+static void	cast_ray(t_vars *vars, int ray_id)
 {
 	t_tex_typ	texture_index;
-	(void)offset;
 
-	get_ray_target_coords(vars, vars->unit_size - offset);
+	get_ray_target_coords(vars);
 	setup_ray(vars, vars->ray->ray_x, vars->ray->ray_y);
 	texture_index = define_texture_type(vars);
 	draw_ray_column(vars, ray_id, texture_index);
@@ -125,7 +135,7 @@ void	raycast(t_vars *vars)
 	while (x < vars->mlx->window_width)
 	{
 		vars->ray->ray_angle = start_angle + x * angle_step;
-		cast_ray(vars, x, vars->offset);
+		cast_ray(vars, x);
 		x++;
 	}
 }

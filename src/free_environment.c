@@ -64,17 +64,17 @@ void	free_frames(t_img **frames, int count)
 
 void	free_doors(t_vars *vars)
 {
-	if (vars->door)
+	if (vars->doors)
 	{
-		if (vars->door->textures)
+		if (vars->doors->textures)
 		{
-			if (vars->door->textures->frames)
+			if (vars->doors->textures->frames)
 			{
-				free_frames((t_img **)vars->door->textures->frames, 4);
-				free(vars->door->textures->frames);
+				free_frames((t_img **)vars->doors->textures->frames, 4);
+				free(vars->doors->textures->frames);
 			}
-			free(vars->door->textures);
+			free(vars->doors->textures);
 		}
-		free(vars->door);
+		free(vars->doors);
 	}
 }

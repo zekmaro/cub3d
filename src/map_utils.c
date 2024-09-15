@@ -33,11 +33,16 @@ int	player_inside_map(t_vars *vars, int x, int y)
 		&& y < vars->map->height);
 }
 
+// int	is_opened_door(t_vars *vars, int y, int x)
+// {
+
+// }
+
 int	can_move(t_vars *vars, int y, int x)
 {
 	if (player_inside_map(vars, x, y))
 	{
-		if (vars->map->grid[y][x] == '1' || (vars->map->grid[y][x] == 'D' && !vars->offset))
+		if (vars->map->grid[y][x] == '1' /*|| vars->map->grid[y][x] == 'D'*/)
 			return (0);
 		return (1);
 	}

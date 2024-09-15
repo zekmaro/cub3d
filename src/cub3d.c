@@ -12,6 +12,20 @@
 
 #include "../cub3d.h"
 
+void	update_door_list(t_vars *vars, t_door *door_list, int size)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+	{
+		if (door_list[i].open && door_list[i].offset < vars->unit_size)
+			door_list[i].offset += 8;
+		else if (!door_list[i].open && door_list[i].offset > 0)
+			door_list[i].offset -= 8;
+	}
+}
+
 int	main_loop_hook(t_vars *vars)
 {
 	struct timeval	t;
@@ -20,7 +34,6 @@ int	main_loop_hook(t_vars *vars)
 	get_current_time(&t);
 	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
-	get_current_time(&vars->door->time1);
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 300, vars->map->caco_list_size);
 	update_enemy_frames(vars->boss, 200);
@@ -34,11 +47,7 @@ int	main_loop_hook(t_vars *vars)
 		draw_player_damaged(vars);
 	draw_minimap(vars);
 	draw_player(vars, RED);
-	if (vars->door->draw && vars->offset < vars->unit_size)
-		vars->offset += 4;
-	else if (!vars->door->draw && vars->offset > 0)
-		vars->offset -= 4;
-	vars->door->time0 = vars->door->time1;
+	update_door_list(vars, vars->doors, vars->map->num_doors);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
 	get_current_time(&t);
@@ -79,8 +88,6 @@ void	run_screen(t_vars *vars)
 	init_enemies(vars);
 	init_boss(vars);
 	init_doors(vars);
-	setup_door(vars, vars->door);
-	printout_doors(vars);
 	setup_boss(vars, vars->boss);
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);

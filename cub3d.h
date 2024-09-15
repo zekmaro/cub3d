@@ -133,14 +133,8 @@ typedef struct s_map
 	int		player_x;
 	int		player_y;
 	char	player_dir;
-	int		monster_x;
-	int		monster_y;
-	int		caco_x;
-	int		caco_y;
 	int		boss_x;
 	int		boss_y;
-	int		door_x;
-	int		door_y;
 	int		imp_list_size;
 	int		caco_list_size;
 	int		num_doors;
@@ -154,8 +148,10 @@ typedef struct s_door
 	int				grid_y;
 	int				center_x;
 	int				center_y;
-	int				draw;
+	int				offset;
+	int				open;
 	int				state;
+	int				distance_to_door;
 	double			animation_progress;
 	t_img			*textures;
 	struct timeval	time0;
@@ -304,10 +300,7 @@ typedef struct s_vars
 	t_enemy			*boss;
 	t_animation		*boss_animation;
 	t_ray			*ray;
-	t_door			*door;
-	long			door_elapsed_time;
-	int offset;
-	int	distance_to_door;
+	t_door			*doors;
 	int				minimap_update_x;
 	int				minimap_update_y;
 	t_img			*textures[8];
@@ -659,7 +652,6 @@ int			get_map_y(t_vars *vars);
 void		handle_monster(t_vars *vars, int ray_id, int y, int color);
 void		handle_door(t_vars *vars, int ray_id, int y, int color);
 void		handle_wall(t_vars *vars, int ray_id, int y, int color);
-void		handle_pixel(t_vars *vars, t_pix_inf *pix_inf);
 int			get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 				int y, t_tex_coords *coords);
 

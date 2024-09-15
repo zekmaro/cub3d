@@ -71,11 +71,11 @@ void	load_sprites(t_vars *vars)
 		"Failed to allocate memory for gun sprite");
 	allocate_sprite_memory(vars, &vars->player->fire, \
 		"Failed to allocate memory for fire sprite");
-	allocate_sprite_memory(vars, &vars->door->textures, \
+	allocate_sprite_memory(vars, &vars->doors->textures, \
 		"Failed to allocate memory for door textures");
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
-	load_animated_sprite(vars, vars->door->textures, door_frames, 4);
+	load_animated_sprite(vars, vars->doors->textures, door_frames, 4);
 }
 
 void	initialise_sprites(t_vars *vars)

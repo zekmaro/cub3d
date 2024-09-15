@@ -32,12 +32,12 @@ void	free_textures(t_vars *vars)
 
 void	free_vars_door_textures(t_vars *vars)
 {
-	if (vars->door->textures)
+	if (vars->doors->textures)
 	{
-		if (vars->door->textures->mlx_img)
-			free(vars->door->textures->mlx_img);
-		free(vars->door->textures);
-		vars->door->textures = NULL;
+		if (vars->doors->textures->mlx_img)
+			free(vars->doors->textures->mlx_img);
+		free(vars->doors->textures);
+		vars->doors->textures = NULL;
 	}
 }
 
