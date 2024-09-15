@@ -14,6 +14,11 @@
 
 void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 {
+	// if (texture_index == TEXTURE_DOOR0 || texture_index == TEXTURE_DOOR1 \
+	// 	|| texture_index == TEXTURE_DOOR2 || texture_index == TEXTURE_DOOR3)
+	// {
+	// 	*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
+	// }
 	if (texture_index % 2 == 0)
 	{
 		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;

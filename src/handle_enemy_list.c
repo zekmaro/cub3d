@@ -54,7 +54,7 @@ void	update_enemy_frames(t_enemy *enemy, long delay)
 	get_current_time(&enemy->time1);
 	enemy_elapsed_time = get_elapsed_time(&enemy->time0, \
 		&enemy->time1);
-	if (!enemy->is_dead && enemy_elapsed_time > delay)
+	if (!enemy->is_dead && enemy->draw && enemy_elapsed_time > delay)
 	{
 		if (enemy->current_animation == enemy->death
 			&& enemy->current_frame

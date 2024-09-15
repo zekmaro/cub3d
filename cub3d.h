@@ -268,6 +268,7 @@ typedef struct s_enemy
 	int				center_y;
 	int				rot_dir;
 	int				detected_player;
+	int				draw;
 	int				shoot_ball;
 	t_img			*move;
 	t_img			*death;

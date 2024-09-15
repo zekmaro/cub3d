@@ -26,14 +26,75 @@ void	update_door_list(t_vars *vars, t_door *door_list, int size)
 	}
 }
 
+void	check_object(t_vars *vars, int y, int x)
+{
+	int i;
+	
+	i = 0;
+	while (i < vars->map->imp_list_size)
+	{
+		if (is_enemy(&vars->imp_list[i], y, x))
+		{
+			vars->imp_list[i].draw = 1;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < vars->map->caco_list_size)
+	{
+		if (is_enemy(&vars->caco_list[i], y, x))
+		{
+			vars->caco_list[i].draw = 1;
+		}
+		i++;
+	}
+	if (is_enemy(vars->boss, y, x))
+	{
+		vars->boss->draw = 1;
+	}
+}
+
+void	search_for_objects(t_vars *vars, double angle_offset)
+{
+	double	ray_x;
+	double	ray_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	ray_angle;
+
+	ray_angle = vars->player->angle + angle_offset;
+	ray_x = vars->player->center_x;
+	ray_y = vars->player->center_y;
+	ray_dir_x = ray_x;
+	ray_dir_y = ray_y;
+	while (!is_wall(vars, ray_dir_y, ray_dir_x))
+	{
+		ray_dir_x += cos(ray_angle);
+		ray_dir_y += sin(ray_angle);
+		check_object(vars, ray_dir_y, ray_dir_x);
+	}
+}
+
+void	check_objects_to_draw(t_vars *vars)
+{
+	double	fov_half;
+	double	radian;
+
+	fov_half = vars->player->fov / 2;
+	radian = 0;
+	while (radian < vars->player->fov)
+	{
+		search_for_objects(vars, -fov_half + radian);
+		radian += 0.01;
+	}
+}
+
 int	main_loop_hook(t_vars *vars)
 {
-	struct timeval	t;
-
 	reset_mouse_to_center(vars);
-	get_current_time(&t);
 	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
+	check_objects_to_draw(vars);
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 300, vars->map->caco_list_size);
 	update_enemy_frames(vars->boss, 200);
@@ -50,7 +111,6 @@ int	main_loop_hook(t_vars *vars)
 	update_door_list(vars, vars->doors, vars->map->num_doors);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
-	get_current_time(&t);
 	return (0);
 }
 

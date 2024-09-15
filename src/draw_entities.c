@@ -42,7 +42,7 @@ void	draw_and_update_entity(t_vars *vars, t_enemy *entity, int scale)
 	t_sprite_info	sprite_info;
 	t_sprite_info	fireball_info;
 
-	if (!entity->is_dead)
+	if (!entity->is_dead && entity->draw)
 	{
 		sprite_info.sprite = entity->current_animation;
 		sprite_info.object_x = entity->center_x;
