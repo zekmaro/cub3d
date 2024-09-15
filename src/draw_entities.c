@@ -42,7 +42,7 @@ void	draw_and_update_entity(t_vars *vars, t_enemy *entity, int scale)
 	t_sprite_info	sprite_info;
 	t_sprite_info	fireball_info;
 
-	if (!entity->is_dead)
+	if (!entity->is_dead && entity->draw)
 	{
 		sprite_info.sprite = entity->current_animation;
 		sprite_info.object_x = entity->center_x;
@@ -79,7 +79,7 @@ void	draw_map(t_vars *vars)
 	raycast(vars);
 	draw_and_update_entities(vars, vars->imp_list, vars->map->imp_list_size);
 	draw_and_update_entities(vars, vars->caco_list, vars->map->caco_list_size);
-	draw_and_update_entity(vars, vars->boss, 100);
+	draw_and_update_entity(vars, vars->boss, 150);
 	draw_gun(vars, 4.0);
 	update_player_position(vars);
 }

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/15 18:40:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 23:35:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,18 @@ void	free_map(t_map *map)
 	i = 0;
 	while (i < map->width)
 	{
-		free(map->grid[i]);
-		i++;
+		i = -1;
+		while (++i < map->height)
+		{
+			if (map->grid[i])
+			{
+				free(map->grid[i]);
+				map->grid[i] = NULL;
+			}
+		}
+		free(map->grid);
+		map->grid = NULL;
 	}
-	free(map->grid);
 }
 
 void	free_vars_gun(t_vars *vars)
@@ -74,17 +82,17 @@ void	free_doors(t_vars *vars)
 {
 	if (vars == NULL)
 		return ;
-	if (vars->door)
+	if (vars->doors)
 	{
-		if (vars->door->textures)
+		if (vars->doors->textures)
 		{
-			if (vars->door->textures->frames)
+			if (vars->doors->textures->frames)
 			{
-				free_frames((t_img **)vars->door->textures->frames, 4);
-				free(vars->door->textures->frames);
+				free_frames((t_img **)vars->doors->textures->frames, 4);
+				free(vars->doors->textures->frames);
 			}
-			free(vars->door->textures);
+			free(vars->doors->textures);
 		}
-		free(vars->door);
+		free(vars->doors);
 	}
 }

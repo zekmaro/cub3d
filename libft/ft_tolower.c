@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   tolower.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:00:13 by anarama           #+#    #+#             */
 /*   Updated: 2024/04/03 15:01:20 by anarama          ###   ########.fr       */

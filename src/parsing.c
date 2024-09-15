@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 17:38:39 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 00:11:10 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,20 @@ int	read_map(int fd, t_map *map, char *file_name)
 	while (line != NULL)
 	{
 		if (!validate_line(line, i, map))
-			return (free(line), close(fd), 0);
+		{
+			free(line);
+			while (i > 0)
+				free(map->grid[--i]);
+			free(map->grid);
+			close(fd);
+			return (0);
+		}
 		map->grid[i] = line;
 		line = get_next_line(fd);
 		i++;
 	}
+	if (line != NULL)
+		free(line);
 	close(fd);
 	return (1);
 }

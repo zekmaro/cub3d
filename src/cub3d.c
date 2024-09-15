@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 18:48:23 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 21:53:28 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	main_loop_hook(t_vars *vars)
 {
-	struct timeval	t;
-
 	reset_mouse_to_center(vars);
-	get_current_time(&t);
 	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
+	check_objects_to_draw(vars);
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 300, vars->map->caco_list_size);
 	update_enemy_frames(vars->boss, 200);
@@ -33,9 +31,9 @@ int	main_loop_hook(t_vars *vars)
 		draw_player_damaged(vars);
 	draw_minimap(vars);
 	draw_player(vars, RED);
+	update_door_list(vars, vars->doors, vars->map->num_doors);
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
-	get_current_time(&t);
 	return (0);
 }
 
@@ -73,7 +71,7 @@ void	run_screen(t_vars *vars)
 	init_enemies(vars);
 	init_boss(vars);
 	init_doors(vars);
-	setup_door(vars, vars->door);
+	setup_door(vars, vars->doors);
 	setup_boss(vars, vars->boss);
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);

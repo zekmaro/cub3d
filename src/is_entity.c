@@ -34,8 +34,3 @@ int	is_caco(t_vars *vars, int y, int x)
 	return (abs(y - vars->caco->center_y) < 40 \
 		&& abs(x - vars->caco->center_x) < 40);
 }
-
-int	is_monster(t_vars *vars, int x, int y)
-{
-	return (x == vars->map->monster_x && y == vars->map->monster_y);
-}
