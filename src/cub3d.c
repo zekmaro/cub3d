@@ -21,18 +21,6 @@ int	main_loop_hook(t_vars *vars)
 	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
 	get_current_time(&vars->door->time1);
-	// if (vars->door->draw && vars->offset < vars->unit_size)
-	// {
-	vars->door_elapsed_time = get_elapsed_time(&vars->door->time0, \
-		&vars->door->time1);
-	if (vars->door_elapsed_time > 50)
-	{
-		if (vars->door->draw && vars->offset < vars->unit_size)
-			vars->offset += 4;
-		else if (!vars->door->draw && vars->offset > 0)
-			vars->offset -= 4;
-		vars->door->time0 = vars->door->time1;
-	}
 	update_enemy_list(vars->imp_list, 200, vars->map->imp_list_size);
 	update_enemy_list(vars->caco_list, 300, vars->map->caco_list_size);
 	update_enemy_frames(vars->boss, 200);
@@ -46,6 +34,11 @@ int	main_loop_hook(t_vars *vars)
 		draw_player_damaged(vars);
 	draw_minimap(vars);
 	draw_player(vars, RED);
+	if (vars->door->draw && vars->offset < vars->unit_size)
+		vars->offset += 4;
+	else if (!vars->door->draw && vars->offset > 0)
+		vars->offset -= 4;
+	vars->door->time0 = vars->door->time1;
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
 	get_current_time(&t);

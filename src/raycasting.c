@@ -44,8 +44,8 @@ static void	get_ray_target_coords(t_vars *vars, int offset)
 		door_flag = is_door(vars, vars->ray->ray_y, vars->ray->ray_x);
 		if (door_flag)
 		{
-			int dy = vars->ray->ray_y - vars->player->y;
-			int dx = vars->ray->ray_x - vars->player->x;
+			int dy = vars->door->center_y - vars->player->center_y;
+			int dx = vars->door->center_x - vars->player->center_x;
 			vars->distance_to_door = sqrt(dy * dy + dx * dx);
 			if (vars->distance_to_door < 150)
 				vars->door->draw = 1;
