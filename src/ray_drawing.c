@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/12 13:45:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 23:53:18 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 {
-	// if (texture_index == TEXTURE_DOOR0 || texture_index == TEXTURE_DOOR1 \
-	// 	|| texture_index == TEXTURE_DOOR2 || texture_index == TEXTURE_DOOR3)
-	// {
-	// 	*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
-	// }
 	if (texture_index % 2 == 0)
 	{
 		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
@@ -39,6 +34,32 @@ void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 	}
 }
 
+static t_tex_typ	get_wall_texture(int dx, int dy)
+{
+	if (dy == 1)
+		return (TEXTURE_NORTH);
+	else if (dx == 1)
+		return (TEXTURE_WEST);
+	else if (dy == -1)
+		return (TEXTURE_SOUTH);
+	else if (dx == -1)
+		return (TEXTURE_EAST);
+	return (TEXTURE_NONE);
+}
+
+static t_tex_typ	get_door_texture(int dx, int dy)
+{
+	if (dy == 1)
+		return (TEXTURE_DOOR0);
+	else if (dx == 1)
+		return (TEXTURE_DOOR1);
+	else if (dy == -1)
+		return (TEXTURE_DOOR2);
+	else if (dx == -1)
+		return (TEXTURE_DOOR3);
+	return (TEXTURE_NONE);
+}
+
 t_tex_typ	define_texture_type(t_vars *vars)
 {
 	int	map_x;
@@ -48,41 +69,11 @@ t_tex_typ	define_texture_type(t_vars *vars)
 
 	map_x = (int)vars->ray->ray_x / vars->unit_size;
 	map_y = (int)vars->ray->ray_y / vars->unit_size;
+	dx = (int)vars->ray->last_ray_x / vars->unit_size - map_x;
+	dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
 	if (vars->map->grid[map_y][map_x] == '1')
-	{
-		dx = (int)vars->ray->last_ray_x / vars->unit_size - map_x;
-		dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
-		if (dy == 1)
-			return (TEXTURE_NORTH);
-		else if (dx == 1)
-			return (TEXTURE_WEST);
-		else if (dy == -1)
-			return (TEXTURE_SOUTH);
-		else if (dx == -1)
-			return (TEXTURE_EAST);
-	}
+		return (get_wall_texture(dx, dy));
 	else if (vars->map->grid[map_y][map_x] == 'D')
-	{
-		dx = (int)vars->ray->last_ray_x / vars->unit_size - map_x;
-		dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
-		if (dy == 1)
-			return (TEXTURE_DOOR0);
-		else if (dx == 1)
-			return (TEXTURE_DOOR1);
-		else if (dy == -1)
-			return (TEXTURE_DOOR2);
-		else if (dx == -1)
-			return (TEXTURE_DOOR3);
-	}
+		return (get_door_texture(dx, dy));
 	return (TEXTURE_NONE);
-}
-
-int	get_map_x(t_vars *vars)
-{
-	return ((int)(vars->ray->ray_x / vars->unit_size));
-}
-
-int	get_map_y(t_vars *vars)
-{
-	return ((int)(vars->ray->ray_y / vars->unit_size));
 }

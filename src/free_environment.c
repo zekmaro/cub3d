@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/13 22:53:31 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 23:35:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,20 @@ void	free_map(t_map *map)
 {
 	int	i;
 
-	i = 0;
-	while (i < map->width)
+	if (map->grid)
 	{
-		free(map->grid[i]);
-		i++;
+		i = -1;
+		while (++i < map->height)
+		{
+			if (map->grid[i])
+			{
+				free(map->grid[i]);
+				map->grid[i] = NULL;
+			}
+		}
+		free(map->grid);
+		map->grid = NULL;
 	}
-	free(map->grid);
 }
 
 void	free_vars_gun(t_vars *vars)

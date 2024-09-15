@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
 /*   Updated: 2024/09/13 17:56:10 by anarama          ###   ########.fr       */
