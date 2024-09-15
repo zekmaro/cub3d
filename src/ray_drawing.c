@@ -14,12 +14,7 @@
 
 void	get_texture_coords(t_vars *vars, t_tex_typ texture_index, int *tex_x)
 {
-	if (texture_index == TEXTURE_DOOR0 || texture_index == TEXTURE_DOOR1 \
-		|| texture_index == TEXTURE_DOOR2 || texture_index == TEXTURE_DOOR3)
-	{
-		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
-	}
-	else if (texture_index % 2 == 0)
+	if (texture_index % 2 == 0)
 	{
 		*tex_x = (int)(vars->ray->ray_x) % vars->unit_size;
 		if (texture_index == TEXTURE_SOUTH)
@@ -54,16 +49,25 @@ t_tex_typ	define_texture_type(t_vars *vars)
 		dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
 		if (dy == 1)
 			return (TEXTURE_NORTH);
-		else if (dy == -1)
-			return (TEXTURE_SOUTH);
 		else if (dx == 1)
 			return (TEXTURE_WEST);
+		else if (dy == -1)
+			return (TEXTURE_SOUTH);
 		else if (dx == -1)
 			return (TEXTURE_EAST);
 	}
 	else if (vars->map->grid[map_y][map_x] == 'D')
 	{
-		return (TEXTURE_DOOR0);
+		dx = (int)vars->ray->last_ray_x / vars->unit_size - map_x;
+		dy = (int)vars->ray->last_ray_y / vars->unit_size - map_y;
+		if (dy == 1)
+			return (TEXTURE_DOOR0);
+		else if (dx == 1)
+			return (TEXTURE_DOOR1);
+		else if (dy == -1)
+			return (TEXTURE_DOOR2);
+		else if (dx == -1)
+			return (TEXTURE_DOOR3);
 	}
 	return (TEXTURE_NONE);
 }

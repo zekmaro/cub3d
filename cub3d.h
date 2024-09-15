@@ -150,6 +150,7 @@ typedef struct s_door
 	int				center_y;
 	int				offset;
 	int				open;
+	int				orientation;
 	int				state;
 	int				distance_to_door;
 	double			animation_progress;

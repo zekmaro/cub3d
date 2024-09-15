@@ -11,13 +11,18 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <unistd.h>
 
 int inside_door(t_vars *vars, int door_flag, int ray_y, int ray_x, int index)
 {
-	(void)ray_y;
-	return (door_flag && ((ray_x % vars->unit_size < (vars->unit_size - vars->doors[index].offset))));
-	// || (ray_y % vars->unit_size < vars->unit_size / 2))
+	if (vars->doors[index].orientation == 0)
+	{
+		return (door_flag && ((ray_x % vars->unit_size < (vars->unit_size - vars->doors[index].offset))));
+	}
+	else if (vars->doors[index].orientation == 1)
+	{
+		return (door_flag && ((ray_y % vars->unit_size < (vars->unit_size - vars->doors[index].offset))));
+	}
+	return (0);
 }
 
 int	get_door_id(t_vars *vars, int ray_x, int ray_y)

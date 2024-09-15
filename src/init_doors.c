@@ -28,6 +28,14 @@ void	init_door(t_vars *vars, int i, int j, int *counter_doors)
 {
 	vars->doors[*counter_doors].grid_x = j;
 	vars->doors[*counter_doors].grid_y = i;
+	if (vars->map->grid[i - 1][j] == '1' && vars->map->grid[i + 1][j] == '1')
+	{
+		vars->doors[*counter_doors].orientation = 1;
+	}
+	else if (vars->map->grid[i][j - 1] == '1' && vars->map->grid[i][j + 1] == '1')
+	{
+		vars->doors[*counter_doors].orientation = 0;
+	}
 	setup_door(vars, &vars->doors[*counter_doors]);
 	(*counter_doors)++;
 }
@@ -46,7 +54,9 @@ void	init_doors(t_vars *vars)
 		while (vars->map->grid[i][++j])
 		{
 			if (vars->map->grid[i][j] == 'D')
+			{
 				init_door(vars, i, j, &counter_doors);
+			}
 		}
 	}
 }
