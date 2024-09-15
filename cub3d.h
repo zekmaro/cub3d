@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 02:08:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:16:43 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -618,9 +618,6 @@ void		allocate_memory_for_sprites(t_vars *vars);
 void		load_sprites(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 
-/* Parsing.c */
-int			read_map(int fd, t_map *map, char *file_name);
-
 /* Map_utils.c */
 void		print_map(t_map *map);
 int			player_inside_map(t_vars *vars, int x, int y);
@@ -713,6 +710,12 @@ void		setup_door(t_vars *vars, t_door *door);
 void		init_door(t_vars *vars, int i, int j, int *counter_doors);
 void		init_doors(t_vars *vars);
 void		printout_doors(t_vars *vars);
+
+/* Parsing.c */
+int			count_new_lines(int fd);
+int			handle_player_direction(char *line, int i, int row, t_map *map);
+int			validate_line(char *line, int row, t_map *map);
+int			read_map(int fd, t_map *map, char *file_name);
 
 /* Parse_input.c */
 void		parse_color_components(char *line, int *r, int *g, int *b);
