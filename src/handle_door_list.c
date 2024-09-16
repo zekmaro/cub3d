@@ -14,7 +14,7 @@
 
 int	is_closed_door(t_vars *vars, int y, int x)
 {
-	int door_id;
+	int	door_id;
 
 	if (is_door(vars, y, x))
 	{

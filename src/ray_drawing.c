@@ -68,6 +68,7 @@ t_tex_typ	define_texture_type(t_vars *vars)
 {
 	int	map_x;
 	int	map_y;
+	int	index;
 	int	dx;
 	int	dy;
 
@@ -79,7 +80,7 @@ t_tex_typ	define_texture_type(t_vars *vars)
 		return (get_wall_texture(dx, dy));
 	else if (vars->map->grid[map_y][map_x] == 'D')
 	{
-		int index = get_door_id(vars, vars->ray->ray_x, vars->ray->ray_y);
+		index = get_door_id(vars, vars->ray->ray_x, vars->ray->ray_y);
 		return (get_door_texture(vars, dx, dy, index));
 	}
 	return (TEXTURE_NONE);
