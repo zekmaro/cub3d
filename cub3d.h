@@ -102,13 +102,6 @@ typedef enum e_tex_typ
 	TEXTURE_NONE
 }	t_tex_typ;
 
-typedef enum e_enemy_type
-{
-	IMP,
-	CACO,
-	CYBER_DEMON
-}	t_enemy_type;
-
 typedef struct s_img
 {
 	void		*mlx_img;

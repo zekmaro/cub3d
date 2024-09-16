@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:12:34 by iberegsz          #+#    #+#             */
 /*   Updated: 2024/09/14 23:44:52 by iberegsz         ###   ########.fr       */
@@ -44,10 +44,10 @@ void	initialise_textures(t_vars *vars)
 
 	if (!vars->mlx || !vars->mlx->mlx)
 		exit_with_error(vars, "MLX not initialized");
-	vars->texture_names[0] = ft_strdup("./assets/north_texture.xpm");
-	vars->texture_names[1] = ft_strdup("./assets/south_texture.xpm");
-	vars->texture_names[2] = ft_strdup("./assets/west_texture.xpm");
-	vars->texture_names[3] = ft_strdup("./assets/east_texture.xpm");
+	vars->texture_names[0] = ft_strdup("./assets/wall1.xpm");
+	vars->texture_names[1] = ft_strdup("./assets/wall2.xpm");
+	vars->texture_names[2] = ft_strdup("./assets/wall3.xpm");
+	vars->texture_names[3] = ft_strdup("./assets/wall4.xpm");
 	i = -1;
 	while (++i < 4)
 	{
