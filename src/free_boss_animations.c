@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   free_boss_animations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:50:48 by anarama           #+#    #+#             */
 /*   Updated: 2024/09/13 17:56:30 by anarama          ###   ########.fr       */

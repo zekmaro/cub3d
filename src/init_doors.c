@@ -32,7 +32,8 @@ void	init_door(t_vars *vars, int i, int j, int *counter_doors)
 	{
 		vars->doors[*counter_doors].orientation = 1;
 	}
-	else if (vars->map->grid[i][j - 1] == '1' && vars->map->grid[i][j + 1] == '1')
+	else if (vars->map->grid[i][j - 1] == '1' \
+		&& vars->map->grid[i][j + 1] == '1')
 	{
 		vars->doors[*counter_doors].orientation = 0;
 	}

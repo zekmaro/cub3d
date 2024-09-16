@@ -6,7 +6,7 @@
 #    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/16 11:39:47 by anarama          ###   ########.fr        #
+#    Updated: 2024/09/16 11:50:28 by anarama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,6 @@ SRC		:=	src/cub3d.c \
 			src/ray_drawing.c \
 			src/ray_handlers.c \
 			src/handle_sprites.c \
-			src/doors.c \
 			src/gradient.c \
 			src/draw_player.c \
 			src/draw_monster.c \
@@ -78,7 +77,9 @@ SRC		:=	src/cub3d.c \
 			src/load_animated_sprite.c \
 			src/free_boss_animations.c \
 			src/setup_enemies.c \
-			src/object_utils.c
+			src/handle_door_list.c \
+			src/handle_objects.c \
+			src/raycasting_utils.c \
 
 # LIBS 
 LIBS	:= libft/libft.a

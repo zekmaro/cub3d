@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 11:42:00 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 11:49:27 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,6 +422,14 @@ typedef struct s_sprite_info
 	int		current_frame;
 }			t_sprite_info;
 
+typedef struct s_ray_params
+{
+	int	door_flag;
+	int	ray_y;
+	int	ray_x;
+	int	index;
+}	t_ray_params;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -615,7 +623,10 @@ void		load_sprites(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 
 /* Parsing.c */
-int			read_map(int fd, t_map *map, char *file_name);
+int			count_new_lines(int fd);
+int			handle_player_direction(char *line, int i, int row, t_map *map);
+void		handle_boss(int i, int row, t_map *map);
+int			validate_line(char *line, int row, t_map *map);
 
 /* Map_utils.c */
 void		print_map(t_map *map);
@@ -710,7 +721,18 @@ void		init_door(t_vars *vars, int i, int j, int *counter_doors);
 void		init_doors(t_vars *vars);
 void		printout_doors(t_vars *vars);
 
-/* Object_utils.c */
-void	check_objects_to_draw(t_vars *vars);
+/* Handle_door_list.c */
+void		update_door_list(t_vars *vars, t_door *door_list, int size);
+int			inside_door(t_vars *vars, t_ray_params *params);
+int			get_door_id(t_vars *vars, int ray_x, int ray_y);
+
+/* Handle_objects.c */
+void		check_objects_to_draw(t_vars *vars);
+
+/* Raycasting_utils.c */
+void		get_ray_target_coords(t_vars *vars);
+
+/* Read_map.c */
+int			read_map(int fd, t_map *map, char *file_name);
 
 #endif // CUB3D_H
