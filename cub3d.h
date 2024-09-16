@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 12:34:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 23:05:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,6 +316,8 @@ typedef struct s_vars
 	int				ceiling_r;
 	int				ceiling_g;
 	int				ceiling_b;
+	int				floor_color;
+	int				ceiling_color;
 }	t_vars;
 
 typedef struct s_dim
