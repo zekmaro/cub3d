@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 12:22:02 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 12:46:08 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,6 @@ typedef enum e_tex_typ
 	TEXTURE_DOOR3,
 	TEXTURE_NONE
 }	t_tex_typ;
-
-typedef enum e_enemy_type
-{
-	IMP,
-	CACO,
-	CYBER_DEMON
-}	t_enemy_type;
 
 typedef struct s_img
 {
