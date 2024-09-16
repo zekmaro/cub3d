@@ -37,8 +37,12 @@ void	enemy_act(t_vars *vars, t_enemy *enemy)
 	vector_x = vars->player->center_x - enemy->center_x;
 	vector_y = vars->player->center_y - enemy->center_y;
 	vector = sqrt(vector_x * vector_x + vector_y * vector_y);
-	enemy->center_x += vector_x / 40;
-	enemy->center_y += vector_y / 40;
+	if (!is_wall(vars, enemy->center_y + vector_y / 40,
+			enemy->center_x + vector_x / 40))
+	{
+		enemy->center_x += vector_x / 40;
+		enemy->center_y += vector_y / 40;
+	}
 	if (!enemy->shoot_ball)
 		enemy_shoot(enemy, vector_x, vector_y, vector);
 	if (is_wall(vars, enemy->fire_ball_y, enemy->fire_ball_x) \

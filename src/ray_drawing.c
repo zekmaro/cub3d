@@ -68,9 +68,9 @@ t_tex_typ	define_texture_type(t_vars *vars)
 {
 	int	map_x;
 	int	map_y;
+	int	index;
 	int	dx;
 	int	dy;
-	int	index;
 
 	map_x = (int)vars->ray->ray_x / vars->unit_size;
 	map_y = (int)vars->ray->ray_y / vars->unit_size;
