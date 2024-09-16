@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/16 00:10:38 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/16 12:16:34 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,6 @@ SRC		:=	src/cub3d.c \
 			src/ray_drawing.c \
 			src/ray_handlers.c \
 			src/handle_sprites.c \
-			src/doors.c \
 			src/gradient.c \
 			src/draw_player.c \
 			src/draw_monster.c \

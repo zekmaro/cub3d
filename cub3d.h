@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 00:25:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:34:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,7 +426,7 @@ typedef struct s_sprite_info
 	int		object_y;
 	int		scale;
 	int		current_frame;
-}			t_sprite_info;
+}	t_sprite_info;
 
 typedef struct s_ray_params
 {
@@ -723,8 +723,6 @@ int			inside_door(t_vars *vars, t_ray_params *params);
 int			get_door_id(t_vars *vars, int ray_x, int ray_y);
 
 /* Handle_objects.c */
-void		check_object(t_vars *vars, int y, int x);
-void		search_for_objects(t_vars *vars, double angle_offset);
 void		check_objects_to_draw(t_vars *vars);
 
 /* Raycasting_utils.c */
