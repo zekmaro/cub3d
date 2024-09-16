@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_door_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 21:52:49 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 12:22:56 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 14:12:01 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_closed_door(t_vars *vars, int y, int x)
 {
-	int door_id;
+	int	door_id;
 
 	if (is_door(vars, y, x))
 	{
