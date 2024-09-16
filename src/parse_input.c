@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 22:15:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 23:01:18 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	parse_color_components(char *line, int *r, int *g, int *b)
 	free(components);
 }
 
-uint32_t	rgb_to_hex(int r, int g, int b)
+int	rgb_to_hex(int r, int g, int b)
 {
 	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
