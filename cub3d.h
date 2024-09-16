@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 11:55:47 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 12:22:02 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -726,6 +726,7 @@ void		printout_doors(t_vars *vars);
 
 /* Handle_door_list.c */
 void		update_door_list(t_vars *vars, t_door *door_list, int size);
+int			is_closed_door(t_vars *vars, int y, int x);
 int			inside_door(t_vars *vars, t_ray_params *params);
 int			get_door_id(t_vars *vars, int ray_x, int ray_y);
 

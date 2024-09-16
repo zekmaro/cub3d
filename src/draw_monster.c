@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:18:43 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 12:16:06 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 12:22:47 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,6 @@ void	draw_monster(t_vars *vars, unsigned int color)
 	}
 }
 
-static int	is_closed_door(t_vars *vars, int y, int x)
-{
-	int door_id;
-
-	if (is_door(vars, y, x))
-	{
-		door_id = get_door_id(vars, x, y);
-		if (!vars->doors[door_id].open)
-			return (0);
-	}
-	return (1);
-}
-
 void	cast_ray_enemy(t_vars *vars, t_enemy *enemy, double angle_offset)
 {
 	double	ray_x;
@@ -59,7 +46,7 @@ void	cast_ray_enemy(t_vars *vars, t_enemy *enemy, double angle_offset)
 	ray_dir_x = ray_x;
 	ray_dir_y = ray_y;
 	while (!is_wall(vars, ray_dir_y, ray_dir_x)
-		&& is_closed_door(vars, ray_dir_y, ray_dir_x))
+		&& !is_closed_door(vars, ray_dir_y, ray_dir_x))
 	{
 		ray_dir_x += cos(ray_angle);
 		ray_dir_y += sin(ray_angle);
