@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
+#    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/14 14:36:42 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/16 11:39:47 by anarama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ SRC		:=	src/cub3d.c \
 			src/load_animated_sprite.c \
 			src/free_boss_animations.c \
 			src/setup_enemies.c \
+			src/object_utils.c
 
 # LIBS 
 LIBS	:= libft/libft.a

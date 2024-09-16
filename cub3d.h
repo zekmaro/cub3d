@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 20:06:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:42:00 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,6 +425,9 @@ typedef struct s_sprite_info
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
+/* Doors.c */
+void	update_door_list(t_vars *vars, t_door *door_list, int size);
+
 /* Draw_line.c */
 void		draw_line(t_vars *vars, unsigned long color);
 
@@ -706,5 +709,8 @@ void		setup_door(t_vars *vars, t_door *door);
 void		init_door(t_vars *vars, int i, int j, int *counter_doors);
 void		init_doors(t_vars *vars);
 void		printout_doors(t_vars *vars);
+
+/* Object_utils.c */
+void	check_objects_to_draw(t_vars *vars);
 
 #endif // CUB3D_H
