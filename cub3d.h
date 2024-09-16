@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 00:25:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:59:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,7 +426,7 @@ typedef struct s_sprite_info
 	int		object_y;
 	int		scale;
 	int		current_frame;
-}			t_sprite_info;
+}	t_sprite_info;
 
 typedef struct s_ray_params
 {
