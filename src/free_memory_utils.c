@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/13 17:56:10 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/15 18:47:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_memory(char **arr)
 {
 	char	**temp;
 
+	if (!arr)
+		return ;
 	temp = arr;
 	while (*arr)
 	{
@@ -27,6 +29,8 @@ void	free_memory(char **arr)
 
 void	free_vars_zbuffer(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	if (vars->zbuffer)
 	{
 		free(vars->zbuffer);
@@ -36,18 +40,24 @@ void	free_vars_zbuffer(t_vars *vars)
 
 int	free_and_exit(t_vars *vars)
 {
+	if (vars == NULL)
+		return (0);
 	cleanup_vars(vars);
 	exit(0);
 }
 
 void	exit_with_error(t_vars *vars, char *error_message)
 {
+	if (vars == NULL)
+		return ;
 	perror(error_message);
 	free_and_exit(vars);
 }
 
 void	cleanup_vars(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	free_imp_animations(vars);
 	free_caco_animations(vars);
 	free_boss_animations(vars);
@@ -64,4 +74,5 @@ void	cleanup_vars(t_vars *vars)
 	free_vars_ray(vars);
 	free_vars_sprites(vars);
 	free_vars_zbuffer(vars);
+	free_vars_texture_names(vars);
 }

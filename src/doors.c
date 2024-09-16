@@ -1,45 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_sprites.c                                     :+:      :+:    :+:   */
+/*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 21:44:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/15 18:42:16 by iberegsz         ###   ########.fr       */
+/*   Created: 2024/09/01 17:45:13 by iberegsz          #+#    #+#             */
+/*   Updated: 2024/09/14 22:50:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_sprites(t_vars *vars)
+void	open_door(t_vars *vars, int x, int y)
 {
-	if (!vars)
-		return ;
+	if (is_door(vars, x, y))
+		vars->map->grid[y][x] = '0';
 }
 
-void	free_vars_sprites(t_vars *vars)
+void	close_door(t_vars *vars, int x, int y)
 {
-	if (vars == NULL)
-		return ;
-	if (vars->sprites)
-	{
-		free(vars->sprites);
-		vars->sprites = NULL;
-	}
-}
-
-void	free_sprite_frame(t_img *frame)
-{
-	if (frame == NULL)
-		return ;
-	if (frame)
-	{
-		if (frame->mlx_img)
-		{
-			free(frame->mlx_img);
-			frame->mlx_img = NULL;
-		}
-		free(frame);
-	}
+	if (is_door(vars, x, y))
+		vars->map->grid[y][x] = 'D';
 }

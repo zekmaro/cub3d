@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 12:46:08 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 12:34:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,9 +307,15 @@ typedef struct s_vars
 	int				*sprite_order;
 	t_sprite		*sprites;
 	t_img			*sprite_texture;
+	char			*texture_names[4];
 	int				num_sprites;
-	t_img			*door_textures;
 	t_keys			keys;
+	int				floor_r;
+	int				floor_g;
+	int				floor_b;
+	int				ceiling_r;
+	int				ceiling_g;
+	int				ceiling_b;
 }	t_vars;
 
 typedef struct s_dim
@@ -413,7 +419,7 @@ typedef struct s_sprite_info
 	int		object_y;
 	int		scale;
 	int		current_frame;
-}			t_sprite_info;
+}	t_sprite_info;
 
 typedef struct s_ray_params
 {
@@ -425,9 +431,6 @@ typedef struct s_ray_params
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
-
-/* Doors.c */
-void	update_door_list(t_vars *vars, t_door *door_list, int size);
 
 /* Draw_line.c */
 void		draw_line(t_vars *vars, unsigned long color);
@@ -545,10 +548,10 @@ void		free_sprite_frame(t_img *frame);
 
 /* Free_textures.c */
 void		free_textures(t_vars *vars);
-void		free_vars_door_textures(t_vars *vars);
 void		free_vars_textures(t_vars *vars);
 void		free_vars_sprite_texture(t_vars *vars);
 void		free_vars_fire(t_vars *vars);
+void		free_vars_texture_names(t_vars *vars);
 
 /* Free_enemies.c */
 void		free_enemy_list(t_vars *vars);
@@ -556,12 +559,11 @@ void		free_enemies(t_vars *vars);
 void		free_vars_imp(t_vars *vars);
 void		free_vars_caco(t_vars *vars);
 
-/* Free_imp_animations.c */
+/* Free_animations.c */
+void		free_animation(t_img **animation, int frame_count);
 void		free_imp_animations(t_vars *vars);
-void		free_boss_animations(t_vars *vars);
-
-/* Free_caco_animations.c */
 void		free_caco_animations(t_vars *vars);
+void		free_boss_animations(t_vars *vars);
 
 /* Free_gun_and_fire */
 void		free_gun(t_vars *vars);
@@ -619,10 +621,7 @@ void		load_sprites(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 
 /* Parsing.c */
-int			count_new_lines(int fd);
-int			handle_player_direction(char *line, int i, int row, t_map *map);
-void		handle_boss(int i, int row, t_map *map);
-int			validate_line(char *line, int row, t_map *map);
+int			read_map(int fd, t_map *map, char *file_name);
 
 /* Map_utils.c */
 void		print_map(t_map *map);
@@ -651,7 +650,6 @@ void		load_animated_sprite(t_vars *vars, t_img *sprite, \
 /* Doors */
 void		open_door(t_vars *vars, int x, int y);
 void		close_door(t_vars *vars, int x, int y);
-void		toggle_door(t_vars *vars, int x, int y);
 
 /* Ray_drawing */
 void		get_texture_coords(t_vars *vars, t_tex_typ texture_index, \
@@ -683,10 +681,8 @@ int			is_monster(t_vars *vars, int x, int y);
 int			is_wall(t_vars *vars, int y, int x);
 int			is_door(t_vars *vars, int y, int x);
 
+/* Gradient.c */
 void		draw_player_damaged(t_vars *vars);
-void		draw_door(t_vars *vars);
-int			is_enemy(t_enemy *enemy, int y, int x);
-int			functioin(t_vars *vars);
 
 /* Init_animations.c */
 void		init_imp_sprites(t_vars *vars, t_enemy *imp);
@@ -731,5 +727,24 @@ void		get_ray_target_coords(t_vars *vars);
 
 /* Read_map.c */
 int			read_map(int fd, t_map *map, char *file_name);
+
+/* Parsing.c */
+int			count_new_lines(int fd);
+int			handle_player_direction(char *line, int i, int row, t_map *map);
+int			validate_line(char *line, int row, t_map *map);
+int			read_map(int fd, t_map *map, char *file_name);
+
+/* Parse_input.c */
+void		parse_color_components(char *line, int *r, int *g, int *b);
+void		parse_texture(t_vars *vars, char *line, char **texture);
+void		parse_line(t_vars *vars, char *line);
+
+/* Parse_map.c */
+int			is_map_surrounded_by_ones(t_map *map);
+void		fill_with_ones(t_map *map);
+void		parse_file_paths_and_colors(int fd, t_vars *vars);
+int			parse_map(int fd, t_map *map);
+int			read_map_form_file(int fd, t_map *map, t_vars *vars, \
+				char *file_name);
 
 #endif // CUB3D_H

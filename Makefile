@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
+#    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/16 11:56:25 by anarama          ###   ########.fr        #
+#    Updated: 2024/09/16 12:16:34 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,6 @@ SRC		:=	src/cub3d.c \
 			src/free_textures.c \
 			src/free_enemies.c \
 			src/free_gun_and_fire.c \
-			src/free_imp_animations.c \
-			src/free_caco_animations.c \
 			src/free_animated_frames.c \
 			src/handle_image.c \
 			src/handle_keys.c \
@@ -75,8 +73,9 @@ SRC		:=	src/cub3d.c \
 			src/init_enemies.c \
 			src/init_doors.c \
 			src/load_animated_sprite.c \
-			src/free_boss_animations.c \
 			src/setup_enemies.c \
+			src/parse_input.c \
+			src/free_animations.c \
 			src/handle_door_list.c \
 			src/handle_objects.c \
 			src/raycasting_utils.c \

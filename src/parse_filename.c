@@ -1,45 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_sprites.c                                     :+:      :+:    :+:   */
+/*   parse_filename.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 21:44:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/15 18:42:16 by iberegsz         ###   ########.fr       */
+/*   Created: 2024/09/15 15:11:26 by iberegsz          #+#    #+#             */
+/*   Updated: 2024/09/15 18:46:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_sprites(t_vars *vars)
+int	has_cub_extension(const char *filename)
 {
-	if (!vars)
-		return ;
+	size_t	len;
+
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	return (ft_strncmp(filename + len - 4, ".cub", 4) == 0);
 }
 
-void	free_vars_sprites(t_vars *vars)
+int	is_valid_file(const char *filename)
 {
-	if (vars == NULL)
-		return ;
-	if (vars->sprites)
-	{
-		free(vars->sprites);
-		vars->sprites = NULL;
-	}
-}
+	int	fd;
 
-void	free_sprite_frame(t_img *frame)
-{
-	if (frame == NULL)
-		return ;
-	if (frame)
-	{
-		if (frame->mlx_img)
-		{
-			free(frame->mlx_img);
-			frame->mlx_img = NULL;
-		}
-		free(frame);
-	}
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
+	return (1);
 }

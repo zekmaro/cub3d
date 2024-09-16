@@ -25,13 +25,15 @@ int	count_new_lines(int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	return (new_lines);
 }
 
 int	handle_player_direction(char *line, int i, int row, t_map *map)
 {
 	if (map->player_dir != 0)
-		return (printf("hello\n"), 0);
+		return (perror("Multiple player directions found\n"), \
+					exit(EXIT_FAILURE), 1);
 	map->player_x = i;
 	map->player_y = row;
 	map->player_dir = line[i];
@@ -39,7 +41,7 @@ int	handle_player_direction(char *line, int i, int row, t_map *map)
 	return (1);
 }
 
-void	handle_boss(int i, int row, t_map *map)
+static void	handle_boss(int i, int row, t_map *map)
 {
 	map->boss_x = i;
 	map->boss_y = row;
@@ -67,7 +69,7 @@ int	validate_line(char *line, int row, t_map *map)
 		else if (line[i] == 'D')
 			map->num_doors++;
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
-			return (printf("world\n"), 0);
+			return (perror("Error\nInvalid character in map\n"), 0);
 	}
 	if (i > map->width)
 		map->width = i;
@@ -81,10 +83,9 @@ int	read_map(int fd, t_map *map, char *file_name)
 
 	i = 0;
 	map->height = count_new_lines(fd);
-	close(fd);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0 || map->height <= 0)
-		return (0);
+		return (close(fd), 0);
 	map->grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (!map->grid)
 		return (close(fd), 0);

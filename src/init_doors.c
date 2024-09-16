@@ -61,3 +61,19 @@ void	init_doors(t_vars *vars)
 		}
 	}
 }
+
+void	printout_doors(t_vars *vars)
+{
+	int	i;
+
+	printf("Number of doors: %d\n", vars->map->num_doors);
+	i = 0;
+	while (i < vars->map->num_doors)
+	{
+		printf("#%d: x: %d, y: %d, st: %d, anims: %f cntx: %d, cnty: %d\n", \
+			i, vars->doors[i].grid_x, vars->doors[i].grid_y, \
+			vars->doors[i].state, vars->doors[i].animation_progress, \
+			vars->doors[i].center_x, vars->doors[i].center_y);
+		i++;
+	}
+}

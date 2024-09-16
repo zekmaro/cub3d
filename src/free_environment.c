@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/15 23:35:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:09:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_vars_map(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	if (vars->map)
 	{
 		free_map(vars->map);
@@ -26,17 +28,19 @@ void	free_map(t_map *map)
 {
 	int	i;
 
+	if (map == NULL || map->grid == NULL)
+		return ;
+	i = -1;
+	while (++i < map->height + 1)
+	{
+		if (map->grid[i])
+		{
+			free(map->grid[i]);
+			map->grid[i] = NULL;
+		}
+	}
 	if (map->grid)
 	{
-		i = -1;
-		while (++i < map->height)
-		{
-			if (map->grid[i])
-			{
-				free(map->grid[i]);
-				map->grid[i] = NULL;
-			}
-		}
 		free(map->grid);
 		map->grid = NULL;
 	}
@@ -44,6 +48,8 @@ void	free_map(t_map *map)
 
 void	free_vars_gun(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	if (vars->player->gun)
 	{
 		free(vars->player->gun);
@@ -56,6 +62,8 @@ void	free_frames(t_img **frames, int count)
 	int		i;
 	t_img	*tmp;
 
+	if (frames == NULL)
+		return ;
 	i = -1;
 	while (++i < count)
 	{
@@ -71,6 +79,8 @@ void	free_frames(t_img **frames, int count)
 
 void	free_doors(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	if (vars->doors)
 	{
 		if (vars->doors->textures)

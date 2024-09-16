@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 11:54:49 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 12:16:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	run_screen(t_vars *vars)
 	init_enemies(vars);
 	init_boss(vars);
 	init_doors(vars);
+	setup_door(vars, vars->doors);
 	setup_boss(vars, vars->boss);
 	reset_mouse_to_center(vars);
 	mlx_hook(vars->mlx->win, 2, 1L << 0, key_press, vars);
@@ -59,26 +60,31 @@ void	run_screen(t_vars *vars)
 	mlx_loop(vars->mlx->mlx);
 }
 
+int	validate_and_open_file(int argc, char **argv)
+{
+	int	fd;
+
+	if (argc != 2)
+		exit_with_error(NULL, "Error\nUsage: ./cub3D [path]<filename>.cub\n");
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Error\nInvalid file descriptor!\n");
+		exit(EXIT_FAILURE);
+	}
+	return (fd);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	int		fd;
 
-	if (argc != 2)
-	{
-		perror("Usage: ./cub3D [path]<filename>.cub\n");
-		exit(EXIT_FAILURE);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Invalid file descriptor!\n");
-		exit(EXIT_FAILURE);
-	}
+	fd = validate_and_open_file(argc, argv);
 	ft_bzero(&vars, sizeof(t_vars));
 	initialise_vars(&vars);
 	if (!read_map(fd, vars.map, argv[1]))
-		free_and_exit(&vars);
+		exit_with_error(&vars, "Error\nFailed to read map\n");
 	initialise_doors(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);
