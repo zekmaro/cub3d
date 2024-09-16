@@ -6,13 +6,13 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:04:43 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/15 22:05:26 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:16:45 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	check_object(t_vars *vars, int y, int x)
+static void	check_object(t_vars *vars, int y, int x)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ void	check_object(t_vars *vars, int y, int x)
 	}
 }
 
-void	search_for_objects(t_vars *vars, double angle_offset)
+static void	search_for_objects(t_vars *vars, double angle_offset)
 {
 	double	ray_x;
 	double	ray_y;

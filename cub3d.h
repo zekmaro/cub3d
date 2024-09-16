@@ -439,6 +439,9 @@ typedef struct s_ray_params
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
+/* Doors.c */
+void	update_door_list(t_vars *vars, t_door *door_list, int size);
+
 /* Draw_line.c */
 void		draw_line(t_vars *vars, unsigned long color);
 
@@ -723,8 +726,6 @@ int			inside_door(t_vars *vars, t_ray_params *params);
 int			get_door_id(t_vars *vars, int ray_x, int ray_y);
 
 /* Handle_objects.c */
-void		check_object(t_vars *vars, int y, int x);
-void		search_for_objects(t_vars *vars, double angle_offset);
 void		check_objects_to_draw(t_vars *vars);
 
 /* Raycasting_utils.c */
