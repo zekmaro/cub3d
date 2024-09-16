@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 11:59:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:34:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -438,9 +438,6 @@ typedef struct s_ray_params
 
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
-
-/* Doors.c */
-void	update_door_list(t_vars *vars, t_door *door_list, int size);
 
 /* Draw_line.c */
 void		draw_line(t_vars *vars, unsigned long color);
