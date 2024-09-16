@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_drawing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/15 23:53:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:10:38 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_tex_typ	get_wall_texture(int dx, int dy)
 	return (TEXTURE_NONE);
 }
 
-static t_tex_typ	get_door_texture(int dx, int dy)
+static t_tex_typ	get_door_texture(t_vars *vars, int dx, int dy, int index)
 {
 	if (dy == 1)
 		return (TEXTURE_DOOR0);
@@ -57,6 +57,10 @@ static t_tex_typ	get_door_texture(int dx, int dy)
 		return (TEXTURE_DOOR2);
 	else if (dx == -1)
 		return (TEXTURE_DOOR3);
+	else if (vars->doors[index].orientation == 1)
+		return (TEXTURE_DOOR0);
+	else if (vars->doors[index].orientation == 0)
+		return (TEXTURE_DOOR1);
 	return (TEXTURE_NONE);
 }
 
@@ -74,6 +78,9 @@ t_tex_typ	define_texture_type(t_vars *vars)
 	if (vars->map->grid[map_y][map_x] == '1')
 		return (get_wall_texture(dx, dy));
 	else if (vars->map->grid[map_y][map_x] == 'D')
-		return (get_door_texture(dx, dy));
+	{
+		int index = get_door_id(vars, vars->ray->ray_x, vars->ray->ray_y);
+		return (get_door_texture(vars, dx, dy, index));
+	}
 	return (TEXTURE_NONE);
 }
