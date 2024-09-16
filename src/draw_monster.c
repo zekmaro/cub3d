@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_monster.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:18:43 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/09 21:23:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:22:47 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	cast_ray_enemy(t_vars *vars, t_enemy *enemy, double angle_offset)
 	ray_y = enemy->center_y;
 	ray_dir_x = ray_x;
 	ray_dir_y = ray_y;
-	while (!is_wall(vars, ray_dir_y, ray_dir_x))
+	while (!is_wall(vars, ray_dir_y, ray_dir_x)
+		&& !is_closed_door(vars, ray_dir_y, ray_dir_x))
 	{
 		ray_dir_x += cos(ray_angle);
 		ray_dir_y += sin(ray_angle);
