@@ -6,7 +6,7 @@
 #    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/16 11:50:28 by anarama          ###   ########.fr        #
+#    Updated: 2024/09/16 11:56:25 by anarama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC		:=	src/cub3d.c \
 			src/handle_door_list.c \
 			src/handle_objects.c \
 			src/raycasting_utils.c \
+			src/init_mlx.c
 
 # LIBS 
 LIBS	:= libft/libft.a

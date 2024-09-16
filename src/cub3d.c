@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 11:46:42 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 11:54:49 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,6 @@ int	main_loop_hook(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win, \
 		vars->image->mlx_img, 0, 0);
 	return (0);
-}
-
-void	safe_init_mlx(t_vars *vars)
-{
-	vars->mlx->mlx = mlx_init();
-	if (!vars->mlx->mlx)
-	{
-		free(vars->mlx);
-		vars->mlx = NULL;
-		exit_with_error(vars, "Failed to initialise mlx");
-		exit(EXIT_FAILURE);
-	}
-	vars->mlx->win = mlx_new_window(vars->mlx->mlx, vars->mlx->window_width, \
-		vars->mlx->window_height, "Gestalt DOOM Cube3D");
-	if (!vars->mlx->win)
-	{
-		mlx_destroy_display(vars->mlx->mlx);
-		free(vars->mlx->mlx);
-		vars->mlx->mlx = NULL;
-		free(vars->mlx);
-		vars->mlx = NULL;
-		exit_with_error(vars, "Failed to create window");
-	}
 }
 
 void	run_screen(t_vars *vars)

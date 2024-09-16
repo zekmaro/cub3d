@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 11:49:27 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 11:55:47 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -593,7 +593,6 @@ int			mouse_move(int x, int y, t_vars *vars);
 int			shoot_entity(int button, int x, int y, t_vars *vars);
 
 /* Init_components.c */
-void		initialise_mlx(t_vars *vars);
 void		initialise_line(t_vars *vars);
 void		initialise_image(t_vars *vars);
 void		initialise_player(t_vars *vars);
@@ -612,6 +611,10 @@ void		load_texture(t_vars *vars, int texture_index, \
 void		initialise_textures(t_vars *vars);
 void		initialise_enemy_textures(t_vars *vars, t_img *animation,
 				const char **frames);
+
+/* Init_mlx.c */
+void		initialise_mlx(t_vars *vars);
+void		safe_init_mlx(t_vars *vars);
 
 /* Init_sprites.c	*/
 void		load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
