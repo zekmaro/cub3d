@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_drawing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 13:10:38 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/16 14:23:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_tex_typ	define_texture_type(t_vars *vars)
 	int	map_y;
 	int	dx;
 	int	dy;
+	int	index;
 
 	map_x = (int)vars->ray->ray_x / vars->unit_size;
 	map_y = (int)vars->ray->ray_y / vars->unit_size;
@@ -79,7 +80,7 @@ t_tex_typ	define_texture_type(t_vars *vars)
 		return (get_wall_texture(dx, dy));
 	else if (vars->map->grid[map_y][map_x] == 'D')
 	{
-		int index = get_door_id(vars, vars->ray->ray_x, vars->ray->ray_y);
+		index = get_door_id(vars, vars->ray->ray_x, vars->ray->ray_y);
 		return (get_door_texture(vars, dx, dy, index));
 	}
 	return (TEXTURE_NONE);
