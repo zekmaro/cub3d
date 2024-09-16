@@ -79,6 +79,7 @@ SRC		:=	src/cub3d.c \
 			src/handle_door_list.c \
 			src/handle_objects.c \
 			src/raycasting_utils.c \
+			src/init_mlx.c
 
 # LIBS 
 LIBS	:= libft/libft.a

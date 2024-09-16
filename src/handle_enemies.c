@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_enemies.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:40:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 02:52:33 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:23:36 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	enemy_act(t_vars *vars, t_enemy *enemy)
 	enemy->center_y += vector_y / 40;
 	if (!enemy->shoot_ball)
 		enemy_shoot(enemy, vector_x, vector_y, vector);
-	if (is_wall(vars, enemy->fire_ball_y, enemy->fire_ball_x))
+	if (is_wall(vars, enemy->fire_ball_y, enemy->fire_ball_x) ||
+		is_closed_door(vars, enemy->fire_ball_y, enemy->fire_ball_x))
 	{
 		enemy->fire_ball_y = enemy->center_y;
 		enemy->fire_ball_x = enemy->center_x;

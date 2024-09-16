@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   handle_door_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 21:52:49 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 00:08:46 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:22:56 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	is_closed_door(t_vars *vars, int y, int x)
+{
+	int door_id;
+
+	if (is_door(vars, y, x))
+	{
+		door_id = get_door_id(vars, x, y);
+		if (!vars->doors[door_id].open)
+			return (1);
+	}
+	return (0);
+}
 
 void	update_door_list(t_vars *vars, t_door *door_list, int size)
 {

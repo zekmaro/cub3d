@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_components.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 14:10:42 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:54:34 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	initialise_mlx(t_vars *vars)
-{
-	t_mlx	*mlx;
-
-	mlx = (t_mlx *)(malloc(sizeof(t_mlx)));
-	if (!mlx)
-	{
-		exit_with_error(vars, "Failed to allocate memory for mlx");
-		return ;
-	}
-	ft_bzero(mlx, sizeof(t_mlx));
-	mlx->window_height = 1080;
-	mlx->window_width = 1920;
-	vars->mlx = mlx;
-}
 
 void	initialise_line(t_vars *vars)
 {
