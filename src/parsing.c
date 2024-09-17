@@ -6,19 +6,22 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 00:11:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/17 02:09:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	count_new_lines(int fd)
+int	count_new_lines(int fd, char *line_left)
 {
 	char	*line;
 	int		new_lines;
 
 	new_lines = 0;
-	line = get_next_line(fd);
+	//line = get_next_line(fd);
+	//(void)line_left;
+	line = line_left;
+	printf("Line in count lines '%s'\n", line);
 	while (line != NULL)
 	{
 		new_lines++;
@@ -76,37 +79,44 @@ int	validate_line(char *line, int row, t_map *map)
 	return (1);
 }
 
-int	read_map(int fd, t_map *map, char *file_name)
+int	read_map(int fd, t_map *map, char *file_name, char **line_left, int readed_lines)
 {
-	char	*line;
-	int		i;
+    char	*line;
+    int		i;
 
-	i = 0;
-	map->height = count_new_lines(fd);
+    i = 0;
+    map->height = count_new_lines(fd, *line_left);
+    //printf("Read map: map height: %d line left: %s\n", map->height, *line_left);
+    printf("Read map: map height: %d\n", map->height);
 	fd = open(file_name, O_RDONLY);
-	if (fd < 0 || map->height <= 0)
-		return (close(fd), 0);
-	map->grid = ft_calloc(map->height + 1, sizeof(char *));
-	if (!map->grid)
-		return (close(fd), 0);
-	line = get_next_line(fd);
-	while (line != NULL)
+    if (fd < 0 || map->height <= 0)
+        return (close(fd), 0);
+    map->grid = ft_calloc(map->height + 1, sizeof(char *));
+    if (!map->grid)
+        return (close(fd), 0);
+    while (readed_lines-- > 0)
 	{
-		if (!validate_line(line, i, map))
-		{
-			free(line);
-			while (i > 0)
-				free(map->grid[--i]);
-			free(map->grid);
-			close(fd);
-			return (0);
-		}
-		map->grid[i] = line;
+		printf("Readed lines: %d\n", readed_lines);
 		line = get_next_line(fd);
-		i++;
-	}
-	if (line != NULL)
+		printf("Line: %s\n", line);
+		if (readed_lines == 0)
+			break;
 		free(line);
-	close(fd);
-	return (1);
+	}	
+    if (line != NULL)
+    {
+		printf("Line in if in read line after skipping: %s\n", line);
+        if (!validate_line(line, i, map))
+        {
+            free(line);
+            while (i > 0)
+                free(map->grid[--i]);
+            free(map->grid);
+            close(fd);
+            return (0);
+        }
+        map->grid[i++] = line;
+    }
+    close(fd);
+    return (1);
 }

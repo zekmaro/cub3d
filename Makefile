@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/16 12:16:34 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/17 00:52:53 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,8 @@ SRC		:=	src/cub3d.c \
 			src/handle_door_list.c \
 			src/handle_objects.c \
 			src/raycasting_utils.c \
-			src/init_mlx.c
+			src/init_mlx.c \
+			src/parse_map.c \
 
 # LIBS 
 LIBS	:= libft/libft.a

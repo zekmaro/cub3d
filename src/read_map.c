@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 00:22:49 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:26:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,29 @@ static int	process_line(char *line, int i, t_map *map)
 	return (1);
 }
 
-int	read_map(int fd, t_map *map, char *file_name)
-{
-	char	*line;
-	int		i;
+// int	read_map_refactored(int fd, t_map *map, char *file_name)
+// {
+// 	char	*line;
+// 	int		i;
 
-	i = 0;
-	map->height = count_new_lines(fd);
-	close(fd);
-	fd = open_file(file_name);
-	if (fd < 0 || map->height <= 0)
-		return (0);
-	if (!allocate_grid(map))
-		return (close(fd), 0);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		if (!process_line(line, i, map))
-			return (free_grid(map->grid, i), close(fd), 0);
-		line = get_next_line(fd);
-		i++;
-	}
-	if (line != NULL)
-		free(line);
-	close(fd);
-	return (1);
-}
+// 	i = 0;
+// 	map->height = count_new_lines(fd);
+// 	close(fd);
+// 	fd = open_file(file_name);
+// 	if (fd < 0 || map->height <= 0)
+// 		return (0);
+// 	if (!allocate_grid(map))
+// 		return (close(fd), 0);
+// 	line = get_next_line(fd);
+// 	while (line != NULL)
+// 	{
+// 		if (!process_line(line, i, map))
+// 			return (free_grid(map->grid, i), close(fd), 0);
+// 		line = get_next_line(fd);
+// 		i++;
+// 	}
+// 	if (line != NULL)
+// 		free(line);
+// 	close(fd);
+// 	return (1);
+// }

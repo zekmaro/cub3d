@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 23:05:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/17 01:53:53 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -622,9 +622,6 @@ void		allocate_memory_for_sprites(t_vars *vars);
 void		load_sprites(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 
-/* Parsing.c */
-int			read_map(int fd, t_map *map, char *file_name);
-
 /* Map_utils.c */
 void		print_map(t_map *map);
 int			player_inside_map(t_vars *vars, int x, int y);
@@ -728,13 +725,14 @@ void		check_objects_to_draw(t_vars *vars);
 void		get_ray_target_coords(t_vars *vars);
 
 /* Read_map.c */
-int			read_map(int fd, t_map *map, char *file_name);
+int			read_map_refactored(int fd, t_map *map, char *file_name);
 
 /* Parsing.c */
-int			count_new_lines(int fd);
+int			count_new_lines(int fd, char *line_left);
 int			handle_player_direction(char *line, int i, int row, t_map *map);
 int			validate_line(char *line, int row, t_map *map);
-int			read_map(int fd, t_map *map, char *file_name);
+int			read_map(int fd, t_map *map, char *file_name, char **line_left, \
+				int readed_lines);
 
 /* Parse_input.c */
 void		parse_color_components(char *line, int *r, int *g, int *b);
@@ -744,7 +742,7 @@ void		parse_line(t_vars *vars, char *line);
 /* Parse_map.c */
 int			is_map_surrounded_by_ones(t_map *map);
 void		fill_with_ones(t_map *map);
-void		parse_file_paths_and_colors(int fd, t_vars *vars);
+int			parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left);
 int			parse_map(int fd, t_map *map);
 int			read_map_form_file(int fd, t_map *map, t_vars *vars, \
 				char *file_name);
