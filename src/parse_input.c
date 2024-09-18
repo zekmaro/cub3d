@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 16:43:40 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:03:15 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 
 void	parse_line(t_vars *vars, char *line)
 {
-	printf("  Parsing line: '%s'\n", line);
+	//printf("  Parsing line: '%s'\n", line);
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[0]);
 	else if (ft_strncmp(line, "SO ", 3) == 0)

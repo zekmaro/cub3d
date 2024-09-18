@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 16:43:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:00:40 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,25 @@ int	validate_and_open_file(int argc, char **argv)
 	return (fd);
 }
 
+void	replace_space_with_one(t_map *map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while ((size_t)j < ft_strlen(map->grid[i]))
+		{
+			if (map->grid[i][j] == ' ')
+				map->grid[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -89,6 +108,7 @@ int	main(int argc, char **argv)
 	readed_lines = parse_file_paths_and_colors(fd, &vars, &line_left);
 	if (!read_map(fd, vars.map, argv[1], &line_left, readed_lines))
 		exit_with_error(&vars, "Error\nFailed to read map\n");
+	replace_space_with_one(vars.map);
 	initialise_doors(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);

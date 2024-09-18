@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 16:54:27 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:02:19 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	validate_line(char *line, int row, t_map *map)
 	int	last_zero_index;
 
 	i = 0;
-	printf("%s ", line);
 	while ((line[i] == ' ' || line[i] == '\t' \
 		|| line[i] == '\r' || line[i] == '\f' || line[i] == '\v'))
 		i++;
@@ -129,7 +128,6 @@ int	validate_line(char *line, int row, t_map *map)
 		{
 			if (i > 0 && ((ft_strlen(map->grid[row - 1]) - 1 >= (size_t)i)))
 			{
-				printf("%d\n", i);
 				if (map->grid[row - 1][i] == '0')
 					return (0);
 			}

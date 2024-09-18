@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_entities.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/13 21:42:08 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:05:06 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	draw_minimap(t_vars *vars)
 	int	i;
 	int	j;
 
-	i = -1;
-	while (++i < vars->map->height)
+	i = 0;
+	while (i < vars->map->height)
 	{
-		j = -1;
-		while (++j < vars->map->width)
+		j = 0;
+		while ((size_t)j < ft_strlen(vars->map->grid[i]))
 		{
 			vars->line->x0 = 100 + j * 16 - vars->map->player_x * 16;
 			vars->line->y0 = 100 + i * 16 - vars->map->player_y * 16;
@@ -33,7 +33,9 @@ void	draw_minimap(t_vars *vars)
 				draw_square(vars, vars->line->x0, vars->line->y0, GRAY);
 			else
 				draw_square(vars, vars->line->x0, vars->line->y0, WHITE);
+			j++;
 		}
+		i++;
 	}
 }
 
