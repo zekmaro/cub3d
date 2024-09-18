@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/17 01:53:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:49:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	int		fd;
-	int 	readed_lines;
-	char	*line_left = NULL;
+	int		readed_lines;
+	char	*line_left;
 
+	line_left = NULL;
 	fd = validate_and_open_file(argc, argv);
 	ft_bzero(&vars, sizeof(t_vars));
 	initialise_vars(&vars);
@@ -91,12 +92,6 @@ int	main(int argc, char **argv)
 	printf("After parsed file paths and colors\n");
 	if (!read_map(fd, vars.map, argv[1], &line_left, readed_lines))
 		exit_with_error(&vars, "Error\nFailed to read map\n");
-	// printf("printfout the whole map grid\n");
-	// while (vars.map->grid)
-	// {
-	// 	printf("%s\n", *vars.map->grid);
-	// 	vars.map->grid++;
-	// }	
 	initialise_doors(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);
