@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:35:24 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/14 20:06:34 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:47:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init_doors(t_vars *vars)
 
 	counter_doors = 0;
 	i = -1;
-	while (vars->map->grid[++i])
+	while (vars->map->gridgi[++i])
 	{
 		j = -1;
 		while (vars->map->grid[i][++j])
