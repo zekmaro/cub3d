@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 17:13:07 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:37:04 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void	free_components(char **components)
+{
+	if (components)
+	{
+		free(components[0]);
+		free(components[1]);
+		free(components[2]);
+		free(components);
+	}
+}
 
 void	parse_color_components(char *line, int *r, int *g, int *b)
 {
@@ -24,29 +35,19 @@ void	parse_color_components(char *line, int *r, int *g, int *b)
 	}
 	if (!components[0] || !components[1] || !components[2])
 	{
-		free(components[0]);
-		free(components[1]);
-		free(components[2]);
-		free(components);
-		perror("Error\nInvalid color components\n");
-		exit(EXIT_FAILURE);
-	}
-	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
-	{
-		free(components[0]);
-		free(components[1]);
-		free(components[2]);
-		free(components);
+		free_components(components);
 		perror("Error\nInvalid color components\n");
 		exit(EXIT_FAILURE);
 	}
 	*r = ft_atoi(components[0]);
 	*g = ft_atoi(components[1]);
 	*b = ft_atoi(components[2]);
-	free(components[0]);
-	free(components[1]);
-	free(components[2]);
-	free(components);
+	free_components(components);
+	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
+	{
+		perror("Error\nInvalid color components\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 int	rgb_to_hex(int r, int g, int b)
