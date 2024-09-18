@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 23:26:40 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:58:29 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,16 @@ static int	skip_readed_lines(t_vars *vars, t_read_map_context *ctx)
 	return (1);
 }
 
-static int	read_and_validate_lines(t_vars *vars,
-				t_read_map_context *ctx)
+static int	handle_gnl_error(t_vars *vars, t_read_map_context *ctx, \
+				char *line, int *gnl_flag)
+{
+	free(line);
+	get_next_line(-1, gnl_flag);
+	ft_close(vars, ctx->fd);
+	return (0);
+}
+
+static int	read_and_validate_lines(t_vars *vars, t_read_map_context *ctx)
 {
 	char	*line;
 	int		i;
@@ -57,30 +65,15 @@ static int	read_and_validate_lines(t_vars *vars,
 	i = 0;
 	line = get_next_line(ctx->fd, &gnl_flag);
 	if (gnl_flag == 1)
-	{
-		free(line);
-		get_next_line(-1, &gnl_flag);
-		ft_close(vars, ctx->fd);
-		return (0);
-	}
+		return (handle_gnl_error(vars, ctx, line, &gnl_flag));
 	while (line != NULL)
 	{
 		if (!validate_line(line, i, ctx->map))
-		{
-			free(line);
-			get_next_line(-1, &gnl_flag);
-			ft_close(vars, ctx->fd);
-			return (0);
-		}
+			return (handle_gnl_error(vars, ctx, line, &gnl_flag));
 		ctx->map->grid[i++] = line;
 		line = get_next_line(ctx->fd, &gnl_flag);
 		if (gnl_flag == 1)
-		{
-			free(line);
-			get_next_line(-1, &gnl_flag);
-			ft_close(vars, ctx->fd);
-			return (0);
-		}
+			return (handle_gnl_error(vars, ctx, line, &gnl_flag));
 	}
 	return (1);
 }
