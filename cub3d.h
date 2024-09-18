@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 17:48:01 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 18:16:34 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,6 +431,16 @@ typedef struct s_ray_params
 	int	index;
 }	t_ray_params;
 
+typedef struct s_parse_context
+{
+	char	**line;
+	int		*parsed_components;
+	int		*count_lines;
+	t_vars	*vars;
+	char	**line_left;
+	int		fd;
+}	t_parse_context;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -759,8 +769,7 @@ int			is_hidden_file(char *file_name);
 
 /* Parse_resolution.c */
 void		handle_initial_line(char **line, char **line_left, int fd);
-void		handle_parsing_loop(char **line, int *parsed_components, \
-				int *count_lines, t_vars *vars, char **line_left, int fd);
+void		handle_parsing_loop(t_parse_context *ctx);
 void		handle_empty_lines(char **line, int *count_lines, int fd);
 void		check_parsing_errors(t_vars *vars, int parsed_components, \
 				char *line);
