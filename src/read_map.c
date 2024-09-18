@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 21:02:22 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:19:01 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int	skip_readed_lines(t_read_map_context *ctx)
 	while (ctx->readed_lines-- > 0)
 	{
 		line = get_next_line(ctx->fd);
+		free(line);
 		if (ctx->readed_lines == 0)
 			break ;
-		free(line);
 	}
 	return (1);
 }
