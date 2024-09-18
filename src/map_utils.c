@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/15 22:13:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:14:00 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	can_move(t_vars *vars, int y, int x)
 	else
 		return (0);
 }
-// 		if (vars->map->grid[y][x] == '1' || vars->map->grid[y][x] == 'D')
-//			return (0);
 
 int	get_texture_color(t_img *texture, int x, int y)
 {

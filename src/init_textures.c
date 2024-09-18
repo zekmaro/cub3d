@@ -44,10 +44,6 @@ void	initialise_textures(t_vars *vars)
 
 	if (!vars->mlx || !vars->mlx->mlx)
 		exit_with_error(vars, "MLX not initialized");
-	vars->texture_names[0] = ft_strdup("./assets/wall1.xpm");
-	vars->texture_names[1] = ft_strdup("./assets/wall2.xpm");
-	vars->texture_names[2] = ft_strdup("./assets/wall3.xpm");
-	vars->texture_names[3] = ft_strdup("./assets/wall4.xpm");
 	i = -1;
 	while (++i < 4)
 	{

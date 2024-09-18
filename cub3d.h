@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 23:05:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:58:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,6 +431,25 @@ typedef struct s_ray_params
 	int	index;
 }	t_ray_params;
 
+typedef struct s_parse_context
+{
+	char	**line;
+	int		*parsed_components;
+	int		*count_lines;
+	t_vars	*vars;
+	char	**line_left;
+	int		fd;
+}	t_parse_context;
+
+typedef struct s_read_map_context
+{
+	int		fd;
+	t_map	*map;
+	char	*file_name;
+	char	**line_left;
+	int		readed_lines;
+}	t_read_map_context;
+
 // for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
 // for mac: -framework OpenGL -framework AppKit -o
 
@@ -622,9 +641,6 @@ void		allocate_memory_for_sprites(t_vars *vars);
 void		load_sprites(t_vars *vars);
 void		initialise_sprites(t_vars *vars);
 
-/* Parsing.c */
-int			read_map(int fd, t_map *map, char *file_name);
-
 /* Map_utils.c */
 void		print_map(t_map *map);
 int			player_inside_map(t_vars *vars, int x, int y);
@@ -728,13 +744,12 @@ void		check_objects_to_draw(t_vars *vars);
 void		get_ray_target_coords(t_vars *vars);
 
 /* Read_map.c */
-int			read_map(int fd, t_map *map, char *file_name);
+int			read_map(t_read_map_context *ctx);
 
 /* Parsing.c */
-int			count_new_lines(int fd);
+int			count_new_lines(int fd, char *line_left);
 int			handle_player_direction(char *line, int i, int row, t_map *map);
-int			validate_line(char *line, int row, t_map *map);
-int			read_map(int fd, t_map *map, char *file_name);
+void		handle_boss(int i, int row, t_map *map);
 
 /* Parse_input.c */
 void		parse_color_components(char *line, int *r, int *g, int *b);
@@ -744,9 +759,33 @@ void		parse_line(t_vars *vars, char *line);
 /* Parse_map.c */
 int			is_map_surrounded_by_ones(t_map *map);
 void		fill_with_ones(t_map *map);
-void		parse_file_paths_and_colors(int fd, t_vars *vars);
+int			parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left);
 int			parse_map(int fd, t_map *map);
-int			read_map_form_file(int fd, t_map *map, t_vars *vars, \
-				char *file_name);
+
+/* Parse_utils.c */
+int			check_first_row(char *line);
+int			check_last_row(char *line);
+int			find_last_zero_index(char *line);
+
+/* Pars_filename.c */
+int			has_cub_extension(const char *filename);
+int			is_valid_file(const char *filename);
+int			is_hidden_file(char *file_name);
+
+/* Parse_resolution.c */
+void		handle_initial_line(char **line, char **line_left, int fd);
+void		handle_parsing_loop(t_parse_context *ctx);
+void		handle_empty_lines(char **line, int *count_lines, int fd);
+void		check_parsing_errors(t_vars *vars, int parsed_components, \
+				char *line);
+int			parse_file_paths_and_colors(int fd, t_vars *vars, \
+				char **line_left);
+
+/* Validate line */
+int			skip_whitespace(char *line);
+int			check_first_last_row(char *line, int row, t_map *map);
+int			check_last_zero_index(char *line, int row, t_map *map);
+int			validate_line_content(char *line, int i, int row, t_map *map);
+int			validate_line(char *line, int row, t_map *map);
 
 #endif // CUB3D_H

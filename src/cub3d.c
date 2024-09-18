@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/16 12:16:39 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:46:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,46 @@ int	validate_and_open_file(int argc, char **argv)
 	return (fd);
 }
 
+void	replace_space_with_one(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while ((size_t)j < ft_strlen(map->grid[i]))
+		{
+			if (map->grid[i][j] == ' ')
+				map->grid[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
-	t_vars	vars;
-	int		fd;
+	t_vars				vars;
+	int					fd;
+	int					readed_lines;
+	char				*line_left;
+	t_read_map_context	ctx;
 
+	line_left = NULL;
 	fd = validate_and_open_file(argc, argv);
 	ft_bzero(&vars, sizeof(t_vars));
 	initialise_vars(&vars);
-	if (!read_map(fd, vars.map, argv[1]))
+	readed_lines = parse_file_paths_and_colors(fd, &vars, &line_left);
+	ctx.fd = fd;
+	ctx.map = vars.map;
+	ctx.file_name = argv[1];
+	ctx.line_left = &line_left;
+	ctx.readed_lines = readed_lines;
+	if (!read_map(&ctx))
 		exit_with_error(&vars, "Error\nFailed to read map\n");
+	replace_space_with_one(vars.map);
 	initialise_doors(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);
