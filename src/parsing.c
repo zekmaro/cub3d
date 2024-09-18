@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 15:30:41 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:43:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	count_new_lines(int fd, char *line_left)
 int	handle_player_direction(char *line, int i, int row, t_map *map)
 {
 	if (map->player_dir != 0)
-		return (perror("Multiple player directions found\n"), \
+		return (perror("Error\nMultiple player directions found\n"), \
 					exit(EXIT_FAILURE), 1);
 	map->player_x = i;
 	map->player_y = row;
@@ -56,7 +56,6 @@ int	check_first_row(char *line)
 	{
 		if (line[i] != '1')
 		{
-			printf("NOPE\n");
 			return (0);
 		}
 		i++;
@@ -194,9 +193,7 @@ int	read_map(int fd, t_map *map, char *file_name, char **line_left, \
 		return (close(fd), 0);
 	while (readed_lines-- > 0)
 	{
-		printf("Readed lines: %d\n", readed_lines);
 		line = get_next_line(fd);
-		printf("Line: %s\n", line);
 		if (readed_lines == 0)
 			break ;
 		free(line);

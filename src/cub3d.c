@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 14:49:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:43:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ int	main(int argc, char **argv)
 	fd = validate_and_open_file(argc, argv);
 	ft_bzero(&vars, sizeof(t_vars));
 	initialise_vars(&vars);
-	printf("Start reading the map\n");
 	readed_lines = parse_file_paths_and_colors(fd, &vars, &line_left);
-	printf("After line left: %s\n", line_left);
-	printf("After parsed file paths and colors\n");
 	if (!read_map(fd, vars.map, argv[1], &line_left, readed_lines))
 		exit_with_error(&vars, "Error\nFailed to read map\n");
 	initialise_doors(&vars);

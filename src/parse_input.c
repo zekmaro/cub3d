@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 14:47:57 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:43:40 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	parse_color_components(char *line, int *r, int *g, int *b)
 		free(components[1]);
 		free(components[2]);
 		free(components);
-		perror("Invalid color components");
+		perror("Error\nInvalid color components\n");
 		exit(EXIT_FAILURE);
 	}
 	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
