@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/17 01:53:53 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:03:49 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -746,5 +746,10 @@ int			parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left);
 int			parse_map(int fd, t_map *map);
 int			read_map_form_file(int fd, t_map *map, t_vars *vars, \
 				char *file_name);
+
+/* Parse_utils.c */
+int			check_first_row(char *line);
+int			check_last_row(char *line);
+int			find_last_zero_index(char *line);
 
 #endif // CUB3D_H
