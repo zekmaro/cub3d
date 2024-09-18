@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/18 17:48:53 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/18 20:59:46 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,8 @@ SRC		:=	src/cub3d.c \
 			src/parse_utils.c \
 			src/parse_filename.c \
 			src/parse_file_paths_and_colors.c \
+			src/validate_line.c \
+			src/read_map.c \
 
 # LIBS 
 LIBS	:= libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 17:36:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:46:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,23 @@ void	replace_space_with_one(t_map *map)
 
 int	main(int argc, char **argv)
 {
-	t_vars	vars;
-	int		fd;
-	int		readed_lines;
-	char	*line_left;
+	t_vars				vars;
+	int					fd;
+	int					readed_lines;
+	char				*line_left;
+	t_read_map_context	ctx;
 
 	line_left = NULL;
 	fd = validate_and_open_file(argc, argv);
 	ft_bzero(&vars, sizeof(t_vars));
 	initialise_vars(&vars);
 	readed_lines = parse_file_paths_and_colors(fd, &vars, &line_left);
-	if (!read_map(fd, vars.map, argv[1], &line_left, readed_lines))
+	ctx.fd = fd;
+	ctx.map = vars.map;
+	ctx.file_name = argv[1];
+	ctx.line_left = &line_left;
+	ctx.readed_lines = readed_lines;
+	if (!read_map(&ctx))
 		exit_with_error(&vars, "Error\nFailed to read map\n");
 	replace_space_with_one(vars.map);
 	initialise_doors(&vars);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:59:53 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 17:00:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:54:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,130 +41,46 @@ int	handle_player_direction(char *line, int i, int row, t_map *map)
 	return (1);
 }
 
-static void	handle_boss(int i, int row, t_map *map)
+void	handle_boss(int i, int row, t_map *map)
 {
 	map->boss_x = i;
 	map->boss_y = row;
 }
 
-int	validate_line(char *line, int row, t_map *map)
-{
-	int	i;
-	int	last_zero_index;
+// int	read_map(t_read_map_context *ctx)
+// {
+// 	char	*line;
+// 	int		i;
 
-	i = 0;
-	while ((line[i] == ' ' || line[i] == '\t' \
-		|| line[i] == '\r' || line[i] == '\f' || line[i] == '\v'))
-		i++;
-	if (line[i] != '1' || line[ft_strlen(line) - 2] != '1')
-		return (0);
-	if (row == 0)
-		return (check_first_row(line + i));
-	if (row == map->height)
-		return (check_last_row(line));
-	else if (row != 0)
-	{
-		last_zero_index = find_last_zero_index(map->grid[row - 1]);
-		if (last_zero_index != 0)
-		{
-			if (ft_strlen(line) - 1 < (size_t)last_zero_index)
-				return (0);
-		}
-	}
-	while (line[i] && line[i] != '\n')
-	{
-		if (row == 1)
-		{
-			if (map->grid[0][i] != '1')
-				return (0);
-		}
-		if (line[i] == ' ')
-		{
-			if (i > 0 && ((ft_strlen(map->grid[row - 1]) - 1 >= (size_t)i)))
-			{
-				if (map->grid[row - 1][i] == '0')
-					return (0);
-			}
-		}
-		if (row == map->height)
-		{
-			if (ft_strlen(line) < ft_strlen(map->grid[row - 1]))
-				return (0);
-			else
-			{
-				if (line[i] == '0')
-					return (1);
-			}
-		}
-		if (line[i] == '0' && i > 0 \
-			&& ((ft_strlen(map->grid[row - 1]) - 1 < (size_t)i) \
-			|| map->grid[row - 1][i] == ' ' \
-			|| line[i + 1] == ' ' \
-			|| line[i - 1] == ' '))
-		{
-			return (0);
-		}
-		if (line[i] == 'N' || line[i] == 'S' \
-			|| line[i] == 'W' || line[i] == 'E')
-		{
-			if (!handle_player_direction(line, i, row, map))
-				return (0);
-		}
-		else if (line[i] == 'B')
-			handle_boss(i, row, map);
-		else if (line[i] == 'M')
-			map->imp_list_size++;
-		else if (line[i] == 'C')
-			map->caco_list_size++;
-		else if (line[i] == 'D')
-			map->num_doors++;
-		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
-		{
-			return (perror("Error\nInvalid character in map\n"), 0);
-		}
-		i++;
-	}
-	if (i > map->width)
-		map->width = i;
-	return (1);
-}
-
-int	read_map(int fd, t_map *map, char *file_name, char **line_left, \
-		int readed_lines)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	if (is_hidden_file(file_name) == 0)
-		return (0);
-	map->height = count_new_lines(fd, *line_left);
-	fd = open(file_name, O_RDONLY);
-	if (fd < 0 || map->height <= 0)
-		return (close(fd), 0);
-	map->grid = ft_calloc(map->height + 1, sizeof(char *));
-	if (!map->grid)
-		return (close(fd), 0);
-	while (readed_lines-- > 0)
-	{
-		line = get_next_line(fd);
-		free(line);
-		if (readed_lines == 0)
-			break ;
-	}
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		if (!validate_line(line, i, map))
-		{
-			get_next_line(-1);
-			free(line);
-			close(fd);
-			return (0);
-		}
-		map->grid[i++] = line;
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (1);
-}
+// 	i = 0;
+// 	if (is_hidden_file(ctx->file_name) == 0)
+// 		return (0);
+// 	ctx->map->height = count_new_lines(ctx->fd, *(ctx->line_left));
+// 	ctx->fd = open(ctx->file_name, O_RDONLY);
+// 	if (ctx->fd < 0 || ctx->map->height <= 0)
+// 		return (close(ctx->fd), 0);
+// 	ctx->map->grid = ft_calloc(ctx->map->height + 1, sizeof(char *));
+// 	if (!ctx->map->grid)
+// 		return (close(ctx->fd), 0);
+// 	while (ctx->readed_lines-- > 0)
+// 	{
+// 		line = get_next_line(ctx->fd);
+// 		if (ctx->readed_lines == 0)
+// 			break ;
+// 		free(line);
+// 	}
+// 	line = get_next_line(ctx->fd);
+// 	while (line != NULL)
+// 	{
+// 		if (!validate_line(line, i, ctx->map))
+// 		{
+// 			free(line);
+// 			close(ctx->fd);
+// 			return (0);
+// 		}
+// 		ctx->map->grid[i++] = line;
+// 		line = get_next_line(ctx->fd);
+// 	}
+// 	close(ctx->fd);
+// 	return (1);
+// }
