@@ -6,13 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/17 02:09:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:30:41 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
-#include <unistd.h>
 
 int	count_new_lines(int fd, char *line_left)
 {
@@ -20,10 +18,7 @@ int	count_new_lines(int fd, char *line_left)
 	int		new_lines;
 
 	new_lines = 0;
-	//line = get_next_line(fd);
-	//(void)line_left;
 	line = line_left;
-	printf("Line in count lines '%s'\n", line);
 	while (line != NULL)
 	{
 		new_lines++;
@@ -52,9 +47,11 @@ static void	handle_boss(int i, int row, t_map *map)
 	map->boss_y = row;
 }
 
-int check_first_row(char *line)
+int	check_first_row(char *line)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
 		if (line[i] != '1')
@@ -67,9 +64,11 @@ int check_first_row(char *line)
 	return (1);
 }
 
-int check_last_row(char *line)
+int	check_last_row(char *line)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
 		if (line[i] != '1' || line[i] != ' ')
@@ -79,13 +78,16 @@ int check_last_row(char *line)
 	return (1);
 }
 
-int find_last_zero_index(char *line)
+int	find_last_zero_index(char *line)
 {
-	int i = 0;
-	int save = 0;
+	int	i;
+	int	save;
+
+	i = 0;
+	save = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (line[i] == '0') // not sure about save being zero cause it might be first char
+		if (line[i] == '0')
 			save = i;
 		i++;
 	}
@@ -95,11 +97,11 @@ int find_last_zero_index(char *line)
 int	validate_line(char *line, int row, t_map *map)
 {
 	int	i;
-	int last_zero_index;
+	int	last_zero_index;
 
 	i = 0;
 	printf("%s ", line);
-	while ((line[i] == ' ' || line[i] == '\t'
+	while ((line[i] == ' ' || line[i] == '\t' \
 		|| line[i] == '\r' || line[i] == '\f' || line[i] == '\v'))
 		i++;
 	if (line[i] != '1' || line[ft_strlen(line) - 2] != '1')
@@ -116,8 +118,6 @@ int	validate_line(char *line, int row, t_map *map)
 			if (ft_strlen(line) - 1 < (size_t)last_zero_index)
 				return (0);
 		}
-		// if (last_zero_index == -1)
-		// 	return (0);
 	}
 	while (line[i] && line[i] != '\n')
 	{
@@ -145,10 +145,10 @@ int	validate_line(char *line, int row, t_map *map)
 					return (1);
 			}
 		}
-		if (line[i] == '0' && i > 0
-			&& ((ft_strlen(map->grid[row - 1]) - 1 < (size_t)i)
-			|| map->grid[row - 1][i] == ' '
-			|| line[i + 1] == ' '
+		if (line[i] == '0' && i > 0 \
+			&& ((ft_strlen(map->grid[row - 1]) - 1 < (size_t)i) \
+			|| map->grid[row - 1][i] == ' ' \
+			|| line[i + 1] == ' ' \
 			|| line[i - 1] == ' '))
 		{
 			return (0);
@@ -169,7 +169,6 @@ int	validate_line(char *line, int row, t_map *map)
 			map->num_doors++;
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
 		{
-			printf("Line[%d] %s\n", i, line);
 			return (perror("Error\nInvalid character in map\n"), 0);
 		}
 		i++;
@@ -179,43 +178,41 @@ int	validate_line(char *line, int row, t_map *map)
 	return (1);
 }
 
-int	read_map(int fd, t_map *map, char *file_name, char **line_left, int readed_lines)
+int	read_map(int fd, t_map *map, char *file_name, char **line_left, \
+		int readed_lines)
 {
-    char	*line;
-    int		i;
+	char	*line;
+	int		i;
 
-    i = 0;
-    map->height = count_new_lines(fd, *line_left);
-    //printf("Read map: map height: %d line left: %s\n", map->height, *line_left);
-    printf("Read map: map height: %d\n", map->height);
+	i = 0;
+	map->height = count_new_lines(fd, *line_left);
 	fd = open(file_name, O_RDONLY);
-    if (fd < 0 || map->height <= 0)
-        return (close(fd), 0);
-    map->grid = ft_calloc(map->height + 1, sizeof(char *));
-    if (!map->grid)
-        return (close(fd), 0);
-    while (readed_lines-- > 0)
+	if (fd < 0 || map->height <= 0)
+		return (close(fd), 0);
+	map->grid = ft_calloc(map->height + 1, sizeof(char *));
+	if (!map->grid)
+		return (close(fd), 0);
+	while (readed_lines-- > 0)
 	{
 		printf("Readed lines: %d\n", readed_lines);
 		line = get_next_line(fd);
 		printf("Line: %s\n", line);
 		if (readed_lines == 0)
-			break;
+			break ;
 		free(line);
-	}	
+	}
 	line = get_next_line(fd);
-    while (line != NULL)
-    {
-        if (!validate_line(line, i, map))
-        {
-            free(line);
-            close(fd);
-            return (0);
-        }
-        map->grid[i++] = line;
-		//printf("Line in if in read line after skipping: %s\n", line);
+	while (line != NULL)
+	{
+		if (!validate_line(line, i, map))
+		{
+			free(line);
+			close(fd);
+			return (0);
+		}
+		map->grid[i++] = line;
 		line = get_next_line(fd);
-    }
-    close(fd);
-    return (1);
+	}
+	close(fd);
+	return (1);
 }
