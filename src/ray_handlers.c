@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:20:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 21:52:33 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:40:22 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	handle_wall(t_vars *vars, int ray_id, int y, int color)
 {
 	put_pixel_to_image(vars, ray_id, y, color);
 }
-// else if (is_door(vars, pix_inf->map_x, pix_inf->map_y))
-// 	handle_door(vars, pix_inf->ray_id, pix_inf->y, pix_inf->color);
 
 int	get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 	int y, t_tex_coords *coords)

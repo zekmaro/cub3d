@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/15 02:22:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:39:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,6 @@ void	fill_with_ones(t_map *map)
 	}
 }
 
-void	parse_file_paths_and_colors(int fd, t_vars *vars)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		if (ft_strncmp(line, "1", 1) == 0 || ft_strncmp(line, "0", 1) == 0)
-		{
-			free(line);
-			break ;
-		}
-		if (ft_strlen(line) > 0)
-			parse_line(vars, line);
-		free(line);
-		line = get_next_line(fd);
-	}
-}
-
 int	parse_map(int fd, t_map *map)
 {
 	char	*line;
@@ -91,22 +72,8 @@ int	parse_map(int fd, t_map *map)
 		line = get_next_line(fd);
 	}
 	if (!is_map_surrounded_by_ones(map))
-		return (perror("Map is not surrounded by '1's"), exit(EXIT_FAILURE), 0);
+		return (perror("\nError\nMap is not surrounded by '1's\n"), \
+			exit(EXIT_FAILURE), 0);
 	fill_with_ones(map);
-}
-
-int	read_map_form_file(int fd, t_map *map, t_vars *vars, char *file_name)
-{
-	map->height = count_new_lines(fd);
-	close(fd);
-	fd = open(file_name, O_RDONLY);
-	if (fd < 0 || map->height <= 0)
-		return (0);
-	map->grid = ft_calloc(map->height + 1, sizeof(char *));
-	if (!map->grid)
-		return (close(fd), 0);
-	parse_file_paths_and_colors(fd, vars);
-	parse_map(fd, map);
-	close(fd);
 	return (1);
 }

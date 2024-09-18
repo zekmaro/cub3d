@@ -30,14 +30,15 @@ void	free_map(t_map *map)
 
 	if (map == NULL || map->grid == NULL)
 		return ;
-	i = -1;
-	while (++i < map->height + 1)
+	i = 0;
+	while (i < map->height)
 	{
 		if (map->grid[i])
 		{
 			free(map->grid[i]);
 			map->grid[i] = NULL;
 		}
+		i++;
 	}
 	if (map->grid)
 	{

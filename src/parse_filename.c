@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 15:11:26 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/15 18:46:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:15:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,12 @@ int	is_valid_file(const char *filename)
 	if (fd < 0)
 		return (0);
 	close(fd);
+	return (1);
+}
+
+int	is_hidden_file(char *file_name)
+{
+	if (!file_name || *file_name == '.')
+		return (0);
 	return (1);
 }
