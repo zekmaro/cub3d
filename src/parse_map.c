@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 16:43:46 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:54:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	parse_map(int fd, t_map *map)
 
 	i = 0;
 	line = get_next_line(fd);
-    while (line == NULL)
+	while (line == NULL)
 	{
 		while (*line == ' ')
 			line++;
@@ -129,7 +129,7 @@ int	parse_map(int fd, t_map *map)
 	}
 	if (!is_map_surrounded_by_ones(map))
 		return (perror("\Error\nMap is not surrounded by '1's\n"), \
-            exit(EXIT_FAILURE), 0);
+			exit(EXIT_FAILURE), 0);
 	fill_with_ones(map);
 	return (1);
 }
