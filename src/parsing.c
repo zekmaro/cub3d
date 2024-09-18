@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 16:43:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:00:19 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,52 +45,6 @@ static void	handle_boss(int i, int row, t_map *map)
 {
 	map->boss_x = i;
 	map->boss_y = row;
-}
-
-int	check_first_row(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] != '1')
-		{
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	check_last_row(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] != '1' || line[i] != ' ')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	find_last_zero_index(char *line)
-{
-	int	i;
-	int	save;
-
-	i = 0;
-	save = 0;
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] == '0')
-			save = i;
-		i++;
-	}
-	return (save);
 }
 
 int	validate_line(char *line, int row, t_map *map)
