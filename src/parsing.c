@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <stdio.h>
+#include <unistd.h>
 
 int	count_new_lines(int fd, char *line_left)
 {
@@ -77,27 +79,61 @@ int check_last_row(char *line)
 	return (1);
 }
 
+int find_last_zero_index(char *line)
+{
+	int i = 0;
+	int save = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		if (line[i] == '0') // not sure about save being zero cause it might be first char
+			save = i;
+		i++;
+	}
+	return (save);
+}
+
 int	validate_line(char *line, int row, t_map *map)
 {
 	int	i;
+	int last_zero_index;
 
 	i = 0;
 	printf("%s ", line);
 	while ((line[i] == ' ' || line[i] == '\t'
 		|| line[i] == '\r' || line[i] == '\f' || line[i] == '\v'))
 		i++;
-	if (line[i] != '1')
+	if (line[i] != '1' || line[ft_strlen(line) - 2] != '1')
 		return (0);
 	if (row == 0)
 		return (check_first_row(line + i));
 	if (row == map->height)
 		return (check_last_row(line));
+	else if (row != 0)
+	{
+		last_zero_index = find_last_zero_index(map->grid[row - 1]);
+		if (last_zero_index != 0)
+		{
+			if (ft_strlen(line) - 1 < (size_t)last_zero_index)
+				return (0);
+		}
+		// if (last_zero_index == -1)
+		// 	return (0);
+	}
 	while (line[i] && line[i] != '\n')
 	{
 		if (row == 1)
 		{
 			if (map->grid[0][i] != '1')
 				return (0);
+		}
+		if (line[i] == ' ')
+		{
+			if (i > 0 && ((ft_strlen(map->grid[row - 1]) - 1 >= (size_t)i)))
+			{
+				printf("%d\n", i);
+				if (map->grid[row - 1][i] == '0')
+					return (0);
+			}
 		}
 		if (row == map->height)
 		{
@@ -109,15 +145,11 @@ int	validate_line(char *line, int row, t_map *map)
 					return (1);
 			}
 		}
-		if (i > 0 && line[i] == '0'
-			&& (map->grid[row - 1][i] == ' '
+		if (line[i] == '0' && i > 0
+			&& ((ft_strlen(map->grid[row - 1]) - 1 < (size_t)i)
+			|| map->grid[row - 1][i] == ' '
 			|| line[i + 1] == ' '
 			|| line[i - 1] == ' '))
-		{
-			return (0);
-		}
-		if (i > 0 && line[i] == ' '
-			&& map->grid[row - 1][i] == '0')
 		{
 			return (0);
 		}
