@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 18:23:48 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:11:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_initial_line(char **line, char **line_left, int fd)
 {
-	char *str;
+	char	*str;
 
 	if (*line_left != NULL)
 	{
@@ -32,7 +32,7 @@ void	handle_initial_line(char **line, char **line_left, int fd)
 
 void	handle_parsing_loop(t_parse_context *ctx)
 {
-	char *str;
+	char	*str;
 
 	while (*(ctx->line) != NULL && *(ctx->parsed_components) < 6)
 	{
@@ -58,7 +58,7 @@ void	handle_parsing_loop(t_parse_context *ctx)
 
 void	handle_empty_lines(char **line, int *count_lines, int fd)
 {
-	char *str;
+	char	*str;
 
 	while (*line != NULL && ft_strlen(*line) == 0)
 	{

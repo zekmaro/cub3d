@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:59:53 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 20:54:31 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:10:22 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,41 +46,3 @@ void	handle_boss(int i, int row, t_map *map)
 	map->boss_x = i;
 	map->boss_y = row;
 }
-
-// int	read_map(t_read_map_context *ctx)
-// {
-// 	char	*line;
-// 	int		i;
-
-// 	i = 0;
-// 	if (is_hidden_file(ctx->file_name) == 0)
-// 		return (0);
-// 	ctx->map->height = count_new_lines(ctx->fd, *(ctx->line_left));
-// 	ctx->fd = open(ctx->file_name, O_RDONLY);
-// 	if (ctx->fd < 0 || ctx->map->height <= 0)
-// 		return (close(ctx->fd), 0);
-// 	ctx->map->grid = ft_calloc(ctx->map->height + 1, sizeof(char *));
-// 	if (!ctx->map->grid)
-// 		return (close(ctx->fd), 0);
-// 	while (ctx->readed_lines-- > 0)
-// 	{
-// 		line = get_next_line(ctx->fd);
-// 		if (ctx->readed_lines == 0)
-// 			break ;
-// 		free(line);
-// 	}
-// 	line = get_next_line(ctx->fd);
-// 	while (line != NULL)
-// 	{
-// 		if (!validate_line(line, i, ctx->map))
-// 		{
-// 			free(line);
-// 			close(ctx->fd);
-// 			return (0);
-// 		}
-// 		ctx->map->grid[i++] = line;
-// 		line = get_next_line(ctx->fd);
-// 	}
-// 	close(ctx->fd);
-// 	return (1);
-// }
