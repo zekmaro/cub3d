@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/18 22:05:14 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/19 00:19:21 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,13 +80,13 @@ SRC		:=	src/cub3d.c \
 			src/handle_objects.c \
 			src/raycasting_utils.c \
 			src/init_mlx.c \
-			src/parse_map.c \
 			src/parse_utils.c \
 			src/parse_filename.c \
 			src/parse_file_paths_and_colors.c \
 			src/validate_line.c \
 			src/read_map.c \
-			src/ft_utils.c
+			src/ft_utils.c \
+			src/handle_initial_line.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
