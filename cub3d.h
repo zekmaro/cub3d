@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 17:03:49 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:17:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -751,5 +751,10 @@ int			read_map_form_file(int fd, t_map *map, t_vars *vars, \
 int			check_first_row(char *line);
 int			check_last_row(char *line);
 int			find_last_zero_index(char *line);
+
+/* Pars_filename.c */
+int			has_cub_extension(const char *filename);
+int			is_valid_file(const char *filename);
+int			is_hidden_file(char *file_name);
 
 #endif // CUB3D_H

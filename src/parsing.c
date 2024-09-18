@@ -129,13 +129,6 @@ int	validate_line(char *line, int row, t_map *map)
 	return (1);
 }
 
-int is_hidden_file(char *file_name)
-{
-	if (!file_name || *file_name == '.')
-		return (0);
-	return (1);
-}
-
 int	read_map(int fd, t_map *map, char *file_name, char **line_left, \
 		int readed_lines)
 {
