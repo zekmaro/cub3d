@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 16:43:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:54:27 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,13 @@ int	validate_line(char *line, int row, t_map *map)
 	return (1);
 }
 
+int is_hidden_file(char *file_name)
+{
+	if (!file_name || *file_name == '.')
+		return (0);
+	return (1);
+}
+
 int	read_map(int fd, t_map *map, char *file_name, char **line_left, \
 		int readed_lines)
 {
@@ -184,6 +191,8 @@ int	read_map(int fd, t_map *map, char *file_name, char **line_left, \
 	int		i;
 
 	i = 0;
+	if (is_hidden_file(file_name) == 0)
+		return (0);
 	map->height = count_new_lines(fd, *line_left);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0 || map->height <= 0)
