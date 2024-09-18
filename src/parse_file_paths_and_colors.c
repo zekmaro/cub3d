@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 21:11:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:45:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	handle_parsing_loop(t_parse_context *ctx)
 		{
 			*(ctx->line_left) = ft_strdup(*(ctx->line));
 			free(*(ctx->line));
+            *(ctx->line) = NULL;
 			break ;
 		}
 		if (ft_strlen(*(ctx->line)) > 0)
@@ -62,9 +63,9 @@ void	handle_empty_lines(char **line, int *count_lines, int fd)
 
 	while (*line != NULL && ft_strlen(*line) == 0)
 	{
+		free(*line);
 		str = get_next_line(fd);
 		(*count_lines)++;
-		free(*line);
 		*line = ft_strtrim(str, "\n");
 		free(str);
 	}
