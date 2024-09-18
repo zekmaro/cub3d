@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:53:33 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/16 14:11:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:54:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	safe_init_mlx(t_vars *vars)
 	vars->mlx->mlx = mlx_init();
 	if (!vars->mlx->mlx)
 	{
-		free(vars->mlx);
-		vars->mlx = NULL;
 		exit_with_error(vars, "Failed to initialise mlx");
 		exit(EXIT_FAILURE);
 	}

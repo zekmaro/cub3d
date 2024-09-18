@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:21:46 by anarama           #+#    #+#             */
-/*   Updated: 2024/05/23 21:32:25 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/18 22:30:22 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_strchr_gnl(char *str, char c)
 	return (NULL);
 }
 
-char	*ft_strjoin_gnl(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2, int *flag)
 {
 	size_t	len_s1;
 	size_t	len_s2;
@@ -60,14 +60,14 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 
 	if (s1 == NULL)
 	{
-		cat_result = ft_strdup_gnl(s2);
+		cat_result = ft_strdup_gnl(s2, flag);
 		return (ft_free_gnl(&s2), cat_result);
 	}
 	len_s1 = ft_strlen_gnl(s1);
 	len_s2 = ft_strlen_gnl(s2);
 	cat_result = (char *)ft_calloc_gnl((len_s1 + len_s2) + 1, 1);
 	if (!cat_result)
-		return (ft_free_gnl(&s1), ft_free_gnl(&s2), NULL);
+		return (ft_free_gnl(&s1), ft_free_gnl(&s2), *flag = 1, NULL);
 	temp_cat_result = cat_result;
 	ft_memcpy_gnl(cat_result, s1, len_s1);
 	cat_result += len_s1;
@@ -75,18 +75,18 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	return (ft_free_gnl(&s1), ft_free_gnl(&s2), temp_cat_result);
 }
 
-char	*ft_strdup_gnl(const char *s)
+char	*ft_strdup_gnl(const char *s, int *flag)
 {
 	size_t	len_s;
 	char	*dup_s;
 	char	*temp_dup_s;
 
 	if (s == NULL)
-		return (NULL);
+		return (*flag = 1, NULL);
 	len_s = ft_strlen_gnl(s);
 	dup_s = (char *)malloc(sizeof(char) * (len_s + 1));
 	if (!dup_s)
-		return (NULL);
+		return (*flag = 1, NULL);
 	temp_dup_s = dup_s;
 	while (*s)
 		*dup_s++ = *s++;
