@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 17:17:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:48:01 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -756,5 +756,15 @@ int			find_last_zero_index(char *line);
 int			has_cub_extension(const char *filename);
 int			is_valid_file(const char *filename);
 int			is_hidden_file(char *file_name);
+
+/* Parse_resolution.c */
+void		handle_initial_line(char **line, char **line_left, int fd);
+void		handle_parsing_loop(char **line, int *parsed_components, \
+				int *count_lines, t_vars *vars, char **line_left, int fd);
+void		handle_empty_lines(char **line, int *count_lines, int fd);
+void		check_parsing_errors(t_vars *vars, int parsed_components, \
+				char *line);
+int			parse_file_paths_and_colors(int fd, t_vars *vars, \
+				char **line_left);
 
 #endif // CUB3D_H
