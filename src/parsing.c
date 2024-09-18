@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:19:49 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 17:07:57 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:14:18 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,6 @@ int	validate_line(char *line, int row, t_map *map)
 	}
 	if (i > map->width)
 		map->width = i;
-	return (1);
-}
-
-int is_hidden_file(char *file_name)
-{
-	if (!file_name || *file_name == '.')
-		return (0);
 	return (1);
 }
 
