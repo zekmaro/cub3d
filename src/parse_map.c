@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 20:04:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:39:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,62 +52,6 @@ void	fill_with_ones(t_map *map)
 		j++;
 	}
 }
-
-// int	parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left)
-// {
-// 	char	*line;
-// 	int		parsed_components;
-// 	int		count_lines;
-
-// 	count_lines = 0;
-// 	parsed_components = 0;
-// 	if (*line_left != NULL)
-// 	{
-// 		line = ft_strdup(*line_left);
-// 		free(*line_left);
-// 		*line_left = NULL;
-// 	}
-// 	else
-// 	{
-// 		line = ft_strtrim(get_next_line(fd), "\n");
-// 	}
-// 	while (line != NULL && parsed_components < 6)
-// 	{
-// 		count_lines++;
-// 		if (ft_strncmp(line, "1", 1) == 0 || ft_strncmp(line, "0", 1) == 0)
-// 		{
-// 			*line_left = ft_strdup(line);
-// 			free(line);
-// 			break ;
-// 		}
-// 		if (ft_strlen(line) > 0)
-// 		{
-// 			parse_line(vars, line);
-// 			parsed_components++;
-// 		}
-// 		free(line);
-// 		line = ft_strtrim(get_next_line(fd), "\n");
-// 	}
-// 	while (line != NULL && ft_strlen(line) == 0)
-// 	{
-// 		count_lines++;
-// 		free(line);
-// 		line = ft_strtrim(get_next_line(fd), "\n");
-// 	}
-// 	if (line == NULL)
-// 		exit_with_error(vars, "Error\nFailed to read map file\n");
-// 	if (parsed_components < 6)
-// 		exit_with_error(vars, \
-// 		"Error\nIncomplete map file: missing textures or colors\n");
-// 	if (!vars->texture_names[0] || !vars->texture_names[1] \
-// 		|| !vars->texture_names[2] || !vars->texture_names[3])
-// 		exit_with_error(vars, "Error\nMissing one or more texture paths\n");
-// 	if (vars->floor_color == -1 || vars->ceiling_color == -1)
-// 		exit_with_error(vars, "Error\nMissing floor or ceiling color\n");
-// 	*line_left = ft_strdup(line);
-// 	free(line);
-// 	return (count_lines);
-// }
 
 int	parse_map(int fd, t_map *map)
 {

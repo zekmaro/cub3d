@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:22 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/11 01:07:29 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:39:48 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,3 @@ void	draw_sprites(t_vars *vars)
 		i++;
 	}
 }
-
-// int	draw_sprite(t_vars *vars)
-// {
-// 	//update_sprite_frame(vars->animated_sprite);
-// 	draw_map(vars);
-// 	mlx_put_image_to_window(vars->mlx->mlx, vars->mlx->win,
-// 		vars->image->mlx_img, 0, 0);
-// 	return (0);
-// }

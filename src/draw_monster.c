@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:18:43 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 14:10:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:39:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,3 @@ void	search_for_player_enemy(t_vars *vars, t_enemy *enemy)
 		radian += 0.01;
 	}
 }
-// Comment from cast_ray_enemy
-// ray_dir_x += cos(ray_angle);
-// ray_dir_y += sin(ray_angle);
-// //put_pixel_to_image(vars, (int)ray_dir_x, (int)ray_dir_y, BLUE);
-// if (!enemy->detected_player)
