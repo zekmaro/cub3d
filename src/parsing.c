@@ -6,26 +6,36 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:59:53 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 21:10:22 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:37:17 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	count_new_lines(int fd, char *line_left)
+int	count_new_lines(t_vars *vars, int fd, char *line_left)
 {
 	char	*line;
 	int		new_lines;
+	int		gnl_flag;
 
+	gnl_flag = 0;
 	new_lines = 0;
 	line = line_left;
 	while (line != NULL)
 	{
 		new_lines++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, &gnl_flag);
+		if (gnl_flag == 1)
+		{
+			free(line);
+			line = NULL;
+			ft_close(vars, fd);
+			get_next_line(-1, &gnl_flag);
+			return (0);
+		}
 	}
-	close(fd);
+	ft_close(vars, fd);
 	return (new_lines);
 }
 

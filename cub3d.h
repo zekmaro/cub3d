@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 20:58:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:33:25 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -744,10 +744,10 @@ void		check_objects_to_draw(t_vars *vars);
 void		get_ray_target_coords(t_vars *vars);
 
 /* Read_map.c */
-int			read_map(t_read_map_context *ctx);
+int			read_map(t_vars *vars, t_read_map_context *ctx);
 
 /* Parsing.c */
-int			count_new_lines(int fd, char *line_left);
+int			count_new_lines(t_vars *vars, int fd, char *line_left);
 int			handle_player_direction(char *line, int i, int row, t_map *map);
 void		handle_boss(int i, int row, t_map *map);
 
@@ -769,13 +769,15 @@ int			find_last_zero_index(char *line);
 
 /* Pars_filename.c */
 int			has_cub_extension(const char *filename);
-int			is_valid_file(const char *filename);
+int			is_valid_file(t_vars *vars, const char *filename);
 int			is_hidden_file(char *file_name);
 
 /* Parse_resolution.c */
-void		handle_initial_line(char **line, char **line_left, int fd);
-void		handle_parsing_loop(t_parse_context *ctx);
-void		handle_empty_lines(char **line, int *count_lines, int fd);
+void		handle_initial_line(t_vars *vars, char **line, \
+				char **line_left, int fd);
+void		handle_parsing_loop(t_vars *vars, t_parse_context *ctx);
+void		handle_empty_lines(t_vars *vars, char **line, \
+				int *count_lines, int fd);
 void		check_parsing_errors(t_vars *vars, int parsed_components, \
 				char *line);
 int			parse_file_paths_and_colors(int fd, t_vars *vars, \
@@ -787,5 +789,8 @@ int			check_first_last_row(char *line, int row, t_map *map);
 int			check_last_zero_index(char *line, int row, t_map *map);
 int			validate_line_content(char *line, int i, int row, t_map *map);
 int			validate_line(char *line, int row, t_map *map);
+
+/* Ft_utils.c */
+void		ft_close(t_vars *vars, int fd);
 
 #endif // CUB3D_H

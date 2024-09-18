@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_filename.c                                   :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/15 15:11:26 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 22:10:02 by iberegsz         ###   ########.fr       */
+/*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
+/*   Updated: 2024/09/18 23:36:43 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	has_cub_extension(const char *filename)
+void	ft_close(t_vars *vars, int fd)
 {
-	size_t	len;
-
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (0);
-	return (ft_strncmp(filename + len - 4, ".cub", 4) == 0);
+	if (close(fd) == -1)
+	{
+		exit_with_error(vars, "Error\nClose failed\n");
+	}
 }
 
-int	is_valid_file(t_vars *vars, const char *filename)
+int	check_input(char *str, int num)
 {
-	int	fd;
+	char	*check;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	check = ft_itoa(num);
+	if (!check || ft_strncmp(check, str, ft_strlen(str)) != 0)
+	{
+		free(check);
 		return (0);
-	ft_close(vars, fd);
-	return (1);
-}
-
-int	is_hidden_file(char *file_name)
-{
-	if (!file_name || *file_name == '.')
-		return (0);
+	}
+	free(check);
 	return (1);
 }
