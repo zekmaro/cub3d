@@ -50,13 +50,77 @@ static void	handle_boss(int i, int row, t_map *map)
 	map->boss_y = row;
 }
 
+int check_first_row(char *line)
+{
+	int i = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		if (line[i] != '1')
+		{
+			printf("NOPE\n");
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int check_last_row(char *line)
+{
+	int i = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		if (line[i] != '1' || line[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	validate_line(char *line, int row, t_map *map)
 {
 	int	i;
 
-	i = -1;
-	while (line[++i] && line[i] != '\n')
+	i = 0;
+	printf("%s ", line);
+	while ((line[i] == ' ' || line[i] == '\t'
+		|| line[i] == '\r' || line[i] == '\f' || line[i] == '\v'))
+		i++;
+	if (line[i] != '1')
+		return (0);
+	if (row == 0)
+		return (check_first_row(line + i));
+	if (row == map->height)
+		return (check_last_row(line));
+	while (line[i] && line[i] != '\n')
 	{
+		if (row == 1)
+		{
+			if (map->grid[0][i] != '1')
+				return (0);
+		}
+		if (row == map->height)
+		{
+			if (ft_strlen(line) < ft_strlen(map->grid[row - 1]))
+				return (0);
+			else
+			{
+				if (line[i] == '0')
+					return (1);
+			}
+		}
+		if (i > 0 && line[i] == '0'
+			&& (map->grid[row - 1][i] == ' '
+			|| line[i + 1] == ' '
+			|| line[i - 1] == ' '))
+		{
+			return (0);
+		}
+		if (i > 0 && line[i] == ' '
+			&& map->grid[row - 1][i] == '0')
+		{
+			return (0);
+		}
 		if (line[i] == 'N' || line[i] == 'S' \
 			|| line[i] == 'W' || line[i] == 'E')
 		{
@@ -72,7 +136,11 @@ int	validate_line(char *line, int row, t_map *map)
 		else if (line[i] == 'D')
 			map->num_doors++;
 		else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
+		{
+			printf("Line[%d] %s\n", i, line);
 			return (perror("Error\nInvalid character in map\n"), 0);
+		}
+		i++;
 	}
 	if (i > map->width)
 		map->width = i;
@@ -103,19 +171,18 @@ int	read_map(int fd, t_map *map, char *file_name, char **line_left, int readed_l
 			break;
 		free(line);
 	}	
-    if (line != NULL)
+	line = get_next_line(fd);
+    while (line != NULL)
     {
-		printf("Line in if in read line after skipping: %s\n", line);
         if (!validate_line(line, i, map))
         {
             free(line);
-            while (i > 0)
-                free(map->grid[--i]);
-            free(map->grid);
             close(fd);
             return (0);
         }
         map->grid[i++] = line;
+		//printf("Line in if in read line after skipping: %s\n", line);
+		line = get_next_line(fd);
     }
     close(fd);
     return (1);

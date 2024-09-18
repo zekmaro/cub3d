@@ -91,12 +91,12 @@ int	main(int argc, char **argv)
 	printf("After parsed file paths and colors\n");
 	if (!read_map(fd, vars.map, argv[1], &line_left, readed_lines))
 		exit_with_error(&vars, "Error\nFailed to read map\n");
-	printf("printfout the whole map grid\n");
-	while (vars.map->grid)
-	{
-		printf("%s\n", *vars.map->grid);
-		vars.map->grid++;
-	}	
+	// printf("printfout the whole map grid\n");
+	// while (vars.map->grid)
+	// {
+	// 	printf("%s\n", *vars.map->grid);
+	// 	vars.map->grid++;
+	// }	
 	initialise_doors(&vars);
 	init_enemy_lists(&vars);
 	setup_player(&vars);
