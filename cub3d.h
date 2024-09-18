@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 18:16:34 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:53:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -740,7 +740,8 @@ int			read_map_refactored(int fd, t_map *map, char *file_name);
 /* Parsing.c */
 int			count_new_lines(int fd, char *line_left);
 int			handle_player_direction(char *line, int i, int row, t_map *map);
-int			validate_line(char *line, int row, t_map *map);
+//int			validate_line(char *line, int row, t_map *map);
+void		handle_boss(int i, int row, t_map *map);
 int			read_map(int fd, t_map *map, char *file_name, char **line_left, \
 				int readed_lines);
 
@@ -775,5 +776,12 @@ void		check_parsing_errors(t_vars *vars, int parsed_components, \
 				char *line);
 int			parse_file_paths_and_colors(int fd, t_vars *vars, \
 				char **line_left);
+
+/* Validate line */
+int			skip_whitespace(char *line);
+int			check_first_last_row(char *line, int row, t_map *map);
+int			check_last_zero_index(char *line, int row, t_map *map);
+int			validate_line_content(char *line, int i, int row, t_map *map);
+int			validate_line(char *line, int row, t_map *map);
 
 #endif // CUB3D_H
