@@ -148,15 +148,16 @@ int	read_map(int fd, t_map *map, char *file_name, char **line_left, \
 	while (readed_lines-- > 0)
 	{
 		line = get_next_line(fd);
+		free(line);
 		if (readed_lines == 0)
 			break ;
-		free(line);
 	}
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		if (!validate_line(line, i, map))
 		{
+			get_next_line(-1);
 			free(line);
 			close(fd);
 			return (0);

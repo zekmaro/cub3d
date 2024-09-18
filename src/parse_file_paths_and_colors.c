@@ -14,6 +14,8 @@
 
 void	handle_initial_line(char **line, char **line_left, int fd)
 {
+	char *str;
+
 	if (*line_left != NULL)
 	{
 		*line = ft_strdup(*line_left);
@@ -22,12 +24,16 @@ void	handle_initial_line(char **line, char **line_left, int fd)
 	}
 	else
 	{
-		*line = ft_strtrim(get_next_line(fd), "\n");
+		str = get_next_line(fd);
+		*line = ft_strtrim(str, "\n");
+		free(str);
 	}
 }
 
 void	handle_parsing_loop(t_parse_context *ctx)
 {
+	char *str;
+
 	while (*(ctx->line) != NULL && *(ctx->parsed_components) < 6)
 	{
 		(*(ctx->count_lines))++;
@@ -44,17 +50,23 @@ void	handle_parsing_loop(t_parse_context *ctx)
 			(*(ctx->parsed_components))++;
 		}
 		free(*(ctx->line));
-		*(ctx->line) = ft_strtrim(get_next_line(ctx->fd), "\n");
+		str = get_next_line(ctx->fd);
+		*(ctx->line) = ft_strtrim(str, "\n");
+		free(str);
 	}
 }
 
 void	handle_empty_lines(char **line, int *count_lines, int fd)
 {
+	char *str;
+
 	while (*line != NULL && ft_strlen(*line) == 0)
 	{
+		str = get_next_line(fd);
 		(*count_lines)++;
 		free(*line);
-		*line = ft_strtrim(get_next_line(fd), "\n");
+		*line = ft_strtrim(str, "\n");
+		free(str);
 	}
 }
 
