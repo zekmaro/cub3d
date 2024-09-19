@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/19 15:22:52 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:06:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -789,6 +789,10 @@ int			validate_line(char *line, int row, t_map *map);
 
 /* Ft_utils.c */
 void		ft_close(t_vars *vars, int fd);
+int			check_input(char *str, int num);
+int			rgb_to_hex(int r, int g, int b);
+void		free_components(char **components);
+void		check_valid_rgb(char **components, int *r, int *g, int *b);
 
 /* Handle_initial_line.c */
 void		handle_initial_line(t_vars *vars, char **line, \

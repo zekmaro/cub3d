@@ -6,22 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 15:08:28 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:04:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-static void	free_components(char **components)
-{
-	if (components)
-	{
-		free(components[0]);
-		free(components[1]);
-		free(components[2]);
-		free(components);
-	}
-}
 
 void	parse_color_components(char *line, int *r, int *g, int *b)
 {
@@ -39,20 +28,13 @@ void	parse_color_components(char *line, int *r, int *g, int *b)
 		ft_putstr_fd("Error\nInvalid color components\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	*r = ft_atoi(components[0]);
-	*g = ft_atoi(components[1]);
-	*b = ft_atoi(components[2]);
+	check_valid_rgb(components, r, g, b);
 	free_components(components);
 	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
 	{
 		ft_putstr_fd("Error\nInvalid color components\n", 2);
 		exit(EXIT_FAILURE);
 	}
-}
-
-int	rgb_to_hex(int r, int g, int b)
-{
-	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
 
 void	parse_texture(t_vars *vars, char *line, char **texture)

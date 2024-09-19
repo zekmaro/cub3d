@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 13:03:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:19:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	handle_initial_line(t_vars *vars, char **line, char **line_left, int fd)
 		free(str);
 		if (!*line)
 			handle_gnl_memory_error(vars, &gnl_flag);
-		get_next_line(-1, &gnl_flag);
 	}
 }
+// if (!*line)
+// 			handle_gnl_memory_error(vars, &gnl_flag);
+// 		// get_next_line(-1, &gnl_flag);
+// 	}
+// }
