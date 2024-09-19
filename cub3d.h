@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 23:33:25 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 01:59:00 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -773,8 +773,6 @@ int			is_valid_file(t_vars *vars, const char *filename);
 int			is_hidden_file(char *file_name);
 
 /* Parse_resolution.c */
-void		handle_initial_line(t_vars *vars, char **line, \
-				char **line_left, int fd);
 void		handle_parsing_loop(t_vars *vars, t_parse_context *ctx);
 void		handle_empty_lines(t_vars *vars, char **line, \
 				int *count_lines, int fd);
@@ -792,5 +790,18 @@ int			validate_line(char *line, int row, t_map *map);
 
 /* Ft_utils.c */
 void		ft_close(t_vars *vars, int fd);
+
+/* Handle_initial_line.c */
+void		handle_initial_line(t_vars *vars, char **line, \
+				char **line_left, int fd);
+
+/* Handle_gnl_error.c */
+void		handle_gnl_error(t_vars *vars, char **str, int *gnl_flag);
+void		handle_gnl_memory_error(t_vars *vars, int *gnl_flag);
+int			handle_gnl_error_close(t_vars *vars, int fd, char **line, \
+				int *gnl_flag);
+
+/* Handle_parsing_loop.c */
+void		handle_parsing_loop(t_vars *vars, t_parse_context *ctx);
 
 #endif // CUB3D_H
