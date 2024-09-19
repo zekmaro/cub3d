@@ -6,14 +6,13 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 17:23:09 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 01:53:03 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	handle_empty_lines(t_vars *vars, char **line, \
-			int *count_lines, int fd)
+void	handle_empty_lines(t_vars *vars, char **line, int *count_lines, int fd)
 {
 	char	*str;
 	int		gnl_flag;
@@ -24,22 +23,12 @@ void	handle_empty_lines(t_vars *vars, char **line, \
 		free(*line);
 		str = get_next_line(fd, &gnl_flag);
 		if (gnl_flag == 1)
-		{
-			free(str);
-			str = NULL;
-			ft_close(vars, fd);
-			get_next_line(-1, &gnl_flag);
-			exit_with_error(vars, "Error\nGnl failed\n");
-		}
+			handle_gnl_error(vars, &str, &gnl_flag);
 		(*count_lines)++;
 		*line = ft_strtrim(str, "\n");
 		free(str);
 		if (!*line)
-		{
-			ft_close(vars, fd);
-			get_next_line(-1, &gnl_flag);
-			exit_with_error(vars, "Error\nFailed to allocate memory\n");
-		}
+			handle_gnl_memory_error(vars, &gnl_flag);
 	}
 }
 
