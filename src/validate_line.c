@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 20:08:46 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:08:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	validate_line_content(char *line, int i, int row, t_map *map)
 	else if (line[i] == 'D')
 		map->num_doors++;
 	else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
-		return (perror("Error\nInvalid character in map\n"), 0);
+		return (ft_putstr_fd("Error\nInvalid character in map\n", 2), 0);
 	return (1);
 }
 

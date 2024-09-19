@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:03:44 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/15 18:47:47 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:07:52 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	exit_with_error(t_vars *vars, char *error_message)
 {
 	if (vars == NULL)
 		return ;
-	perror(error_message);
+	ft_putstr_fd(error_message, 2);
 	free_and_exit(vars);
 }
 

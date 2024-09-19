@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 22:13:49 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:07:47 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	validate_and_open_file(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error\nInvalid file descriptor!\n");
+		ft_putstr_fd("Error\nInvalid file descriptor!\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);

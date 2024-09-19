@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:12:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 14:22:28 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:08:18 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	load_texture(t_vars *vars, int texture_index, const char *file_path)
 		(char *)file_path, &width, &height);
 	if (!vars->textures[texture_index])
 	{
-		perror("Failed to load texture");
+		ft_putstr_fd("Failed to load texture", 2);
 		free_and_exit(vars);
 	}
 	vars->textures[texture_index]->addr = mlx_get_data_addr(\
@@ -31,7 +31,7 @@ void	load_texture(t_vars *vars, int texture_index, const char *file_path)
 		&vars->textures[texture_index]->endian);
 	if (!vars->textures[texture_index]->addr)
 	{
-		perror("Failed to get texture data address");
+		ft_putstr_fd("Failed to get texture data address", 2);
 		free_and_exit(vars);
 	}
 	vars->textures[texture_index]->width = width;

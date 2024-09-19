@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 13:31:36 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:08:04 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 		(char *)file_path, &width, &height);
 	if (!sprite_texture->mlx_img)
 	{
-		perror("Failed to load sprite texture");
+		ft_putstr_fd("Error\nFailed to load sprite texture\n", 2);
 		free_and_exit(vars);
 	}
 	sprite_texture->addr = mlx_get_data_addr(sprite_texture->mlx_img, \
@@ -42,7 +42,7 @@ void	allocate_sprite_memory(t_vars *vars, t_img **sprite, \
 	*sprite = ft_calloc(sizeof(t_img), 1);
 	if (!*sprite)
 	{
-		perror(error_message);
+		ft_putstr_fd((char *)error_message, 2);
 		free_and_exit(vars);
 	}
 }
@@ -53,7 +53,7 @@ void	allocate_memory_for_sprites(t_vars *vars)
 	vars->sprites = ft_calloc(sizeof(t_sprite), vars->num_sprites);
 	if (!vars->sprites)
 	{
-		perror("Failed to allocate memory for sprites");
+		ft_putstr_fd("Error\nFailed to allocate memory for sprites\n", 2);
 		free_and_exit(vars);
 	}
 }

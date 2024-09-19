@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/18 21:14:00 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:08:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	get_texture_color(t_img *texture, int x, int y)
 
 	if (!texture || !texture->addr)
 	{
-		perror("Error: Null texture or texture address\n");
+		ft_putstr_fd("Error: Null texture or texture address\n", 2);
 		return (-1);
 	}
 	index = (x * (texture->bits_per_pixel / 8)) + (y * texture->line_len);
