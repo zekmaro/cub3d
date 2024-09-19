@@ -83,7 +83,7 @@ char	*get_next_line(int fd, int *flag)
 		{
 			ft_free_gnl(&buffer);
 			if (leftovers == NULL || *leftovers == '\0')
-				return (ft_free_gnl(&leftovers), *flag = 1, NULL);
+				return (ft_free_gnl(&leftovers), NULL);
 			break ;
 		}
 		leftovers = ft_strjoin_gnl(leftovers, buffer, flag);
