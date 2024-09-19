@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 01:21:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:03:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	handle_initial_line(t_vars *vars, char **line, char **line_left, int fd)
 	{
 		str = get_next_line(fd, &gnl_flag);
 		if (gnl_flag == 1)
+		{
+			free(str);
 			handle_gnl_error(vars, &str, &gnl_flag);
+		}
 		*line = ft_strtrim(str, "\n");
 		free(str);
 		if (!*line)
