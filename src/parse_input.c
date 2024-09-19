@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 20:55:43 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 01:43:09 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,8 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 	}
 }
 
-void	parse_line(t_vars *vars, char *line)
+static void	parse_texture_line(t_vars *vars, char *line)
 {
-	int	result;
-
-	result = 1;
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[0]);
 	else if (ft_strncmp(line, "SO ", 3) == 0)
@@ -64,19 +61,34 @@ void	parse_line(t_vars *vars, char *line)
 		parse_texture(vars, line, &vars->texture_names[2]);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[3]);
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		result = parse_color_components(line + 2, \
-			&vars->floor_r, &vars->floor_g, &vars->floor_b);
+}
+
+static int	parse_color_line(t_vars *vars, char *line)
+{
+	if (ft_strncmp(line, "F ", 2) == 0)
+		return (parse_color_components(line + 2, \
+			&vars->floor_r, &vars->floor_g, &vars->floor_b));
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		result = parse_color_components(line + 2, \
-			&vars->ceiling_r, &vars->ceiling_g, &vars->ceiling_b);
+		return (parse_color_components(line + 2, \
+			&vars->ceiling_r, &vars->ceiling_g, &vars->ceiling_b));
+	return (1);
+}
+
+void	parse_line(t_vars *vars, char *line)
+{
+	int	result;
+
+	result = 1;
+	parse_texture_line(vars, line);
+	result = parse_color_line(vars, line);
 	if (!result)
 	{
 		free(line);
 		get_next_line(-1, NULL);
 		free_and_exit(vars);
 	}
-	vars->floor_color = rgb_to_hex(vars->floor_r, vars->floor_g, vars->floor_b);
-	vars->ceiling_color = rgb_to_hex(vars->ceiling_r, vars->ceiling_g, \
-										vars->ceiling_b);
+	vars->floor_color = rgb_to_hex(vars->floor_r, \
+		vars->floor_g, vars->floor_b);
+	vars->ceiling_color = rgb_to_hex(vars->ceiling_r, \
+		vars->ceiling_g, vars->ceiling_b);
 }
