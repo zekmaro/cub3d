@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 22:47:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:08:28 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	parse_color_components(char *line, int *r, int *g, int *b)
 	components = ft_split(line, ',');
 	if (!components)
 	{
-		perror("Error\nFailed to split color components\n");
+		ft_putstr_fd("Error\nFailed to split color components\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	if (!components[0] || !components[1] || !components[2])
 	{
 		free_components(components);
-		perror("Error\nInvalid color components\n");
+		ft_putstr_fd("Error\nInvalid color components\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	*r = ft_atoi(components[0]);
@@ -45,7 +45,7 @@ void	parse_color_components(char *line, int *r, int *g, int *b)
 	free_components(components);
 	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
 	{
-		perror("Error\nInvalid color components\n");
+		ft_putstr_fd("Error\nInvalid color components\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -59,7 +59,7 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 {
 	if (*texture)
 	{
-		perror("Error\nMultiple texture paths found\n");
+		ft_putstr_fd("Error\nMultiple texture paths found\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	while (*(line + 3) == ' ' || *(line + 3) == '\t' || *(line + 3) == '\n' \
