@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:35:24 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 21:51:46 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:22:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,5 @@ void	init_doors(t_vars *vars)
 				init_door(vars, i, j, &counter_doors);
 			}
 		}
-	}
-}
-
-void	printout_doors(t_vars *vars)
-{
-	int	i;
-
-	printf("Number of doors: %d\n", vars->map->num_doors);
-	i = 0;
-	while (i < vars->map->num_doors)
-	{
-		printf("#%d: x: %d, y: %d, st: %d, anims: %f cntx: %d, cnty: %d\n", \
-			i, vars->doors[i].grid_x, vars->doors[i].grid_y, \
-			vars->doors[i].state, vars->doors[i].animation_progress, \
-			vars->doors[i].center_x, vars->doors[i].center_y);
-		i++;
 	}
 }
