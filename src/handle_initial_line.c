@@ -31,12 +31,12 @@ void	handle_initial_line(t_vars *vars, char **line, char **line_left, int fd)
 		str = get_next_line(fd, &gnl_flag);
 		if (gnl_flag == 1)
 		{
-			free(str);
 			handle_gnl_error(vars, &str, &gnl_flag);
 		}
 		*line = ft_strtrim(str, "\n");
 		free(str);
 		if (!*line)
 			handle_gnl_memory_error(vars, &gnl_flag);
+		get_next_line(-1, &gnl_flag);
 	}
 }
