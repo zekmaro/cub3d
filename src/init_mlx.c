@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:53:33 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/19 18:36:37 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:45:22 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	safe_init_mlx(t_vars *vars)
 	vars->mlx->mlx = mlx_init();
 	if (!vars->mlx->mlx)
 	{
-		exit_with_error(vars, "Failed to initialise mlx");
-		exit(EXIT_FAILURE);
+		get_next_line(-1, NULL);
+		free_and_exit(vars);
 	}
 	vars->mlx->win = mlx_new_window(vars->mlx->mlx, vars->mlx->window_width, \
 		vars->mlx->window_height, "Gestalt DOOM Cube3D");

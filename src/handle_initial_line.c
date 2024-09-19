@@ -6,18 +6,29 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 18:19:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 19:15:28 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	handle_initial_line(t_vars *vars, char **line, char **line_left, int fd)
+static void	handle_line_from_fd(t_vars *vars, char **line, int fd)
 {
 	char	*str;
 	int		gnl_flag;
 
 	gnl_flag = 0;
+	str = get_next_line(fd, &gnl_flag);
+	if (gnl_flag == 1)
+		handle_gnl_error(vars, &str, &gnl_flag);
+	*line = ft_strtrim(str, "\n");
+	free(str);
+	if (!*line)
+		handle_gnl_memory_error(vars, &gnl_flag);
+}
+
+void	handle_initial_line(t_vars *vars, char **line, char **line_left, int fd)
+{
 	if (*line_left != NULL)
 	{
 		*line = ft_strdup(*line_left);
@@ -27,17 +38,7 @@ void	handle_initial_line(t_vars *vars, char **line, char **line_left, int fd)
 			exit_with_error(vars, "Error\nFailed to allocate memory\n");
 	}
 	else
-	{
-		str = get_next_line(fd, &gnl_flag);
-		if (gnl_flag == 1)
-		{
-			handle_gnl_error(vars, &str, &gnl_flag);
-		}
-		*line = ft_strtrim(str, "\n");
-		free(str);
-		if (!*line)
-			handle_gnl_memory_error(vars, &gnl_flag);
-	}
+		handle_line_from_fd(vars, line, fd);
 }
 // if (!*line)
 // 			handle_gnl_memory_error(vars, &gnl_flag);
