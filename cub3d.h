@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/19 15:22:52 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:49:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -751,7 +751,7 @@ int			handle_player_direction(char *line, int i, int row, t_map *map);
 void		handle_boss(int i, int row, t_map *map);
 
 /* Parse_input.c */
-void		parse_color_components(char *line, int *r, int *g, int *b);
+int			parse_color_components(char *line, int *r, int *g, int *b);
 void		parse_texture(t_vars *vars, char *line, char **texture);
 void		parse_line(t_vars *vars, char *line);
 
