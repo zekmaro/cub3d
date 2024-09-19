@@ -6,22 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 16:52:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 20:55:43 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-static void	free_components(char **components)
-{
-	if (components)
-	{
-		free(components[0]);
-		free(components[1]);
-		free(components[2]);
-		free(components);
-	}
-}
 
 int	parse_color_components(char *line, int *r, int *g, int *b)
 {
@@ -41,11 +30,6 @@ int	parse_color_components(char *line, int *r, int *g, int *b)
 		return (0);
 	}
 	return (1);
-}
-
-int	rgb_to_hex(int r, int g, int b)
-{
-	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
 
 void	parse_texture(t_vars *vars, char *line, char **texture)

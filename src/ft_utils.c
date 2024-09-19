@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 23:36:43 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 20:55:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,20 @@ int	check_input(char *str, int num)
 	}
 	free(check);
 	return (1);
+}
+
+int	rgb_to_hex(int r, int g, int b)
+{
+	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
+}
+
+void	free_components(char **components)
+{
+	if (components)
+	{
+		free(components[0]);
+		free(components[1]);
+		free(components[2]);
+		free(components);
+	}
 }
