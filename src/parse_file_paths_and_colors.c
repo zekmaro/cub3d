@@ -6,51 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 00:16:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/19 01:56:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	handle_parsing_loop(t_vars *vars, t_parse_context *ctx)
-{
-	char	*str;
-	int		gnl_flag;
-
-	gnl_flag = 0;
-	while (*(ctx->line) != NULL && *(ctx->parsed_components) < 6)
-	{
-		(*(ctx->count_lines))++;
-		if (ft_strncmp(*(ctx->line), "1", 1) == 0 \
-			|| ft_strncmp(*(ctx->line), "0", 1) == 0)
-		{
-			*(ctx->line_left) = ft_strdup(*(ctx->line));
-			free(*(ctx->line));
-			*(ctx->line) = NULL;
-			if (!*(ctx->line_left))
-				exit_with_error(vars, "Error\nFailed to allocate memory\n");
-			break ;
-		}
-		if (ft_strlen(*(ctx->line)) > 0)
-		{
-			parse_line(ctx->vars, *(ctx->line));
-			(*(ctx->parsed_components))++;
-		}
-		free(*(ctx->line));
-		str = get_next_line(ctx->fd, &gnl_flag);
-		if (gnl_flag == 1)
-		{
-			free(str);
-			str = NULL;
-			get_next_line(-1, &gnl_flag);
-			exit_with_error(vars, "Error\nGnl failed\n");
-		}
-		*(ctx->line) = ft_strtrim(str, "\n");
-		free(str);
-		if (!*(ctx->line))
-			exit_with_error(vars, "Error\nFailed to allocate memory\n");
-	}
-}
 
 void	handle_empty_lines(t_vars *vars, char **line, \
 			int *count_lines, int fd)

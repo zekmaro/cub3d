@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/19 00:19:21 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/19 01:58:41 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,8 @@ SRC		:=	src/cub3d.c \
 			src/read_map.c \
 			src/ft_utils.c \
 			src/handle_initial_line.c \
+			src/handle_gnl_errors.c \
+			src/handle_parsing_loop.c \
 
 # LIBS 
 LIBS	:= libft/libft.a
