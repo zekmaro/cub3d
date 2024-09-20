@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 13:37:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:10:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	handle_parsing_error(t_vars *vars, char *line, int fd)
 
 	gnl_flag = 0;
 	handle_gnl_error_close(vars, fd, &line, &gnl_flag);
-	exit_with_error(vars, "Error\nFailed to read map file\n");
+	exit_with_error(vars, "Error\nFailed to read map file during parsing\n");
 }
 
 int	parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left)
