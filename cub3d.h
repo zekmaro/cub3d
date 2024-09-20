@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/20 13:03:40 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:26:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -775,7 +775,7 @@ int			is_hidden_file(char *file_name);
 void		handle_parsing_loop(t_vars *vars, t_parse_context *ctx);
 void		handle_empty_lines(t_vars *vars, char **line, \
 				int *count_lines, int fd);
-int		check_parsing_errors(t_vars *vars, int parsed_components, \
+int			check_parsing_errors(t_vars *vars, int parsed_components, \
 				char *line);
 int			parse_file_paths_and_colors(int fd, t_vars *vars, \
 				char **line_left);

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 22:10:20 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/15 02:09:12 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:22:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static uint32_t	combine_colors(uint32_t color1, uint32_t color2)
 	result = (color1 & 0xFF) * (255 - alpha)
 		+ (color2 & 0xFF);
 	b_blend = result / 255;
-	return ((255 << 24) | r_blend | g_blend | b_blend);
+	return ((uint32_t)(255 << 24) | r_blend | g_blend | b_blend);
 }
 
 static void	blend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)

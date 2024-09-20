@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 13:10:36 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:27:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	parse_color_components(char *line, int *r, int *g, int *b)
 {
 	char	**components;
-	int flag;
+	int		flag;
 
 	components = ft_split(line, ',');
 	if (!components)
