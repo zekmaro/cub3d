@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 01:43:09 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:53:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 int	parse_color_components(char *line, int *r, int *g, int *b)
 {
 	char	**components;
+	int flag;
 
 	components = ft_split(line, ',');
 	if (!components)
 	{
 		return (0);
 	}
-	check_valid_rgb(components, r, g, b);
+	flag = check_valid_rgb(components, r, g, b);
 	free_components(components);
+	if (!flag)
+	{
+		return (0);
+	}
 	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
 	{
 		return (0);
@@ -76,7 +81,6 @@ void	parse_line(t_vars *vars, char *line)
 {
 	int	result;
 
-	result = 1;
 	parse_texture_line(vars, line);
 	result = parse_color_line(vars, line);
 	if (!result)

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 21:07:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:47:41 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	free_components(char **components)
 	}
 }
 
-void	check_valid_rgb(char **components, int *r, int *g, int *b)
+int	check_valid_rgb(char **components, int *r, int *g, int *b)
 {
 	*r = ft_atoi(components[0]);
 	*g = ft_atoi(components[1]);
@@ -59,8 +59,7 @@ void	check_valid_rgb(char **components, int *r, int *g, int *b)
 		|| !check_input(components[1], *g)
 		|| !check_input(components[2], *b))
 	{
-		free_components(components);
-		ft_putstr_fd("Error\nInvalid color components\n", 2);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
+	return (1);
 }
