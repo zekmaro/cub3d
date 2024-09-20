@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 12:53:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:10:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	parse_line(t_vars *vars, char *line)
 		free(line);
 		get_next_line(-1, NULL);
 		free_and_exit(vars);
+		exit(EXIT_FAILURE);
 	}
 	vars->floor_color = rgb_to_hex(vars->floor_r, \
 		vars->floor_g, vars->floor_b);

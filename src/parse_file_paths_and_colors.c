@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 02:00:13 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:11:05 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,31 @@ void	handle_empty_lines(t_vars *vars, char **line, int *count_lines, int fd)
 	}
 }
 
-void	check_parsing_errors(t_vars *vars, int parsed_components, char *line)
+int	check_parsing_errors(t_vars *vars, int parsed_components, char *line)
 {
 	if (line == NULL)
-		exit_with_error(vars, "Error\nFailed to read map file\n");
-	if (parsed_components < 6)
-		exit_with_error(vars, \
-			"Error\nIncomplete map file: missing textures or colors\n");
-	if (!vars->texture_names[0] || !vars->texture_names[1] \
+	{
+		return (0);
+		// exit_with_error(vars, "Error\nFailed to read map file\n");
+	}
+	else if (parsed_components < 6)
+	{
+		return (0);
+		// exit_with_error(vars, 
+		// 	"Error\nIncomplete map file: missing textures or colors\n");
+	}
+	else if (!vars->texture_names[0] || !vars->texture_names[1] \
 		|| !vars->texture_names[2] || !vars->texture_names[3])
-		exit_with_error(vars, "Error\nMissing one or more texture paths\n");
-	if (vars->floor_color == -1 || vars->ceiling_color == -1)
-		exit_with_error(vars, "Error\nMissing floor or ceiling color\n");
+	{
+		return (0);
+		// exit_with_error(vars, "Error\nMissing one or more texture paths\n");
+	}
+	else if (vars->floor_color == -1 || vars->ceiling_color == -1)
+	{
+		return (0);
+		// exit_with_error(vars, "Error\nMissing floor or ceiling color\n");
+	}
+	return (1);
 }
 
 static void	handle_line_left(t_vars *vars, char **line_left, char *line, int fd)
@@ -76,7 +89,14 @@ int	parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left)
 	ctx.fd = fd;
 	handle_parsing_loop(vars, &ctx);
 	handle_empty_lines(vars, &line, &count_lines, fd);
-	check_parsing_errors(vars, parsed_components, line);
+	if (!check_parsing_errors(vars, parsed_components, line))
+	{
+		free(line);
+		ft_close(vars, fd);
+		get_next_line(-1, NULL);
+		exit_with_error(vars, "Error\nFailed to read map file\n");
+		exit(EXIT_FAILURE);
+	}
 	handle_line_left(vars, line_left, line, fd);
 	free(line);
 	return (count_lines);
