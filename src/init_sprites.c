@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 15:08:04 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 21:54:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 		&sprite_texture->endian);
 	if (!sprite_texture->addr)
 	{
-		exit_with_error(vars, "Failed to get sprite texture data address");
+		exit_with_error(vars, \
+			"Error\nFailed to get sprite texture data address\n");
 	}
 	sprite_texture->width = width;
 	sprite_texture->height = height;
@@ -68,11 +69,11 @@ void	load_sprites(t_vars *vars)
 		"./assets/door1.xpm", "./assets/door2.xpm", "./assets/door3.xpm"};
 
 	allocate_sprite_memory(vars, &vars->player->gun, \
-		"Failed to allocate memory for gun sprite");
+		"Error\nFailed to allocate memory for gun sprite\n");
 	allocate_sprite_memory(vars, &vars->player->fire, \
-		"Failed to allocate memory for fire sprite");
+		"Error\nFailed to allocate memory for fire sprite\n");
 	allocate_sprite_memory(vars, &vars->doors->textures, \
-		"Failed to allocate memory for door textures");
+		"Error\nFailed to allocate memory for door textures\n");
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	load_animated_sprite(vars, vars->doors->textures, door_frames, 4);
