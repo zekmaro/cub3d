@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 21:54:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 00:34:23 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 	int	width;
 	int	height;
 
+	if (!vars || !sprite_texture || !file_path)
+		return ;
 	sprite_texture->mlx_img = mlx_xpm_file_to_image(vars->mlx->mlx, \
 		(char *)file_path, &width, &height);
 	if (!sprite_texture->mlx_img)
@@ -40,6 +42,8 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 void	allocate_sprite_memory(t_vars *vars, t_img **sprite, \
 			const char *error_message)
 {
+	if (vars == NULL || *sprite == NULL)
+		return ;
 	*sprite = ft_calloc(sizeof(t_img), 1);
 	if (!*sprite)
 	{
@@ -50,6 +54,8 @@ void	allocate_sprite_memory(t_vars *vars, t_img **sprite, \
 
 void	allocate_memory_for_sprites(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	vars->num_sprites = 1;
 	vars->sprites = ft_calloc(sizeof(t_sprite), vars->num_sprites);
 	if (!vars->sprites)
@@ -68,10 +74,14 @@ void	load_sprites(t_vars *vars)
 	const char	*door_frames[] = {"./assets/door0.xpm", \
 		"./assets/door1.xpm", "./assets/door2.xpm", "./assets/door3.xpm"};
 
+	if (vars == NULL)
+		return ;
 	allocate_sprite_memory(vars, &vars->player->gun, \
 		"Error\nFailed to allocate memory for gun sprite\n");
 	allocate_sprite_memory(vars, &vars->player->fire, \
 		"Error\nFailed to allocate memory for fire sprite\n");
+	if (vars->doors == NULL)
+		return ;
 	allocate_sprite_memory(vars, &vars->doors->textures, \
 		"Error\nFailed to allocate memory for door textures\n");
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
@@ -81,6 +91,8 @@ void	load_sprites(t_vars *vars)
 
 void	initialise_sprites(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	allocate_memory_for_sprites(vars);
 	load_sprites(vars);
 }

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 23:41:47 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 00:06:31 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:06:49 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	get_ray_target_coords(t_vars *vars)
 		if (door_flag)
 		{
 			index = get_door_id(vars, vars->ray->ray_x, vars->ray->ray_y);
+			if (index == -1)
+				break ;
 			update_door_status(vars, index);
 		}
 	}

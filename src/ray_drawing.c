@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:29:01 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/16 14:23:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:06:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ t_tex_typ	define_texture_type(t_vars *vars)
 	else if (vars->map->grid[map_y][map_x] == 'D')
 	{
 		index = get_door_id(vars, vars->ray->ray_x, vars->ray->ray_y);
+		if (index == -1)
+			return (TEXTURE_NONE);
 		return (get_door_texture(vars, dx, dy, index));
 	}
 	return (TEXTURE_NONE);

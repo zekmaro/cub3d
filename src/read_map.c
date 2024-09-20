@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 12:54:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 00:25:05 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,25 @@ static int	read_and_validate_lines(t_vars *vars, t_read_map_context *ctx)
 int	read_map(t_vars *vars, t_read_map_context *ctx)
 {
 	if (is_hidden_file(ctx->file_name) == 0)
+	{
+		ft_putstr_fd("Error\nHidden files are not allowed\n", 2);
 		return (0);
+	}
 	if (!initialize_map(vars, ctx))
+	{
+		ft_putstr_fd("Error\nFailed to initialize map\n", 2);
 		return (0);
+	}
 	if (!skip_readed_lines(vars, ctx))
+	{
+		ft_putstr_fd("Error\nFailed to skip readed lines\n", 2);
 		return (0);
+	}
 	if (!read_and_validate_lines(vars, ctx))
+	{
+		ft_putstr_fd("Error\nFailed to read and validate lines\n", 2);
 		return (0);
+	}
 	ft_close(vars, ctx->fd);
 	return (1);
 }

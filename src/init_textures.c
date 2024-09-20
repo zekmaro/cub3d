@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:12:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 15:08:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:27:52 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	initialise_enemy_textures(t_vars *vars, t_img *animation,
 {
 	int	frame_count;
 
+	if (!vars || !animation || !frames)
+		return ;
 	frame_count = count_frames(frames);
 	load_animated_sprite(vars, animation, frames, frame_count);
 }

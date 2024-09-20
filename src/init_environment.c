@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 23:35:56 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 21:09:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,18 @@ void	initialise_doors(t_vars *vars)
 {
 	t_door	*doors;
 
+	if (vars->map->num_doors == 0)
+	{
+		vars->doors = NULL;
+		return ;
+	}
 	doors = ft_calloc(vars->map->num_doors, sizeof(t_door));
 	if (!doors)
 	{
 		exit_with_error(vars, "Failed to allocate memory for doors");
 		return ;
 	}
-	ft_bzero(doors, sizeof(t_door));
+	ft_bzero(doors, vars->map->num_doors * sizeof(t_door));
 	vars->doors = doors;
 }
 

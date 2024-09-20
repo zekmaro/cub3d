@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:39:25 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/14 15:23:28 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:25:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	draw_fire(t_vars *vars, double scale)
 	t_img				*temp;
 	t_draw_image_params	params;
 
+	if (vars == NULL || vars->player == NULL || vars->player->fire == NULL)
+		return ;
 	temp = \
 		(t_img *)vars->player->fire->frames[vars->player->fire->current_frame];
 	params.vars = vars;
@@ -82,6 +84,8 @@ void	draw_gun(t_vars *vars, double scale)
 	t_img				*temp;
 	t_draw_image_params	params;
 
+	if (vars == NULL || vars->player == NULL || vars->player->gun == NULL)
+		return ;
 	temp = \
 		(t_img *)vars->player->gun->frames[vars->player->gun->current_frame];
 	params.vars = vars;

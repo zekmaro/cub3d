@@ -6,17 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:44:14 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/15 18:42:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 22:09:33 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	free_sprites(t_vars *vars)
-{
-	if (!vars)
-		return ;
-}
 
 void	free_vars_sprites(t_vars *vars)
 {
