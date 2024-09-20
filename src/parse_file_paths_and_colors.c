@@ -6,14 +6,13 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 17:23:09 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 02:00:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	handle_empty_lines(t_vars *vars, char **line, \
-			int *count_lines, int fd)
+void	handle_empty_lines(t_vars *vars, char **line, int *count_lines, int fd)
 {
 	char	*str;
 	int		gnl_flag;
@@ -24,22 +23,12 @@ void	handle_empty_lines(t_vars *vars, char **line, \
 		free(*line);
 		str = get_next_line(fd, &gnl_flag);
 		if (gnl_flag == 1)
-		{
-			free(str);
-			str = NULL;
-			ft_close(vars, fd);
-			get_next_line(-1, &gnl_flag);
-			exit_with_error(vars, "Error\nGnl failed\n");
-		}
+			handle_gnl_error(vars, &str, &gnl_flag);
 		(*count_lines)++;
 		*line = ft_strtrim(str, "\n");
 		free(str);
 		if (!*line)
-		{
-			ft_close(vars, fd);
-			get_next_line(-1, &gnl_flag);
-			exit_with_error(vars, "Error\nFailed to allocate memory\n");
-		}
+			handle_gnl_memory_error(vars, &gnl_flag);
 	}
 }
 
@@ -55,6 +44,18 @@ void	check_parsing_errors(t_vars *vars, int parsed_components, char *line)
 		exit_with_error(vars, "Error\nMissing one or more texture paths\n");
 	if (vars->floor_color == -1 || vars->ceiling_color == -1)
 		exit_with_error(vars, "Error\nMissing floor or ceiling color\n");
+}
+
+static void	handle_line_left(t_vars *vars, char **line_left, char *line, int fd)
+{
+	*line_left = ft_strdup(line);
+	if (!*line_left)
+	{
+		free(line);
+		get_next_line(-1, NULL);
+		ft_close(vars, fd);
+		free_and_exit(vars);
+	}
 }
 
 int	parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left)
@@ -76,14 +77,7 @@ int	parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left)
 	handle_parsing_loop(vars, &ctx);
 	handle_empty_lines(vars, &line, &count_lines, fd);
 	check_parsing_errors(vars, parsed_components, line);
-	*line_left = ft_strdup(line);
-	if (!*line_left)
-	{
-		free(line);
-		get_next_line(-1, NULL);
-		ft_close(vars, fd);
-		free_and_exit(vars);
-	}
+	handle_line_left(vars, line_left, line, fd);
 	free(line);
 	return (count_lines);
 }
