@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/20 13:26:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 22:09:48 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -563,7 +563,6 @@ void		free_vars_line(t_vars *vars);
 void		free_vars_ray(t_vars *vars);
 
 /* Free_sprites.c */
-void		free_sprites(t_vars *vars);
 void		free_vars_sprites(t_vars *vars);
 void		free_sprite_frame(t_img *frame);
 

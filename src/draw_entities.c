@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:57:43 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/18 17:36:39 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:24:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	draw_and_update_entities(t_vars *vars, t_enemy *entity_list, \
 
 void	draw_map(t_vars *vars)
 {
+	if (vars == NULL)
+		return ;
 	raycast(vars);
 	draw_and_update_entities(vars, vars->imp_list, vars->map->imp_list_size);
 	draw_and_update_entities(vars, vars->caco_list, vars->map->caco_list_size);

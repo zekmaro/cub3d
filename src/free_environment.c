@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:04:34 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/16 13:09:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 22:05:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void	free_doors(t_vars *vars)
 			free(vars->doors->textures);
 		}
 		free(vars->doors);
+		vars->doors = NULL;
 	}
 }

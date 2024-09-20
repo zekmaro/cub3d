@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:35:24 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 15:22:57 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:23:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	setup_door(t_vars *vars, t_door *door)
 {
+	if (vars == NULL || door == NULL)
+		return ;
 	door->x = door->grid_x * vars->unit_size;
 	door->y = door->grid_y * vars->unit_size;
 	door->center_x = door->x + vars->unit_size / 2;
@@ -26,6 +28,8 @@ void	setup_door(t_vars *vars, t_door *door)
 
 void	init_door(t_vars *vars, int i, int j, int *counter_doors)
 {
+	if (vars == NULL)
+		return ;
 	vars->doors[*counter_doors].grid_x = j;
 	vars->doors[*counter_doors].grid_y = i;
 	if (vars->map->grid[i - 1][j] == '1' && vars->map->grid[i + 1][j] == '1')
@@ -47,6 +51,8 @@ void	init_doors(t_vars *vars)
 	int	j;
 	int	counter_doors;
 
+	if (vars == NULL)
+		return ;
 	counter_doors = 0;
 	i = -1;
 	while (vars->map->grid[++i])

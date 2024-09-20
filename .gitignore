@@ -11,4 +11,9 @@ a.out
 .vscode
 libft/libft.a
 cub3d-tester/
+42_cub_tester/
+cub3D_map_tester/
+invalid_maps/
+valid_maps/
+textures_xpm/
 *.supp

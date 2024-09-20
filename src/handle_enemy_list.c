@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:46:23 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 23:24:48 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 21:17:45 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,28 @@ void	init_enemy_lists(t_vars *vars)
 	int	gnl_flag;
 
 	gnl_flag = 0;
-	vars->imp_list = ft_calloc(sizeof(t_enemy), vars->map->imp_list_size);
-	if (!vars->imp_list)
+	if (vars->map->imp_list_size > 0)
 	{
-		exit_with_error(vars, "Failed to allocate memory for imp list");
+		vars->imp_list = ft_calloc(sizeof(t_enemy), vars->map->imp_list_size);
+		if (!vars->imp_list)
+		{
+			exit_with_error(vars, "Failed to allocate memory for imp list");
+		}
 	}
-	vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
-	if (!vars->caco_list)
+	else
+		vars->imp_list = NULL;
+	if (vars->map->caco_list_size > 0)
 	{
-		get_next_line(-1, &gnl_flag);
-		cleanup_enemy_lists(vars);
-		exit_with_error(vars, "Failed to allocate memory for caco list");
+		vars->caco_list = ft_calloc(sizeof(t_enemy), vars->map->caco_list_size);
+		if (!vars->caco_list)
+		{
+			get_next_line(-1, &gnl_flag);
+			cleanup_enemy_lists(vars);
+			exit_with_error(vars, "Failed to allocate memory for caco list");
+		}
 	}
+	else
+		vars->caco_list = NULL;
 }
 
 void	update_sprite_frame_enemy(t_enemy *enemy)
