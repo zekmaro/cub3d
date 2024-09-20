@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 01:53:03 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 02:00:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ void	check_parsing_errors(t_vars *vars, int parsed_components, char *line)
 		exit_with_error(vars, "Error\nMissing floor or ceiling color\n");
 }
 
+static void	handle_line_left(t_vars *vars, char **line_left, char *line, int fd)
+{
+	*line_left = ft_strdup(line);
+	if (!*line_left)
+	{
+		free(line);
+		get_next_line(-1, NULL);
+		ft_close(vars, fd);
+		free_and_exit(vars);
+	}
+}
+
 int	parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left)
 {
 	char			*line;
@@ -65,14 +77,7 @@ int	parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left)
 	handle_parsing_loop(vars, &ctx);
 	handle_empty_lines(vars, &line, &count_lines, fd);
 	check_parsing_errors(vars, parsed_components, line);
-	*line_left = ft_strdup(line);
-	if (!*line_left)
-	{
-		free(line);
-		get_next_line(-1, NULL);
-		ft_close(vars, fd);
-		free_and_exit(vars);
-	}
+	handle_line_left(vars, line_left, line, fd);
 	free(line);
 	return (count_lines);
 }

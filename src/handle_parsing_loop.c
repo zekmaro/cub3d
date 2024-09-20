@@ -6,13 +6,13 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:42:19 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 13:00:32 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/20 02:03:10 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	handle_line_left(t_vars *vars, t_parse_context *ctx)
+static void	handle_line_left_ctx(t_vars *vars, t_parse_context *ctx)
 {
 	*(ctx->line_left) = ft_strdup(*(ctx->line));
 	free(*(ctx->line));
@@ -45,7 +45,7 @@ void	handle_parsing_loop(t_vars *vars, t_parse_context *ctx)
 		if (ft_strncmp(*(ctx->line), "1", 1) == 0 \
 			|| ft_strncmp(*(ctx->line), "0", 1) == 0)
 		{
-			handle_line_left(vars, ctx);
+			handle_line_left_ctx(vars, ctx);
 			break ;
 		}
 		if (ft_strlen(*(ctx->line)) > 0)
