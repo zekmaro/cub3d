@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 12:47:41 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:57:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	free_components(char **components)
 
 int	check_valid_rgb(char **components, int *r, int *g, int *b)
 {
-	*r = ft_atoi(components[0]);
-	*g = ft_atoi(components[1]);
-	*b = ft_atoi(components[2]);
-	if (!check_input(components[0], *r)
-		|| !check_input(components[1], *g)
-		|| !check_input(components[2], *b))
+	*r = ft_atoi(ft_strtrim(components[0], " "));
+	*g = ft_atoi(ft_strtrim(components[1], " "));
+	*b = ft_atoi(ft_strtrim(components[2], " "));
+	if (!check_input(ft_strtrim(components[0], " "), *r)
+		|| !check_input(ft_strtrim(components[1], " "), *g)
+		|| !check_input(ft_strtrim(components[2], " "), *b))
 	{
 		return (0);
 	}
