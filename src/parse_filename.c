@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 15:11:26 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 12:10:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 12:41:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	is_hidden_file(char *file_name)
 {
 	const char	*last_separator;
 
-	printf("file_name: '%s'\n", file_name);
 	if (!file_name)
 		return (0);
 	last_separator = ft_strrchr(file_name, '/');
