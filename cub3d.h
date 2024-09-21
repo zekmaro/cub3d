@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/21 17:56:28 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:36:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -762,6 +762,7 @@ int			parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left);
 int			parse_map(int fd, t_map *map);
 
 /* Parse_utils.c */
+int			skip_whitespace(char *line);
 int			check_first_row(char *line);
 int			check_last_row(char *line);
 int			find_last_zero_index(char *line);
@@ -780,7 +781,6 @@ int			parse_file_paths_and_colors(int fd, t_vars *vars, \
 				char **line_left);
 
 /* Validate line */
-int			skip_whitespace(char *line);
 int			check_first_last_row(char *line, int row, t_map *map);
 int			check_last_zero_index(char *line, int row, t_map *map);
 int			validate_line_content(char *line, int i, int row, t_map *map);

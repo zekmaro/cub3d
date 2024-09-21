@@ -6,11 +6,22 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:59:53 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 16:12:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:35:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	skip_whitespace(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\r' \
+		|| line[i] == '\f' || line[i] == '\v')
+		i++;
+	return (i);
+}
 
 int	check_first_row(char *line)
 {
