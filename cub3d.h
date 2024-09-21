@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/21 13:23:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:39:05 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -765,7 +765,7 @@ int			check_first_row(char *line);
 int			check_last_row(char *line);
 int			find_last_zero_index(char *line);
 
-/* Pars_filename.c */
+/* Parse_filename.c */
 int			has_cub_extension(const char *filename);
 int			is_valid_file(t_vars *vars, const char *filename);
 int			is_hidden_file(char *file_name);
@@ -793,6 +793,8 @@ void		free_components(char **components);
 int			check_valid_rgb(char **components, int *r, int *g, int *b);
 
 /* Handle_initial_line.c */
+int			get_split_size(char **split);
+int			free_split(char **split);
 void		handle_initial_line(t_vars *vars, char **line, \
 				char **line_left, int fd);
 

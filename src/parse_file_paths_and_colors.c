@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 13:36:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:52:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_empty_lines(t_vars *vars, char **line, int *count_lines, int fd)
 		str = get_next_line(fd, &gnl_flag);
 		if (gnl_flag == 1)
 		{
-			ft_close(vars, fd);			
+			ft_close(vars, fd);
 			handle_gnl_error(vars, &str, &gnl_flag);
 		}
 		(*count_lines)++;
@@ -32,7 +32,7 @@ void	handle_empty_lines(t_vars *vars, char **line, int *count_lines, int fd)
 		free(str);
 		if (!*line)
 		{
-			ft_close(vars, fd);	
+			ft_close(vars, fd);
 			handle_gnl_memory_error(vars, &gnl_flag);
 		}
 	}
@@ -61,6 +61,7 @@ static void	handle_line_left(t_vars *vars, char **line_left, char *line, int fd)
 		get_next_line(-1, NULL);
 		ft_close(vars, fd);
 		free_and_exit(vars);
+		exit(EXIT_FAILURE);
 	}
 }
 

@@ -6,41 +6,17 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 14:08:26 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:50:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int get_split_size(char **split)
-{
-	int i;
-
-	i = 0;
-	while (split[i])
-		i++;
-	return (i);
-}
-
-int	free_split(char **split)
-{
-	int i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-	return (0);
-}
-
 int	parse_color_components(char *line, int *r, int *g, int *b)
 {
 	char	**components;
+	int		split_size;
 	int		flag;
-	int split_size;
 
 	components = ft_split(line, ',');
 	split_size = get_split_size(components);
@@ -65,6 +41,7 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 		free(line);
 		get_next_line(-1, NULL);
 		exit_with_error(vars, "Error\nMultiple texture paths found\n");
+		exit(EXIT_FAILURE);
 	}
 	while (*(line + 3) == ' ' || *(line + 3) == '\t' || *(line + 3) == '\n' \
 		|| *(line + 3) == '\r' || *(line + 3) == '\f' || *(line + 3) == '\v')
@@ -75,6 +52,7 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 		free(line);
 		get_next_line(-1, NULL);
 		exit_with_error(vars, "Error\nFailed to allocate memory for texture\n");
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -108,13 +86,7 @@ int	parse_line(t_vars *vars, char *line)
 	parse_texture_line(vars, line);
 	result = parse_color_line(vars, line);
 	if (!result)
-	{
 		return (0);
-		// free(line);
-		// get_next_line(-1, NULL);
-		// free_and_exit(vars);
-		// exit(EXIT_FAILURE);
-	}
 	vars->floor_color = rgb_to_hex(vars->floor_r, \
 		vars->floor_g, vars->floor_b);
 	vars->ceiling_color = rgb_to_hex(vars->ceiling_r, \

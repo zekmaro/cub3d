@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:42:19 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 13:15:30 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:43:15 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,26 @@ static void	read_next_line(t_vars *vars, t_parse_context *ctx, int *gnl_flag)
 		handle_gnl_memory_error(vars, gnl_flag);
 }
 
+int	process_line(t_vars *vars, t_parse_context *ctx)
+{
+	if (ft_strlen(*(ctx->line)) > 0)
+	{
+		if (!parse_line(vars, *(ctx->line)))
+			return (0);
+		(*(ctx->parsed_components))++;
+	}
+	return (1);
+}
+
+void	cleanup_line_left(char **line_left)
+{
+	if (*line_left)
+	{
+		free(*line_left);
+		*line_left = NULL;
+	}
+}
+
 int	handle_parsing_loop(t_vars *vars, t_parse_context *ctx)
 {
 	int	gnl_flag;
@@ -48,19 +68,11 @@ int	handle_parsing_loop(t_vars *vars, t_parse_context *ctx)
 			handle_line_left_ctx(vars, ctx);
 			break ;
 		}
-		if (ft_strlen(*(ctx->line)) > 0)
-		{
-			if (!parse_line(ctx->vars, *(ctx->line)))
-				return (0);
-			(*(ctx->parsed_components))++;
-		}
+		if (!process_line(vars, ctx))
+			return (0);
 		free(*(ctx->line));
 		read_next_line(vars, ctx, &gnl_flag);
 	}
-	if (*(ctx->line_left))
-	{
-		free(*(ctx->line_left));
-		*(ctx->line_left) = NULL;
-	}
+	cleanup_line_left(ctx->line_left);
 	return (1);
 }

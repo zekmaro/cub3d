@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 12:57:22 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/21 14:37:22 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 void	allocate_sprite_memory(t_vars *vars, t_img **sprite, \
 			const char *error_message)
 {
-	// if (vars == NULL || *sprite == NULL)
-	// 	return ;
 	*sprite = ft_calloc(sizeof(t_img), 1);
 	if (!*sprite)
 	{
