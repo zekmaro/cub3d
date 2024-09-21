@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/21 00:25:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:35:55 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&vars, sizeof(t_vars));
 	initialise_vars(&vars);
 	readed_lines = parse_file_paths_and_colors(fd, &vars, &line_left);
+	printf("readed_lines: %d\n", readed_lines);
 	ctx.fd = fd;
 	ctx.map = vars.map;
 	ctx.file_name = argv[1];

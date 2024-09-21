@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 17:56:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:52:07 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,26 @@ int	count_commas(char *line)
 static void	handle_line_from_fd(t_vars *vars, char **line, int fd)
 {
 	char	*str;
+	int i=0;
+	char	*save;
 	int		gnl_flag;
 
 	gnl_flag = 0;
 	str = get_next_line(fd, &gnl_flag);
 	if (gnl_flag == 1)
 		handle_gnl_error(vars, &str, &gnl_flag);
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' \
+	|| str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
+		i++;
+	save = str;
+	str += i;
 	*line = ft_strtrim(str, "\n");
-	free(str);
+	free(save);
 	if (!*line)
+	{
+		printf("HELLO ISTVAN!!!\n");
 		handle_gnl_memory_error(vars, &gnl_flag);
+	}
 }
 
 void	handle_initial_line(t_vars *vars, char **line, char **line_left, int fd)

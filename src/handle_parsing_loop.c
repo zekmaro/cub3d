@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:42:19 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 14:43:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:49:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,19 @@ static void	handle_line_left_ctx(t_vars *vars, t_parse_context *ctx)
 static void	read_next_line(t_vars *vars, t_parse_context *ctx, int *gnl_flag)
 {
 	char	*str;
+	char *save;
+	int i=0;
 
 	str = get_next_line(ctx->fd, gnl_flag);
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' \
+	|| str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
+		i++;
+	save = str;
+	str += i;
 	if (*gnl_flag == 1)
 		handle_gnl_error(vars, &str, gnl_flag);
 	*(ctx->line) = ft_strtrim(str, "\n");
-	free(str);
+	free(save);
 	if (!*(ctx->line))
 		handle_gnl_memory_error(vars, gnl_flag);
 }

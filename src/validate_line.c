@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 18:51:39 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:33:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int	handle_special_characters(char *line, int i, int row, t_map *map)
 
 int	validate_line_content(char *line, int i, int row, t_map *map)
 {
-	if (row == 1 && map->grid[0][i] != '1')
-		return (0);
+	// if (row == 1 && map->grid[0][i] != '1')
+	// 	return (0);
 	if (line[i] == ' ' && i > 0 && ft_strlen(map->grid[row - 1]) - 1 \
 		>= (size_t)i && map->grid[row - 1][i] == '0')
 		return (0);
 	if (row == map->height - 1 \
-		&& ft_strlen(line) < ft_strlen(map->grid[row - 1]))
-		return (0);
+		&& ft_strlen(line) + 1 < ft_strlen(map->grid[row - 1]))
+		return (printf("its just us\n"), 0);
 	if (line[i] == '0' && i > 0 && (ft_strlen(map->grid[row - 1]) - 1 \
 		< (size_t)i || map->grid[row - 1][i] == ' ' || line[i + 1] == ' ' \
 		|| line[i - 1] == ' '))
@@ -77,7 +77,7 @@ int	validate_line(char *line, int row, t_map *map)
 	int	i;
 
 	if (!check_first_last_row(line, row, map))
-		return (0);
+		return (printf("as it was %s\n", line), 0);
 	i = skip_whitespace(line);
 	if (line[i] != '1' || line[ft_strlen(line) - 2] != '1')
 		return (0);
