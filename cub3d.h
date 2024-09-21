@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/21 15:35:53 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:56:28 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_map
 	int		imp_list_size;
 	int		caco_list_size;
 	int		num_doors;
-	int player_found;
+	int		player_found;
 }	t_map;
 
 typedef struct s_door
@@ -796,6 +796,7 @@ int			check_valid_rgb(char **components, int *r, int *g, int *b);
 /* Handle_initial_line.c */
 int			get_split_size(char **split);
 int			free_split(char **split);
+int			count_commas(char *line);
 void		handle_initial_line(t_vars *vars, char **line, \
 				char **line_left, int fd);
 

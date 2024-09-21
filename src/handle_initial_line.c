@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 14:38:41 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:56:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ int	free_split(char **split)
 	}
 	free(split);
 	return (0);
+}
+
+int	count_commas(char *line)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
 }
 
 static void	handle_line_from_fd(t_vars *vars, char **line, int fd)

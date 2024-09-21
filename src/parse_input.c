@@ -6,27 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 16:27:22 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:55:41 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int count_commas(char *line)
-{
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ',')
-			count++;
-		i++;
-	}
-	return (count);
-}
 
 int	parse_color_components(char *line, int *r, int *g, int *b)
 {
