@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 18:35:26 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:51:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,13 @@ int	check_last_zero_index(char *line, int row, t_map *map)
 	return (1);
 }
 
-int	validate_line_content(char *line, int i, int row, t_map *map)
+int	handle_special_characters(char *line, int i, int row, t_map *map)
 {
-	if (row == 1 && map->grid[0][i] != '1')
-		return (0);
-	if (line[i] == ' ' && i > 0 && ft_strlen(map->grid[row - 1]) - 1 \
-		>= (size_t)i && map->grid[row - 1][i] == '0')
-		return (0);
-	if (row == map->height - 1 && ft_strlen(line) < ft_strlen(map->grid[row - 1]))
-		return (0);
-	if (line[i] == '0' && i > 0 && (ft_strlen(map->grid[row - 1]) - 1 \
-		< (size_t)i || map->grid[row - 1][i] == ' ' || line[i + 1] == ' ' \
-		|| line[i - 1] == ' '))
-		return (0);
 	if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
-		return (map->player_found = 1,
-			handle_player_direction(line, i, row, map));
+	{
+		map->player_found = 1;
+		return (handle_player_direction(line, i, row, map));
+	}
 	if (line[i] == 'B')
 		handle_boss(i, row, map);
 	else if (line[i] == 'M')
@@ -57,8 +48,28 @@ int	validate_line_content(char *line, int i, int row, t_map *map)
 	else if (line[i] == 'D')
 		map->num_doors++;
 	else if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
-		return (ft_putstr_fd("Error\nInvalid character in map\n", 2), 0);
+	{
+		ft_putstr_fd("Error\nInvalid character in map\n", 2);
+		return (0);
+	}
 	return (1);
+}
+
+int	validate_line_content(char *line, int i, int row, t_map *map)
+{
+	if (row == 1 && map->grid[0][i] != '1')
+		return (0);
+	if (line[i] == ' ' && i > 0 && ft_strlen(map->grid[row - 1]) - 1 \
+		>= (size_t)i && map->grid[row - 1][i] == '0')
+		return (0);
+	if (row == map->height - 1 \
+		&& ft_strlen(line) < ft_strlen(map->grid[row - 1]))
+		return (0);
+	if (line[i] == '0' && i > 0 && (ft_strlen(map->grid[row - 1]) - 1 \
+		< (size_t)i || map->grid[row - 1][i] == ' ' || line[i + 1] == ' ' \
+		|| line[i - 1] == ' '))
+		return (0);
+	return (handle_special_characters(line, i, row, map));
 }
 
 int	validate_line(char *line, int row, t_map *map)
