@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/21 18:36:12 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:52:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -783,6 +783,7 @@ int			parse_file_paths_and_colors(int fd, t_vars *vars, \
 /* Validate line */
 int			check_first_last_row(char *line, int row, t_map *map);
 int			check_last_zero_index(char *line, int row, t_map *map);
+int			handle_special_characters(char *line, int i, int row, t_map *map);
 int			validate_line_content(char *line, int i, int row, t_map *map);
 int			validate_line(char *line, int row, t_map *map);
 
