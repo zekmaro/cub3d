@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 15:37:35 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:30:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_first_last_row(char *line, int row, t_map *map)
 {
 	if (row == 0)
 		return (check_first_row(line));
-	if (row == map->height)
+	if (row == map->height - 1)
 		return (check_last_row(line));
 	return (1);
 }
@@ -50,7 +50,7 @@ int	validate_line_content(char *line, int i, int row, t_map *map)
 	if (line[i] == ' ' && i > 0 && ft_strlen(map->grid[row - 1]) - 1 \
 		>= (size_t)i && map->grid[row - 1][i] == '0')
 		return (0);
-	if (row == map->height && ft_strlen(line) < ft_strlen(map->grid[row - 1]))
+	if (row == map->height - 1 && ft_strlen(line) < ft_strlen(map->grid[row - 1]))
 		return (0);
 	if (line[i] == '0' && i > 0 && (ft_strlen(map->grid[row - 1]) - 1 \
 		< (size_t)i || map->grid[row - 1][i] == ' ' || line[i + 1] == ' ' \
@@ -76,10 +76,10 @@ int	validate_line(char *line, int row, t_map *map)
 {
 	int	i;
 
+	if (!check_first_last_row(line, row, map))
+		return (0);
 	i = skip_whitespace(line);
 	if (line[i] != '1' || line[ft_strlen(line) - 2] != '1')
-		return (0);
-	if (!check_first_last_row(line + i, row, map))
 		return (0);
 	if (row != 0 && !check_last_zero_index(line, row, map))
 		return (0);

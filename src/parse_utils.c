@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:59:53 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/18 17:00:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:12:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ int	check_first_row(char *line)
 	while (line[i] && line[i] != '\n')
 	{
 		if (line[i] != '1')
-		{
 			return (0);
-		}
 		i++;
 	}
 	return (1);
@@ -35,7 +33,7 @@ int	check_last_row(char *line)
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (line[i] != '1' || line[i] != ' ')
+		if (line[i] != '1')
 			return (0);
 		i++;
 	}
