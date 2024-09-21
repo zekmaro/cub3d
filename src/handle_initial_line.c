@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 00:13:46 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 00:38:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,7 @@ static void	handle_line_from_fd(t_vars *vars, char **line, int fd)
 	*line = ft_strtrim(str, "\n");
 	free(save);
 	if (!*line)
-	{
-		printf("HELLO ISTVAN!!!\n");
 		handle_gnl_memory_error(vars, &gnl_flag);
-	}
 }
 
 void	handle_initial_line(t_vars *vars, char **line, char **line_left, int fd)
