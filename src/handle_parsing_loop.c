@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:42:19 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 02:03:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:15:30 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	read_next_line(t_vars *vars, t_parse_context *ctx, int *gnl_flag)
 		handle_gnl_memory_error(vars, gnl_flag);
 }
 
-void	handle_parsing_loop(t_vars *vars, t_parse_context *ctx)
+int	handle_parsing_loop(t_vars *vars, t_parse_context *ctx)
 {
 	int	gnl_flag;
 
@@ -50,7 +50,8 @@ void	handle_parsing_loop(t_vars *vars, t_parse_context *ctx)
 		}
 		if (ft_strlen(*(ctx->line)) > 0)
 		{
-			parse_line(ctx->vars, *(ctx->line));
+			if (!parse_line(ctx->vars, *(ctx->line)))
+				return (0);
 			(*(ctx->parsed_components))++;
 		}
 		free(*(ctx->line));
@@ -61,4 +62,5 @@ void	handle_parsing_loop(t_vars *vars, t_parse_context *ctx)
 		free(*(ctx->line_left));
 		*(ctx->line_left) = NULL;
 	}
+	return (1);
 }

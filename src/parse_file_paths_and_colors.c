@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 18:10:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:36:38 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,18 @@ void	handle_empty_lines(t_vars *vars, char **line, int *count_lines, int fd)
 		free(*line);
 		str = get_next_line(fd, &gnl_flag);
 		if (gnl_flag == 1)
+		{
+			ft_close(vars, fd);			
 			handle_gnl_error(vars, &str, &gnl_flag);
+		}
 		(*count_lines)++;
 		*line = ft_strtrim(str, "\n");
 		free(str);
 		if (!*line)
+		{
+			ft_close(vars, fd);	
 			handle_gnl_memory_error(vars, &gnl_flag);
+		}
 	}
 }
 
@@ -83,7 +89,8 @@ int	parse_file_paths_and_colors(int fd, t_vars *vars, char **line_left)
 	ctx.vars = vars;
 	ctx.line_left = line_left;
 	ctx.fd = fd;
-	handle_parsing_loop(vars, &ctx);
+	if (!handle_parsing_loop(vars, &ctx))
+		handle_parsing_error(vars, line, fd);
 	handle_empty_lines(vars, &line, &count_lines, fd);
 	if (!check_parsing_errors(vars, parsed_components, line))
 		handle_parsing_error(vars, line, fd);

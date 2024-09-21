@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/20 22:09:48 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:23:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -752,7 +752,7 @@ void		handle_boss(int i, int row, t_map *map);
 /* Parse_input.c */
 int			parse_color_components(char *line, int *r, int *g, int *b);
 void		parse_texture(t_vars *vars, char *line, char **texture);
-void		parse_line(t_vars *vars, char *line);
+int			parse_line(t_vars *vars, char *line);
 
 /* Parse_map.c */
 int			is_map_surrounded_by_ones(t_map *map);
@@ -771,7 +771,6 @@ int			is_valid_file(t_vars *vars, const char *filename);
 int			is_hidden_file(char *file_name);
 
 /* Parse_resolution.c */
-void		handle_parsing_loop(t_vars *vars, t_parse_context *ctx);
 void		handle_empty_lines(t_vars *vars, char **line, \
 				int *count_lines, int fd);
 int			check_parsing_errors(t_vars *vars, int parsed_components, \
@@ -804,6 +803,6 @@ int			handle_gnl_error_close(t_vars *vars, int fd, char **line, \
 				int *gnl_flag);
 
 /* Handle_parsing_loop.c */
-void		handle_parsing_loop(t_vars *vars, t_parse_context *ctx);
+int			handle_parsing_loop(t_vars *vars, t_parse_context *ctx);
 
 #endif // CUB3D_H
