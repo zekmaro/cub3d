@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 15:36:57 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:13:25 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,33 +69,24 @@ static int	read_and_validate_lines(t_vars *vars, t_read_map_context *ctx)
 	return (1);
 }
 
+static int	put_error_msg(const char *error_message)
+{
+	ft_putstr_fd((char *)error_message, 2);
+	return (0);
+}
+
 int	read_map(t_vars *vars, t_read_map_context *ctx)
 {
 	if (is_hidden_file(ctx->file_name) == 0)
-	{
-		ft_putstr_fd("Error\nHidden files are not allowed\n", 2);
-		return (0);
-	}
+		return (put_error_msg("Error\nHidden files are not allowed\n"));
 	if (!initialize_map(vars, ctx))
-	{
-		ft_putstr_fd("Error\nFailed to initialize map\n", 2);
-		return (0);
-	}
+		return (put_error_msg("Error\nFailed to initialize map\n"));
 	if (!skip_readed_lines(vars, ctx))
-	{
-		ft_putstr_fd("Error\nFailed to skip readed lines\n", 2);
-		return (0);
-	}
+		return (put_error_msg("Error\nFailed to skip readed lines\n"));
 	if (!read_and_validate_lines(vars, ctx))
-	{
-		ft_putstr_fd("Error\nFailed to read and validate lines\n", 2);
-		return (0);
-	}
+		return (put_error_msg("Error\nFailed to read and validate lines\n"));
 	if (!vars->map->player_found)
-	{
-		ft_putstr_fd("Error\nPlayer not found in map\n", 2);
-		return (0);
-	}
+		return (put_error_msg("Error\nPlayer not found in map\n"));
 	ft_close(vars, ctx->fd);
 	return (1);
 }
