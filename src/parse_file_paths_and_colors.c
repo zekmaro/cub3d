@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:40:55 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 20:48:27 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 00:15:36 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_empty_lines(t_vars *vars, char **line, int *count_lines, int fd)
 {
 	char	*str;
 	int		gnl_flag;
-	int i;
+	int		i;
 
 	gnl_flag = 0;
 	while (*line != NULL && ft_strlen(*line) == 0)

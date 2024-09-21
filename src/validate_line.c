@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 22:06:06 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 00:15:13 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int	handle_special_characters(char *line, int i, int row, t_map *map)
 
 int	validate_line_content(char *line, int i, int row, t_map *map)
 {
-	if (row == 1 && map->grid[0][i] != '1' && map->grid[0][i] == ' '  && map->grid[0][i] == '\t'  && map->grid[0][i] == '\r' \
-		 && map->grid[0][i] == '\f'  && map->grid[0][i] == '\v' && map->grid[0][i] != '\n' && map->grid[0][i] != '\0')
+	if (row == 1 && map->grid[0][i] != '1' && map->grid[0][i] == ' ' \
+		&& map->grid[0][i] == '\t' && map->grid[0][i] == '\r' \
+		&& map->grid[0][i] == '\f' && map->grid[0][i] == '\v' \
+		&& map->grid[0][i] != '\n' && map->grid[0][i] != '\0')
 		return (printf("I HATE CUB#D %c", map->grid[0][i]), 0);
 	if (row && line[i] == ' ' && i > 0 && ft_strlen(map->grid[row - 1]) - 1 \
 		>= (size_t)i && map->grid[row - 1][i] == '0')
