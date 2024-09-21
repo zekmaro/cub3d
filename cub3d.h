@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/21 14:39:05 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:35:53 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_map
 	int		imp_list_size;
 	int		caco_list_size;
 	int		num_doors;
+	int player_found;
 }	t_map;
 
 typedef struct s_door

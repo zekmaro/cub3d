@@ -6,11 +6,12 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 14:37:22 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:29:29 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <stdio.h>
 
 void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 			const char *file_path)
@@ -78,12 +79,12 @@ void	load_sprites(t_vars *vars)
 		"Error\nFailed to allocate memory for gun sprite\n");
 	allocate_sprite_memory(vars, &vars->player->fire, \
 		"Error\nFailed to allocate memory for fire sprite\n");
+	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
+	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	if (vars->doors == NULL)
 		return ;
 	allocate_sprite_memory(vars, &vars->doors->textures, \
 		"Error\nFailed to allocate memory for door textures\n");
-	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
-	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	load_animated_sprite(vars, vars->doors->textures, door_frames, 4);
 }
 

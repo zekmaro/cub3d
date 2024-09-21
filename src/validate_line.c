@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 15:08:37 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:37:35 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	validate_line_content(char *line, int i, int row, t_map *map)
 		|| line[i - 1] == ' '))
 		return (0);
 	if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
-		return (handle_player_direction(line, i, row, map));
+		return (map->player_found = 1,
+			handle_player_direction(line, i, row, map));
 	if (line[i] == 'B')
 		handle_boss(i, row, map);
 	else if (line[i] == 'M')
