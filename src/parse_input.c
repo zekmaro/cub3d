@@ -6,20 +6,49 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 13:40:44 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:08:26 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+int get_split_size(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	return (i);
+}
+
+int	free_split(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+	return (0);
+}
+
 int	parse_color_components(char *line, int *r, int *g, int *b)
 {
 	char	**components;
 	int		flag;
+	int split_size;
 
 	components = ft_split(line, ',');
-	if (!components)
+	split_size = get_split_size(components);
+	if (split_size != 3)
+	{
+		free_split(components);
 		return (0);
+	}
 	flag = check_valid_rgb(components, r, g, b);
 	free_components(components);
 	if (!flag)
