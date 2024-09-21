@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 00:25:05 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:36:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,11 @@ int	read_map(t_vars *vars, t_read_map_context *ctx)
 	if (!read_and_validate_lines(vars, ctx))
 	{
 		ft_putstr_fd("Error\nFailed to read and validate lines\n", 2);
+		return (0);
+	}
+	if (!vars->map->player_found)
+	{
+		ft_putstr_fd("Error\nPlayer not found in map\n", 2);
 		return (0);
 	}
 	ft_close(vars, ctx->fd);
