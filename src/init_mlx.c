@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:53:33 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/21 00:42:32 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 12:14:53 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	initialise_mlx(t_vars *vars)
 	mlx = (t_mlx *)(malloc(sizeof(t_mlx)));
 	if (!mlx)
 	{
-		exit_with_error(vars, "Failed to allocate memory for mlx");
+		exit_with_error(vars, "Error\nFailed to allocate memory for mlx\n");
 		return ;
 	}
 	ft_bzero(mlx, sizeof(t_mlx));
@@ -45,6 +45,6 @@ void	safe_init_mlx(t_vars *vars)
 		vars->mlx->mlx = NULL;
 		free(vars->mlx);
 		vars->mlx = NULL;
-		exit_with_error(vars, "Failed to create window");
+		exit_with_error(vars, "Error\nFailed to create window\n");
 	}
 }
