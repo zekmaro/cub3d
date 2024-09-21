@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:32:18 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/20 21:09:15 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 12:08:50 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	initialise_map(t_vars *vars)
 	map = (t_map *)(malloc(sizeof(t_map)));
 	if (!map)
 	{
-		exit_with_error(vars, "Failed to allocate memory for map");
+		exit_with_error(vars, "Error\nFailed to allocate memory for map\n");
 		return ;
 	}
 	ft_bzero(map, sizeof(t_map));
@@ -44,7 +44,7 @@ void	initialise_zbuffer(t_vars *vars)
 	vars->zbuffer = malloc(sizeof(int) * vars->mlx->window_width);
 	if (!vars->zbuffer)
 	{
-		exit_with_error(vars, "Failed to allocate memory for zbuffer");
+		exit_with_error(vars, "Error\nFailed to allocate memory for zbuffer\n");
 		return ;
 	}
 	ft_bzero(vars->zbuffer, sizeof(int) * vars->mlx->window_width);
@@ -62,7 +62,7 @@ void	initialise_doors(t_vars *vars)
 	doors = ft_calloc(vars->map->num_doors, sizeof(t_door));
 	if (!doors)
 	{
-		exit_with_error(vars, "Failed to allocate memory for doors");
+		exit_with_error(vars, "Error\nFailed to allocate memory for doors\n");
 		return ;
 	}
 	ft_bzero(doors, vars->map->num_doors * sizeof(t_door));
