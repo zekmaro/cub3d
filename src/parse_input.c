@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 13:14:53 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:40:44 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 {
 	if (*texture)
 	{
-		ft_putstr_fd("Error\nMultiple texture paths found\n", 2);
-		exit(EXIT_FAILURE);
+		free(line);
+		get_next_line(-1, NULL);
+		exit_with_error(vars, "Error\nMultiple texture paths found\n");
 	}
 	while (*(line + 3) == ' ' || *(line + 3) == '\t' || *(line + 3) == '\n' \
 		|| *(line + 3) == '\r' || *(line + 3) == '\f' || *(line + 3) == '\v')
