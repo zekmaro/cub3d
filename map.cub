@@ -3,8 +3,6 @@ SO ./assets/wall2.xpm
 WE ./assets/wall3.xpm
 EA ./assets/wall4.xpm
 
-SO ./assets/wall2.xpm
-
 F 76,44,23
 C 225,116,145
 
