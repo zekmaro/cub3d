@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 00:38:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:28:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ static void	handle_line_from_fd(t_vars *vars, char **line, int fd)
 
 	gnl_flag = 0;
 	str = get_next_line(fd, &gnl_flag);
-	if (gnl_flag == 1)
+	if (gnl_flag == 1 || !str)
+	{
+		ft_close(vars, fd);
 		handle_gnl_error(vars, &str, &gnl_flag);
+	}
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' \
 		|| str[i] == '\r' || str[i] == '\f' || str[i] == '\v')

@@ -44,26 +44,24 @@ void	draw_and_update_entity(t_vars *vars, t_enemy *entity, int scale)
 	t_sprite_info	sprite_info;
 	t_sprite_info	fireball_info;
 
-	if (!entity->is_dead)
+	if (!entity->is_dead && entity->draw)
 	{
 		sprite_info.sprite = entity->current_animation;
 		sprite_info.object_x = entity->center_x;
 		sprite_info.object_y = entity->center_y;
 		sprite_info.scale = scale;
 		sprite_info.current_frame = entity->current_frame;
-		if (entity->draw)
-			draw_dynamic_sprite(vars, &sprite_info);
-		if (!entity->is_dead)
-			search_for_player_enemy(vars, entity);
-		if (entity->detected_player && entity->draw)
-		{
-			fireball_info.sprite = entity->fire_ball;
-			fireball_info.object_x = entity->fire_ball_x;
-			fireball_info.object_y = entity->fire_ball_y;
-			fireball_info.scale = 20;
-			fireball_info.current_frame = 0;
-			draw_dynamic_sprite(vars, &fireball_info);
-		}
+		search_for_player_enemy(vars, entity);
+		draw_dynamic_sprite(vars, &sprite_info);
+	}
+	if (entity->detected_player && entity->draw)
+	{
+		fireball_info.sprite = entity->fire_ball;
+		fireball_info.object_x = entity->fire_ball_x;
+		fireball_info.object_y = entity->fire_ball_y;
+		fireball_info.scale = 20;
+		fireball_info.current_frame = 0;
+		draw_dynamic_sprite(vars, &fireball_info);
 	}
 }
 
