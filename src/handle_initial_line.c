@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 01:55:09 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 21:28:39 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 00:24:32 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	get_split_size(char **split)
 {
 	int	i;
 
+	if (!split)
+		return (0);
 	i = 0;
 	while (split[i])
 		i++;
@@ -26,6 +28,8 @@ int	free_split(char **split)
 {
 	int	i;
 
+	if (!split)
+		return (0);
 	i = 0;
 	while (split[i])
 	{
