@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 16:41:32 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:56:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,23 @@ void	free_components(char **components)
 
 int	check_valid_rgb(char **components, int *r, int *g, int *b)
 {
-	*r = ft_atoi(ft_strtrim(components[0], " "));
-	*g = ft_atoi(ft_strtrim(components[1], " "));
-	*b = ft_atoi(ft_strtrim(components[2], " "));
-	if (!check_input(ft_strtrim(components[0], " "), *r)
-		|| !check_input(ft_strtrim(components[1], " "), *g)
-		|| !check_input(ft_strtrim(components[2], " "), *b))
-	{
+	char *str_r;
+	char *str_g;
+	char *str_b;
+
+	if (!components)
 		return (0);
-	}
-	return (1);
+	str_r = ft_strtrim(components[0], " ");
+	str_g = ft_strtrim(components[1], " ");
+	str_b = ft_strtrim(components[2], " ");
+	if (!str_r || !str_g || !str_b)
+		return (free(str_r), free(str_g), free(str_b), 0);
+	*r = ft_atoi(str_r);
+	*g = ft_atoi(str_g);
+	*b = ft_atoi(str_b);
+	if (!check_input(str_r, *r)
+		|| !check_input(str_g, *g)
+		|| !check_input(str_b, *b))
+		return (0);
+	return (free(str_r), free(str_g), free(str_b), 1);
 }
