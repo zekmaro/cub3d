@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:59:53 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 15:08:33 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:10:00 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	count_new_lines(t_vars *vars, int fd, char *line_left)
 int	handle_player_direction(char *line, int i, int row, t_map *map)
 {
 	if (map->player_dir != 0)
-		return (ft_putstr_fd("Error\nMultiple player directions found\n", 2), \
-					exit(EXIT_FAILURE), 1);
+		return (ft_putstr_fd("Error\nMultiple player directions found\n", 2), 0);
 	map->player_x = i;
 	map->player_y = row;
 	map->player_dir = line[i];
