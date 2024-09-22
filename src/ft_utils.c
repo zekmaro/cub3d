@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 16:56:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:04:51 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ int	check_valid_rgb(char **components, int *r, int *g, int *b)
 	if (!check_input(str_r, *r)
 		|| !check_input(str_g, *g)
 		|| !check_input(str_b, *b))
-		return (0);
+		return (free(str_r), free(str_g), free(str_b), 0);
 	return (free(str_r), free(str_g), free(str_b), 1);
 }
