@@ -6,14 +6,14 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/19 01:58:41 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/23 00:51:00 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	cub3D
 
 CC		:=	cc
-CFLAGS	:= -Wall -Wextra -Werror -g#3 -fsanitize=address,undefined,leak
+CFLAGS	:= -Wall -Wextra -Werror #-g3 -fsanitize=address,undefined,leak
 #LDFLAGS := -fsanitize=address,undefined,leak
 MLXFLAGS:= -lmlx -lXext -lX11 -lm
 

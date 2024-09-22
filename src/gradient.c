@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 22:10:20 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/20 13:22:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 00:49:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static uint32_t	apply_transparency(uint32_t color, double trans_coef)
 	green = (color << 8) & 0xFF;
 	blue = color & 0xFF;
 	alpha = (uint8_t)(trans_coef * 255);
-	return ((alpha << 24) | (red << 16) | (green << 8) | blue);
+	return (((uint32_t)alpha << 24) | (red << 16) | (green << 8) | blue);
 }
 
 static uint32_t	combine_colors(uint32_t color1, uint32_t color2)
@@ -44,7 +44,7 @@ static uint32_t	combine_colors(uint32_t color1, uint32_t color2)
 	result = (color1 & 0xFF) * (255 - alpha)
 		+ (color2 & 0xFF);
 	b_blend = result / 255;
-	return ((uint32_t)(255 << 24) | r_blend | g_blend | b_blend);
+	return (((uint32_t)255 << 24) | r_blend | g_blend | b_blend);
 }
 
 static void	blend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)
