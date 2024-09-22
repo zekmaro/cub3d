@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 16:12:43 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:22:06 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,8 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 	}
 }
 
-// static void	parse_texture_line(t_vars *vars, char *line)
-// {
-// }
-
-static int	parse_color_line(t_vars *vars, char *line)
-{	
+static int	parse_path_and_color_line(t_vars *vars, char *line)
+{
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[0]);
 	else if (ft_strncmp(line, "SO ", 3) == 0)
@@ -73,15 +69,11 @@ static int	parse_color_line(t_vars *vars, char *line)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[3]);
 	else if (ft_strncmp(line, "F ", 2) == 0)
-	{
-		return (printf("line: '%s'\n", line), parse_color_components(line + 2, \
+		return (parse_color_components(line + 2, \
 			&vars->floor_r, &vars->floor_g, &vars->floor_b));
-	}
 	else if (ft_strncmp(line, "C ", 2) == 0)
-	{
-		return (printf("line: '%s'\n", line), parse_color_components(line + 2, \
+		return (parse_color_components(line + 2, \
 			&vars->ceiling_r, &vars->ceiling_g, &vars->ceiling_b));
-	}
 	else
 		return (0);
 	return (1);
@@ -91,8 +83,7 @@ int	parse_line(t_vars *vars, char *line)
 {
 	int	result;
 
-	//parse_texture_line(vars, line);
-	result = parse_color_line(vars, line);
+	result = parse_path_and_color_line(vars, line);
 	if (!result)
 		return (0);
 	vars->floor_color = rgb_to_hex(vars->floor_r, \
