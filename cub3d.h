@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/22 00:24:46 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 23:34:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 # define MINIMAP_RADIUS 100
 
-// KEY DEFINITION LINUX
 # define W 119
 # define D 100
 # define S 115
@@ -40,14 +39,6 @@
 # define E 101
 # define KEY_OPEN_DOOR SPACE
 
-// KEY DEFINITION MAC
-// # define W 13
-// # define D 2
-// # define S 1
-// # define A 0
-// # define ESCAPE 53
-
-// COLORS
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define PURPLE 0x800080
@@ -65,7 +56,6 @@
 
 # define TRANSPARENT MAGENTA
 
-// DOOR STATES
 # define DOOR_CLOSED 0
 # define DOOR_OPEN 1
 # define DOOR_OPENING 2
@@ -451,9 +441,6 @@ typedef struct s_read_map_context
 	int		readed_lines;
 }	t_read_map_context;
 
-// for makefile compilation from linux: -lmlx -lXext -lX11 -lm -o
-// for mac: -framework OpenGL -framework AppKit -o
-
 /* Draw_line.c */
 void		draw_line(t_vars *vars, unsigned long color);
 
@@ -808,4 +795,4 @@ int			handle_gnl_error_close(t_vars *vars, int fd, char **line, \
 /* Handle_parsing_loop.c */
 int			handle_parsing_loop(t_vars *vars, t_parse_context *ctx);
 
-#endif // CUB3D_H
+#endif
