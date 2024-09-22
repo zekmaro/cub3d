@@ -6,12 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 17:04:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:17:18 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 
 void	ft_close(t_vars *vars, int fd)
 {
@@ -53,9 +52,9 @@ void	free_components(char **components)
 
 int	check_valid_rgb(char **components, int *r, int *g, int *b)
 {
-	char *str_r;
-	char *str_g;
-	char *str_b;
+	char	*str_r;
+	char	*str_g;
+	char	*str_b;
 
 	if (!components)
 		return (0);
