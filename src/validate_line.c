@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 23:32:46 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 00:17:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,20 @@ int	handle_special_characters(char *line, int i, int row, t_map *map)
 	return (1);
 }
 
-int	check_empty_line(char *line)
-{
-	int	i;
+// int	check_empty_line(char *line)
+// {
+// 	int	i;
 
-	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\r' \
-			|| line[i] == '\f' || line[i] == '\v' || line[i] == '\n'))
-	{
-		i++;
-	}
-	if (ft_strlen(line) == (size_t)i)
-		return (1);
-	return (0);
-}
+// 	i = 0;
+// 	while (line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\r' \
+// 			|| line[i] == '\f' || line[i] == '\v' || line[i] == '\n'))
+// 	{
+// 		i++;
+// 	}
+// 	if (ft_strlen(line) == (size_t)i)
+// 		return (1);
+// 	return (0);
+// }
 
 int	validate_line_content(char *line, int i, int row, t_map *map)
 {
@@ -90,9 +90,8 @@ int	validate_line_content(char *line, int i, int row, t_map *map)
 		&& map->grid[0][i] != '\n' && map->grid[0][i] != '\0')
 		return (0);
 	if (row && (line[i] == ' ' || line[i] == EOF || line[i] == '\n') \
-		&& (ft_strlen(map->grid[row - 1]) - 1 \
-		>= (size_t)i) && (map->grid[row - 1][i] == '0' \
-		|| map->grid[row - 1][i + 1] == '0' \
+		&& (ft_strlen(map->grid[row - 1]) - 1 >= (size_t)i) \
+		&& (map->grid[row - 1][i] == '0' || map->grid[row - 1][i + 1] == '0' \
 		|| (i > 0 && map->grid[row - 1][i - 1] == '0')))
 		return (0);
 	if (row == map->height - 1 \
