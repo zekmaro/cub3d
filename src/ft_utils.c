@@ -6,11 +6,12 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 20:57:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:41:32 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <stdio.h>
 
 void	ft_close(t_vars *vars, int fd)
 {
