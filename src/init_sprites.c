@@ -6,12 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/21 15:29:29 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:17:55 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 
 void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 			const char *file_path)
