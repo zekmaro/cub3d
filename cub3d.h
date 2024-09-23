@@ -29,6 +29,7 @@
 # define D 100
 # define S 115
 # define A 97
+# define K 107
 # define MOUSE_CLICK_LEFT 1
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -226,6 +227,7 @@ typedef struct s_keys
 	int		a;
 	int		s;
 	int		d;
+	int		k;
 	int		space;
 	int		left;
 	int		right;

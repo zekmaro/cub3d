@@ -30,6 +30,13 @@ int	key_press(int keycode, t_vars *vars)
 		vars->keys.left = 1;
 	if (keycode == KEY_RIGHT)
 		vars->keys.right = 1;
+	if (keycode == K)
+	{
+		if (vars->keys.k == 0)
+			vars->keys.k = 1;
+		else if (vars->keys.k == 1)
+			vars->keys.k = 0;
+	}
 	return (0);
 }
 

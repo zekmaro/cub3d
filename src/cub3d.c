@@ -14,7 +14,8 @@
 
 int	main_loop_hook(t_vars *vars)
 {
-	reset_mouse_to_center(vars);
+	if (vars->keys.k == 0)
+		reset_mouse_to_center(vars);
 	get_current_time(&vars->player->time1);
 	handle_player_damaged_time(vars);
 	check_objects_to_draw(vars);
