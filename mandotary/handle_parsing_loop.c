@@ -37,6 +37,13 @@ static void	read_next_line(t_vars *vars, t_parse_context *ctx, int *gnl_flag)
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' \
 		|| str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
 		i++;
+	if (str[i] == '0' || str[i] == '1')
+	{
+		free(str);
+		ft_close(vars, ctx->fd);
+		get_next_line(-1, NULL);
+		exit_with_error(vars, "Error\nInvalid char\n");
+	}
 	save = str;
 	str += i;
 	*(ctx->line) = ft_strtrim(str, "\n");
