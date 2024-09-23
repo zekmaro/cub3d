@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:17:29 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 03:03:07 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:59:12 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,10 @@ void	check_enemy_collision(t_vars *vars, t_enemy *enemy, int damage)
 	enemy_flag = check_collision(vars, enemy, &ray);
 	if (enemy_flag)
 	{
-		system("aplay ./assets/imp_pain.wav -q &");
 		enemy->health -= damage;
 	}
 	if (enemy->health == 0)
 	{
-		if (!enemy->is_dead)
-			system("aplay ./assets/imp_death.wav -q &");
 		enemy->current_animation = enemy->death;
 		enemy->current_frame = 0;
 		enemy->health -= 10;

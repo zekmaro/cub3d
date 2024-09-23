@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:30:03 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/23 16:06:37 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:59:03 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ void	update_damaged_player(t_vars *vars)
 	vars->player->is_damaged = 1;
 	vars->player->health -= 20;
 	get_current_time(&vars->player->time0);
-	system("aplay ./assets/player_pain.wav -q &");
 	if (vars->player->health == 0)
 	{
 		ft_putstr_fd("GAME OVER!\n", 1);
-		system("aplay ./assets/player_dead.wav -q &");
 		free_and_exit(vars);
 	}
 }
