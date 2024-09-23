@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/22 23:34:39 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:11:24 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -485,6 +485,8 @@ t_scr_pos	init_scr_pos(int x, int y);
 /* Draw_utils.c */
 void		draw_square(t_vars *vars, int x, int y, int color);
 void		rotate_around_point(t_vars *vars, int *x, int *y);
+int			rgb_to_hex(int r, int g, int b);
+int			ft_abs(int num);
 
 /* Draw_dynamic_sprite.c */
 void		calculate_sprite_params(t_vars *vars, t_sprite_calc_params \
@@ -777,7 +779,6 @@ int			validate_line(char *line, int row, t_map *map);
 /* Ft_utils.c */
 void		ft_close(t_vars *vars, int fd);
 int			check_input(char *str, int num);
-int			rgb_to_hex(int r, int g, int b);
 void		free_components(char **components);
 int			check_valid_rgb(char **components, int *r, int *g, int *b);
 

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 21:52:49 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/20 22:57:05 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:06:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	get_door_id(t_vars *vars, int ray_x, int ray_y)
 	i = 0;
 	while (i < vars->map->num_doors)
 	{
-		if (abs(vars->doors[i].center_x - ray_x) < vars->unit_size \
-			&& abs(vars->doors[i].center_y - ray_y) < vars->unit_size)
+		if (ft_abs(vars->doors[i].center_x - ray_x) < vars->unit_size \
+			&& ft_abs(vars->doors[i].center_y - ray_y) < vars->unit_size)
 			return (i);
 		i++;
 	}

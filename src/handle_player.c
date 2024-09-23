@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:30:03 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/19 15:07:59 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:06:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	setup_player(t_vars *vars)
 
 int	player_damaged_enemy(t_vars *vars, t_enemy *enemy)
 {
-	return (abs(enemy->fire_ball_x - vars->player->center_x) < 20
-		&& abs(enemy->fire_ball_y - vars->player->center_y) < 20
+	return (ft_abs(enemy->fire_ball_x - vars->player->center_x) < 20
+		&& ft_abs(enemy->fire_ball_y - vars->player->center_y) < 20
 		&& !vars->player->is_damaged);
 }
 
