@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/22 21:08:39 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:01:20 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int argc, char **argv)
 	ctx.line_left = &line_left;
 	ctx.readed_lines = readed_lines;
 	if (!read_map(&vars, &ctx))
-		exit_with_error(&vars, "Failed to read map\n");
+		exit_with_error(&vars, "Error\nFailed to read map\n");
 	replace_space_with_one(vars.map);
 	initialise_doors(&vars);
 	init_enemy_lists(&vars);
