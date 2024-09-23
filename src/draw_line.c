@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 14:59:58 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/14 15:32:58 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:12:43 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	get_line_data(t_line *line)
 {
 	line->step_x = define_step(line->x0, line->x1);
 	line->step_y = define_step(line->y0, line->y1);
-	line->dx = abs(line->x1 - line->x0);
-	line->dy = abs(line->y1 - line->y0);
+	line->dx = ft_abs(line->x1 - line->x0);
+	line->dy = ft_abs(line->y1 - line->y0);
 	line->amount_pixels = sqrt(line->dx * line->dx + line->dy * line->dy);
 }
 
@@ -35,7 +35,8 @@ static void	increment_step(int *x0, int *y0, t_line *line)
 {
 	int	error;
 
-	error = abs(*x0 - line->x0) * line->dy - abs(*y0 - line->y0) * line->dx;
+	error = ft_abs(*x0 - line->x0) * line->dy \
+		- ft_abs(*y0 - line->y0) * line->dx;
 	if (line->step_x && !error)
 		*x0 += line->step_x;
 	else if (line->step_y && !error)

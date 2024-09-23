@@ -6,11 +6,18 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 17:17:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:05:29 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	ft_abs(int num)
+{
+	if (num < 0)
+		return (-num);
+	return (num);
+}
 
 void	ft_close(t_vars *vars, int fd)
 {
@@ -32,11 +39,6 @@ int	check_input(char *str, int num)
 	}
 	free(check);
 	return (1);
-}
-
-int	rgb_to_hex(int r, int g, int b)
-{
-	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
 
 void	free_components(char **components)

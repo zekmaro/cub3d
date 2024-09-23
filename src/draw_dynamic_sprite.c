@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:03:27 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 21:30:40 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:06:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	calculate_sprite_params(t_vars *vars, t_sprite_calc_params \
 	screen_height = (double)vars->mlx->window_height;
 	params->sprite_screen_x = (int)((screen_width / 2.0) * (1.0 \
 		+ calc_params->transform_x / calc_params->transform_y));
-	params->sprite_height = abs((int)(screen_height * calc_params->scale \
+	params->sprite_height = ft_abs((int)(screen_height * calc_params->scale \
 		/ calc_params->transform_y));
-	params->sprite_width = abs((int)(screen_height * calc_params->scale \
+	params->sprite_width = ft_abs((int)(screen_height * calc_params->scale \
 		/ calc_params->transform_y));
 	params->draw_start_y = -params->sprite_height / 2 \
 		+ vars->mlx->window_height / 2;

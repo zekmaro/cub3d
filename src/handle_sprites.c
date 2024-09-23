@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 01:03:38 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/13 14:05:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:06:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	project_sprite(t_vars *vars, t_sprite *sprite)
 		+ vars->player->plane_x * sprite_y);
 	sprite->screen_x = (int)((vars->mlx->window_width / 2) \
 		* (1 + transform_x / transform_y));
-	sprite->height = abs((int)(vars->mlx->window_height / transform_y));
-	sprite->width = abs((int)(vars->mlx->window_height / transform_y));
+	sprite->height = ft_abs((int)(vars->mlx->window_height / transform_y));
+	sprite->width = ft_abs((int)(vars->mlx->window_height / transform_y));
 }
 
 void	sort_sprites(t_vars *vars)
