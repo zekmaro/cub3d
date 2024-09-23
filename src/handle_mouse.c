@@ -31,7 +31,7 @@ int	mouse_move(int x, int y, t_vars *vars)
 	(void)y;
 	center_x = vars->mlx->window_width / 2;
 	dx = x - center_x;
-	rot_speed = 0.0003;
+	rot_speed = 0.0002;
 	vars->player->angle += dx * rot_speed;
 	return (0);
 }

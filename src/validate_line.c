@@ -94,9 +94,6 @@ int	validate_line_content(char *line, int i, int row, t_map *map)
 		&& (map->grid[row - 1][i] == '0' || map->grid[row - 1][i + 1] == '0' \
 		|| (i > 0 && map->grid[row - 1][i - 1] == '0')))
 		return (0);
-	if (row == map->height - 1 \
-		&& ft_strlen(line) + 1 < ft_strlen(map->grid[row - 1]))
-		return (0);
 	return (handle_special_characters(line, i, row, map));
 }
 
