@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 12:49:45 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/24 20:45:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ static int	read_and_validate_lines(t_vars *vars, t_read_map_context *ctx)
 		return (handle_gnl_error_close(vars, ctx->fd, &line, &gnl_flag));
 	while (line != NULL)
 	{
+		if (*line == '\n')
+		{
+			free(line);
+			get_next_line(-1, NULL);
+			return (exit_with_error(vars, "Error\nEmpty line in map\n"), 0);
+		}
 		if (!validate_line(line, i, ctx->map))
 			return (handle_gnl_error_close(vars, ctx->fd, &line, &gnl_flag));
 		ctx->map->grid[i++] = line;
