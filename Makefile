@@ -6,23 +6,18 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/23 19:34:21 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/24 16:49:23 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	cub3D
-
-BONUS_NAME	:=	cub3D_bonus
+BON_NAME:=	cub3D_bonus
 
 CC		:=	cc
 CFLAGS	:= -Wall -Wextra -Werror #-g3 -fsanitize=address,undefined,leak
 #LDFLAGS := -fsanitize=address,undefined,leak
 MLXFLAGS:= -lmlx -lXext -lX11 -lm
 
-# DIRECTORIES
-SRCDIR	:=	mandotary
-BNSDIR	:=	bonus
-GNLDIR	:=	gnl
 OBJDIR	:=	obj
 
 # FILES
@@ -162,34 +157,38 @@ LIBS	:= libft/libft.a
 
 # OBJECT FILES
 OBJ_SRC	:= $(SRC:%.c=$(OBJDIR)/%.o)
-OBJ_BNS	:= $(BNS:%.c=$(OBJDIR)/%.o)
 OBJ_GNL	:= $(GNL:%.c=$(OBJDIR)/%.o)
+OBJ_BON	:= $(BNS:%.c=$(OBJDIR)/%.o)
 
-$(shell mkdir -p $(OBJDIR) $(OBJDIR)/mandotary $(OBJDIR)/gnl $(OBJDIR)/bonus)
+MAKEFLAGS += -j$(nproc)
+
+$(shell mkdir -p $(OBJDIR) $(OBJDIR)/src $(OBJDIR)/gnl $(OBJDIR)/bonus)
 
 all		: $(NAME)
 
-bonus	: $(BONUS_NAME)
-
-
-$(BONUS_NAME) : $(OBJ_BNS) $(OBJ_GNL) cub3d.h
-	make -C libft all -j
-	$(CC) $(OBJ_BNS) $(OBJ_GNL) $(LIBS) $(MLXFLAGS) -o $(BONUS_NAME)
+bonus	: $(BON_NAME)
 
 $(NAME)	: $(OBJ_SRC) $(OBJ_GNL) cub3d.h
-	make -C libft all -j
+	$(MAKE) -C libft all
 	$(CC) $(OBJ_SRC) $(OBJ_GNL) $(LIBS) $(MLXFLAGS) -o $(NAME)
 # $(LDFLAGS) -o $(NAME)
 
+$(BON_NAME)	: $(OBJ_BON) $(OBJ_GNL) cub3d.h
+	$(MAKE) -C libft all
+	$(CC) $(OBJ_BON) $(OBJ_GNL) $(LIBS) $(MLXFLAGS) -o $(BON_NAME)
+
 clean	:
-	make -C libft clean -j
+	$(MAKE) -C libft clean
 	rm -f $(OBJ_SRC) $(OBJ_GNL)
 
 fclean	:
-	make -C libft fclean -j
+	$(MAKE) -C libft fclean
 	rm -f $(OBJ_SRC) $(OBJ_GNL) $(NAME)
 
-re		: fclean all
+re		:
+	$(MAKE) -C libft fclean
+	rm -f $(OBJ_SRC) $(OBJ_GNL) $(NAME)
+	$(MAKE) all
 
 $(OBJDIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -197,10 +196,4 @@ $(OBJDIR)/%.o: %.c
 $(OBJDIR)/gnl/%.o: gnl/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/mandotary/%.o: mandotary/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJDIR)/bonus/%.o: bonus/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-.PHONY	: all clean fclean re
+.PHONY	: all clean fclean re bonus

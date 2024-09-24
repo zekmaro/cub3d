@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/23 19:36:38 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:18:52 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ int	handle_special_characters(char *line, int i, int row, t_map *map)
 
 int	validate_line_content(char *line, int i, int row, t_map *map)
 {
-	if ((line[i] == '0' || line[i] == 'N') && i > 0 \
+	if ((is_map_player(line[i]) || line[i] == '0') && i == 0)
+		return (0);
+	if ((line[i] == '0' || is_map_player(line[i])) && i > 0 \
 		&& (ft_strlen(map->grid[row - 1]) - 2 \
 		< (size_t)i || map->grid[row - 1][i + 1] == '\n' \
-		|| map->grid[row - 1][i + 1] == ' ' \
-		|| map->grid[row - 1][i - 1] == ' ' \
+		|| map->grid[row - 1][i + 1] == ' ' || map->grid[row - 1][i - 1] == ' '
 		|| map->grid[row - 1][i - 1] == '\n' \
 		|| map->grid[row - 1][i] == ' ' || line[i + 1] == ' ' \
 		|| map->grid[row - 1][i] == '\n' || line[i + 1] == '\n' \
@@ -68,7 +69,9 @@ int	validate_line_content(char *line, int i, int row, t_map *map)
 		return (0);
 	if (row && (line[i] == ' ' || line[i] == EOF || line[i] == '\n') \
 		&& (ft_strlen(map->grid[row - 1]) - 1 >= (size_t)i) \
-		&& (map->grid[row - 1][i] == '0' || map->grid[row - 1][i + 1] == '0' \
+		&& (map->grid[row - 1][i] == 'P' || map->grid[row - 1][i + 1] == 'P' \
+		|| (i > 0 && map->grid[row - 1][i - 1] == 'P')
+		|| map->grid[row - 1][i] == '0' || map->grid[row - 1][i + 1] == '0' \
 		|| (i > 0 && map->grid[row - 1][i - 1] == '0')))
 		return (0);
 	return (handle_special_characters(line, i, row, map));

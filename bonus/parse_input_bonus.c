@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input.c                                      :+:      :+:    :+:   */
+/*   parse_input_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 16:22:06 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:59:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 		exit_with_error(vars, "Error\nFailed to allocate memory for texture\n");
 		exit(EXIT_FAILURE);
 	}
+	vars->num_path_color_lines++;
 }
 
 static int	parse_path_and_color_line(t_vars *vars, char *line)
@@ -69,10 +70,12 @@ static int	parse_path_and_color_line(t_vars *vars, char *line)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[3]);
 	else if (ft_strncmp(line, "F ", 2) == 0)
-		return (parse_color_components(line + 2, \
+		return (vars->num_path_color_lines++, \
+			parse_color_components(line + 2, \
 			&vars->floor_r, &vars->floor_g, &vars->floor_b));
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (parse_color_components(line + 2, \
+		return (vars->num_path_color_lines++, \
+			parse_color_components(line + 2, \
 			&vars->ceiling_r, &vars->ceiling_g, &vars->ceiling_b));
 	else
 		return (0);

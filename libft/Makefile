@@ -11,6 +11,8 @@ SRC		:= ft_putnbr_fd.c ft_putendl_fd.c ft_putstr_fd.c ft_putchar_fd.c \
 		ft_lstdelone_bonus.c ft_lstadd_back_bonus.c ft_lstlast_bonus.c \
 		ft_lstsize_bonus.c ft_lstnew_bonus.c ft_lstadd_front_bonus.c
 
+MAKEFLAGS += -j$(nproc)
+
 OBJ := $(SRC:%.c=%.o)
 
 $(NAME): $(OBJ)
@@ -21,9 +23,12 @@ all: $(NAME)
 clean:
 	rm -f $(OBJ) $(BNS_OBJ)
 
-fclean: clean
+fclean:
+	rm -f $(OBJ) $(BNS_OBJ)
 	rm -f $(NAME)
 
-re: fclean all
+re:
+	rm -f $(OBJ) $(BNS_OBJ) $(NAME)
+	$(MAKE) all
 
 .PHONY: all clean fclean re

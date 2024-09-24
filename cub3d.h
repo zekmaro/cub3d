@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/23 16:11:24 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:19:30 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ typedef struct s_vars
 	int				ceiling_b;
 	int				floor_color;
 	int				ceiling_color;
+	int				num_path_color_lines;
 }	t_vars;
 
 typedef struct s_dim
@@ -684,7 +685,7 @@ int			is_player(t_vars *vars, int y, int x);
 int			is_enemy(t_enemy *enemy, int y, int x);
 int			is_imp(t_vars *vars, int y, int x);
 int			is_caco(t_vars *vars, int y, int x);
-int			is_monster(t_vars *vars, int x, int y);
+int			is_map_player(char c);
 
 /* Is_construction.c */
 int			is_wall(t_vars *vars, int y, int x);
@@ -794,6 +795,7 @@ void		handle_gnl_error(t_vars *vars, char **str, int *gnl_flag);
 void		handle_gnl_memory_error(t_vars *vars, int *gnl_flag);
 int			handle_gnl_error_close(t_vars *vars, int fd, char **line, \
 				int *gnl_flag);
+void		handle_gnl_error_char(t_vars *vars, int fd, char **line);
 
 /* Handle_parsing_loop.c */
 int			handle_parsing_loop(t_vars *vars, t_parse_context *ctx);

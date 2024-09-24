@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_entity.c                                        :+:      :+:    :+:   */
+/*   is_entity_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:00:29 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/23 16:12:07 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:57:54 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,9 @@ int	is_caco(t_vars *vars, int y, int x)
 {
 	return (ft_abs(y - vars->caco->center_y) < 40 \
 		&& ft_abs(x - vars->caco->center_x) < 40);
+}
+
+int	is_map_player(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
