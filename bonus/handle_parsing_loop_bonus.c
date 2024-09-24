@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_parsing_loop.c                              :+:      :+:    :+:   */
+/*   handle_parsing_loop_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:42:19 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/22 21:20:51 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:59:28 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	read_next_line(t_vars *vars, t_parse_context *ctx, int *gnl_flag)
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' \
 		|| str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
 		i++;
+	if ((str[i] == '0' || str[i] == '1' ) && (vars->num_path_color_lines < 6))
+		handle_gnl_error_char(vars, ctx->fd, &str);
 	save = str;
 	str += i;
 	*(ctx->line) = ft_strtrim(str, "\n");
