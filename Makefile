@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/24 16:49:23 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/24 18:23:21 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,69 +24,69 @@ OBJDIR	:=	obj
 GNL		:=	gnl/get_next_line.c \
 			gnl/get_next_line_utils.c \
 
-SRC		:=	mandotary/cub3d.c \
-			mandotary/draw_line.c \
-			mandotary/draw_environment.c \
-			mandotary/draw_entities.c \
-			mandotary/free_memory_utils.c \
-			mandotary/free_environment.c \
-			mandotary/free_components.c \
-			mandotary/free_sprites.c \
-			mandotary/free_textures.c \
-			mandotary/free_enemies.c \
-			mandotary/free_gun_and_fire.c \
-			mandotary/free_animated_frames.c \
-			mandotary/handle_image.c \
-			mandotary/handle_keys.c \
-			mandotary/handle_mouse.c \
-			mandotary/init_components.c \
-			mandotary/init_environment.c \
-			mandotary/init_enemy_sprites.c \
-			mandotary/parsing.c \
-			mandotary/map_utils.c \
-			mandotary/time_utils.c \
-			mandotary/raycasting.c \
-			mandotary/ray_drawing.c \
-			mandotary/ray_handlers.c \
-			mandotary/handle_sprites.c \
-			mandotary/gradient.c \
-			mandotary/draw_player.c \
-			mandotary/draw_monster.c \
-			mandotary/draw_raycasting.c \
-			mandotary/draw_gunshot.c \
-			mandotary/draw_gunshot_helper.c \
-			mandotary/draw_utils.c \
-			mandotary/draw_dynamic_sprite.c \
-			mandotary/draw_sprite_stripe.c \
-			mandotary/draw_sprites.c \
-			mandotary/is_entity.c \
-			mandotary/is_construction.c \
-			mandotary/init_textures.c \
-			mandotary/init_sprites.c \
-			mandotary/player_move.c \
-			mandotary/handle_player.c \
-			mandotary/handle_enemies.c \
-			mandotary/handle_enemy_list.c \
-			mandotary/init_animations.c \
-			mandotary/init_enemies.c \
-			mandotary/init_doors.c \
-			mandotary/load_animated_sprite.c \
-			mandotary/setup_enemies.c \
-			mandotary/parse_input.c \
-			mandotary/free_animations.c \
-			mandotary/handle_door_list.c \
-			mandotary/handle_objects.c \
-			mandotary/raycasting_utils.c \
-			mandotary/init_mlx.c \
-			mandotary/parse_utils.c \
-			mandotary/parse_filename.c \
-			mandotary/parse_file_paths_and_colors.c \
-			mandotary/validate_line.c \
-			mandotary/read_map.c \
-			mandotary/ft_utils.c \
-			mandotary/handle_initial_line.c \
-			mandotary/handle_gnl_errors.c \
-			mandotary/handle_parsing_loop.c \
+SRC		:=	mandatory/cub3d.c \
+			mandatory/draw_line.c \
+			mandatory/draw_environment.c \
+			mandatory/draw_entities.c \
+			mandatory/free_memory_utils.c \
+			mandatory/free_environment.c \
+			mandatory/free_components.c \
+			mandatory/free_sprites.c \
+			mandatory/free_textures.c \
+			mandatory/free_enemies.c \
+			mandatory/free_gun_and_fire.c \
+			mandatory/free_animated_frames.c \
+			mandatory/handle_image.c \
+			mandatory/handle_keys.c \
+			mandatory/handle_mouse.c \
+			mandatory/init_components.c \
+			mandatory/init_environment.c \
+			mandatory/init_enemy_sprites.c \
+			mandatory/parsing.c \
+			mandatory/map_utils.c \
+			mandatory/time_utils.c \
+			mandatory/raycasting.c \
+			mandatory/ray_drawing.c \
+			mandatory/ray_handlers.c \
+			mandatory/handle_sprites.c \
+			mandatory/gradient.c \
+			mandatory/draw_player.c \
+			mandatory/draw_monster.c \
+			mandatory/draw_raycasting.c \
+			mandatory/draw_gunshot.c \
+			mandatory/draw_gunshot_helper.c \
+			mandatory/draw_utils.c \
+			mandatory/draw_dynamic_sprite.c \
+			mandatory/draw_sprite_stripe.c \
+			mandatory/draw_sprites.c \
+			mandatory/is_entity.c \
+			mandatory/is_construction.c \
+			mandatory/init_textures.c \
+			mandatory/init_sprites.c \
+			mandatory/player_move.c \
+			mandatory/handle_player.c \
+			mandatory/handle_enemies.c \
+			mandatory/handle_enemy_list.c \
+			mandatory/init_animations.c \
+			mandatory/init_enemies.c \
+			mandatory/init_doors.c \
+			mandatory/load_animated_sprite.c \
+			mandatory/setup_enemies.c \
+			mandatory/parse_input.c \
+			mandatory/free_animations.c \
+			mandatory/handle_door_list.c \
+			mandatory/handle_objects.c \
+			mandatory/raycasting_utils.c \
+			mandatory/init_mlx.c \
+			mandatory/parse_utils.c \
+			mandatory/parse_filename.c \
+			mandatory/parse_file_paths_and_colors.c \
+			mandatory/validate_line.c \
+			mandatory/read_map.c \
+			mandatory/ft_utils.c \
+			mandatory/handle_initial_line.c \
+			mandatory/handle_gnl_errors.c \
+			mandatory/handle_parsing_loop.c \
 
 BNS		:=	bonus/cub3d_bonus.c \
 			bonus/draw_line_bonus.c \
@@ -162,7 +162,7 @@ OBJ_BON	:= $(BNS:%.c=$(OBJDIR)/%.o)
 
 MAKEFLAGS += -j$(nproc)
 
-$(shell mkdir -p $(OBJDIR) $(OBJDIR)/src $(OBJDIR)/gnl $(OBJDIR)/bonus)
+$(shell mkdir -p $(OBJDIR) $(OBJDIR)/mandatory $(OBJDIR)/gnl $(OBJDIR)/bonus)
 
 all		: $(NAME)
 
@@ -179,15 +179,15 @@ $(BON_NAME)	: $(OBJ_BON) $(OBJ_GNL) cub3d.h
 
 clean	:
 	$(MAKE) -C libft clean
-	rm -f $(OBJ_SRC) $(OBJ_GNL)
+	rm -f $(OBJ_SRC) $(OBJ_GNL) $(OBJ_BON)
 
 fclean	:
 	$(MAKE) -C libft fclean
-	rm -f $(OBJ_SRC) $(OBJ_GNL) $(NAME)
+	rm -f $(OBJ_SRC) $(OBJ_GNL) $(OBJ_BON) $(NAME) $(BON_NAME)
 
 re		:
 	$(MAKE) -C libft fclean
-	rm -f $(OBJ_SRC) $(OBJ_GNL) $(NAME)
+	rm -f $(OBJ_SRC) $(OBJ_GNL)  $(OBJ_BON) $(NAME) $(BON_NAME)
 	$(MAKE) all
 
 $(OBJDIR)/%.o: %.c
