@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:46:44 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/23 00:33:31 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:26:58 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,6 @@ int	handle_special_characters(char *line, int i, int row, t_map *map)
 	}
 	return (1);
 }
-
-// int	check_empty_line(char *line)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\r'
-// 			|| line[i] == '\f' || line[i] == '\v' || line[i] == '\n'))
-// 	{
-// 		i++;
-// 	}
-// 	if (ft_strlen(line) == (size_t)i)
-// 		return (1);
-// 	return (0);
-// }
 
 int	validate_line_content(char *line, int i, int row, t_map *map)
 {
