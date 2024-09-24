@@ -1,3 +1,11 @@
+NO ./assets/wall1.xpm
+SO ./assets/wall2.xpm
+WE ./assets/wall3.xpm
+EA ./assets/wall4.xpm
+
+F 76,44,23
+C 225,116,145
+
 11111111111111111
 10000001010000001
 10000001010000001

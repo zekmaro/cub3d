@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/24 14:52:02 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:29:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ static int	parse_path_and_color_line(t_vars *vars, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[0]);
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		parse_texture(vars, line, &vars->texture_names[1]);
 	else if (ft_strncmp(line, "WE ", 3) == 0)
+		parse_texture(vars, line, &vars->texture_names[1]);
+	else if (ft_strncmp(line, "SO ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[2]);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		parse_texture(vars, line, &vars->texture_names[3]);
