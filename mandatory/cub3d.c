@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:04:39 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/23 14:01:20 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:05:57 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int	validate_and_open_file(int argc, char **argv)
 	int	fd;
 
 	if (argc != 2)
-		exit_with_error(NULL, "Error\nUsage: ./cub3D [path]<filename>.cub\n");
+	{
+		ft_putstr_fd("Error\nUsage: ./cub3D [path]<filename>.cub\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{

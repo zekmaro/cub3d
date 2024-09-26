@@ -4,7 +4,7 @@ WE ./assets/west_texture.xpm
 EA ./assets/east_texture.xpm
 
 F 76,44,23
-C 225,116,145
+C 1,1,1
 
 11111111111111111
 10000000000000001

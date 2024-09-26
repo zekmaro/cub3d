@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:04:58 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/23 16:05:29 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:05:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ int	check_valid_rgb(char **components, int *r, int *g, int *b)
 	str_r = ft_strtrim(components[0], " ");
 	str_g = ft_strtrim(components[1], " ");
 	str_b = ft_strtrim(components[2], " ");
-	if (!str_r || !str_g || !str_b)
+	if (!str_r || !str_g || !str_b || !*str_r || !*str_g || !*str_b)
+	{
+		ft_putstr_fd("Error\nInvalid RGB color\n", 2);
 		return (free(str_r), free(str_g), free(str_b), 0);
+	}
 	*r = ft_atoi(str_r);
 	*g = ft_atoi(str_g);
 	*b = ft_atoi(str_b);
