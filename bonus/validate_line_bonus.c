@@ -100,6 +100,13 @@ int	validate_line(char *line, int row, t_map *map)
 			return (0);
 		i++;
 	}
+	if (row && line[i] == '\0' \
+		&& (ft_strlen(map->grid[row - 1]) - 1 >= (size_t)i) \
+		&& (map->grid[row - 1][i] == 'P' || map->grid[row - 1][i + 1] == 'P' \
+		|| (i > 0 && map->grid[row - 1][i - 1] == 'P')
+		|| map->grid[row - 1][i] == '0' || map->grid[row - 1][i + 1] == '0' \
+		|| (i > 0 && map->grid[row - 1][i - 1] == '0')))
+		return (0);
 	if (i > map->width)
 		map->width = i;
 	return (1);
