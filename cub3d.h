@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/28 13:48:00 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/28 14:40:21 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -797,6 +797,7 @@ void		handle_gnl_memory_error(t_vars *vars, int *gnl_flag);
 int			handle_gnl_error_close(t_vars *vars, int fd, char **line, \
 				int *gnl_flag);
 void		handle_gnl_error_char(t_vars *vars, int fd, char **line);
+void		handle_gnl_error_msg(t_vars *vars, char *line, char *message);
 
 /* Handle_parsing_loop.c */
 int			handle_parsing_loop(t_vars *vars, t_parse_context *ctx);

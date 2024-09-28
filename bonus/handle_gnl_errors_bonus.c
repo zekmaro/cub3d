@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 01:17:21 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/24 16:59:10 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:50:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,12 @@ int	handle_gnl_error_close(t_vars *vars, int fd, char **line, int *gnl_flag)
 	get_next_line(-1, gnl_flag);
 	ft_close(vars, fd);
 	return (0);
+}
+
+void	handle_gnl_error_msg(t_vars *vars, char *line, char *message)
+{
+	free(line);
+	get_next_line(-1, NULL);
+	exit_with_error(vars, message);
+	exit(EXIT_FAILURE);
 }

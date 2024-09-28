@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/28 14:15:06 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/28 14:49:26 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,22 @@ int	parse_color_components(char *line, int *r, int *g, int *b)
 
 void	parse_texture(t_vars *vars, char *line, char **texture)
 {
-	char *temp;
+	char	*temp;
+
 	if (*texture)
-	{
-		free(line);
-		get_next_line(-1, NULL);
-		exit_with_error(vars, "Error\nMultiple texture paths found\n");
-		exit(EXIT_FAILURE);
-	}
+		handle_gnl_error_msg(vars, line, \
+			"Error\nMultiple texture paths found\n");
 	while (*(line + 3) == ' ' || *(line + 3) == '\t' || *(line + 3) == '\n' \
 		|| *(line + 3) == '\r' || *(line + 3) == '\f' || *(line + 3) == '\v')
 		line++;
 	*texture = ft_strdup(line + 3);
 	if (!*texture)
-	{
-		free(line);
-		get_next_line(-1, NULL);
-		exit_with_error(vars, "Error\nFailed to allocate memory for texture\n");
-		exit(EXIT_FAILURE);
-	}
+		handle_gnl_error_msg(vars, line, \
+			"Error\nFailed to allocate memory for texture\n");
 	temp = ft_strtrim(*texture, " ");
 	if (!temp)
-	{
-		free(line);
-		get_next_line(-1, NULL);
-		exit_with_error(vars, "Error\nFailed to allocate memory for texture\n");
-		exit(EXIT_FAILURE);
-	}
+		handle_gnl_error_msg(vars, line, \
+			"Error\nFailed to allocate memory for texture\n");
 	free(*texture);
 	*texture = temp;
 	vars->num_path_color_lines++;
