@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/24 15:19:30 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/28 13:48:00 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -760,7 +760,8 @@ int			check_last_row(char *line);
 int			find_last_zero_index(char *line);
 
 /* Parse_filename.c */
-int			is_hidden_file(char *file_name);
+int			is_hidden_file(char *file_name, t_vars *vars,
+				t_read_map_context *ctx);
 
 /* Parse_resolution.c */
 void		handle_empty_lines(t_vars *vars, char **line, \

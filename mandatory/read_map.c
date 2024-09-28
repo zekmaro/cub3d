@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/24 21:15:44 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/28 13:48:26 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	put_error_msg(const char *error_message)
 
 int	read_map(t_vars *vars, t_read_map_context *ctx)
 {
-	if (is_hidden_file(ctx->file_name) == 0)
+	if (is_hidden_file(ctx->file_name, vars, ctx) == 0)
 		return (put_error_msg("Error\nHidden files are not allowed\n"));
 	if (!initialize_map(vars, ctx))
 		return (put_error_msg("Error\nFailed to initialize map\n"));
