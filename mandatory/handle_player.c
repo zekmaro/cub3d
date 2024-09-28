@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:30:03 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/23 18:59:03 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:23:06 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	setup_player(t_vars *vars)
 	plane_length = tan(vars->player->fov / 2);
 	vars->player->plane_x = -vars->player->dir_y * plane_length;
 	vars->player->plane_y = vars->player->dir_x * plane_length;
-	vars->player->health = 100;
+	vars->player->health = 1000;
 }
 
 int	player_damaged_enemy(t_vars *vars, t_enemy *enemy)
