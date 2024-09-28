@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
+#    By: anarama <anarama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/24 18:23:21 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/28 13:57:20 by anarama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	:=	cub3D
 BON_NAME:=	cub3D_bonus
 
 CC		:=	cc
-CFLAGS	:= -Wall -Wextra -Werror #-g3 -fsanitize=address,undefined,leak
+CFLAGS	:= -Wall -Wextra -Werror -g3 #-fsanitize=address,undefined,leak
 #LDFLAGS := -fsanitize=address,undefined,leak
 MLXFLAGS:= -lmlx -lXext -lX11 -lm
 

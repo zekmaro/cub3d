@@ -6,7 +6,7 @@
 /*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 15:11:26 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/28 13:50:16 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/28 13:58:24 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	handle_stuff(t_vars *vars,
 				t_read_map_context *ctx)
 {
 	free(*ctx->line_left);
-	ft_close(vars, ctx->fd);
 	get_next_line(-1, NULL);
+	ft_close(vars, ctx->fd);
 }
 
 int	is_hidden_file(char *file_name, t_vars *vars,
