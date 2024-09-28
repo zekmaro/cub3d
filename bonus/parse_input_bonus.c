@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
+/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 00:39:20 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/24 20:05:12 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:14:11 by anarama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	parse_color_components(char *line, int *r, int *g, int *b)
 
 void	parse_texture(t_vars *vars, char *line, char **texture)
 {
+	char *temp;
 	if (*texture)
 	{
 		free(line);
@@ -56,6 +57,16 @@ void	parse_texture(t_vars *vars, char *line, char **texture)
 		exit_with_error(vars, "Error\nFailed to allocate memory for texture\n");
 		exit(EXIT_FAILURE);
 	}
+	temp = ft_strtrim(*texture, " ");
+	if (!temp)
+	{
+		free(line);
+		get_next_line(-1, NULL);
+		exit_with_error(vars, "Error\nFailed to allocate memory for texture\n");
+		exit(EXIT_FAILURE);
+	}
+	free(*texture);
+	*texture = temp;
 	vars->num_path_color_lines++;
 }
 
