@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/28 14:40:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:52:16 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -573,7 +573,7 @@ void		free_vars_imp(t_vars *vars);
 void		free_vars_caco(t_vars *vars);
 
 /* Free_animations.c */
-void		free_animation(t_img **animation, int frame_count);
+void		free_animation(t_vars *vars, t_img **animation, int frame_count);
 void		free_imp_animations(t_vars *vars);
 void		free_caco_animations(t_vars *vars);
 void		free_boss_animations(t_vars *vars);
@@ -583,7 +583,7 @@ void		free_gun(t_vars *vars);
 void		free_fire(t_vars *vars);
 
 /* Free_animation_frames.c */
-void		free_animated_frames(t_img **frames, int count);
+void		free_animated_frames(t_vars *vars, t_img **frames, int count);
 
 /* Handle_image.c */
 void		put_pixel_to_image(t_vars *vars, int x, int y, int color);

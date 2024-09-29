@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/28 14:45:55 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/29 20:08:26 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	:=	cub3D
 BON_NAME:=	cub3D_bonus
 
 CC		:=	cc
-CFLAGS	:= -Wall -Wextra -Werror #-g3 -fsanitize=address,undefined,leak
+CFLAGS	:= -Wall -Wextra -Werror -MMD -MP #-g3 -fsanitize=address,undefined,leak
 #LDFLAGS := -fsanitize=address,undefined,leak
 MLXFLAGS:= -lmlx -lXext -lX11 -lm
 
@@ -159,6 +159,9 @@ LIBS	:= libft/libft.a
 OBJ_SRC	:= $(SRC:%.c=$(OBJDIR)/%.o)
 OBJ_GNL	:= $(GNL:%.c=$(OBJDIR)/%.o)
 OBJ_BON	:= $(BNS:%.c=$(OBJDIR)/%.o)
+OBJ_DEP_SRC:= $(OBJ_SRC:.o=.d)
+OBJ_DEP_GNL:= $(OBJ_GNL:.o=.d)
+OBJ_DEP_BON:= $(OBJ_BON:.o=.d)
 
 MAKEFLAGS += -j$(nproc)
 
@@ -168,22 +171,22 @@ all		: $(NAME)
 
 bonus	: $(BON_NAME)
 
-$(NAME)	: $(OBJ_SRC) $(OBJ_GNL) cub3d.h
+$(NAME)	: $(OBJ_SRC) $(OBJ_GNL)
 	$(MAKE) -C libft all
 	$(CC) $(OBJ_SRC) $(OBJ_GNL) $(LIBS) $(MLXFLAGS) -o $(NAME)
 # $(LDFLAGS) -o $(NAME)
 
-$(BON_NAME)	: $(OBJ_BON) $(OBJ_GNL) cub3d.h
+$(BON_NAME)	: $(OBJ_BON) $(OBJ_GNL)
 	$(MAKE) -C libft all
 	$(CC) $(OBJ_BON) $(OBJ_GNL) $(LIBS) $(MLXFLAGS) -o $(BON_NAME)
 
 clean	:
 	$(MAKE) -C libft clean
-	rm -f $(OBJ_SRC) $(OBJ_GNL) $(OBJ_BON)
+	rm -f $(OBJ_SRC) $(OBJ_GNL) $(OBJ_BON) $(OBJ_DEP_SRC) $(OBJ_DEP_GNL) $(OBJ_DEP_BON)
 
 fclean	:
 	$(MAKE) -C libft fclean
-	rm -f $(OBJ_SRC) $(OBJ_GNL) $(OBJ_BON) $(NAME) $(BON_NAME)
+	rm -f $(OBJ_SRC) $(OBJ_GNL) $(OBJ_BON) $(NAME) $(BON_NAME) $(OBJ_DEP_SRC) $(OBJ_DEP_GNL) $(OBJ_DEP_BON)
 
 re		:
 	$(MAKE) -C libft fclean
@@ -195,5 +198,9 @@ $(OBJDIR)/%.o: %.c
 
 $(OBJDIR)/gnl/%.o: gnl/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+-include $(OBJ_DEP_SRC)
+-include $(OBJ_DEP_GNL)
+-include $(OBJ_DEP_BON)
 
 .PHONY	: all clean fclean re bonus

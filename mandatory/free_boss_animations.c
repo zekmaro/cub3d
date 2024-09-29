@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_boss_animations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:50:48 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/13 17:56:30 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/29 15:52:03 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ void	free_boss_animations(t_vars *vars)
 		return ;
 	if (vars->boss_animation->attack != NULL)
 	{
-		free_animated_frames((t_img **)vars->boss_animation->attack->frames, 2);
+		free_animated_frames(vars, (t_img **)vars->boss_animation->attack->frames, 2);
 		free(vars->boss_animation->attack);
 	}
 	if (vars->boss_animation->move != NULL)
 	{
-		free_animated_frames((t_img **)vars->boss_animation->move->frames, 4);
+		free_animated_frames(vars, (t_img **)vars->boss_animation->move->frames, 4);
 		free(vars->boss_animation->move);
 	}
 	if (vars->boss_animation->death != NULL)
 	{
-		free_animated_frames((t_img **)vars->boss_animation->death->frames, 9);
+		free_animated_frames(vars, (t_img **)vars->boss_animation->death->frames, 9);
 		free(vars->boss_animation->death);
 	}
 	if (vars->boss_animation->bullet != NULL)
 	{
-		free_animated_frames((t_img **)vars->boss_animation->bullet->frames, 1);
+		free_animated_frames(vars, (t_img **)vars->boss_animation->bullet->frames, 1);
 		free(vars->boss_animation->bullet);
 	}
 	free(vars->boss_animation);

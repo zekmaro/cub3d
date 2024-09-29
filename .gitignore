@@ -19,3 +19,4 @@ valid_maps/
 textures_xpm/
 *.supp
 *.cpp
+*.d
