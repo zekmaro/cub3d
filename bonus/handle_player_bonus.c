@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_player_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:30:03 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/28 15:14:06 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/29 20:30:58 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

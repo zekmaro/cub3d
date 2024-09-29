@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_filename_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarama <anarama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 15:11:26 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/28 13:57:52 by anarama          ###   ########.fr       */
+/*   Updated: 2024/09/29 20:31:07 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
