@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:20:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/24 17:01:26 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/30 03:35:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int	get_texture_color_at_y(t_vars *vars, t_tex_typ texture_index, \
 	get_texture_coords(vars, texture_index, &coords->tex_x);
 	coords->tex_y = (int)((y - vars->ray->draw_start) * vars->unit_size \
 		/ vars->ray->line_height);
-	return (get_texture_color(vars->textures[texture_index], coords->tex_x, \
+	return (get_texture_color(vars, vars->textures[texture_index], coords->tex_x, \
 		coords->tex_y));
 }

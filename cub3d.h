@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:09:04 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/29 15:52:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:58:59 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <math.h>
-# include "mlx.h"
+# include <mlx.h>
 
-# define MINIMAP_RADIUS 100
+// # define MINIMAP_RADIUS 100
 
 # define W 119
 # define D 100
@@ -43,14 +43,14 @@
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define PURPLE 0x800080
+# define GRAY 0x808080
 # define BLACK 0x000000
+# define MAGENTA 0xFF00FF
 # define BLUE 0x00008B
 # define GREEN 0x008000
 # define YELLOW 0xFFFF00
 # define BEIGE 0xC8AE7E
 # define BROWN 0x4C2C17
-# define GRAY 0x808080
-# define MAGENTA 0xFF00FF
 # define ORANGE 0xFFA500
 # define LIGHT_BLUE 0x7FDBFF
 # define LIGHT_GREEN 0x90EE90
@@ -63,7 +63,7 @@
 # define DOOR_CLOSING 3
 # define DOOR_NONE -1
 
-# define MAX_DOORS 10
+// # define MAX_DOORS 10
 
 typedef struct s_pix_inf
 {
@@ -637,7 +637,7 @@ void		initialise_sprites(t_vars *vars);
 void		print_map(t_map *map);
 int			player_inside_map(t_vars *vars, int x, int y);
 int			can_move(t_vars *vars, int y, int x);
-int			get_texture_color(t_img *texture, int x, int y);
+int			get_texture_color(t_vars *vars, t_img *texture, int x, int y);
 
 /* Time_utils */
 long		get_elapsed_time(struct timeval *start, struct timeval *end);
@@ -762,6 +762,7 @@ int			find_last_zero_index(char *line);
 /* Parse_filename.c */
 int			is_hidden_file(char *file_name, t_vars *vars,
 				t_read_map_context *ctx);
+int			has_cub_extension(const char *filename);
 
 /* Parse_resolution.c */
 void		handle_empty_lines(t_vars *vars, char **line, \

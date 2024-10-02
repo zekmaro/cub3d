@@ -6,7 +6,7 @@
 #    By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 15:52:05 by iberegsz          #+#    #+#              #
-#    Updated: 2024/09/29 20:08:26 by iberegsz         ###   ########.fr        #
+#    Updated: 2024/09/30 01:13:53 by iberegsz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	:=	cub3D
 BON_NAME:=	cub3D_bonus
 
 CC		:=	cc
-CFLAGS	:= -Wall -Wextra -Werror -MMD -MP #-g3 -fsanitize=address,undefined,leak
+CFLAGS	:= -Wall -Wextra -Werror -MMD -MP -g3 #-fsanitize=address,undefined,leak
 #LDFLAGS := -fsanitize=address,undefined,leak
 MLXFLAGS:= -lmlx -lXext -lX11 -lm
 

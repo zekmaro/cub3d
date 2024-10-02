@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:22 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/24 16:57:49 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/30 03:36:23 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	draw_sprites_stripe(t_vars *vars, t_sprite *sprite, int stripe, \
 				* vars->sprite_texture->width / sprite->width);
 			tex_y = (int)((y - (-sprite->height / 2 + vars->mlx->window_height \
 				/ 2)) * vars->sprite_texture->height / sprite->height);
-			color = get_texture_color(vars->sprite_texture, tex_x, tex_y);
+			color = get_texture_color(vars, vars->sprite_texture, tex_x, tex_y);
 			if (color != -1)
 				put_pixel_to_image(vars, stripe, y, color);
 			y++;

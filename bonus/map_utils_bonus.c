@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 22:40:10 by andrejarama       #+#    #+#             */
-/*   Updated: 2024/09/24 17:01:03 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/30 03:36:02 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	can_move(t_vars *vars, int y, int x)
 		return (0);
 }
 
-int	get_texture_color(t_img *texture, int x, int y)
+int	get_texture_color(t_vars *vars,t_img *texture, int x, int y)
 {
 	int	index;
 	int	color;

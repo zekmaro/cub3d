@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 15:11:26 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/29 20:31:18 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:07:31 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,12 @@ int	is_hidden_file(char *file_name, t_vars *vars,
 	if (last_separator[0] == '.')
 		return (handle_stuff(vars, ctx), 0);
 	return (1);
+}
+
+int	has_cub_extension(const char *filename)
+{
+	size_t	len;
+
+	len = ft_strlen(filename);	
+	return (ft_strncmp(filename + len - 4, ".cub", 4) == 0);
 }

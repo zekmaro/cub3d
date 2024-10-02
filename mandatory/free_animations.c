@@ -6,12 +6,11 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 19:57:17 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/29 15:54:41 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:37:39 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <mlx.h>
 
 void	free_animation(t_vars *vars, t_img **animation, int frame_count)
 {

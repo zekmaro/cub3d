@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 16:50:17 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/14 15:52:43 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/30 03:34:37 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_sprite_stripe(t_vars *vars, t_sprite_params *params, \
 			while (++y < params->draw_end_y)
 			{
 				tex_y = calculate_tex_y(tmp, vars, params, y);
-				color = get_texture_color(tmp, tex_x, tex_y);
+				color = get_texture_color(vars, tmp, tex_x, tex_y);
 				draw_raycaster_pixel(vars, stripe, y, color);
 				update_zbuffer(vars, stripe, calc_params->transform_y, color);
 			}

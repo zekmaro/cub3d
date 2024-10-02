@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 22:10:20 by anarama           #+#    #+#             */
-/*   Updated: 2024/09/24 16:58:54 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/30 03:36:11 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	blend_pixel_to_image(t_vars *vars, int x, int y, uint32_t color)
 	uint32_t	original_color;
 	uint32_t	blended_color;
 
-	original_color = get_texture_color(vars->image, x, y);
+	original_color = get_texture_color(vars, vars->image, x, y);
 	blended_color = combine_colors(original_color, color);
 	put_pixel_to_image(vars, x, y, blended_color);
 }

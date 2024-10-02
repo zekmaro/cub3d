@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 14:15:51 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/29 18:15:16 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:50:27 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,28 @@ t_img	*load_sprite_frame(t_vars *vars, const char *file_path, \
 {
 	t_img	*frame;
 
+	if (!vars || !file_path || !width || !height)
+		return (NULL);
 	frame = ft_calloc(1, sizeof(t_img));
 	if (!frame)
 		return (NULL);
-	frame->mlx_img = (t_img *)mlx_xpm_file_to_image(vars->mlx->mlx, (char *)file_path, \
-				width, height);
+	printf("File path: %s\n", file_path);
+	frame->mlx_img = mlx_xpm_file_to_image(vars->mlx->mlx, \
+						(char *)file_path, width, height);
 	if (!frame->mlx_img)
+	{
+		ft_putstr_fd("Error\nFailed to load sprite frame\n", 2);
 		return (free(frame), NULL);
+	}
 	frame->addr = mlx_get_data_addr(frame, &frame->bits_per_pixel, \
 					&frame->line_len, &frame->endian);
+	if (!frame->addr)
+	{
+		mlx_destroy_image(vars->mlx->mlx, frame->mlx_img);
+		ft_putstr_fd("Error\nFailed to get sprite frame data address\n", 2);
+		free(frame);
+		return (NULL);
+	}
 	frame->width = *width;
 	frame->height = *height;
 	return (frame);
@@ -76,7 +89,8 @@ int	load_single_frame(t_vars *vars, t_img *sprite, \
 	{
 		cleanup_sprite_frames(vars, (t_img **)sprite->frames, index);
 		sprite->frames = NULL;
-		exit_with_error(vars, "Error\nFailed to allocate memory for sprite frame\n");
+		exit_with_error(vars, \
+			"Error\nFailed to allocate memory for sprite frame\n");
 		return (1);
 	}
 	return (0);

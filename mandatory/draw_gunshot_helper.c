@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:54:34 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/09 23:58:33 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/09/30 03:34:55 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw_pixel(t_draw_params *params, t_scr_pos screen_pos, \
 {
 	int	color;
 
-	color = get_texture_color(params->image, tex_pos.x, tex_pos.y);
+	color = get_texture_color(params->vars, params->image, tex_pos.x, tex_pos.y);
 	if (color != -1)
 		put_pixel_to_image(params->vars, params->screen_start.x + screen_pos.x,
 			params->screen_start.y + screen_pos.y, color);

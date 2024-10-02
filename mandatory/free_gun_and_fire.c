@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 01:20:49 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/15 18:47:30 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/10/01 03:04:01 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_gun(t_vars *vars)
 			if (tmp)
 			{
 				if (tmp->mlx_img)
-					free(tmp->mlx_img);
+					mlx_destroy_image(vars->mlx->mlx, tmp->mlx_img);
 				free(tmp);
 			}
 			i++;
@@ -40,26 +40,26 @@ void	free_gun(t_vars *vars)
 
 void	free_fire(t_vars *vars)
 {
-	int		i;
-	t_img	*tmp;
+    int		i;
+    t_img	*tmp;
 
-	if (vars == NULL)
-		return ;
-	if (vars->player && vars->player->fire && vars->player->fire->frames)
-	{
-		i = 0;
-		while (i < 2)
-		{
-			tmp = (t_img *)vars->player->fire->frames[i];
-			if (tmp)
-			{
-				if (tmp->mlx_img)
-					free(tmp->mlx_img);
-				free(tmp);
-			}
-			i++;
-		}
-		free(vars->player->fire->frames);
-		free(vars->player->fire);
-	}
+    if (vars == NULL)
+        return ;
+    if (vars->player && vars->player->fire && vars->player->fire->frames)
+    {
+        i = 0;
+        while (i < 2)
+        {
+            tmp = (t_img *)vars->player->fire->frames[i];
+            if (tmp)
+            {
+                if (tmp->mlx_img)
+                	mlx_destroy_image(vars->mlx->mlx, tmp->mlx_img);
+                free(tmp);
+            }
+            i++;
+        }
+        free(vars->player->fire->frames);
+        free(vars->player->fire);
+    }
 }

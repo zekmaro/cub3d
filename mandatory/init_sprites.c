@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 01:19:28 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/29 15:45:52 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/10/01 03:00:14 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,19 @@ void	load_sprite_texture(t_vars *vars, t_img *sprite_texture, \
 void	allocate_sprite_memory(t_vars *vars, t_img **sprite, \
 			const char *error_message)
 {
-	*sprite = ft_calloc(sizeof(t_img), 1);
+	*sprite = malloc(sizeof(t_img));
 	if (!*sprite)
 	{
 		ft_putstr_fd((char *)error_message, 2);
 		free_and_exit(vars);
 	}
+	(*sprite)->mlx_img = NULL;
+    (*sprite)->addr = NULL;
+    (*sprite)->bits_per_pixel = 0;
+    (*sprite)->line_len = 0;
+    (*sprite)->endian = 0;
+    (*sprite)->width = 0;
+    (*sprite)->height = 0;
 }
 
 void	allocate_memory_for_sprites(t_vars *vars)
@@ -74,20 +81,20 @@ void	load_sprites(t_vars *vars)
 
 	if (vars == NULL)
 		return ;
-	/*
+	
 	allocate_sprite_memory(vars, &vars->player->gun, \
 		"Error\nFailed to allocate memory for gun sprite\n");
 	allocate_sprite_memory(vars, &vars->player->fire, \
 		"Error\nFailed to allocate memory for fire sprite\n");
-	*/
+	
 	load_animated_sprite(vars, vars->player->gun, gun_frames, 4);
 	load_animated_sprite(vars, vars->player->fire, fire_frames, 2);
 	if (vars->doors == NULL)
 		return ;
-	/*
+	
 	allocate_sprite_memory(vars, &vars->doors->textures, \
 		"Error\nFailed to allocate memory for door textures\n");
-	*/
+	
 	load_animated_sprite(vars, vars->doors->textures, door_frames, 4);
 }
 

@@ -6,7 +6,7 @@
 /*   By: iberegsz <iberegsz@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 00:10:18 by iberegsz          #+#    #+#             */
-/*   Updated: 2024/09/29 20:31:21 by iberegsz         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:04:52 by iberegsz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,10 @@ static int	put_error_msg(const char *error_message)
 
 int	read_map(t_vars *vars, t_read_map_context *ctx)
 {
-	if (is_hidden_file(ctx->file_name, vars, ctx) == 0)
+	if (!is_hidden_file(ctx->file_name, vars, ctx))
 		return (put_error_msg("Error\nHidden files are not allowed\n"));
+	if (!has_cub_extension(ctx->file_name))
+		return (put_error_msg("Error\nFile must have .cub extension\n"));
 	if (!initialize_map(vars, ctx))
 		return (put_error_msg("Error\nFailed to initialize map\n"));
 	if (!skip_readed_lines(vars, ctx))
